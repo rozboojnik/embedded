@@ -1,1 +1,108 @@
-to delete  sdasdd
+==============================================
+PROGRAM---->
+VERSION---->
+CREATED BY->
+==============================================
+
+INDEX:
+
+-> Requirements
+-> About
+-> Installation
+-> Files and their Proper Directories
+-> Playing this plugin
+-> Known Bugs & Issues
+-> Version History
+-> Incompatibilities & Save game warnings
+-> Credits & Usage
+
+
+==============================================
+REQUIREMENTS:
+==============================================
+
+
+
+===============================================
+ABOUT
+===============================================
+
+
+
+===============================================
+INSTALLATION:
+===============================================
+
+
+
+===============================================
+FILES USED AND THEIR PROPER DIRECTORIES:
+===============================================
+
+~~~~~~~~~~~README FILE~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~ESP & ESM FILES~~~~~~~~~~~~
+\Data Files\
+\Data Files\
+
+~~~~~~~~~~~~~~MESHES~~~~~~~~~~~~~~~~
+\Data Files\Meshes\
+\Data Files\Meshes\
+\Data Files\Meshes\
+
+~~~~~~~~~~~~~TEXTURES~~~~~~~~~~~~~~~
+\Data Files\Textures\
+\Data Files\Textures\
+\Data Files\Textures\
+
+~~~~~~~~~~~~~~ICONS~~~~~~~~~~~~~~~~~
+\Data Files\Icons\
+\Data Files\Icons\
+\Data Files\Icons\
+
+~~~~~~~~~~~~~~MUSIC~~~~~~~~~~~~~~~~~
+\Data Files\Music\
+\Data Files\Music\
+
+~~~~~~~~~~~~~~SOUND~~~~~~~~~~~~~~~~~
+\Data Files\Sound\
+\Data Files\Sound\
+
+
+===============================================
+PLAYING THIS PLUGIN:
+===============================================
+
+
+===============================================
+KNOWN ISSUES OR BUGS:
+===============================================
+
+
+===============================================
+VERSION HISTORY
+===============================================
+
+
+===============================================
+INCOMPATIBILITIES & SAVED GAME WARNINGS:
+===============================================
+Always make sure that you backup your existing savegame before use.
+
+
+===============================================
+CREDITS & USAGE:
+===============================================
+
+( Template user: Pick one and delete the rest)
+
+--> Feel Free to use any of the resources I provided in this plugin, but give credit to me where it is due.
+
+--> You may use any of the resources I provided in this mod, but please contact me first by email for permission.
+
+--> Please don't use any of the resources in this plugin.
+
+
+EMAIL: 
