@@ -1,0 +1,1395 @@
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
+
+
+   1              		.code	16
+   2              		.file	"key.c"
+   3              		.section	.debug_abbrev,"",%progbits
+   4              	.Ldebug_abbrev0:
+   5              		.section	.debug_info,"",%progbits
+   6              	.Ldebug_info0:
+   7              		.section	.debug_line,"",%progbits
+   8              	.Ldebug_line0:
+   9 0000 AE000000 		.text
+   9      02005800 
+   9      00000201 
+   9      FB0E0D00 
+   9      01010101 
+  10              	.Ltext0:
+  11              		.align	2
+  12              		.global	checkKey
+  13              		.code 16
+  14              		.thumb_func
+  15              		.type	checkKey, %function
+  16              	checkKey:
+  17              	.LFB2:
+  18              		.file 1 "key.c"
+   1:key.c         **** /******************************************************************************
+   2:key.c         ****  *
+   3:key.c         ****  * Copyright:
+   4:key.c         ****  *    (C) 2006 Embedded Artists AB
+   5:key.c         ****  *
+   6:key.c         ****  * File:
+   7:key.c         ****  *    key.c
+   8:key.c         ****  *
+   9:key.c         ****  * Description:
+  10:key.c         ****  *    Implements sampling and handling of joystick key.
+  11:key.c         ****  *
+  12:key.c         ****  *****************************************************************************/
+  13:key.c         **** 
+  14:key.c         **** /******************************************************************************
+  15:key.c         ****  * Includes
+  16:key.c         ****  *****************************************************************************/
+  17:key.c         **** #include "../pre_emptive_os/api/osapi.h"
+  18:key.c         **** #include "../pre_emptive_os/api/general.h"
+  19:key.c         **** #include <printf_P.h>
+  20:key.c         **** #include "key.h"
+  21:key.c         **** #include "hw.h"
+  22:key.c         **** 
+  23:key.c         **** 
+  24:key.c         **** /******************************************************************************
+  25:key.c         ****  * Typedefs and defines
+  26:key.c         ****  *****************************************************************************/
+  27:key.c         **** #define FIRST_REPEAT  4
+  28:key.c         **** #define SECOND_REPEAT 3
+  29:key.c         **** 
+  30:key.c         **** 
+  31:key.c         **** /*****************************************************************************
+  32:key.c         ****  * Local variables
+  33:key.c         ****  ****************************************************************************/
+  34:key.c         **** static tU8 centerReleased = TRUE;
+  35:key.c         **** static tU8 keyUpReleased = TRUE;
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 2
+
+
+  36:key.c         **** static tU8 keyDownReleased = TRUE;
+  37:key.c         **** static tU8 keyLeftReleased = TRUE;
+  38:key.c         **** static tU8 keyRightReleased = TRUE;
+  39:key.c         **** static tU8 centerKeyCnt;
+  40:key.c         **** static tU8 upKeyCnt;
+  41:key.c         **** static tU8 downKeyCnt;
+  42:key.c         **** static tU8 leftKeyCnt;
+  43:key.c         **** static tU8 rightKeyCnt;
+  44:key.c         **** 
+  45:key.c         **** static volatile tU8 activeKey = KEY_NOTHING;
+  46:key.c         **** static volatile tU8 activeKey2 = KEY_NOTHING;
+  47:key.c         **** 
+  48:key.c         **** 
+  49:key.c         **** /*****************************************************************************
+  50:key.c         ****  *
+  51:key.c         ****  * Description:
+  52:key.c         ****  *    Function to check if any key press has been detected
+  53:key.c         ****  *
+  54:key.c         ****  ****************************************************************************/
+  55:key.c         **** tU8
+  56:key.c         **** checkKey(void)
+  57:key.c         **** {
+  19              		.loc 1 57 0
+  58:key.c         ****   tU8 retVal = activeKey;
+  20              		.loc 1 58 0
+  21 0000 024B     		ldr	r3, .L3
+  22 0002 1878     		ldrb	r0, [r3]
+  59:key.c         ****   activeKey = KEY_NOTHING;
+  23              		.loc 1 59 0
+  24 0004 0022     		mov	r2, #0
+  25              		.loc 1 57 0
+  26              		@ lr needed for prologue
+  27              		.loc 1 59 0
+  28 0006 1A70     		strb	r2, [r3]
+  60:key.c         ****   return retVal;
+  61:key.c         **** }
+  29              		.loc 1 61 0
+  30              		@ sp needed for prologue
+  31 0008 7047     		bx	lr
+  32              	.L4:
+  33 000a 0000     		.align	2
+  34              	.L3:
+  35 000c 00000000 		.word	activeKey
+  36              	.LFE2:
+  37              		.size	checkKey, .-checkKey
+  38              		.align	2
+  39              		.global	checkKey2
+  40              		.code 16
+  41              		.thumb_func
+  42              		.type	checkKey2, %function
+  43              	checkKey2:
+  44              	.LFB3:
+  62:key.c         **** 
+  63:key.c         **** /*****************************************************************************
+  64:key.c         ****  *
+  65:key.c         ****  * Description:
+  66:key.c         ****  *    Function to check current (instantaneous) key state
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 3
+
+
+  67:key.c         ****  *
+  68:key.c         ****  ****************************************************************************/
+  69:key.c         **** tU8
+  70:key.c         **** checkKey2(void)
+  71:key.c         **** {
+  45              		.loc 1 71 0
+  72:key.c         ****   return activeKey2;
+  46              		.loc 1 72 0
+  47 0010 014B     		ldr	r3, .L7
+  48 0012 1878     		ldrb	r0, [r3]
+  49              		.loc 1 71 0
+  50              		@ lr needed for prologue
+  73:key.c         **** }
+  51              		.loc 1 73 0
+  52              		@ sp needed for prologue
+  53 0014 7047     		bx	lr
+  54              	.L8:
+  55 0016 0000     		.align	2
+  56              	.L7:
+  57 0018 01000000 		.word	activeKey2
+  58              	.LFE3:
+  59              		.size	checkKey2, .-checkKey2
+  60              		.align	2
+  61              		.global	sampleKey
+  62              		.code 16
+  63              		.thumb_func
+  64              		.type	sampleKey, %function
+  65              	sampleKey:
+  66              	.LFB4:
+  74:key.c         **** 
+  75:key.c         **** /*****************************************************************************
+  76:key.c         ****  *
+  77:key.c         ****  * Description:
+  78:key.c         ****  *    Sample key states
+  79:key.c         ****  *
+  80:key.c         ****  ****************************************************************************/
+  81:key.c         **** void
+  82:key.c         **** sampleKey(void)
+  83:key.c         **** {
+  67              		.loc 1 83 0
+  68 001c 30B5     		push	{r4, r5, lr}
+  69              	.LCFI0:
+  84:key.c         ****   tBool nothing = TRUE;
+  85:key.c         ****   tU8   readKeys;
+  86:key.c         ****   
+  87:key.c         ****   //get sample
+  88:key.c         ****   readKeys = getKeys();
+  70              		.loc 1 88 0
+  71 001e FFF7FEFF 		bl	getKeys
+  72 0022 051C     		mov	r5, r0
+  89:key.c         ****   
+  90:key.c         **** 
+  91:key.c         ****   //check center key
+  92:key.c         ****   if (readKeys & KEY_CENTER)
+  73              		.loc 1 92 0
+  74 0024 1020     		mov	r0, #16
+  75 0026 4E4A     		ldr	r2, .L74
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 4
+
+
+  76 0028 0542     		tst	r5, r0
+  77 002a 17D0     		beq	.L10
+  93:key.c         ****   {
+  94:key.c         ****     nothing = FALSE;
+  95:key.c         ****   	if (centerReleased == TRUE)
+  78              		.loc 1 95 0
+  79 002c 1378     		ldrb	r3, [r2]
+  80 002e 4D49     		ldr	r1, .L74+4
+  81 0030 012B     		cmp	r3, #1
+  82 0032 02D1     		bne	.L12
+  96:key.c         ****   	{
+  97:key.c         ****   		centerReleased = FALSE;
+  83              		.loc 1 97 0
+  84 0034 0023     		mov	r3, #0
+  85 0036 1370     		strb	r3, [r2]
+  86 0038 09E0     		b	.L70
+  87              	.L12:
+  98:key.c         ****   		centerKeyCnt = 0;
+  99:key.c         ****   		activeKey = KEY_CENTER;
+ 100:key.c         ****   		activeKey2 = KEY_CENTER;
+ 101:key.c         ****   	}
+ 102:key.c         ****   	else
+ 103:key.c         ****   	{
+ 104:key.c         ****   	  centerKeyCnt++;
+  88              		.loc 1 104 0
+  89 003a 0B78     		ldrb	r3, [r1]
+  90 003c 0133     		add	r3, r3, #1
+  91 003e 1B06     		lsl	r3, r3, #24
+  92 0040 1B0E     		lsr	r3, r3, #24
+  93 0042 0B70     		strb	r3, [r1]
+ 105:key.c         ****   	  if (centerKeyCnt == FIRST_REPEAT)
+  94              		.loc 1 105 0
+  95 0044 042B     		cmp	r3, #4
+  96 0046 03D0     		beq	.L57
+ 106:key.c         ****   	  {
+ 107:key.c         ****   		  activeKey = KEY_CENTER;
+ 108:key.c         ****   		  activeKey2 = KEY_CENTER;
+ 109:key.c         ****   	  }
+ 110:key.c         ****   	  else if (centerKeyCnt >= FIRST_REPEAT + SECOND_REPEAT)
+  97              		.loc 1 110 0
+  98 0048 062B     		cmp	r3, #6
+  99 004a 05D9     		bls	.L58
+ 111:key.c         ****   	  {
+ 112:key.c         ****   		  centerKeyCnt = FIRST_REPEAT;
+ 100              		.loc 1 112 0
+ 101 004c 0423     		mov	r3, #4
+ 102              	.L70:
+ 103 004e 0B70     		strb	r3, [r1]
+ 104              	.L57:
+ 113:key.c         ****   		  activeKey = KEY_CENTER;
+ 105              		.loc 1 113 0
+ 106 0050 454B     		ldr	r3, .L74+8
+ 107 0052 1870     		strb	r0, [r3]
+ 114:key.c         ****   		  activeKey2 = KEY_CENTER;
+ 108              		.loc 1 114 0
+ 109 0054 454B     		ldr	r3, .L74+12
+ 110 0056 1870     		strb	r0, [r3]
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 5
+
+
+ 111              	.L58:
+ 112 0058 0024     		mov	r4, #0
+ 113              	.LVL0:
+ 114 005a 02E0     		b	.L14
+ 115              	.LVL1:
+ 116              	.L10:
+ 115:key.c         ****   	  }
+ 116:key.c         ****   	}
+ 117:key.c         ****   }
+ 118:key.c         ****   else
+ 119:key.c         ****   	centerReleased = TRUE;
+ 117              		.loc 1 119 0
+ 118 005c 0123     		mov	r3, #1
+ 119 005e 1370     		strb	r3, [r2]
+ 120 0060 0124     		mov	r4, #1
+ 121              	.LVL2:
+ 122              	.L14:
+ 120:key.c         **** 
+ 121:key.c         ****   //check up key
+ 122:key.c         ****   if (readKeys & KEY_UP)
+ 123              		.loc 1 122 0
+ 124 0062 0120     		mov	r0, #1
+ 125 0064 424A     		ldr	r2, .L74+16
+ 126 0066 0542     		tst	r5, r0
+ 127 0068 17D0     		beq	.L19
+ 123:key.c         ****   {
+ 124:key.c         ****     nothing = FALSE;
+ 125:key.c         ****   	if (keyUpReleased == TRUE)
+ 128              		.loc 1 125 0
+ 129 006a 1378     		ldrb	r3, [r2]
+ 130 006c 4149     		ldr	r1, .L74+20
+ 131 006e 012B     		cmp	r3, #1
+ 132 0070 02D1     		bne	.L21
+ 126:key.c         ****   	{
+ 127:key.c         ****   		keyUpReleased = FALSE;
+ 133              		.loc 1 127 0
+ 134 0072 0023     		mov	r3, #0
+ 135 0074 1370     		strb	r3, [r2]
+ 136 0076 09E0     		b	.L71
+ 137              	.L21:
+ 128:key.c         ****   		upKeyCnt = 0;
+ 129:key.c         ****   		activeKey = KEY_UP;
+ 130:key.c         ****   		activeKey2 = KEY_UP;
+ 131:key.c         ****   	}
+ 132:key.c         ****   	else
+ 133:key.c         ****   	{
+ 134:key.c         ****   	  upKeyCnt++;
+ 138              		.loc 1 134 0
+ 139 0078 0B78     		ldrb	r3, [r1]
+ 140 007a 0133     		add	r3, r3, #1
+ 141 007c 1B06     		lsl	r3, r3, #24
+ 142 007e 1B0E     		lsr	r3, r3, #24
+ 143 0080 0B70     		strb	r3, [r1]
+ 135:key.c         ****   	  if (upKeyCnt == FIRST_REPEAT)
+ 144              		.loc 1 135 0
+ 145 0082 042B     		cmp	r3, #4
+ 146 0084 03D0     		beq	.L60
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 6
+
+
+ 136:key.c         ****   	  {
+ 137:key.c         ****   		  activeKey = KEY_UP;
+ 138:key.c         ****   		  activeKey2 = KEY_UP;
+ 139:key.c         ****   	  }
+ 140:key.c         ****   	  else if (upKeyCnt >= FIRST_REPEAT + SECOND_REPEAT)
+ 147              		.loc 1 140 0
+ 148 0086 062B     		cmp	r3, #6
+ 149 0088 05D9     		bls	.L61
+ 141:key.c         ****   	  {
+ 142:key.c         ****   		  upKeyCnt = FIRST_REPEAT;
+ 150              		.loc 1 142 0
+ 151 008a 0423     		mov	r3, #4
+ 152              	.L71:
+ 153 008c 0B70     		strb	r3, [r1]
+ 154              	.L60:
+ 143:key.c         ****   		  activeKey = KEY_UP;
+ 155              		.loc 1 143 0
+ 156 008e 364B     		ldr	r3, .L74+8
+ 157 0090 1870     		strb	r0, [r3]
+ 144:key.c         ****   		  activeKey2 = KEY_UP;
+ 158              		.loc 1 144 0
+ 159 0092 364B     		ldr	r3, .L74+12
+ 160 0094 1870     		strb	r0, [r3]
+ 161              	.L61:
+ 162 0096 0024     		mov	r4, #0
+ 163 0098 00E0     		b	.L23
+ 164              	.L19:
+ 145:key.c         ****   	  }
+ 146:key.c         ****   	}
+ 147:key.c         ****   }
+ 148:key.c         ****   else
+ 149:key.c         ****   	keyUpReleased = TRUE;
+ 165              		.loc 1 149 0
+ 166 009a 1070     		strb	r0, [r2]
+ 167              	.L23:
+ 150:key.c         **** 
+ 151:key.c         ****   //check down key
+ 152:key.c         ****   if (readKeys & KEY_DOWN)
+ 168              		.loc 1 152 0
+ 169 009c 0420     		mov	r0, #4
+ 170 009e 364A     		ldr	r2, .L74+24
+ 171 00a0 0542     		tst	r5, r0
+ 172 00a2 17D0     		beq	.L28
+ 153:key.c         ****   {
+ 154:key.c         ****     nothing = FALSE;
+ 155:key.c         ****   	if (keyDownReleased == TRUE)
+ 173              		.loc 1 155 0
+ 174 00a4 1378     		ldrb	r3, [r2]
+ 175 00a6 3549     		ldr	r1, .L74+28
+ 176 00a8 012B     		cmp	r3, #1
+ 177 00aa 03D1     		bne	.L30
+ 156:key.c         ****   	{
+ 157:key.c         ****   		keyDownReleased = FALSE;
+ 178              		.loc 1 157 0
+ 179 00ac 0023     		mov	r3, #0
+ 180 00ae 1370     		strb	r3, [r2]
+ 158:key.c         ****   		downKeyCnt = 0;
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 7
+
+
+ 181              		.loc 1 158 0
+ 182 00b0 0B70     		strb	r3, [r1]
+ 183 00b2 09E0     		b	.L63
+ 184              	.L30:
+ 159:key.c         ****   		activeKey = KEY_DOWN;
+ 160:key.c         ****   		activeKey2 = KEY_DOWN;
+ 161:key.c         ****   	}
+ 162:key.c         ****   	else
+ 163:key.c         ****   	{
+ 164:key.c         ****   	  downKeyCnt++;
+ 185              		.loc 1 164 0
+ 186 00b4 0B78     		ldrb	r3, [r1]
+ 187 00b6 0133     		add	r3, r3, #1
+ 188 00b8 1B06     		lsl	r3, r3, #24
+ 189 00ba 1B0E     		lsr	r3, r3, #24
+ 190 00bc 0B70     		strb	r3, [r1]
+ 165:key.c         ****   	  if (downKeyCnt == FIRST_REPEAT)
+ 191              		.loc 1 165 0
+ 192 00be 042B     		cmp	r3, #4
+ 193 00c0 02D0     		beq	.L63
+ 166:key.c         ****   	  {
+ 167:key.c         ****   		  activeKey = KEY_DOWN;
+ 168:key.c         ****   		  activeKey2 = KEY_DOWN;
+ 169:key.c         ****   	  }
+ 170:key.c         ****   	  else if (downKeyCnt >= FIRST_REPEAT + SECOND_REPEAT)
+ 194              		.loc 1 170 0
+ 195 00c2 062B     		cmp	r3, #6
+ 196 00c4 04D9     		bls	.L64
+ 171:key.c         ****   	  {
+ 172:key.c         ****   		  downKeyCnt = FIRST_REPEAT;
+ 197              		.loc 1 172 0
+ 198 00c6 0870     		strb	r0, [r1]
+ 199              	.L63:
+ 173:key.c         ****   		  activeKey = KEY_DOWN;
+ 200              		.loc 1 173 0
+ 201 00c8 274B     		ldr	r3, .L74+8
+ 202 00ca 1870     		strb	r0, [r3]
+ 174:key.c         ****   		  activeKey2 = KEY_DOWN;
+ 203              		.loc 1 174 0
+ 204 00cc 274B     		ldr	r3, .L74+12
+ 205 00ce 1870     		strb	r0, [r3]
+ 206              	.L64:
+ 207 00d0 0024     		mov	r4, #0
+ 208 00d2 01E0     		b	.L32
+ 209              	.L28:
+ 175:key.c         ****   	  }
+ 176:key.c         ****   	}
+ 177:key.c         ****   }
+ 178:key.c         ****   else
+ 179:key.c         ****   	keyDownReleased = TRUE;
+ 210              		.loc 1 179 0
+ 211 00d4 0123     		mov	r3, #1
+ 212 00d6 1370     		strb	r3, [r2]
+ 213              	.L32:
+ 180:key.c         **** 
+ 181:key.c         ****   //check left key
+ 182:key.c         ****   if (readKeys & KEY_LEFT)
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 8
+
+
+ 214              		.loc 1 182 0
+ 215 00d8 0820     		mov	r0, #8
+ 216 00da 294A     		ldr	r2, .L74+32
+ 217 00dc 0542     		tst	r5, r0
+ 218 00de 17D0     		beq	.L37
+ 183:key.c         ****   {
+ 184:key.c         ****     nothing = FALSE;
+ 185:key.c         ****   	if (keyLeftReleased == TRUE)
+ 219              		.loc 1 185 0
+ 220 00e0 1378     		ldrb	r3, [r2]
+ 221 00e2 2849     		ldr	r1, .L74+36
+ 222 00e4 012B     		cmp	r3, #1
+ 223 00e6 02D1     		bne	.L39
+ 186:key.c         ****   	{
+ 187:key.c         ****   		keyLeftReleased = FALSE;
+ 224              		.loc 1 187 0
+ 225 00e8 0023     		mov	r3, #0
+ 226 00ea 1370     		strb	r3, [r2]
+ 227 00ec 09E0     		b	.L72
+ 228              	.L39:
+ 188:key.c         ****   		leftKeyCnt = 0;
+ 189:key.c         ****   		activeKey = KEY_LEFT;
+ 190:key.c         ****   		activeKey2 = KEY_LEFT;
+ 191:key.c         ****   	}
+ 192:key.c         ****   	else
+ 193:key.c         ****   	{
+ 194:key.c         ****   	  leftKeyCnt++;
+ 229              		.loc 1 194 0
+ 230 00ee 0B78     		ldrb	r3, [r1]
+ 231 00f0 0133     		add	r3, r3, #1
+ 232 00f2 1B06     		lsl	r3, r3, #24
+ 233 00f4 1B0E     		lsr	r3, r3, #24
+ 234 00f6 0B70     		strb	r3, [r1]
+ 195:key.c         ****   	  if (leftKeyCnt == FIRST_REPEAT)
+ 235              		.loc 1 195 0
+ 236 00f8 042B     		cmp	r3, #4
+ 237 00fa 03D0     		beq	.L66
+ 196:key.c         ****   	  {
+ 197:key.c         ****   		  activeKey = KEY_LEFT;
+ 198:key.c         ****   		  activeKey2 = KEY_LEFT;
+ 199:key.c         ****   	  }
+ 200:key.c         ****   	  else if (leftKeyCnt >= FIRST_REPEAT + SECOND_REPEAT)
+ 238              		.loc 1 200 0
+ 239 00fc 062B     		cmp	r3, #6
+ 240 00fe 05D9     		bls	.L67
+ 201:key.c         ****   	  {
+ 202:key.c         ****   		  leftKeyCnt = FIRST_REPEAT;
+ 241              		.loc 1 202 0
+ 242 0100 0423     		mov	r3, #4
+ 243              	.L72:
+ 244 0102 0B70     		strb	r3, [r1]
+ 245              	.L66:
+ 203:key.c         ****   		  activeKey = KEY_LEFT;
+ 246              		.loc 1 203 0
+ 247 0104 184B     		ldr	r3, .L74+8
+ 248 0106 1870     		strb	r0, [r3]
+ 204:key.c         ****   		  activeKey2 = KEY_LEFT;
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 9
+
+
+ 249              		.loc 1 204 0
+ 250 0108 184B     		ldr	r3, .L74+12
+ 251 010a 1870     		strb	r0, [r3]
+ 252              	.L67:
+ 253 010c 0024     		mov	r4, #0
+ 254 010e 01E0     		b	.L41
+ 255              	.L37:
+ 205:key.c         ****   	  }
+ 206:key.c         ****   	}
+ 207:key.c         ****   }
+ 208:key.c         ****   else
+ 209:key.c         ****   	keyLeftReleased = TRUE;
+ 256              		.loc 1 209 0
+ 257 0110 0123     		mov	r3, #1
+ 258 0112 1370     		strb	r3, [r2]
+ 259              	.L41:
+ 210:key.c         **** 
+ 211:key.c         ****   //check right key
+ 212:key.c         ****   if (readKeys & KEY_RIGHT)
+ 260              		.loc 1 212 0
+ 261 0114 0220     		mov	r0, #2
+ 262 0116 291C     		mov	r1, r5
+ 263 0118 1B4A     		ldr	r2, .L74+40
+ 264 011a 0140     		and	r1, r0
+ 265 011c 16D0     		beq	.L46
+ 213:key.c         ****   {
+ 214:key.c         ****     nothing = FALSE;
+ 215:key.c         ****   	if (keyRightReleased == TRUE)
+ 266              		.loc 1 215 0
+ 267 011e 1378     		ldrb	r3, [r2]
+ 268 0120 1A49     		ldr	r1, .L74+44
+ 269 0122 012B     		cmp	r3, #1
+ 270 0124 02D1     		bne	.L48
+ 216:key.c         ****   	{
+ 217:key.c         ****   		keyRightReleased = FALSE;
+ 271              		.loc 1 217 0
+ 272 0126 0023     		mov	r3, #0
+ 273 0128 1370     		strb	r3, [r2]
+ 274 012a 09E0     		b	.L73
+ 275              	.L48:
+ 218:key.c         ****   		rightKeyCnt = 0;
+ 219:key.c         ****   		activeKey = KEY_RIGHT;
+ 220:key.c         ****   		activeKey2 = KEY_RIGHT;
+ 221:key.c         ****   	}
+ 222:key.c         ****   	else
+ 223:key.c         ****   	{
+ 224:key.c         ****   	  rightKeyCnt++;
+ 276              		.loc 1 224 0
+ 277 012c 0B78     		ldrb	r3, [r1]
+ 278 012e 0133     		add	r3, r3, #1
+ 279 0130 1B06     		lsl	r3, r3, #24
+ 280 0132 1B0E     		lsr	r3, r3, #24
+ 281 0134 0B70     		strb	r3, [r1]
+ 225:key.c         ****   	  if (rightKeyCnt == FIRST_REPEAT)
+ 282              		.loc 1 225 0
+ 283 0136 042B     		cmp	r3, #4
+ 284 0138 03D0     		beq	.L69
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 10
+
+
+ 226:key.c         ****   	  {
+ 227:key.c         ****   		  activeKey = KEY_RIGHT;
+ 228:key.c         ****   		  activeKey2 = KEY_RIGHT;
+ 229:key.c         ****   	  }
+ 230:key.c         ****   	  else if (rightKeyCnt >= FIRST_REPEAT + SECOND_REPEAT)
+ 285              		.loc 1 230 0
+ 286 013a 062B     		cmp	r3, #6
+ 287 013c 0CD9     		bls	.L55
+ 231:key.c         ****   	  {
+ 232:key.c         ****   		  rightKeyCnt = FIRST_REPEAT;
+ 288              		.loc 1 232 0
+ 289 013e 0423     		mov	r3, #4
+ 290              	.L73:
+ 291 0140 0B70     		strb	r3, [r1]
+ 292              	.L69:
+ 233:key.c         ****   		  activeKey = KEY_RIGHT;
+ 293              		.loc 1 233 0
+ 294 0142 094B     		ldr	r3, .L74+8
+ 295 0144 1870     		strb	r0, [r3]
+ 234:key.c         ****   		  activeKey2 = KEY_RIGHT;
+ 296              		.loc 1 234 0
+ 297 0146 094B     		ldr	r3, .L74+12
+ 298 0148 1870     		strb	r0, [r3]
+ 299 014a 05E0     		b	.L55
+ 300              	.L46:
+ 235:key.c         ****   	  }
+ 236:key.c         ****   	}
+ 237:key.c         ****   }
+ 238:key.c         ****   else
+ 239:key.c         ****   	keyRightReleased = TRUE;
+ 301              		.loc 1 239 0
+ 302 014c 0123     		mov	r3, #1
+ 303 014e 1370     		strb	r3, [r2]
+ 240:key.c         ****   
+ 241:key.c         ****   if (nothing == TRUE)
+ 304              		.loc 1 241 0
+ 305 0150 012C     		cmp	r4, #1
+ 306 0152 01D1     		bne	.L55
+ 242:key.c         ****     activeKey2 = KEY_NOTHING;
+ 307              		.loc 1 242 0
+ 308 0154 054B     		ldr	r3, .L74+12
+ 309 0156 1970     		strb	r1, [r3]
+ 310              	.L55:
+ 243:key.c         **** }
+ 311              		.loc 1 243 0
+ 312              		@ sp needed for prologue
+ 313              	.LVL3:
+ 314 0158 30BC     		pop	{r4, r5}
+ 315 015a 01BC     		pop	{r0}
+ 316 015c 0047     		bx	r0
+ 317              	.L75:
+ 318 015e 0000     		.align	2
+ 319              	.L74:
+ 320 0160 00000000 		.word	centerReleased
+ 321 0164 02000000 		.word	centerKeyCnt
+ 322 0168 00000000 		.word	activeKey
+ 323 016c 01000000 		.word	activeKey2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 11
+
+
+ 324 0170 01000000 		.word	keyUpReleased
+ 325 0174 03000000 		.word	upKeyCnt
+ 326 0178 02000000 		.word	keyDownReleased
+ 327 017c 04000000 		.word	downKeyCnt
+ 328 0180 03000000 		.word	keyLeftReleased
+ 329 0184 05000000 		.word	leftKeyCnt
+ 330 0188 04000000 		.word	keyRightReleased
+ 331 018c 06000000 		.word	rightKeyCnt
+ 332              	.LFE4:
+ 333              		.size	sampleKey, .-sampleKey
+ 334              		.data
+ 335              		.type	centerReleased, %object
+ 336              		.size	centerReleased, 1
+ 337              	centerReleased:
+ 338 0000 01       		.byte	1
+ 339              		.bss
+ 340              	activeKey:
+ 341 0000 00       		.space	1
+ 342              	activeKey2:
+ 343 0001 00       		.space	1
+ 344              		.data
+ 345              		.type	keyUpReleased, %object
+ 346              		.size	keyUpReleased, 1
+ 347              	keyUpReleased:
+ 348 0001 01       		.byte	1
+ 349              		.type	keyDownReleased, %object
+ 350              		.size	keyDownReleased, 1
+ 351              	keyDownReleased:
+ 352 0002 01       		.byte	1
+ 353              		.type	keyLeftReleased, %object
+ 354              		.size	keyLeftReleased, 1
+ 355              	keyLeftReleased:
+ 356 0003 01       		.byte	1
+ 357              		.type	keyRightReleased, %object
+ 358              		.size	keyRightReleased, 1
+ 359              	keyRightReleased:
+ 360 0004 01       		.byte	1
+ 361              		.bss
+ 362              	centerKeyCnt:
+ 363 0002 00       		.space	1
+ 364              	upKeyCnt:
+ 365 0003 00       		.space	1
+ 366              	downKeyCnt:
+ 367 0004 00       		.space	1
+ 368              	leftKeyCnt:
+ 369 0005 00       		.space	1
+ 370              	rightKeyCnt:
+ 371 0006 00       		.space	1
+ 372              		.comm	ver1_0,1,1
+ 373              		.comm	ver1_1,1,1
+ 374              		.section	.debug_frame,"",%progbits
+ 375              	.Lframe0:
+ 376 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
+ 377              	.LSCIE0:
+ 378 0004 FFFFFFFF 		.4byte	0xffffffff
+ 379 0008 01       		.byte	0x1
+ 380 0009 00       		.ascii	"\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 12
+
+
+ 381 000a 01       		.uleb128 0x1
+ 382 000b 7C       		.sleb128 -4
+ 383 000c 0E       		.byte	0xe
+ 384 000d 0C       		.byte	0xc
+ 385 000e 0D       		.uleb128 0xd
+ 386 000f 00       		.uleb128 0x0
+ 387              		.align	2
+ 388              	.LECIE0:
+ 389              	.LSFDE0:
+ 390 0010 0C000000 		.4byte	.LEFDE0-.LASFDE0
+ 391              	.LASFDE0:
+ 392 0014 00000000 		.4byte	.Lframe0
+ 393 0018 00000000 		.4byte	.LFB2
+ 394 001c 10000000 		.4byte	.LFE2-.LFB2
+ 395              		.align	2
+ 396              	.LEFDE0:
+ 397              	.LSFDE2:
+ 398 0020 0C000000 		.4byte	.LEFDE2-.LASFDE2
+ 399              	.LASFDE2:
+ 400 0024 00000000 		.4byte	.Lframe0
+ 401 0028 10000000 		.4byte	.LFB3
+ 402 002c 0C000000 		.4byte	.LFE3-.LFB3
+ 403              		.align	2
+ 404              	.LEFDE2:
+ 405              	.LSFDE4:
+ 406 0030 18000000 		.4byte	.LEFDE4-.LASFDE4
+ 407              	.LASFDE4:
+ 408 0034 00000000 		.4byte	.Lframe0
+ 409 0038 1C000000 		.4byte	.LFB4
+ 410 003c 74010000 		.4byte	.LFE4-.LFB4
+ 411 0040 42       		.byte	0x4
+ 412              		.4byte	.LCFI0-.LFB4
+ 413 0041 0E       		.byte	0xe
+ 414 0042 0C       		.uleb128 0xc
+ 415 0043 84       		.byte	0x84
+ 416 0044 03       		.uleb128 0x3
+ 417 0045 85       		.byte	0x85
+ 418 0046 02       		.uleb128 0x2
+ 419 0047 8E       		.byte	0x8e
+ 420 0048 01       		.uleb128 0x1
+ 421 0049 000000   		.align	2
+ 422              	.LEFDE4:
+ 423              		.file 2 "./startup/../pre_emptive_os/api/../api/general.h"
+ 424              		.file 3 "hw.h"
+ 425              		.text
+ 426              	.Letext0:
+ 427              		.section	.debug_loc,"",%progbits
+ 428              	.Ldebug_loc0:
+ 429              	.LLST2:
+ 430 0000 1C000000 		.4byte	.LFB4-.Ltext0
+ 431 0004 1E000000 		.4byte	.LCFI0-.Ltext0
+ 432 0008 0100     		.2byte	0x1
+ 433 000a 5D       		.byte	0x5d
+ 434 000b 1E000000 		.4byte	.LCFI0-.Ltext0
+ 435 000f 90010000 		.4byte	.LFE4-.Ltext0
+ 436 0013 0200     		.2byte	0x2
+ 437 0015 7D       		.byte	0x7d
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 13
+
+
+ 438 0016 0C       		.sleb128 12
+ 439 0017 00000000 		.4byte	0x0
+ 440 001b 00000000 		.4byte	0x0
+ 441              	.LLST3:
+ 442 001f 5A000000 		.4byte	.LVL0-.Ltext0
+ 443 0023 5C000000 		.4byte	.LVL1-.Ltext0
+ 444 0027 0100     		.2byte	0x1
+ 445 0029 54       		.byte	0x54
+ 446 002a 62000000 		.4byte	.LVL2-.Ltext0
+ 447 002e 58010000 		.4byte	.LVL3-.Ltext0
+ 448 0032 0100     		.2byte	0x1
+ 449 0034 54       		.byte	0x54
+ 450 0035 00000000 		.4byte	0x0
+ 451 0039 00000000 		.4byte	0x0
+ 452              		.section	.debug_info
+ 453 0000 D2010000 		.4byte	0x1d2
+ 454 0004 0200     		.2byte	0x2
+ 455 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 456 000a 04       		.byte	0x4
+ 457 000b 01       		.uleb128 0x1
+ 458 000c 00000000 		.4byte	.Ldebug_line0
+ 459 0010 90010000 		.4byte	.Letext0
+ 460 0014 00000000 		.4byte	.Ltext0
+ 461 0018 FC000000 		.4byte	.LASF26
+ 462 001c 01       		.byte	0x1
+ 463 001d 3C000000 		.4byte	.LASF27
+ 464 0021 00000000 		.4byte	.LASF28
+ 465 0025 02       		.uleb128 0x2
+ 466 0026 74553800 		.ascii	"tU8\000"
+ 467 002a 02       		.byte	0x2
+ 468 002b 47       		.byte	0x47
+ 469 002c 30000000 		.4byte	0x30
+ 470 0030 03       		.uleb128 0x3
+ 471 0031 7B000000 		.4byte	.LASF0
+ 472 0035 01       		.byte	0x1
+ 473 0036 08       		.byte	0x8
+ 474 0037 03       		.uleb128 0x3
+ 475 0038 9B000000 		.4byte	.LASF1
+ 476 003c 02       		.byte	0x2
+ 477 003d 07       		.byte	0x7
+ 478 003e 03       		.uleb128 0x3
+ 479 003f D9000000 		.4byte	.LASF2
+ 480 0043 04       		.byte	0x4
+ 481 0044 07       		.byte	0x7
+ 482 0045 03       		.uleb128 0x3
+ 483 0046 38010000 		.4byte	.LASF3
+ 484 004a 01       		.byte	0x1
+ 485 004b 06       		.byte	0x6
+ 486 004c 03       		.uleb128 0x3
+ 487 004d 1A010000 		.4byte	.LASF4
+ 488 0051 02       		.byte	0x2
+ 489 0052 05       		.byte	0x5
+ 490 0053 04       		.uleb128 0x4
+ 491 0054 696E7400 		.ascii	"int\000"
+ 492 0058 04       		.byte	0x4
+ 493 0059 05       		.byte	0x5
+ 494 005a 05       		.uleb128 0x5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 14
+
+
+ 495 005b 44010000 		.4byte	.LASF5
+ 496 005f 02       		.byte	0x2
+ 497 0060 4D       		.byte	0x4d
+ 498 0061 30000000 		.4byte	0x30
+ 499 0065 03       		.uleb128 0x3
+ 500 0066 89000000 		.4byte	.LASF6
+ 501 006a 04       		.byte	0x4
+ 502 006b 07       		.byte	0x7
+ 503 006c 06       		.uleb128 0x6
+ 504 006d 95000000 		.4byte	0x95
+ 505 0071 01       		.byte	0x1
+ 506 0072 2F010000 		.4byte	.LASF7
+ 507 0076 01       		.byte	0x1
+ 508 0077 39       		.byte	0x39
+ 509 0078 01       		.byte	0x1
+ 510 0079 25000000 		.4byte	0x25
+ 511 007d 00000000 		.4byte	.LFB2
+ 512 0081 10000000 		.4byte	.LFE2
+ 513 0085 01       		.byte	0x1
+ 514 0086 5D       		.byte	0x5d
+ 515 0087 07       		.uleb128 0x7
+ 516 0088 59000000 		.4byte	.LASF9
+ 517 008c 01       		.byte	0x1
+ 518 008d 3A       		.byte	0x3a
+ 519 008e 25000000 		.4byte	0x25
+ 520 0092 01       		.byte	0x1
+ 521 0093 50       		.byte	0x50
+ 522 0094 00       		.byte	0x0
+ 523 0095 08       		.uleb128 0x8
+ 524 0096 01       		.byte	0x1
+ 525 0097 4A010000 		.4byte	.LASF29
+ 526 009b 01       		.byte	0x1
+ 527 009c 47       		.byte	0x47
+ 528 009d 01       		.byte	0x1
+ 529 009e 25000000 		.4byte	0x25
+ 530 00a2 10000000 		.4byte	.LFB3
+ 531 00a6 1C000000 		.4byte	.LFE3
+ 532 00aa 01       		.byte	0x1
+ 533 00ab 5D       		.byte	0x5d
+ 534 00ac 09       		.uleb128 0x9
+ 535 00ad E0000000 		.4byte	0xe0
+ 536 00b1 01       		.byte	0x1
+ 537 00b2 54010000 		.4byte	.LASF8
+ 538 00b6 01       		.byte	0x1
+ 539 00b7 53       		.byte	0x53
+ 540 00b8 01       		.byte	0x1
+ 541 00b9 1C000000 		.4byte	.LFB4
+ 542 00bd 90010000 		.4byte	.LFE4
+ 543 00c1 00000000 		.4byte	.LLST2
+ 544 00c5 0A       		.uleb128 0xa
+ 545 00c6 B8000000 		.4byte	.LASF10
+ 546 00ca 01       		.byte	0x1
+ 547 00cb 54       		.byte	0x54
+ 548 00cc 5A000000 		.4byte	0x5a
+ 549 00d0 1F000000 		.4byte	.LLST3
+ 550 00d4 0B       		.uleb128 0xb
+ 551 00d5 F3000000 		.4byte	.LASF11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 15
+
+
+ 552 00d9 01       		.byte	0x1
+ 553 00da 55       		.byte	0x55
+ 554 00db 25000000 		.4byte	0x25
+ 555 00df 00       		.byte	0x0
+ 556 00e0 07       		.uleb128 0x7
+ 557 00e1 6C000000 		.4byte	.LASF12
+ 558 00e5 01       		.byte	0x1
+ 559 00e6 22       		.byte	0x22
+ 560 00e7 25000000 		.4byte	0x25
+ 561 00eb 05       		.byte	0x5
+ 562 00ec 03       		.byte	0x3
+ 563 00ed 00000000 		.4byte	centerReleased
+ 564 00f1 07       		.uleb128 0x7
+ 565 00f2 CB000000 		.4byte	.LASF13
+ 566 00f6 01       		.byte	0x1
+ 567 00f7 23       		.byte	0x23
+ 568 00f8 25000000 		.4byte	0x25
+ 569 00fc 05       		.byte	0x5
+ 570 00fd 03       		.byte	0x3
+ 571 00fe 01000000 		.4byte	keyUpReleased
+ 572 0102 07       		.uleb128 0x7
+ 573 0103 42000000 		.4byte	.LASF14
+ 574 0107 01       		.byte	0x1
+ 575 0108 24       		.byte	0x24
+ 576 0109 25000000 		.4byte	0x25
+ 577 010d 05       		.byte	0x5
+ 578 010e 03       		.byte	0x3
+ 579 010f 02000000 		.4byte	keyDownReleased
+ 580 0113 07       		.uleb128 0x7
+ 581 0114 23000000 		.4byte	.LASF15
+ 582 0118 01       		.byte	0x1
+ 583 0119 25       		.byte	0x25
+ 584 011a 25000000 		.4byte	0x25
+ 585 011e 05       		.byte	0x5
+ 586 011f 03       		.byte	0x3
+ 587 0120 03000000 		.4byte	keyLeftReleased
+ 588 0124 07       		.uleb128 0x7
+ 589 0125 5E010000 		.4byte	.LASF16
+ 590 0129 01       		.byte	0x1
+ 591 012a 26       		.byte	0x26
+ 592 012b 25000000 		.4byte	0x25
+ 593 012f 05       		.byte	0x5
+ 594 0130 03       		.byte	0x3
+ 595 0131 04000000 		.4byte	keyRightReleased
+ 596 0135 07       		.uleb128 0x7
+ 597 0136 E6000000 		.4byte	.LASF17
+ 598 013a 01       		.byte	0x1
+ 599 013b 27       		.byte	0x27
+ 600 013c 25000000 		.4byte	0x25
+ 601 0140 05       		.byte	0x5
+ 602 0141 03       		.byte	0x3
+ 603 0142 02000000 		.4byte	centerKeyCnt
+ 604 0146 07       		.uleb128 0x7
+ 605 0147 33000000 		.4byte	.LASF18
+ 606 014b 01       		.byte	0x1
+ 607 014c 28       		.byte	0x28
+ 608 014d 25000000 		.4byte	0x25
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 16
+
+
+ 609 0151 05       		.byte	0x5
+ 610 0152 03       		.byte	0x3
+ 611 0153 03000000 		.4byte	upKeyCnt
+ 612 0157 07       		.uleb128 0x7
+ 613 0158 C0000000 		.4byte	.LASF19
+ 614 015c 01       		.byte	0x1
+ 615 015d 29       		.byte	0x29
+ 616 015e 25000000 		.4byte	0x25
+ 617 0162 05       		.byte	0x5
+ 618 0163 03       		.byte	0x3
+ 619 0164 04000000 		.4byte	downKeyCnt
+ 620 0168 07       		.uleb128 0x7
+ 621 0169 24010000 		.4byte	.LASF20
+ 622 016d 01       		.byte	0x1
+ 623 016e 2A       		.byte	0x2a
+ 624 016f 25000000 		.4byte	0x25
+ 625 0173 05       		.byte	0x5
+ 626 0174 03       		.byte	0x3
+ 627 0175 05000000 		.4byte	leftKeyCnt
+ 628 0179 07       		.uleb128 0x7
+ 629 017a 60000000 		.4byte	.LASF21
+ 630 017e 01       		.byte	0x1
+ 631 017f 2B       		.byte	0x2b
+ 632 0180 25000000 		.4byte	0x25
+ 633 0184 05       		.byte	0x5
+ 634 0185 03       		.byte	0x3
+ 635 0186 06000000 		.4byte	rightKeyCnt
+ 636 018a 07       		.uleb128 0x7
+ 637 018b AE000000 		.4byte	.LASF22
+ 638 018f 01       		.byte	0x1
+ 639 0190 2D       		.byte	0x2d
+ 640 0191 9B010000 		.4byte	0x19b
+ 641 0195 05       		.byte	0x5
+ 642 0196 03       		.byte	0x3
+ 643 0197 00000000 		.4byte	activeKey
+ 644 019b 0C       		.uleb128 0xc
+ 645 019c 25000000 		.4byte	0x25
+ 646 01a0 07       		.uleb128 0x7
+ 647 01a1 0F010000 		.4byte	.LASF23
+ 648 01a5 01       		.byte	0x1
+ 649 01a6 2E       		.byte	0x2e
+ 650 01a7 9B010000 		.4byte	0x19b
+ 651 01ab 05       		.byte	0x5
+ 652 01ac 03       		.byte	0x3
+ 653 01ad 01000000 		.4byte	activeKey2
+ 654 01b1 0D       		.uleb128 0xd
+ 655 01b2 08010000 		.4byte	.LASF24
+ 656 01b6 03       		.byte	0x3
+ 657 01b7 21       		.byte	0x21
+ 658 01b8 5A000000 		.4byte	0x5a
+ 659 01bc 01       		.byte	0x1
+ 660 01bd 05       		.byte	0x5
+ 661 01be 03       		.byte	0x3
+ 662 01bf 00000000 		.4byte	ver1_0
+ 663 01c3 0D       		.uleb128 0xd
+ 664 01c4 52000000 		.4byte	.LASF25
+ 665 01c8 03       		.byte	0x3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 17
+
+
+ 666 01c9 22       		.byte	0x22
+ 667 01ca 5A000000 		.4byte	0x5a
+ 668 01ce 01       		.byte	0x1
+ 669 01cf 05       		.byte	0x5
+ 670 01d0 03       		.byte	0x3
+ 671 01d1 00000000 		.4byte	ver1_1
+ 672 01d5 00       		.byte	0x0
+ 673              		.section	.debug_abbrev
+ 674 0000 01       		.uleb128 0x1
+ 675 0001 11       		.uleb128 0x11
+ 676 0002 01       		.byte	0x1
+ 677 0003 10       		.uleb128 0x10
+ 678 0004 06       		.uleb128 0x6
+ 679 0005 12       		.uleb128 0x12
+ 680 0006 01       		.uleb128 0x1
+ 681 0007 11       		.uleb128 0x11
+ 682 0008 01       		.uleb128 0x1
+ 683 0009 25       		.uleb128 0x25
+ 684 000a 0E       		.uleb128 0xe
+ 685 000b 13       		.uleb128 0x13
+ 686 000c 0B       		.uleb128 0xb
+ 687 000d 03       		.uleb128 0x3
+ 688 000e 0E       		.uleb128 0xe
+ 689 000f 1B       		.uleb128 0x1b
+ 690 0010 0E       		.uleb128 0xe
+ 691 0011 00       		.byte	0x0
+ 692 0012 00       		.byte	0x0
+ 693 0013 02       		.uleb128 0x2
+ 694 0014 16       		.uleb128 0x16
+ 695 0015 00       		.byte	0x0
+ 696 0016 03       		.uleb128 0x3
+ 697 0017 08       		.uleb128 0x8
+ 698 0018 3A       		.uleb128 0x3a
+ 699 0019 0B       		.uleb128 0xb
+ 700 001a 3B       		.uleb128 0x3b
+ 701 001b 0B       		.uleb128 0xb
+ 702 001c 49       		.uleb128 0x49
+ 703 001d 13       		.uleb128 0x13
+ 704 001e 00       		.byte	0x0
+ 705 001f 00       		.byte	0x0
+ 706 0020 03       		.uleb128 0x3
+ 707 0021 24       		.uleb128 0x24
+ 708 0022 00       		.byte	0x0
+ 709 0023 03       		.uleb128 0x3
+ 710 0024 0E       		.uleb128 0xe
+ 711 0025 0B       		.uleb128 0xb
+ 712 0026 0B       		.uleb128 0xb
+ 713 0027 3E       		.uleb128 0x3e
+ 714 0028 0B       		.uleb128 0xb
+ 715 0029 00       		.byte	0x0
+ 716 002a 00       		.byte	0x0
+ 717 002b 04       		.uleb128 0x4
+ 718 002c 24       		.uleb128 0x24
+ 719 002d 00       		.byte	0x0
+ 720 002e 03       		.uleb128 0x3
+ 721 002f 08       		.uleb128 0x8
+ 722 0030 0B       		.uleb128 0xb
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 18
+
+
+ 723 0031 0B       		.uleb128 0xb
+ 724 0032 3E       		.uleb128 0x3e
+ 725 0033 0B       		.uleb128 0xb
+ 726 0034 00       		.byte	0x0
+ 727 0035 00       		.byte	0x0
+ 728 0036 05       		.uleb128 0x5
+ 729 0037 16       		.uleb128 0x16
+ 730 0038 00       		.byte	0x0
+ 731 0039 03       		.uleb128 0x3
+ 732 003a 0E       		.uleb128 0xe
+ 733 003b 3A       		.uleb128 0x3a
+ 734 003c 0B       		.uleb128 0xb
+ 735 003d 3B       		.uleb128 0x3b
+ 736 003e 0B       		.uleb128 0xb
+ 737 003f 49       		.uleb128 0x49
+ 738 0040 13       		.uleb128 0x13
+ 739 0041 00       		.byte	0x0
+ 740 0042 00       		.byte	0x0
+ 741 0043 06       		.uleb128 0x6
+ 742 0044 2E       		.uleb128 0x2e
+ 743 0045 01       		.byte	0x1
+ 744 0046 01       		.uleb128 0x1
+ 745 0047 13       		.uleb128 0x13
+ 746 0048 3F       		.uleb128 0x3f
+ 747 0049 0C       		.uleb128 0xc
+ 748 004a 03       		.uleb128 0x3
+ 749 004b 0E       		.uleb128 0xe
+ 750 004c 3A       		.uleb128 0x3a
+ 751 004d 0B       		.uleb128 0xb
+ 752 004e 3B       		.uleb128 0x3b
+ 753 004f 0B       		.uleb128 0xb
+ 754 0050 27       		.uleb128 0x27
+ 755 0051 0C       		.uleb128 0xc
+ 756 0052 49       		.uleb128 0x49
+ 757 0053 13       		.uleb128 0x13
+ 758 0054 11       		.uleb128 0x11
+ 759 0055 01       		.uleb128 0x1
+ 760 0056 12       		.uleb128 0x12
+ 761 0057 01       		.uleb128 0x1
+ 762 0058 40       		.uleb128 0x40
+ 763 0059 0A       		.uleb128 0xa
+ 764 005a 00       		.byte	0x0
+ 765 005b 00       		.byte	0x0
+ 766 005c 07       		.uleb128 0x7
+ 767 005d 34       		.uleb128 0x34
+ 768 005e 00       		.byte	0x0
+ 769 005f 03       		.uleb128 0x3
+ 770 0060 0E       		.uleb128 0xe
+ 771 0061 3A       		.uleb128 0x3a
+ 772 0062 0B       		.uleb128 0xb
+ 773 0063 3B       		.uleb128 0x3b
+ 774 0064 0B       		.uleb128 0xb
+ 775 0065 49       		.uleb128 0x49
+ 776 0066 13       		.uleb128 0x13
+ 777 0067 02       		.uleb128 0x2
+ 778 0068 0A       		.uleb128 0xa
+ 779 0069 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 19
+
+
+ 780 006a 00       		.byte	0x0
+ 781 006b 08       		.uleb128 0x8
+ 782 006c 2E       		.uleb128 0x2e
+ 783 006d 00       		.byte	0x0
+ 784 006e 3F       		.uleb128 0x3f
+ 785 006f 0C       		.uleb128 0xc
+ 786 0070 03       		.uleb128 0x3
+ 787 0071 0E       		.uleb128 0xe
+ 788 0072 3A       		.uleb128 0x3a
+ 789 0073 0B       		.uleb128 0xb
+ 790 0074 3B       		.uleb128 0x3b
+ 791 0075 0B       		.uleb128 0xb
+ 792 0076 27       		.uleb128 0x27
+ 793 0077 0C       		.uleb128 0xc
+ 794 0078 49       		.uleb128 0x49
+ 795 0079 13       		.uleb128 0x13
+ 796 007a 11       		.uleb128 0x11
+ 797 007b 01       		.uleb128 0x1
+ 798 007c 12       		.uleb128 0x12
+ 799 007d 01       		.uleb128 0x1
+ 800 007e 40       		.uleb128 0x40
+ 801 007f 0A       		.uleb128 0xa
+ 802 0080 00       		.byte	0x0
+ 803 0081 00       		.byte	0x0
+ 804 0082 09       		.uleb128 0x9
+ 805 0083 2E       		.uleb128 0x2e
+ 806 0084 01       		.byte	0x1
+ 807 0085 01       		.uleb128 0x1
+ 808 0086 13       		.uleb128 0x13
+ 809 0087 3F       		.uleb128 0x3f
+ 810 0088 0C       		.uleb128 0xc
+ 811 0089 03       		.uleb128 0x3
+ 812 008a 0E       		.uleb128 0xe
+ 813 008b 3A       		.uleb128 0x3a
+ 814 008c 0B       		.uleb128 0xb
+ 815 008d 3B       		.uleb128 0x3b
+ 816 008e 0B       		.uleb128 0xb
+ 817 008f 27       		.uleb128 0x27
+ 818 0090 0C       		.uleb128 0xc
+ 819 0091 11       		.uleb128 0x11
+ 820 0092 01       		.uleb128 0x1
+ 821 0093 12       		.uleb128 0x12
+ 822 0094 01       		.uleb128 0x1
+ 823 0095 40       		.uleb128 0x40
+ 824 0096 06       		.uleb128 0x6
+ 825 0097 00       		.byte	0x0
+ 826 0098 00       		.byte	0x0
+ 827 0099 0A       		.uleb128 0xa
+ 828 009a 34       		.uleb128 0x34
+ 829 009b 00       		.byte	0x0
+ 830 009c 03       		.uleb128 0x3
+ 831 009d 0E       		.uleb128 0xe
+ 832 009e 3A       		.uleb128 0x3a
+ 833 009f 0B       		.uleb128 0xb
+ 834 00a0 3B       		.uleb128 0x3b
+ 835 00a1 0B       		.uleb128 0xb
+ 836 00a2 49       		.uleb128 0x49
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 20
+
+
+ 837 00a3 13       		.uleb128 0x13
+ 838 00a4 02       		.uleb128 0x2
+ 839 00a5 06       		.uleb128 0x6
+ 840 00a6 00       		.byte	0x0
+ 841 00a7 00       		.byte	0x0
+ 842 00a8 0B       		.uleb128 0xb
+ 843 00a9 34       		.uleb128 0x34
+ 844 00aa 00       		.byte	0x0
+ 845 00ab 03       		.uleb128 0x3
+ 846 00ac 0E       		.uleb128 0xe
+ 847 00ad 3A       		.uleb128 0x3a
+ 848 00ae 0B       		.uleb128 0xb
+ 849 00af 3B       		.uleb128 0x3b
+ 850 00b0 0B       		.uleb128 0xb
+ 851 00b1 49       		.uleb128 0x49
+ 852 00b2 13       		.uleb128 0x13
+ 853 00b3 00       		.byte	0x0
+ 854 00b4 00       		.byte	0x0
+ 855 00b5 0C       		.uleb128 0xc
+ 856 00b6 35       		.uleb128 0x35
+ 857 00b7 00       		.byte	0x0
+ 858 00b8 49       		.uleb128 0x49
+ 859 00b9 13       		.uleb128 0x13
+ 860 00ba 00       		.byte	0x0
+ 861 00bb 00       		.byte	0x0
+ 862 00bc 0D       		.uleb128 0xd
+ 863 00bd 34       		.uleb128 0x34
+ 864 00be 00       		.byte	0x0
+ 865 00bf 03       		.uleb128 0x3
+ 866 00c0 0E       		.uleb128 0xe
+ 867 00c1 3A       		.uleb128 0x3a
+ 868 00c2 0B       		.uleb128 0xb
+ 869 00c3 3B       		.uleb128 0x3b
+ 870 00c4 0B       		.uleb128 0xb
+ 871 00c5 49       		.uleb128 0x49
+ 872 00c6 13       		.uleb128 0x13
+ 873 00c7 3F       		.uleb128 0x3f
+ 874 00c8 0C       		.uleb128 0xc
+ 875 00c9 02       		.uleb128 0x2
+ 876 00ca 0A       		.uleb128 0xa
+ 877 00cb 00       		.byte	0x0
+ 878 00cc 00       		.byte	0x0
+ 879 00cd 00       		.byte	0x0
+ 880              		.section	.debug_pubnames,"",%progbits
+ 881 0000 4D000000 		.4byte	0x4d
+ 882 0004 0200     		.2byte	0x2
+ 883 0006 00000000 		.4byte	.Ldebug_info0
+ 884 000a D6010000 		.4byte	0x1d6
+ 885 000e 6C000000 		.4byte	0x6c
+ 886 0012 63686563 		.ascii	"checkKey\000"
+ 886      6B4B6579 
+ 886      00
+ 887 001b 95000000 		.4byte	0x95
+ 888 001f 63686563 		.ascii	"checkKey2\000"
+ 888      6B4B6579 
+ 888      3200
+ 889 0029 AC000000 		.4byte	0xac
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 21
+
+
+ 890 002d 73616D70 		.ascii	"sampleKey\000"
+ 890      6C654B65 
+ 890      7900
+ 891 0037 B1010000 		.4byte	0x1b1
+ 892 003b 76657231 		.ascii	"ver1_0\000"
+ 892      5F3000
+ 893 0042 C3010000 		.4byte	0x1c3
+ 894 0046 76657231 		.ascii	"ver1_1\000"
+ 894      5F3100
+ 895 004d 00000000 		.4byte	0x0
+ 896              		.section	.debug_aranges,"",%progbits
+ 897 0000 1C000000 		.4byte	0x1c
+ 898 0004 0200     		.2byte	0x2
+ 899 0006 00000000 		.4byte	.Ldebug_info0
+ 900 000a 04       		.byte	0x4
+ 901 000b 00       		.byte	0x0
+ 902 000c 0000     		.2byte	0x0
+ 903 000e 0000     		.2byte	0x0
+ 904 0010 00000000 		.4byte	.Ltext0
+ 905 0014 90010000 		.4byte	.Letext0-.Ltext0
+ 906 0018 00000000 		.4byte	0x0
+ 907 001c 00000000 		.4byte	0x0
+ 908              		.section	.debug_str,"MS",%progbits,1
+ 909              	.LASF28:
+ 910 0000 2F637967 		.ascii	"/cygdrive/c/eclipse/workspace/2138\000"
+ 910      64726976 
+ 910      652F632F 
+ 910      65636C69 
+ 910      7073652F 
+ 911              	.LASF15:
+ 912 0023 6B65794C 		.ascii	"keyLeftReleased\000"
+ 912      65667452 
+ 912      656C6561 
+ 912      73656400 
+ 913              	.LASF18:
+ 914 0033 75704B65 		.ascii	"upKeyCnt\000"
+ 914      79436E74 
+ 914      00
+ 915              	.LASF27:
+ 916 003c 6B65792E 		.ascii	"key.c\000"
+ 916      6300
+ 917              	.LASF14:
+ 918 0042 6B657944 		.ascii	"keyDownReleased\000"
+ 918      6F776E52 
+ 918      656C6561 
+ 918      73656400 
+ 919              	.LASF25:
+ 920 0052 76657231 		.ascii	"ver1_1\000"
+ 920      5F3100
+ 921              	.LASF9:
+ 922 0059 72657456 		.ascii	"retVal\000"
+ 922      616C00
+ 923              	.LASF21:
+ 924 0060 72696768 		.ascii	"rightKeyCnt\000"
+ 924      744B6579 
+ 924      436E7400 
+ 925              	.LASF12:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 22
+
+
+ 926 006c 63656E74 		.ascii	"centerReleased\000"
+ 926      65725265 
+ 926      6C656173 
+ 926      656400
+ 927              	.LASF0:
+ 928 007b 756E7369 		.ascii	"unsigned char\000"
+ 928      676E6564 
+ 928      20636861 
+ 928      7200
+ 929              	.LASF6:
+ 930 0089 6C6F6E67 		.ascii	"long unsigned int\000"
+ 930      20756E73 
+ 930      69676E65 
+ 930      6420696E 
+ 930      7400
+ 931              	.LASF1:
+ 932 009b 73686F72 		.ascii	"short unsigned int\000"
+ 932      7420756E 
+ 932      7369676E 
+ 932      65642069 
+ 932      6E7400
+ 933              	.LASF22:
+ 934 00ae 61637469 		.ascii	"activeKey\000"
+ 934      76654B65 
+ 934      7900
+ 935              	.LASF10:
+ 936 00b8 6E6F7468 		.ascii	"nothing\000"
+ 936      696E6700 
+ 937              	.LASF19:
+ 938 00c0 646F776E 		.ascii	"downKeyCnt\000"
+ 938      4B657943 
+ 938      6E7400
+ 939              	.LASF13:
+ 940 00cb 6B657955 		.ascii	"keyUpReleased\000"
+ 940      7052656C 
+ 940      65617365 
+ 940      6400
+ 941              	.LASF2:
+ 942 00d9 756E7369 		.ascii	"unsigned int\000"
+ 942      676E6564 
+ 942      20696E74 
+ 942      00
+ 943              	.LASF17:
+ 944 00e6 63656E74 		.ascii	"centerKeyCnt\000"
+ 944      65724B65 
+ 944      79436E74 
+ 944      00
+ 945              	.LASF11:
+ 946 00f3 72656164 		.ascii	"readKeys\000"
+ 946      4B657973 
+ 946      00
+ 947              	.LASF26:
+ 948 00fc 474E5520 		.ascii	"GNU C 4.1.1\000"
+ 948      4320342E 
+ 948      312E3100 
+ 949              	.LASF24:
+ 950 0108 76657231 		.ascii	"ver1_0\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 23
+
+
+ 950      5F3000
+ 951              	.LASF23:
+ 952 010f 61637469 		.ascii	"activeKey2\000"
+ 952      76654B65 
+ 952      793200
+ 953              	.LASF4:
+ 954 011a 73686F72 		.ascii	"short int\000"
+ 954      7420696E 
+ 954      7400
+ 955              	.LASF20:
+ 956 0124 6C656674 		.ascii	"leftKeyCnt\000"
+ 956      4B657943 
+ 956      6E7400
+ 957              	.LASF7:
+ 958 012f 63686563 		.ascii	"checkKey\000"
+ 958      6B4B6579 
+ 958      00
+ 959              	.LASF3:
+ 960 0138 7369676E 		.ascii	"signed char\000"
+ 960      65642063 
+ 960      68617200 
+ 961              	.LASF5:
+ 962 0144 74426F6F 		.ascii	"tBool\000"
+ 962      6C00
+ 963              	.LASF29:
+ 964 014a 63686563 		.ascii	"checkKey2\000"
+ 964      6B4B6579 
+ 964      3200
+ 965              	.LASF8:
+ 966 0154 73616D70 		.ascii	"sampleKey\000"
+ 966      6C654B65 
+ 966      7900
+ 967              	.LASF16:
+ 968 015e 6B657952 		.ascii	"keyRightReleased\000"
+ 968      69676874 
+ 968      52656C65 
+ 968      61736564 
+ 968      00
+ 969              		.ident	"GCC: (GNU) 4.1.1"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 24
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 key.c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:16     .text:00000000 checkKey
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:35     .text:0000000c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:340    .bss:00000000 activeKey
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:43     .text:00000010 checkKey2
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:40     .text:00000010 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:57     .text:00000018 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:342    .bss:00000001 activeKey2
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:65     .text:0000001c sampleKey
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:62     .text:0000001c $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:320    .text:00000160 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:337    .data:00000000 centerReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:362    .bss:00000002 centerKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:347    .data:00000001 keyUpReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:364    .bss:00000003 upKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:351    .data:00000002 keyDownReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:366    .bss:00000004 downKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:355    .data:00000003 keyLeftReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:368    .bss:00000005 leftKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:359    .data:00000004 keyRightReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:370    .bss:00000006 rightKeyCnt
+                             .bss:00000000 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:344    .bss:00000002 $d
+                            *COM*:00000001 ver1_0
+                            *COM*:00000001 ver1_1
+
+UNDEFINED SYMBOLS
+getKeys

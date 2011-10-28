@@ -1,0 +1,1266 @@
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 1
+
+
+   1              		.code	16
+   2              		.file	"select.c"
+   3              		.section	.debug_abbrev,"",%progbits
+   4              	.Ldebug_abbrev0:
+   5              		.section	.debug_info,"",%progbits
+   6              	.Ldebug_info0:
+   7              		.section	.debug_line,"",%progbits
+   8              	.Ldebug_line0:
+   9 0000 A2000000 		.text
+   9      02005F00 
+   9      00000201 
+   9      FB0E0D00 
+   9      01010101 
+  10              	.Ltext0:
+  11              		.align	2
+  12              		.code 16
+  13              		.thumb_func
+  14              		.type	drawMenuCursor, %function
+  15              	drawMenuCursor:
+  16              	.LFB2:
+  17              		.file 1 "select.c"
+   1:select.c      **** /******************************************************************************
+   2:select.c      ****  *
+   3:select.c      ****  * Copyright:
+   4:select.c      ****  *    (C) 2006 Embedded Artists AB
+   5:select.c      ****  *
+   6:select.c      ****  * File:
+   7:select.c      ****  *    select.c
+   8:select.c      ****  *
+   9:select.c      ****  * Description:
+  10:select.c      ****  *    Implements a general menu handling.
+  11:select.c      ****  *
+  12:select.c      ****  *****************************************************************************/
+  13:select.c      **** 
+  14:select.c      **** /******************************************************************************
+  15:select.c      ****  * Includes
+  16:select.c      ****  *****************************************************************************/
+  17:select.c      **** #include "../pre_emptive_os/api/osapi.h"
+  18:select.c      **** #include "../pre_emptive_os/api/general.h"
+  19:select.c      **** #include <printf_P.h>
+  20:select.c      **** #include <ea_init.h>
+  21:select.c      **** #include <stdlib.h>
+  22:select.c      **** #include "lcd.h"
+  23:select.c      **** #include "key.h"
+  24:select.c      **** #include "select.h"
+  25:select.c      **** 
+  26:select.c      **** 
+  27:select.c      **** /*****************************************************************************
+  28:select.c      ****  * Local variables
+  29:select.c      ****  ****************************************************************************/
+  30:select.c      **** static tMenu menu;
+  31:select.c      **** static tU8 cursor;
+  32:select.c      **** 
+  33:select.c      **** 
+  34:select.c      **** /*****************************************************************************
+  35:select.c      ****  *
+  36:select.c      ****  * Description:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 2
+
+
+  37:select.c      ****  *    Draw cursor in main menu
+  38:select.c      ****  *
+  39:select.c      ****  * Params:
+  40:select.c      ****  *    [in] cursor - Cursor positions
+  41:select.c      ****  *
+  42:select.c      ****  ****************************************************************************/
+  43:select.c      **** static void
+  44:select.c      **** drawMenuCursor(void)
+  45:select.c      **** {
+  18              		.loc 1 45 0
+  19 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  20              	.LCFI0:
+  21              		.loc 1 45 0
+  22 0002 184F     		ldr	r7, .L10
+  23 0004 0025     		mov	r5, #0
+  24              	.LVL0:
+  25 0006 0026     		mov	r6, #0
+  26 0008 25E0     		b	.L2
+  27              	.L3:
+  46:select.c      ****   tU32 row;
+  47:select.c      **** 
+  48:select.c      ****   for(row=0; row<menu.noOfChoices; row++)
+  49:select.c      ****   {
+  50:select.c      ****     lcdGotoxy(menu.xPos+4,menu.yPos+17+(14*row));
+  28              		.loc 1 50 0
+  29 000a 6178     		ldrb	r1, [r4, #1]
+  30 000c 2078     		ldrb	r0, [r4]
+  31 000e 1131     		add	r1, r1, #17
+  32 0010 0430     		add	r0, r0, #4
+  33 0012 7118     		add	r1, r6, r1
+  34 0014 0006     		lsl	r0, r0, #24
+  35 0016 0906     		lsl	r1, r1, #24
+  36 0018 000E     		lsr	r0, r0, #24
+  37 001a 090E     		lsr	r1, r1, #24
+  38 001c FFF7FEFF 		bl	lcdGotoxy
+  51:select.c      ****     if(row == cursor)
+  39              		.loc 1 51 0
+  40 0020 114B     		ldr	r3, .L10+4
+  41 0022 1B78     		ldrb	r3, [r3]
+  42 0024 221C     		mov	r2, r4
+  43 0026 2832     		add	r2, r2, #40
+  44 0028 9D42     		cmp	r5, r3
+  45 002a 06D1     		bne	.L4
+  52:select.c      ****       lcdColor(menu.bgColor+1,menu.selectedColor);
+  46              		.loc 1 52 0
+  47 002c 1078     		ldrb	r0, [r2]
+  48 002e 0130     		add	r0, r0, #1
+  49 0030 0006     		lsl	r0, r0, #24
+  50 0032 231C     		mov	r3, r4
+  51 0034 000E     		lsr	r0, r0, #24
+  52 0036 2C33     		add	r3, r3, #44
+  53 0038 02E0     		b	.L9
+  54              	.L4:
+  53:select.c      ****     else
+  54:select.c      ****       lcdColor(menu.bgColor,menu.choicesColor);
+  55              		.loc 1 54 0
+  56 003a 231C     		mov	r3, r4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 3
+
+
+  57 003c 1078     		ldrb	r0, [r2]
+  58 003e 2B33     		add	r3, r3, #43
+  59              	.L9:
+  60 0040 1978     		ldrb	r1, [r3]
+  61 0042 FFF7FEFF 		bl	lcdColor
+  55:select.c      ****     
+  56:select.c      ****     lcdPuts(menu.pChoice[row]);
+  62              		.loc 1 56 0
+  63 0046 01CF     		ldmia	r7!, {r0}
+  64 0048 FFF7FEFF 		bl	lcdPuts
+  65              		.loc 1 48 0
+  66 004c 331C     		mov	r3, r6
+  67 004e 0E33     		add	r3, r3, #14
+  68 0050 1B06     		lsl	r3, r3, #24
+  69 0052 0135     		add	r5, r5, #1
+  70 0054 1E0E     		lsr	r6, r3, #24
+  71              	.L2:
+  72 0056 054C     		ldr	r4, .L10+8
+  73 0058 2379     		ldrb	r3, [r4, #4]
+  74 005a 9D42     		cmp	r5, r3
+  75 005c D5D3     		bcc	.L3
+  57:select.c      ****   }
+  58:select.c      **** }
+  76              		.loc 1 58 0
+  77              		@ sp needed for prologue
+  78              	.LVL1:
+  79 005e F0BC     		pop	{r4, r5, r6, r7}
+  80 0060 01BC     		pop	{r0}
+  81 0062 0047     		bx	r0
+  82              	.L11:
+  83              		.align	2
+  84              	.L10:
+  85 0064 10000000 		.word	menu+16
+  86 0068 30000000 		.word	cursor
+  87 006c 00000000 		.word	menu
+  88              	.LFE2:
+  89              		.size	drawMenuCursor, .-drawMenuCursor
+  90              		.align	2
+  91              		.global	drawMenu
+  92              		.code 16
+  93              		.thumb_func
+  94              		.type	drawMenu, %function
+  95              	drawMenu:
+  96              	.LFB3:
+  59:select.c      **** 
+  60:select.c      **** /*****************************************************************************
+  61:select.c      ****  *
+  62:select.c      ****  * Description:
+  63:select.c      ****  *    Implements a menu
+  64:select.c      ****  *    
+  65:select.c      ****  ****************************************************************************/
+  66:select.c      **** tU8
+  67:select.c      **** drawMenu(tMenu newMenu)
+  68:select.c      **** {
+  97              		.loc 1 68 0
+  98 0070 84B0     		sub	sp, sp, #16
+  99              	.LCFI1:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 4
+
+
+ 100 0072 70B5     		push	{r4, r5, r6, lr}
+ 101              	.LCFI2:
+  69:select.c      ****   tU8 anyKey;
+  70:select.c      ****   
+  71:select.c      ****   menu = newMenu;
+ 102              		.loc 1 71 0
+ 103 0074 384D     		ldr	r5, .L37
+ 104              		.loc 1 68 0
+ 105 0076 81B0     		sub	sp, sp, #4
+ 106              	.LCFI3:
+ 107              		.loc 1 68 0
+ 108 0078 0792     		str	r2, [sp, #28]
+ 109 007a 0893     		str	r3, [sp, #32]
+ 110 007c 0590     		str	r0, [sp, #20]
+ 111 007e 0691     		str	r1, [sp, #24]
+ 112              		.loc 1 71 0
+ 113 0080 2A1C     		mov	r2, r5
+ 114 0082 05AB     		add	r3, sp, #20
+ 115 0084 13CB     		ldmia	r3!, {r0, r1, r4}
+ 116 0086 13C2     		stmia	r2!, {r0, r1, r4}
+ 117 0088 13CB     		ldmia	r3!, {r0, r1, r4}
+ 118 008a 13C2     		stmia	r2!, {r0, r1, r4}
+ 119 008c 13CB     		ldmia	r3!, {r0, r1, r4}
+ 120 008e 13C2     		stmia	r2!, {r0, r1, r4}
+ 121 0090 13CB     		ldmia	r3!, {r0, r1, r4}
+ 122 0092 13C2     		stmia	r2!, {r0, r1, r4}
+  72:select.c      ****   
+  73:select.c      ****   //draw boarder
+  74:select.c      ****   lcdRect(menu.xPos, menu.yPos, menu.xLen, menu.yLen, menu.borderColor);
+ 123              		.loc 1 74 0
+ 124 0094 2E1C     		mov	r6, r5
+ 125 0096 2936     		add	r6, r6, #41
+ 126 0098 3478     		ldrb	r4, [r6]
+ 127 009a 2878     		ldrb	r0, [r5]
+ 128 009c 6978     		ldrb	r1, [r5, #1]
+ 129 009e AA78     		ldrb	r2, [r5, #2]
+ 130 00a0 EB78     		ldrb	r3, [r5, #3]
+ 131 00a2 0094     		str	r4, [sp]
+ 132 00a4 FFF7FEFF 		bl	lcdRect
+  75:select.c      ****   lcdRect(menu.xPos+1, menu.yPos+16, menu.xLen-2, menu.yLen-17, menu.bgColor);
+ 133              		.loc 1 75 0
+ 134 00a8 2878     		ldrb	r0, [r5]
+ 135 00aa 6978     		ldrb	r1, [r5, #1]
+ 136 00ac AA78     		ldrb	r2, [r5, #2]
+ 137 00ae EB78     		ldrb	r3, [r5, #3]
+ 138 00b0 2C1C     		mov	r4, r5
+ 139 00b2 0130     		add	r0, r0, #1
+ 140 00b4 1031     		add	r1, r1, #16
+ 141 00b6 023A     		sub	r2, r2, #2
+ 142 00b8 113B     		sub	r3, r3, #17
+ 143 00ba 2834     		add	r4, r4, #40
+ 144 00bc 2478     		ldrb	r4, [r4]
+ 145 00be 0006     		lsl	r0, r0, #24
+ 146 00c0 0906     		lsl	r1, r1, #24
+ 147 00c2 1206     		lsl	r2, r2, #24
+ 148 00c4 1B06     		lsl	r3, r3, #24
+ 149 00c6 120E     		lsr	r2, r2, #24
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 5
+
+
+ 150 00c8 1B0E     		lsr	r3, r3, #24
+ 151 00ca 000E     		lsr	r0, r0, #24
+ 152 00cc 090E     		lsr	r1, r1, #24
+ 153 00ce 0094     		str	r4, [sp]
+ 154 00d0 FFF7FEFF 		bl	lcdRect
+  76:select.c      ****   
+  77:select.c      ****   //write header text
+  78:select.c      ****   lcdGotoxy(menu.headerTextXpos,menu.yPos+1);
+ 155              		.loc 1 78 0
+ 156 00d4 6978     		ldrb	r1, [r5, #1]
+ 157 00d6 0131     		add	r1, r1, #1
+ 158 00d8 0906     		lsl	r1, r1, #24
+ 159 00da 287B     		ldrb	r0, [r5, #12]
+ 160 00dc 090E     		lsr	r1, r1, #24
+ 161 00de FFF7FEFF 		bl	lcdGotoxy
+  79:select.c      ****   lcdColor(menu.borderColor,menu.headerColor);
+ 162              		.loc 1 79 0
+ 163 00e2 2B1C     		mov	r3, r5
+ 164 00e4 2A33     		add	r3, r3, #42
+ 165 00e6 1978     		ldrb	r1, [r3]
+ 166 00e8 3078     		ldrb	r0, [r6]
+ 167 00ea FFF7FEFF 		bl	lcdColor
+  80:select.c      ****   lcdPuts(menu.pHeaderText);
+ 168              		.loc 1 80 0
+ 169 00ee A868     		ldr	r0, [r5, #8]
+ 170 00f0 FFF7FEFF 		bl	lcdPuts
+  81:select.c      ****   
+  82:select.c      ****   //write choices
+  83:select.c      ****   cursor = menu.initialChoice;
+ 171              		.loc 1 83 0
+ 172 00f4 194A     		ldr	r2, .L37+4
+ 173 00f6 6B79     		ldrb	r3, [r5, #5]
+ 174 00f8 1370     		strb	r3, [r2]
+  84:select.c      ****   drawMenuCursor();
+ 175              		.loc 1 84 0
+ 176 00fa FFF781FF 		bl	drawMenuCursor
+  85:select.c      ****   
+  86:select.c      ****   //dummy call just to reset previous key strokes
+  87:select.c      ****   checkKey();
+ 177              		.loc 1 87 0
+ 178 00fe FFF7FEFF 		bl	checkKey
+ 179              	.LVL2:
+ 180              	.L36:
+  88:select.c      **** 
+  89:select.c      ****   while(1)
+  90:select.c      ****   {
+  91:select.c      ****     anyKey = checkKey();
+ 181              		.loc 1 91 0
+ 182 0102 FFF7FEFF 		bl	checkKey
+ 183              	.LVL3:
+ 184              	.LVL4:
+  92:select.c      ****     
+  93:select.c      ****     if (anyKey != KEY_NOTHING)
+ 185              		.loc 1 93 0
+ 186 0106 0028     		cmp	r0, #0
+ 187 0108 1BD0     		beq	.L14
+  94:select.c      ****     {
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 6
+
+
+  95:select.c      ****       //select specific function
+  96:select.c      ****       if (anyKey == KEY_CENTER)
+ 188              		.loc 1 96 0
+ 189 010a 1028     		cmp	r0, #16
+ 190 010c 1DD0     		beq	.L28
+  97:select.c      ****       {
+  98:select.c      ****         return cursor;
+  99:select.c      ****       }
+ 100:select.c      ****       
+ 101:select.c      ****       else if (anyKey == KEY_UP)
+ 191              		.loc 1 101 0
+ 192 010e 0128     		cmp	r0, #1
+ 193 0110 07D1     		bne	.L18
+ 102:select.c      ****       {
+ 103:select.c      ****         if (cursor > 0)
+ 194              		.loc 1 103 0
+ 195 0112 124A     		ldr	r2, .L37+4
+ 196 0114 1378     		ldrb	r3, [r2]
+ 197 0116 002B     		cmp	r3, #0
+ 198 0118 01D1     		bne	.L35
+ 104:select.c      ****           cursor--;
+ 105:select.c      ****         else
+ 106:select.c      ****           cursor = menu.noOfChoices - 1;
+ 199              		.loc 1 106 0
+ 200 011a 0F4B     		ldr	r3, .L37
+ 201 011c 1B79     		ldrb	r3, [r3, #4]
+ 202              	.L35:
+ 203 011e 013B     		sub	r3, r3, #1
+ 204 0120 0BE0     		b	.L34
+ 205              	.L18:
+ 107:select.c      ****         drawMenuCursor();
+ 108:select.c      ****       }
+ 109:select.c      ****       
+ 110:select.c      ****       else if (anyKey == KEY_DOWN)
+ 206              		.loc 1 110 0
+ 207 0122 0428     		cmp	r0, #4
+ 208 0124 EDD1     		bne	.L36
+ 111:select.c      ****       {
+ 112:select.c      ****         if (cursor < menu.noOfChoices - 1)
+ 209              		.loc 1 112 0
+ 210 0126 0C4B     		ldr	r3, .L37
+ 211 0128 0C4A     		ldr	r2, .L37+4
+ 212 012a 1B79     		ldrb	r3, [r3, #4]
+ 213 012c 1178     		ldrb	r1, [r2]
+ 214 012e 013B     		sub	r3, r3, #1
+ 215 0130 9942     		cmp	r1, r3
+ 216 0132 01DA     		bge	.L24
+ 113:select.c      ****           cursor++;
+ 217              		.loc 1 113 0
+ 218 0134 4B1C     		add	r3, r1, #1
+ 219 0136 00E0     		b	.L34
+ 220              	.L24:
+ 114:select.c      ****         else
+ 115:select.c      ****           cursor = 0;
+ 221              		.loc 1 115 0
+ 222 0138 0023     		mov	r3, #0
+ 223              	.L34:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 7
+
+
+ 224 013a 1370     		strb	r3, [r2]
+ 116:select.c      ****         drawMenuCursor();
+ 225              		.loc 1 116 0
+ 226 013c FFF760FF 		bl	drawMenuCursor
+ 227              	.LVL5:
+ 228 0140 DFE7     		b	.L36
+ 229              	.LVL6:
+ 230              	.L14:
+ 117:select.c      ****       }
+ 118:select.c      ****     }
+ 119:select.c      ****     else
+ 120:select.c      ****       osSleep(1);
+ 231              		.loc 1 120 0
+ 232 0142 0120     		mov	r0, #1
+ 233              	.LVL7:
+ 234 0144 FFF7FEFF 		bl	osSleep
+ 235 0148 DBE7     		b	.L36
+ 236              	.LVL8:
+ 237              	.L28:
+ 238              		.loc 1 96 0
+ 239 014a 044B     		ldr	r3, .L37+4
+ 240 014c 1878     		ldrb	r0, [r3]
+ 241              	.LVL9:
+ 121:select.c      ****   }
+ 122:select.c      **** }
+ 242              		.loc 1 122 0
+ 243 014e 01B0     		add	sp, sp, #4
+ 244              		@ sp needed for prologue
+ 245 0150 70BC     		pop	{r4, r5, r6}
+ 246 0152 08BC     		pop	{r3}
+ 247 0154 04B0     		add	sp, sp, #16
+ 248 0156 1847     		bx	r3
+ 249              	.L38:
+ 250              		.align	2
+ 251              	.L37:
+ 252 0158 00000000 		.word	menu
+ 253 015c 30000000 		.word	cursor
+ 254              	.LFE3:
+ 255              		.size	drawMenu, .-drawMenu
+ 256              		.bss
+ 257              		.align	2
+ 258              	menu:
+ 259 0000 00000000 		.space	48
+ 259      00000000 
+ 259      00000000 
+ 259      00000000 
+ 259      00000000 
+ 260              	cursor:
+ 261 0030 00       		.space	1
+ 262 0031 000000   		.section	.debug_frame,"",%progbits
+ 263              	.Lframe0:
+ 264 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
+ 265              	.LSCIE0:
+ 266 0004 FFFFFFFF 		.4byte	0xffffffff
+ 267 0008 01       		.byte	0x1
+ 268 0009 00       		.ascii	"\000"
+ 269 000a 01       		.uleb128 0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 8
+
+
+ 270 000b 7C       		.sleb128 -4
+ 271 000c 0E       		.byte	0xe
+ 272 000d 0C       		.byte	0xc
+ 273 000e 0D       		.uleb128 0xd
+ 274 000f 00       		.uleb128 0x0
+ 275              		.align	2
+ 276              	.LECIE0:
+ 277              	.LSFDE0:
+ 278 0010 1C000000 		.4byte	.LEFDE0-.LASFDE0
+ 279              	.LASFDE0:
+ 280 0014 00000000 		.4byte	.Lframe0
+ 281 0018 00000000 		.4byte	.LFB2
+ 282 001c 70000000 		.4byte	.LFE2-.LFB2
+ 283 0020 42       		.byte	0x4
+ 284              		.4byte	.LCFI0-.LFB2
+ 285 0021 0E       		.byte	0xe
+ 286 0022 14       		.uleb128 0x14
+ 287 0023 84       		.byte	0x84
+ 288 0024 05       		.uleb128 0x5
+ 289 0025 85       		.byte	0x85
+ 290 0026 04       		.uleb128 0x4
+ 291 0027 86       		.byte	0x86
+ 292 0028 03       		.uleb128 0x3
+ 293 0029 87       		.byte	0x87
+ 294 002a 02       		.uleb128 0x2
+ 295 002b 8E       		.byte	0x8e
+ 296 002c 01       		.uleb128 0x1
+ 297 002d 000000   		.align	2
+ 298              	.LEFDE0:
+ 299              	.LSFDE2:
+ 300 0030 20000000 		.4byte	.LEFDE2-.LASFDE2
+ 301              	.LASFDE2:
+ 302 0034 00000000 		.4byte	.Lframe0
+ 303 0038 70000000 		.4byte	.LFB3
+ 304 003c F0000000 		.4byte	.LFE3-.LFB3
+ 305 0040 42       		.byte	0x4
+ 306              		.4byte	.LCFI1-.LFB3
+ 307 0041 0E       		.byte	0xe
+ 308 0042 10       		.uleb128 0x10
+ 309 0043 42       		.byte	0x4
+ 310              		.4byte	.LCFI2-.LCFI1
+ 311 0044 0E       		.byte	0xe
+ 312 0045 20       		.uleb128 0x20
+ 313 0046 84       		.byte	0x84
+ 314 0047 08       		.uleb128 0x8
+ 315 0048 85       		.byte	0x85
+ 316 0049 07       		.uleb128 0x7
+ 317 004a 86       		.byte	0x86
+ 318 004b 06       		.uleb128 0x6
+ 319 004c 8E       		.byte	0x8e
+ 320 004d 05       		.uleb128 0x5
+ 321 004e 44       		.byte	0x4
+ 322              		.4byte	.LCFI3-.LCFI2
+ 323 004f 0E       		.byte	0xe
+ 324 0050 24       		.uleb128 0x24
+ 325 0051 000000   		.align	2
+ 326              	.LEFDE2:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 9
+
+
+ 327              		.file 2 "./startup/../pre_emptive_os/api/../api/general.h"
+ 328              		.file 3 "select.h"
+ 329              		.text
+ 330              	.Letext0:
+ 331              		.section	.debug_loc,"",%progbits
+ 332              	.Ldebug_loc0:
+ 333              	.LLST0:
+ 334 0000 00000000 		.4byte	.LFB2-.Ltext0
+ 335 0004 02000000 		.4byte	.LCFI0-.Ltext0
+ 336 0008 0100     		.2byte	0x1
+ 337 000a 5D       		.byte	0x5d
+ 338 000b 02000000 		.4byte	.LCFI0-.Ltext0
+ 339 000f 70000000 		.4byte	.LFE2-.Ltext0
+ 340 0013 0200     		.2byte	0x2
+ 341 0015 7D       		.byte	0x7d
+ 342 0016 14       		.sleb128 20
+ 343 0017 00000000 		.4byte	0x0
+ 344 001b 00000000 		.4byte	0x0
+ 345              	.LLST1:
+ 346 001f 06000000 		.4byte	.LVL0-.Ltext0
+ 347 0023 5E000000 		.4byte	.LVL1-.Ltext0
+ 348 0027 0100     		.2byte	0x1
+ 349 0029 55       		.byte	0x55
+ 350 002a 00000000 		.4byte	0x0
+ 351 002e 00000000 		.4byte	0x0
+ 352              	.LLST2:
+ 353 0032 70000000 		.4byte	.LFB3-.Ltext0
+ 354 0036 72000000 		.4byte	.LCFI1-.Ltext0
+ 355 003a 0100     		.2byte	0x1
+ 356 003c 5D       		.byte	0x5d
+ 357 003d 72000000 		.4byte	.LCFI1-.Ltext0
+ 358 0041 74000000 		.4byte	.LCFI2-.Ltext0
+ 359 0045 0200     		.2byte	0x2
+ 360 0047 7D       		.byte	0x7d
+ 361 0048 10       		.sleb128 16
+ 362 0049 74000000 		.4byte	.LCFI2-.Ltext0
+ 363 004d 78000000 		.4byte	.LCFI3-.Ltext0
+ 364 0051 0200     		.2byte	0x2
+ 365 0053 7D       		.byte	0x7d
+ 366 0054 20       		.sleb128 32
+ 367 0055 78000000 		.4byte	.LCFI3-.Ltext0
+ 368 0059 60010000 		.4byte	.LFE3-.Ltext0
+ 369 005d 0200     		.2byte	0x2
+ 370 005f 7D       		.byte	0x7d
+ 371 0060 24       		.sleb128 36
+ 372 0061 00000000 		.4byte	0x0
+ 373 0065 00000000 		.4byte	0x0
+ 374              	.LLST3:
+ 375 0069 02010000 		.4byte	.LVL2-.Ltext0
+ 376 006d 06010000 		.4byte	.LVL3-.Ltext0
+ 377 0071 0100     		.2byte	0x1
+ 378 0073 50       		.byte	0x50
+ 379 0074 06010000 		.4byte	.LVL4-.Ltext0
+ 380 0078 40010000 		.4byte	.LVL5-.Ltext0
+ 381 007c 0100     		.2byte	0x1
+ 382 007e 50       		.byte	0x50
+ 383 007f 42010000 		.4byte	.LVL6-.Ltext0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 10
+
+
+ 384 0083 44010000 		.4byte	.LVL7-.Ltext0
+ 385 0087 0100     		.2byte	0x1
+ 386 0089 50       		.byte	0x50
+ 387 008a 4A010000 		.4byte	.LVL8-.Ltext0
+ 388 008e 4E010000 		.4byte	.LVL9-.Ltext0
+ 389 0092 0100     		.2byte	0x1
+ 390 0094 50       		.byte	0x50
+ 391 0095 00000000 		.4byte	0x0
+ 392 0099 00000000 		.4byte	0x0
+ 393              		.section	.debug_info
+ 394 0000 FF010000 		.4byte	0x1ff
+ 395 0004 0200     		.2byte	0x2
+ 396 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 397 000a 04       		.byte	0x4
+ 398 000b 01       		.uleb128 0x1
+ 399 000c 00000000 		.4byte	.Ldebug_line0
+ 400 0010 60010000 		.4byte	.Letext0
+ 401 0014 00000000 		.4byte	.Ltext0
+ 402 0018 34010000 		.4byte	.LASF29
+ 403 001c 01       		.byte	0x1
+ 404 001d F1000000 		.4byte	.LASF30
+ 405 0021 61000000 		.4byte	.LASF31
+ 406 0025 02       		.uleb128 0x2
+ 407 0026 74553800 		.ascii	"tU8\000"
+ 408 002a 02       		.byte	0x2
+ 409 002b 47       		.byte	0x47
+ 410 002c 30000000 		.4byte	0x30
+ 411 0030 03       		.uleb128 0x3
+ 412 0031 26010000 		.4byte	.LASF0
+ 413 0035 01       		.byte	0x1
+ 414 0036 08       		.byte	0x8
+ 415 0037 03       		.uleb128 0x3
+ 416 0038 D9000000 		.4byte	.LASF1
+ 417 003c 02       		.byte	0x2
+ 418 003d 07       		.byte	0x7
+ 419 003e 04       		.uleb128 0x4
+ 420 003f EC000000 		.4byte	.LASF2
+ 421 0043 02       		.byte	0x2
+ 422 0044 49       		.byte	0x49
+ 423 0045 49000000 		.4byte	0x49
+ 424 0049 03       		.uleb128 0x3
+ 425 004a AB000000 		.4byte	.LASF3
+ 426 004e 04       		.byte	0x4
+ 427 004f 07       		.byte	0x7
+ 428 0050 03       		.uleb128 0x3
+ 429 0051 00000000 		.4byte	.LASF4
+ 430 0055 01       		.byte	0x1
+ 431 0056 06       		.byte	0x6
+ 432 0057 03       		.uleb128 0x3
+ 433 0058 40010000 		.4byte	.LASF5
+ 434 005c 02       		.byte	0x2
+ 435 005d 05       		.byte	0x5
+ 436 005e 05       		.uleb128 0x5
+ 437 005f 696E7400 		.ascii	"int\000"
+ 438 0063 04       		.byte	0x4
+ 439 0064 05       		.byte	0x5
+ 440 0065 06       		.uleb128 0x6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 11
+
+
+ 441 0066 04       		.byte	0x4
+ 442 0067 25000000 		.4byte	0x25
+ 443 006b 03       		.uleb128 0x3
+ 444 006c C7000000 		.4byte	.LASF6
+ 445 0070 04       		.byte	0x4
+ 446 0071 07       		.byte	0x7
+ 447 0072 03       		.uleb128 0x3
+ 448 0073 C7000000 		.4byte	.LASF6
+ 449 0077 04       		.byte	0x4
+ 450 0078 07       		.byte	0x7
+ 451 0079 03       		.uleb128 0x3
+ 452 007a 53000000 		.4byte	.LASF7
+ 453 007e 04       		.byte	0x4
+ 454 007f 05       		.byte	0x5
+ 455 0080 03       		.uleb128 0x3
+ 456 0081 45000000 		.4byte	.LASF8
+ 457 0085 08       		.byte	0x8
+ 458 0086 05       		.byte	0x5
+ 459 0087 03       		.uleb128 0x3
+ 460 0088 4F010000 		.4byte	.LASF9
+ 461 008c 01       		.byte	0x1
+ 462 008d 08       		.byte	0x8
+ 463 008e 03       		.uleb128 0x3
+ 464 008f 14000000 		.4byte	.LASF10
+ 465 0093 08       		.byte	0x8
+ 466 0094 07       		.byte	0x7
+ 467 0095 07       		.uleb128 0x7
+ 468 0096 62010000 		.4byte	0x162
+ 469 009a 30       		.byte	0x30
+ 470 009b 03       		.byte	0x3
+ 471 009c 1A       		.byte	0x1a
+ 472 009d 08       		.uleb128 0x8
+ 473 009e 7A010000 		.4byte	.LASF11
+ 474 00a2 03       		.byte	0x3
+ 475 00a3 1B       		.byte	0x1b
+ 476 00a4 25000000 		.4byte	0x25
+ 477 00a8 02       		.byte	0x2
+ 478 00a9 23       		.byte	0x23
+ 479 00aa 00       		.uleb128 0x0
+ 480 00ab 08       		.uleb128 0x8
+ 481 00ac 5B010000 		.4byte	.LASF12
+ 482 00b0 03       		.byte	0x3
+ 483 00b1 1C       		.byte	0x1c
+ 484 00b2 25000000 		.4byte	0x25
+ 485 00b6 02       		.byte	0x2
+ 486 00b7 23       		.byte	0x23
+ 487 00b8 01       		.uleb128 0x1
+ 488 00b9 08       		.uleb128 0x8
+ 489 00ba 4A010000 		.4byte	.LASF13
+ 490 00be 03       		.byte	0x3
+ 491 00bf 1D       		.byte	0x1d
+ 492 00c0 25000000 		.4byte	0x25
+ 493 00c4 02       		.byte	0x2
+ 494 00c5 23       		.byte	0x23
+ 495 00c6 02       		.uleb128 0x2
+ 496 00c7 08       		.uleb128 0x8
+ 497 00c8 5C000000 		.4byte	.LASF14
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 12
+
+
+ 498 00cc 03       		.byte	0x3
+ 499 00cd 1E       		.byte	0x1e
+ 500 00ce 25000000 		.4byte	0x25
+ 501 00d2 02       		.byte	0x2
+ 502 00d3 23       		.byte	0x23
+ 503 00d4 03       		.uleb128 0x3
+ 504 00d5 08       		.uleb128 0x8
+ 505 00d6 84000000 		.4byte	.LASF15
+ 506 00da 03       		.byte	0x3
+ 507 00db 1F       		.byte	0x1f
+ 508 00dc 25000000 		.4byte	0x25
+ 509 00e0 02       		.byte	0x2
+ 510 00e1 23       		.byte	0x23
+ 511 00e2 04       		.uleb128 0x4
+ 512 00e3 08       		.uleb128 0x8
+ 513 00e4 9D000000 		.4byte	.LASF16
+ 514 00e8 03       		.byte	0x3
+ 515 00e9 20       		.byte	0x20
+ 516 00ea 25000000 		.4byte	0x25
+ 517 00ee 02       		.byte	0x2
+ 518 00ef 23       		.byte	0x23
+ 519 00f0 05       		.uleb128 0x5
+ 520 00f1 08       		.uleb128 0x8
+ 521 00f2 7F010000 		.4byte	.LASF17
+ 522 00f6 03       		.byte	0x3
+ 523 00f7 21       		.byte	0x21
+ 524 00f8 65000000 		.4byte	0x65
+ 525 00fc 02       		.byte	0x2
+ 526 00fd 23       		.byte	0x23
+ 527 00fe 08       		.uleb128 0x8
+ 528 00ff 08       		.uleb128 0x8
+ 529 0100 B8000000 		.4byte	.LASF18
+ 530 0104 03       		.byte	0x3
+ 531 0105 22       		.byte	0x22
+ 532 0106 25000000 		.4byte	0x25
+ 533 010a 02       		.byte	0x2
+ 534 010b 23       		.byte	0x23
+ 535 010c 0C       		.uleb128 0xc
+ 536 010d 08       		.uleb128 0x8
+ 537 010e FA000000 		.4byte	.LASF19
+ 538 0112 03       		.byte	0x3
+ 539 0113 23       		.byte	0x23
+ 540 0114 62010000 		.4byte	0x162
+ 541 0118 02       		.byte	0x2
+ 542 0119 23       		.byte	0x23
+ 543 011a 10       		.uleb128 0x10
+ 544 011b 08       		.uleb128 0x8
+ 545 011c 02010000 		.4byte	.LASF20
+ 546 0120 03       		.byte	0x3
+ 547 0121 24       		.byte	0x24
+ 548 0122 25000000 		.4byte	0x25
+ 549 0126 02       		.byte	0x2
+ 550 0127 23       		.byte	0x23
+ 551 0128 28       		.uleb128 0x28
+ 552 0129 08       		.uleb128 0x8
+ 553 012a 39000000 		.4byte	.LASF21
+ 554 012e 03       		.byte	0x3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 13
+
+
+ 555 012f 25       		.byte	0x25
+ 556 0130 25000000 		.4byte	0x25
+ 557 0134 02       		.byte	0x2
+ 558 0135 23       		.byte	0x23
+ 559 0136 29       		.uleb128 0x29
+ 560 0137 08       		.uleb128 0x8
+ 561 0138 60010000 		.4byte	.LASF22
+ 562 013c 03       		.byte	0x3
+ 563 013d 26       		.byte	0x26
+ 564 013e 25000000 		.4byte	0x25
+ 565 0142 02       		.byte	0x2
+ 566 0143 23       		.byte	0x23
+ 567 0144 2A       		.uleb128 0x2a
+ 568 0145 08       		.uleb128 0x8
+ 569 0146 90000000 		.4byte	.LASF23
+ 570 014a 03       		.byte	0x3
+ 571 014b 27       		.byte	0x27
+ 572 014c 25000000 		.4byte	0x25
+ 573 0150 02       		.byte	0x2
+ 574 0151 23       		.byte	0x23
+ 575 0152 2B       		.uleb128 0x2b
+ 576 0153 08       		.uleb128 0x8
+ 577 0154 2B000000 		.4byte	.LASF24
+ 578 0158 03       		.byte	0x3
+ 579 0159 28       		.byte	0x28
+ 580 015a 25000000 		.4byte	0x25
+ 581 015e 02       		.byte	0x2
+ 582 015f 23       		.byte	0x23
+ 583 0160 2C       		.uleb128 0x2c
+ 584 0161 00       		.byte	0x0
+ 585 0162 09       		.uleb128 0x9
+ 586 0163 72010000 		.4byte	0x172
+ 587 0167 65000000 		.4byte	0x65
+ 588 016b 0A       		.uleb128 0xa
+ 589 016c 6B000000 		.4byte	0x6b
+ 590 0170 05       		.byte	0x5
+ 591 0171 00       		.byte	0x0
+ 592 0172 04       		.uleb128 0x4
+ 593 0173 11010000 		.4byte	.LASF25
+ 594 0177 03       		.byte	0x3
+ 595 0178 29       		.byte	0x29
+ 596 0179 95000000 		.4byte	0x95
+ 597 017d 0B       		.uleb128 0xb
+ 598 017e A5010000 		.4byte	0x1a5
+ 599 0182 17010000 		.4byte	.LASF32
+ 600 0186 01       		.byte	0x1
+ 601 0187 2D       		.byte	0x2d
+ 602 0188 01       		.byte	0x1
+ 603 0189 00000000 		.4byte	.LFB2
+ 604 018d 70000000 		.4byte	.LFE2
+ 605 0191 00000000 		.4byte	.LLST0
+ 606 0195 0C       		.uleb128 0xc
+ 607 0196 726F7700 		.ascii	"row\000"
+ 608 019a 01       		.byte	0x1
+ 609 019b 2E       		.byte	0x2e
+ 610 019c 3E000000 		.4byte	0x3e
+ 611 01a0 1F000000 		.4byte	.LLST1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 14
+
+
+ 612 01a4 00       		.byte	0x0
+ 613 01a5 0D       		.uleb128 0xd
+ 614 01a6 E0010000 		.4byte	0x1e0
+ 615 01aa 01       		.byte	0x1
+ 616 01ab 6C010000 		.4byte	.LASF33
+ 617 01af 01       		.byte	0x1
+ 618 01b0 44       		.byte	0x44
+ 619 01b1 01       		.byte	0x1
+ 620 01b2 25000000 		.4byte	0x25
+ 621 01b6 70000000 		.4byte	.LFB3
+ 622 01ba 60010000 		.4byte	.LFE3
+ 623 01be 32000000 		.4byte	.LLST2
+ 624 01c2 0E       		.uleb128 0xe
+ 625 01c3 0C000000 		.4byte	.LASF34
+ 626 01c7 01       		.byte	0x1
+ 627 01c8 43       		.byte	0x43
+ 628 01c9 72010000 		.4byte	0x172
+ 629 01cd 02       		.byte	0x2
+ 630 01ce 91       		.byte	0x91
+ 631 01cf 00       		.sleb128 0
+ 632 01d0 0F       		.uleb128 0xf
+ 633 01d1 54010000 		.4byte	.LASF26
+ 634 01d5 01       		.byte	0x1
+ 635 01d6 45       		.byte	0x45
+ 636 01d7 25000000 		.4byte	0x25
+ 637 01db 69000000 		.4byte	.LLST3
+ 638 01df 00       		.byte	0x0
+ 639 01e0 10       		.uleb128 0x10
+ 640 01e1 75010000 		.4byte	.LASF27
+ 641 01e5 01       		.byte	0x1
+ 642 01e6 1E       		.byte	0x1e
+ 643 01e7 72010000 		.4byte	0x172
+ 644 01eb 05       		.byte	0x5
+ 645 01ec 03       		.byte	0x3
+ 646 01ed 00000000 		.4byte	menu
+ 647 01f1 10       		.uleb128 0x10
+ 648 01f2 0A010000 		.4byte	.LASF28
+ 649 01f6 01       		.byte	0x1
+ 650 01f7 1F       		.byte	0x1f
+ 651 01f8 25000000 		.4byte	0x25
+ 652 01fc 05       		.byte	0x5
+ 653 01fd 03       		.byte	0x3
+ 654 01fe 30000000 		.4byte	cursor
+ 655 0202 00       		.byte	0x0
+ 656              		.section	.debug_abbrev
+ 657 0000 01       		.uleb128 0x1
+ 658 0001 11       		.uleb128 0x11
+ 659 0002 01       		.byte	0x1
+ 660 0003 10       		.uleb128 0x10
+ 661 0004 06       		.uleb128 0x6
+ 662 0005 12       		.uleb128 0x12
+ 663 0006 01       		.uleb128 0x1
+ 664 0007 11       		.uleb128 0x11
+ 665 0008 01       		.uleb128 0x1
+ 666 0009 25       		.uleb128 0x25
+ 667 000a 0E       		.uleb128 0xe
+ 668 000b 13       		.uleb128 0x13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 15
+
+
+ 669 000c 0B       		.uleb128 0xb
+ 670 000d 03       		.uleb128 0x3
+ 671 000e 0E       		.uleb128 0xe
+ 672 000f 1B       		.uleb128 0x1b
+ 673 0010 0E       		.uleb128 0xe
+ 674 0011 00       		.byte	0x0
+ 675 0012 00       		.byte	0x0
+ 676 0013 02       		.uleb128 0x2
+ 677 0014 16       		.uleb128 0x16
+ 678 0015 00       		.byte	0x0
+ 679 0016 03       		.uleb128 0x3
+ 680 0017 08       		.uleb128 0x8
+ 681 0018 3A       		.uleb128 0x3a
+ 682 0019 0B       		.uleb128 0xb
+ 683 001a 3B       		.uleb128 0x3b
+ 684 001b 0B       		.uleb128 0xb
+ 685 001c 49       		.uleb128 0x49
+ 686 001d 13       		.uleb128 0x13
+ 687 001e 00       		.byte	0x0
+ 688 001f 00       		.byte	0x0
+ 689 0020 03       		.uleb128 0x3
+ 690 0021 24       		.uleb128 0x24
+ 691 0022 00       		.byte	0x0
+ 692 0023 03       		.uleb128 0x3
+ 693 0024 0E       		.uleb128 0xe
+ 694 0025 0B       		.uleb128 0xb
+ 695 0026 0B       		.uleb128 0xb
+ 696 0027 3E       		.uleb128 0x3e
+ 697 0028 0B       		.uleb128 0xb
+ 698 0029 00       		.byte	0x0
+ 699 002a 00       		.byte	0x0
+ 700 002b 04       		.uleb128 0x4
+ 701 002c 16       		.uleb128 0x16
+ 702 002d 00       		.byte	0x0
+ 703 002e 03       		.uleb128 0x3
+ 704 002f 0E       		.uleb128 0xe
+ 705 0030 3A       		.uleb128 0x3a
+ 706 0031 0B       		.uleb128 0xb
+ 707 0032 3B       		.uleb128 0x3b
+ 708 0033 0B       		.uleb128 0xb
+ 709 0034 49       		.uleb128 0x49
+ 710 0035 13       		.uleb128 0x13
+ 711 0036 00       		.byte	0x0
+ 712 0037 00       		.byte	0x0
+ 713 0038 05       		.uleb128 0x5
+ 714 0039 24       		.uleb128 0x24
+ 715 003a 00       		.byte	0x0
+ 716 003b 03       		.uleb128 0x3
+ 717 003c 08       		.uleb128 0x8
+ 718 003d 0B       		.uleb128 0xb
+ 719 003e 0B       		.uleb128 0xb
+ 720 003f 3E       		.uleb128 0x3e
+ 721 0040 0B       		.uleb128 0xb
+ 722 0041 00       		.byte	0x0
+ 723 0042 00       		.byte	0x0
+ 724 0043 06       		.uleb128 0x6
+ 725 0044 0F       		.uleb128 0xf
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 16
+
+
+ 726 0045 00       		.byte	0x0
+ 727 0046 0B       		.uleb128 0xb
+ 728 0047 0B       		.uleb128 0xb
+ 729 0048 49       		.uleb128 0x49
+ 730 0049 13       		.uleb128 0x13
+ 731 004a 00       		.byte	0x0
+ 732 004b 00       		.byte	0x0
+ 733 004c 07       		.uleb128 0x7
+ 734 004d 13       		.uleb128 0x13
+ 735 004e 01       		.byte	0x1
+ 736 004f 01       		.uleb128 0x1
+ 737 0050 13       		.uleb128 0x13
+ 738 0051 0B       		.uleb128 0xb
+ 739 0052 0B       		.uleb128 0xb
+ 740 0053 3A       		.uleb128 0x3a
+ 741 0054 0B       		.uleb128 0xb
+ 742 0055 3B       		.uleb128 0x3b
+ 743 0056 0B       		.uleb128 0xb
+ 744 0057 00       		.byte	0x0
+ 745 0058 00       		.byte	0x0
+ 746 0059 08       		.uleb128 0x8
+ 747 005a 0D       		.uleb128 0xd
+ 748 005b 00       		.byte	0x0
+ 749 005c 03       		.uleb128 0x3
+ 750 005d 0E       		.uleb128 0xe
+ 751 005e 3A       		.uleb128 0x3a
+ 752 005f 0B       		.uleb128 0xb
+ 753 0060 3B       		.uleb128 0x3b
+ 754 0061 0B       		.uleb128 0xb
+ 755 0062 49       		.uleb128 0x49
+ 756 0063 13       		.uleb128 0x13
+ 757 0064 38       		.uleb128 0x38
+ 758 0065 0A       		.uleb128 0xa
+ 759 0066 00       		.byte	0x0
+ 760 0067 00       		.byte	0x0
+ 761 0068 09       		.uleb128 0x9
+ 762 0069 01       		.uleb128 0x1
+ 763 006a 01       		.byte	0x1
+ 764 006b 01       		.uleb128 0x1
+ 765 006c 13       		.uleb128 0x13
+ 766 006d 49       		.uleb128 0x49
+ 767 006e 13       		.uleb128 0x13
+ 768 006f 00       		.byte	0x0
+ 769 0070 00       		.byte	0x0
+ 770 0071 0A       		.uleb128 0xa
+ 771 0072 21       		.uleb128 0x21
+ 772 0073 00       		.byte	0x0
+ 773 0074 49       		.uleb128 0x49
+ 774 0075 13       		.uleb128 0x13
+ 775 0076 2F       		.uleb128 0x2f
+ 776 0077 0B       		.uleb128 0xb
+ 777 0078 00       		.byte	0x0
+ 778 0079 00       		.byte	0x0
+ 779 007a 0B       		.uleb128 0xb
+ 780 007b 2E       		.uleb128 0x2e
+ 781 007c 01       		.byte	0x1
+ 782 007d 01       		.uleb128 0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 17
+
+
+ 783 007e 13       		.uleb128 0x13
+ 784 007f 03       		.uleb128 0x3
+ 785 0080 0E       		.uleb128 0xe
+ 786 0081 3A       		.uleb128 0x3a
+ 787 0082 0B       		.uleb128 0xb
+ 788 0083 3B       		.uleb128 0x3b
+ 789 0084 0B       		.uleb128 0xb
+ 790 0085 27       		.uleb128 0x27
+ 791 0086 0C       		.uleb128 0xc
+ 792 0087 11       		.uleb128 0x11
+ 793 0088 01       		.uleb128 0x1
+ 794 0089 12       		.uleb128 0x12
+ 795 008a 01       		.uleb128 0x1
+ 796 008b 40       		.uleb128 0x40
+ 797 008c 06       		.uleb128 0x6
+ 798 008d 00       		.byte	0x0
+ 799 008e 00       		.byte	0x0
+ 800 008f 0C       		.uleb128 0xc
+ 801 0090 34       		.uleb128 0x34
+ 802 0091 00       		.byte	0x0
+ 803 0092 03       		.uleb128 0x3
+ 804 0093 08       		.uleb128 0x8
+ 805 0094 3A       		.uleb128 0x3a
+ 806 0095 0B       		.uleb128 0xb
+ 807 0096 3B       		.uleb128 0x3b
+ 808 0097 0B       		.uleb128 0xb
+ 809 0098 49       		.uleb128 0x49
+ 810 0099 13       		.uleb128 0x13
+ 811 009a 02       		.uleb128 0x2
+ 812 009b 06       		.uleb128 0x6
+ 813 009c 00       		.byte	0x0
+ 814 009d 00       		.byte	0x0
+ 815 009e 0D       		.uleb128 0xd
+ 816 009f 2E       		.uleb128 0x2e
+ 817 00a0 01       		.byte	0x1
+ 818 00a1 01       		.uleb128 0x1
+ 819 00a2 13       		.uleb128 0x13
+ 820 00a3 3F       		.uleb128 0x3f
+ 821 00a4 0C       		.uleb128 0xc
+ 822 00a5 03       		.uleb128 0x3
+ 823 00a6 0E       		.uleb128 0xe
+ 824 00a7 3A       		.uleb128 0x3a
+ 825 00a8 0B       		.uleb128 0xb
+ 826 00a9 3B       		.uleb128 0x3b
+ 827 00aa 0B       		.uleb128 0xb
+ 828 00ab 27       		.uleb128 0x27
+ 829 00ac 0C       		.uleb128 0xc
+ 830 00ad 49       		.uleb128 0x49
+ 831 00ae 13       		.uleb128 0x13
+ 832 00af 11       		.uleb128 0x11
+ 833 00b0 01       		.uleb128 0x1
+ 834 00b1 12       		.uleb128 0x12
+ 835 00b2 01       		.uleb128 0x1
+ 836 00b3 40       		.uleb128 0x40
+ 837 00b4 06       		.uleb128 0x6
+ 838 00b5 00       		.byte	0x0
+ 839 00b6 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 18
+
+
+ 840 00b7 0E       		.uleb128 0xe
+ 841 00b8 05       		.uleb128 0x5
+ 842 00b9 00       		.byte	0x0
+ 843 00ba 03       		.uleb128 0x3
+ 844 00bb 0E       		.uleb128 0xe
+ 845 00bc 3A       		.uleb128 0x3a
+ 846 00bd 0B       		.uleb128 0xb
+ 847 00be 3B       		.uleb128 0x3b
+ 848 00bf 0B       		.uleb128 0xb
+ 849 00c0 49       		.uleb128 0x49
+ 850 00c1 13       		.uleb128 0x13
+ 851 00c2 02       		.uleb128 0x2
+ 852 00c3 0A       		.uleb128 0xa
+ 853 00c4 00       		.byte	0x0
+ 854 00c5 00       		.byte	0x0
+ 855 00c6 0F       		.uleb128 0xf
+ 856 00c7 34       		.uleb128 0x34
+ 857 00c8 00       		.byte	0x0
+ 858 00c9 03       		.uleb128 0x3
+ 859 00ca 0E       		.uleb128 0xe
+ 860 00cb 3A       		.uleb128 0x3a
+ 861 00cc 0B       		.uleb128 0xb
+ 862 00cd 3B       		.uleb128 0x3b
+ 863 00ce 0B       		.uleb128 0xb
+ 864 00cf 49       		.uleb128 0x49
+ 865 00d0 13       		.uleb128 0x13
+ 866 00d1 02       		.uleb128 0x2
+ 867 00d2 06       		.uleb128 0x6
+ 868 00d3 00       		.byte	0x0
+ 869 00d4 00       		.byte	0x0
+ 870 00d5 10       		.uleb128 0x10
+ 871 00d6 34       		.uleb128 0x34
+ 872 00d7 00       		.byte	0x0
+ 873 00d8 03       		.uleb128 0x3
+ 874 00d9 0E       		.uleb128 0xe
+ 875 00da 3A       		.uleb128 0x3a
+ 876 00db 0B       		.uleb128 0xb
+ 877 00dc 3B       		.uleb128 0x3b
+ 878 00dd 0B       		.uleb128 0xb
+ 879 00de 49       		.uleb128 0x49
+ 880 00df 13       		.uleb128 0x13
+ 881 00e0 02       		.uleb128 0x2
+ 882 00e1 0A       		.uleb128 0xa
+ 883 00e2 00       		.byte	0x0
+ 884 00e3 00       		.byte	0x0
+ 885 00e4 00       		.byte	0x0
+ 886              		.section	.debug_pubnames,"",%progbits
+ 887 0000 1B000000 		.4byte	0x1b
+ 888 0004 0200     		.2byte	0x2
+ 889 0006 00000000 		.4byte	.Ldebug_info0
+ 890 000a 03020000 		.4byte	0x203
+ 891 000e A5010000 		.4byte	0x1a5
+ 892 0012 64726177 		.ascii	"drawMenu\000"
+ 892      4D656E75 
+ 892      00
+ 893 001b 00000000 		.4byte	0x0
+ 894              		.section	.debug_aranges,"",%progbits
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 19
+
+
+ 895 0000 1C000000 		.4byte	0x1c
+ 896 0004 0200     		.2byte	0x2
+ 897 0006 00000000 		.4byte	.Ldebug_info0
+ 898 000a 04       		.byte	0x4
+ 899 000b 00       		.byte	0x0
+ 900 000c 0000     		.2byte	0x0
+ 901 000e 0000     		.2byte	0x0
+ 902 0010 00000000 		.4byte	.Ltext0
+ 903 0014 60010000 		.4byte	.Letext0-.Ltext0
+ 904 0018 00000000 		.4byte	0x0
+ 905 001c 00000000 		.4byte	0x0
+ 906              		.section	.debug_str,"MS",%progbits,1
+ 907              	.LASF4:
+ 908 0000 7369676E 		.ascii	"signed char\000"
+ 908      65642063 
+ 908      68617200 
+ 909              	.LASF34:
+ 910 000c 6E65774D 		.ascii	"newMenu\000"
+ 910      656E7500 
+ 911              	.LASF10:
+ 912 0014 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 912      206C6F6E 
+ 912      6720756E 
+ 912      7369676E 
+ 912      65642069 
+ 913              	.LASF24:
+ 914 002b 73656C65 		.ascii	"selectedColor\000"
+ 914      63746564 
+ 914      436F6C6F 
+ 914      7200
+ 915              	.LASF21:
+ 916 0039 626F7264 		.ascii	"borderColor\000"
+ 916      6572436F 
+ 916      6C6F7200 
+ 917              	.LASF8:
+ 918 0045 6C6F6E67 		.ascii	"long long int\000"
+ 918      206C6F6E 
+ 918      6720696E 
+ 918      7400
+ 919              	.LASF7:
+ 920 0053 6C6F6E67 		.ascii	"long int\000"
+ 920      20696E74 
+ 920      00
+ 921              	.LASF14:
+ 922 005c 794C656E 		.ascii	"yLen\000"
+ 922      00
+ 923              	.LASF31:
+ 924 0061 2F637967 		.ascii	"/cygdrive/c/eclipse/workspace/2138\000"
+ 924      64726976 
+ 924      652F632F 
+ 924      65636C69 
+ 924      7073652F 
+ 925              	.LASF15:
+ 926 0084 6E6F4F66 		.ascii	"noOfChoices\000"
+ 926      43686F69 
+ 926      63657300 
+ 927              	.LASF23:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 20
+
+
+ 928 0090 63686F69 		.ascii	"choicesColor\000"
+ 928      63657343 
+ 928      6F6C6F72 
+ 928      00
+ 929              	.LASF16:
+ 930 009d 696E6974 		.ascii	"initialChoice\000"
+ 930      69616C43 
+ 930      686F6963 
+ 930      6500
+ 931              	.LASF3:
+ 932 00ab 756E7369 		.ascii	"unsigned int\000"
+ 932      676E6564 
+ 932      20696E74 
+ 932      00
+ 933              	.LASF18:
+ 934 00b8 68656164 		.ascii	"headerTextXpos\000"
+ 934      65725465 
+ 934      78745870 
+ 934      6F7300
+ 935              	.LASF6:
+ 936 00c7 6C6F6E67 		.ascii	"long unsigned int\000"
+ 936      20756E73 
+ 936      69676E65 
+ 936      6420696E 
+ 936      7400
+ 937              	.LASF1:
+ 938 00d9 73686F72 		.ascii	"short unsigned int\000"
+ 938      7420756E 
+ 938      7369676E 
+ 938      65642069 
+ 938      6E7400
+ 939              	.LASF2:
+ 940 00ec 74553332 		.ascii	"tU32\000"
+ 940      00
+ 941              	.LASF30:
+ 942 00f1 73656C65 		.ascii	"select.c\000"
+ 942      63742E63 
+ 942      00
+ 943              	.LASF19:
+ 944 00fa 7043686F 		.ascii	"pChoice\000"
+ 944      69636500 
+ 945              	.LASF20:
+ 946 0102 6267436F 		.ascii	"bgColor\000"
+ 946      6C6F7200 
+ 947              	.LASF28:
+ 948 010a 63757273 		.ascii	"cursor\000"
+ 948      6F7200
+ 949              	.LASF25:
+ 950 0111 744D656E 		.ascii	"tMenu\000"
+ 950      7500
+ 951              	.LASF32:
+ 952 0117 64726177 		.ascii	"drawMenuCursor\000"
+ 952      4D656E75 
+ 952      43757273 
+ 952      6F7200
+ 953              	.LASF0:
+ 954 0126 756E7369 		.ascii	"unsigned char\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 21
+
+
+ 954      676E6564 
+ 954      20636861 
+ 954      7200
+ 955              	.LASF29:
+ 956 0134 474E5520 		.ascii	"GNU C 4.1.1\000"
+ 956      4320342E 
+ 956      312E3100 
+ 957              	.LASF5:
+ 958 0140 73686F72 		.ascii	"short int\000"
+ 958      7420696E 
+ 958      7400
+ 959              	.LASF13:
+ 960 014a 784C656E 		.ascii	"xLen\000"
+ 960      00
+ 961              	.LASF9:
+ 962 014f 63686172 		.ascii	"char\000"
+ 962      00
+ 963              	.LASF26:
+ 964 0154 616E794B 		.ascii	"anyKey\000"
+ 964      657900
+ 965              	.LASF12:
+ 966 015b 79506F73 		.ascii	"yPos\000"
+ 966      00
+ 967              	.LASF22:
+ 968 0160 68656164 		.ascii	"headerColor\000"
+ 968      6572436F 
+ 968      6C6F7200 
+ 969              	.LASF33:
+ 970 016c 64726177 		.ascii	"drawMenu\000"
+ 970      4D656E75 
+ 970      00
+ 971              	.LASF27:
+ 972 0175 6D656E75 		.ascii	"menu\000"
+ 972      00
+ 973              	.LASF11:
+ 974 017a 78506F73 		.ascii	"xPos\000"
+ 974      00
+ 975              	.LASF17:
+ 976 017f 70486561 		.ascii	"pHeaderText\000"
+ 976      64657254 
+ 976      65787400 
+ 977              		.ident	"GCC: (GNU) 4.1.1"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 select.c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s:15     .text:00000000 drawMenuCursor
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s:85     .text:00000064 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s:258    .bss:00000000 menu
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s:260    .bss:00000030 cursor
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s:95     .text:00000070 drawMenu
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s:92     .text:00000070 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccUHfkK0.s:252    .text:00000158 $d
+
+UNDEFINED SYMBOLS
+lcdGotoxy
+lcdColor
+lcdPuts
+lcdRect
+checkKey
+osSleep

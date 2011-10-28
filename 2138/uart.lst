@@ -1,0 +1,2701 @@
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 1
+
+
+   1              		.code	16
+   2              		.file	"uart.c"
+   3              		.section	.debug_abbrev,"",%progbits
+   4              	.Ldebug_abbrev0:
+   5              		.section	.debug_info,"",%progbits
+   6              	.Ldebug_info0:
+   7              		.section	.debug_line,"",%progbits
+   8              	.Ldebug_line0:
+   9 0000 0E010000 		.text
+   9      02007C00 
+   9      00000201 
+   9      FB0E0D00 
+   9      01010101 
+  10              	.Ltext0:
+  11              		.align	2
+  12              		.global	uart1GetChar
+  13              		.code 16
+  14              		.thumb_func
+  15              		.type	uart1GetChar, %function
+  16              	uart1GetChar:
+  17              	.LFB8:
+  18              		.file 1 "uart.c"
+   1:uart.c        **** /******************************************************************************
+   2:uart.c        ****  *
+   3:uart.c        ****  * Copyright:
+   4:uart.c        ****  *    (C) 2000 - 2006 Embedded Artists AB
+   5:uart.c        ****  *
+   6:uart.c        ****  * File:
+   7:uart.c        ****  *    uart.c
+   8:uart.c        ****  *
+   9:uart.c        ****  * Description:
+  10:uart.c        ****  *    Implementation of interrupt driven UART.
+  11:uart.c        ****  *
+  12:uart.c        ****  *****************************************************************************/
+  13:uart.c        ****  
+  14:uart.c        **** /******************************************************************************
+  15:uart.c        ****  * Includes
+  16:uart.c        ****  *****************************************************************************/
+  17:uart.c        **** #include "../pre_emptive_os/api/osapi.h"
+  18:uart.c        **** #include <lpc2xxx.h>
+  19:uart.c        **** #include "uart.h"
+  20:uart.c        **** #include "irq_code/irqUart.h"
+  21:uart.c        **** 
+  22:uart.c        **** 
+  23:uart.c        **** /*****************************************************************************
+  24:uart.c        ****  * Local variables
+  25:uart.c        ****  ****************************************************************************/
+  26:uart.c        **** tU8 uart1TxBuf[TX_BUFFER_SIZE];
+  27:uart.c        **** volatile tU32 uart1TxHead = 0;
+  28:uart.c        **** volatile tU32 uart1TxTail = 0;
+  29:uart.c        **** volatile tU8  uart1TxRunning = FALSE;
+  30:uart.c        **** 
+  31:uart.c        **** tU8 uart1RxBuf[RX_BUFFER_SIZE];
+  32:uart.c        **** volatile tU32 uart1RxHead = 0;
+  33:uart.c        **** volatile tU32 uart1RxTail = 0;
+  34:uart.c        **** volatile tU32 uart1RxInBuff = 0;
+  35:uart.c        **** 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 2
+
+
+  36:uart.c        **** tCntSem receiveSem;
+  37:uart.c        **** 
+  38:uart.c        **** /*****************************************************************************
+  39:uart.c        ****  * Implementation of public functions
+  40:uart.c        ****  ****************************************************************************/
+  41:uart.c        **** 
+  42:uart.c        **** /*****************************************************************************
+  43:uart.c        ****  *
+  44:uart.c        ****  * Description:
+  45:uart.c        ****  *    Initialize UART #1 in irq.
+  46:uart.c        ****  *
+  47:uart.c        ****  * Parameters:
+  48:uart.c        ****  *    [in] div_factor - UART clock division factor to get desired bit rate.
+  49:uart.c        ****  *                      Use definitions in uart.h to calculate correct value.
+  50:uart.c        ****  *    [in] mode       - transmission format settings. Use constants in uart.h
+  51:uart.c        ****  *    [in] fifo_mode  - FIFO control settings. Use constants in uart.h
+  52:uart.c        ****  *
+  53:uart.c        ****  ****************************************************************************/
+  54:uart.c        **** void
+  55:uart.c        **** initUart1(tU16 div_factor, tU8 mode, tU8 fifo_mode)
+  56:uart.c        **** {
+  57:uart.c        ****   volatile tU32 dummy;
+  58:uart.c        ****   
+  59:uart.c        ****   //initialize the receive semaphore
+  60:uart.c        ****   osSemInit(&receiveSem, 0);
+  61:uart.c        **** 
+  62:uart.c        ****   //enable uart #1 pins in GPIO (P0.8  = TxD1, P0.9  = RxD1)
+  63:uart.c        ****   //                            (P0.10 = RTS1, P0.11 = CTS1)
+  64:uart.c        ****   PINSEL0 = (PINSEL0 & 0xff00ffff) | 0x00550000;
+  65:uart.c        **** 
+  66:uart.c        ****   U1IER = 0x00;                        //disable all uart interrupts
+  67:uart.c        ****   dummy = U1IIR;                       //clear all pending interrupts
+  68:uart.c        ****   dummy = U1RBR;                       //clear receive register
+  69:uart.c        ****   dummy = U1LSR;                       //clear line status register
+  70:uart.c        **** 
+  71:uart.c        ****   //set the bit rate = set uart clock (pclk) divisionfactor
+  72:uart.c        ****   U1LCR = 0x80;                        //enable divisor latches (DLAB bit set, bit 7)
+  73:uart.c        ****   U1DLL = (tU8)div_factor;             //write division factor LSB
+  74:uart.c        ****   U1DLM = (tU8)(div_factor >> 8);      //write division factor MSB
+  75:uart.c        **** 
+  76:uart.c        ****   //set transmissiion and fifo mode
+  77:uart.c        ****   U1LCR = (mode & ~0x80);              //DLAB bit (bit 7) must be reset
+  78:uart.c        ****   U1FCR = fifo_mode;
+  79:uart.c        **** 
+  80:uart.c        ****   //initialize the interrupt vector
+  81:uart.c        ****   VICIntSelect &= ~0x00000080;      // UART1 selected as IRQ
+  82:uart.c        ****   VICVectCntl7  =  0x00000027;
+  83:uart.c        ****   VICVectAddr7  =  (tU32)uart1ISR;  // address of the ISR
+  84:uart.c        ****   VICIntEnable |=  0x00000080;      // UART1 interrupt enabled
+  85:uart.c        **** 
+  86:uart.c        ****   //initialize the transmit data queue
+  87:uart.c        ****   uart1TxHead    = 0;
+  88:uart.c        ****   uart1TxTail    = 0;
+  89:uart.c        ****   uart1TxRunning = FALSE;
+  90:uart.c        **** 
+  91:uart.c        ****   //initialize the receive data queue
+  92:uart.c        ****   uart1RxHead   = 0;
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 3
+
+
+  93:uart.c        ****   uart1RxTail   = 0;
+  94:uart.c        ****   uart1RxInBuff = 0;
+  95:uart.c        **** 
+  96:uart.c        ****   //set RTS high (= accept received bytes)
+  97:uart.c        ****   U1MCR = 0x02;
+  98:uart.c        **** 
+  99:uart.c        ****   //enable receiver interrupts
+ 100:uart.c        ****   U1IER = 0x0d; //0x01;  //incl. modem
+ 101:uart.c        **** }
+ 102:uart.c        **** 
+ 103:uart.c        **** /*****************************************************************************
+ 104:uart.c        ****  *
+ 105:uart.c        ****  * Description:
+ 106:uart.c        ****  *    Blocking output routine, i.e., the routine waits until the uart 
+ 107:uart.c        ****  *    buffer is free and then sends the character. 
+ 108:uart.c        ****  *
+ 109:uart.c        ****  * Params:
+ 110:uart.c        ****  *    [in] charToSend - The character to print (to uart #1) 
+ 111:uart.c        ****  *
+ 112:uart.c        ****  ****************************************************************************/
+ 113:uart.c        **** void
+ 114:uart.c        **** uart1SendChar(tU8 charToSend)
+ 115:uart.c        **** {
+ 116:uart.c        ****   volatile tU32 cpsrReg;
+ 117:uart.c        ****   tU32 tmpHead;
+ 118:uart.c        **** 
+ 119:uart.c        ****   //calculate head index
+ 120:uart.c        ****   tmpHead = (uart1TxHead + 1) & TX_BUFFER_MASK; 
+ 121:uart.c        **** 
+ 122:uart.c        ****   //wait for free space in buffer
+ 123:uart.c        ****   while(tmpHead == uart1TxTail)
+ 124:uart.c        ****     ;
+ 125:uart.c        **** 
+ 126:uart.c        ****   //disable IRQ
+ 127:uart.c        ****   cpsrReg = disIrq();
+ 128:uart.c        **** 
+ 129:uart.c        ****   U1IER &= ~0x02;   //disable TX IRQ
+ 130:uart.c        **** 
+ 131:uart.c        ****   //enable IRQ
+ 132:uart.c        ****   restoreIrq(cpsrReg);
+ 133:uart.c        **** 
+ 134:uart.c        ****   if(uart1TxRunning == TRUE)
+ 135:uart.c        ****   {
+ 136:uart.c        ****     uart1TxBuf[tmpHead] = charToSend; 
+ 137:uart.c        ****     uart1TxHead         = tmpHead;
+ 138:uart.c        ****   }
+ 139:uart.c        ****   else
+ 140:uart.c        ****   {
+ 141:uart.c        ****     uart1TxRunning = TRUE;
+ 142:uart.c        ****     U1THR          = charToSend;
+ 143:uart.c        ****   }
+ 144:uart.c        **** 
+ 145:uart.c        ****   //disable IRQ
+ 146:uart.c        ****   cpsrReg = disIrq();
+ 147:uart.c        **** 
+ 148:uart.c        ****   U1IER |= 0x02;   //enable TX IRQ
+ 149:uart.c        **** 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 4
+
+
+ 150:uart.c        ****   //enable IRQ
+ 151:uart.c        ****   restoreIrq(cpsrReg);
+ 152:uart.c        **** }
+ 153:uart.c        **** 
+ 154:uart.c        **** 
+ 155:uart.c        **** /*****************************************************************************
+ 156:uart.c        ****  *
+ 157:uart.c        ****  * Description:
+ 158:uart.c        ****  *    Output routine that adds extra line feeds at line breaks. 
+ 159:uart.c        ****  *
+ 160:uart.c        ****  * Params:
+ 161:uart.c        ****  *    [in] charToSend - The character to print (to uart #1) 
+ 162:uart.c        ****  *
+ 163:uart.c        ****  ****************************************************************************/
+ 164:uart.c        **** void
+ 165:uart.c        **** uart1SendCh(tU8 charToSend)
+ 166:uart.c        **** {
+ 167:uart.c        ****   if(charToSend == '\n')
+ 168:uart.c        ****     uart1SendChar('\r');
+ 169:uart.c        **** 
+ 170:uart.c        ****   uart1SendChar(charToSend);
+ 171:uart.c        **** }
+ 172:uart.c        **** 
+ 173:uart.c        **** 
+ 174:uart.c        **** /*****************************************************************************
+ 175:uart.c        ****  *
+ 176:uart.c        ****  * Description:
+ 177:uart.c        ****  *    Print NULL-terminated string to uart #1. 
+ 178:uart.c        ****  *
+ 179:uart.c        ****  * Params:
+ 180:uart.c        ****  *    [in] pString - Pointer to NULL-terminated string to be printed 
+ 181:uart.c        ****  *
+ 182:uart.c        ****  ****************************************************************************/
+ 183:uart.c        **** void
+ 184:uart.c        **** uart1SendString(tU8 *pString)
+ 185:uart.c        **** {
+ 186:uart.c        ****   while(*pString)
+ 187:uart.c        ****     uart1SendCh(*pString++);
+ 188:uart.c        **** }
+ 189:uart.c        **** 
+ 190:uart.c        **** /*****************************************************************************
+ 191:uart.c        ****  *
+ 192:uart.c        ****  * Description:
+ 193:uart.c        ****  *    Print a fixed number of bytes (as opposed to NULL-terminated string).
+ 194:uart.c        ****  *
+ 195:uart.c        ****  * Params:
+ 196:uart.c        ****  *    [in] pBuff - The character to print (to uart #1) 
+ 197:uart.c        ****  *    [in] count - Number of characters to print
+ 198:uart.c        ****  *
+ 199:uart.c        ****  ****************************************************************************/
+ 200:uart.c        **** void
+ 201:uart.c        **** uart1SendChars(char *pBuff, tU16 count)
+ 202:uart.c        **** {
+ 203:uart.c        ****   while (count--)
+ 204:uart.c        ****     uart1SendChar(*pBuff++);
+ 205:uart.c        **** }
+ 206:uart.c        **** 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 5
+
+
+ 207:uart.c        **** /*****************************************************************************
+ 208:uart.c        ****  *
+ 209:uart.c        ****  * Description:
+ 210:uart.c        ****  *    Blocking function that waits for a received character. 
+ 211:uart.c        ****  *
+ 212:uart.c        ****  * Return:
+ 213:uart.c        ****  *    The received character. 
+ 214:uart.c        ****  *
+ 215:uart.c        ****  ****************************************************************************/
+ 216:uart.c        **** tU8
+ 217:uart.c        **** uart1GetCh(void)
+ 218:uart.c        **** {
+ 219:uart.c        **** 	tU8 rxChar;
+ 220:uart.c        **** 
+ 221:uart.c        ****   //wait for a character to be available
+ 222:uart.c        ****   while(uart1GetChar(&rxChar) == FALSE)
+ 223:uart.c        ****     ;
+ 224:uart.c        ****   return rxChar;
+ 225:uart.c        **** }
+ 226:uart.c        **** 
+ 227:uart.c        **** /*****************************************************************************
+ 228:uart.c        ****  *
+ 229:uart.c        ****  * Description:
+ 230:uart.c        ****  *    Non-blocking receive function.
+ 231:uart.c        ****  *
+ 232:uart.c        ****  * Params:
+ 233:uart.c        ****  *    [in] pRxChar - Pointer to buffer where the received character shall
+ 234:uart.c        ****  *                   be placed.
+ 235:uart.c        ****  *
+ 236:uart.c        ****  * Return:
+ 237:uart.c        ****  *    TRUE if character was received, else FALSE.
+ 238:uart.c        ****  *
+ 239:uart.c        ****  ****************************************************************************/
+ 240:uart.c        **** tU8
+ 241:uart.c        **** uart1GetChar(tU8 *pRxChar)
+ 242:uart.c        **** {
+  19              		.loc 1 242 0
+  20 0000 00B5     		push	{lr}
+  21              	.LCFI0:
+  22              	.LVL0:
+ 243:uart.c        ****   volatile tU32 cpsrReg;
+ 244:uart.c        ****   tU32 tmpTail;
+ 245:uart.c        **** 
+ 246:uart.c        ****   /* buffer is empty */
+ 247:uart.c        ****   if(uart1RxHead == uart1RxTail)
+  23              		.loc 1 247 0
+  24 0002 134B     		ldr	r3, .L8
+  25 0004 1349     		ldr	r1, .L8+4
+  26 0006 1A68     		ldr	r2, [r3]
+  27 0008 0B68     		ldr	r3, [r1]
+  28              		.loc 1 242 0
+  29 000a 81B0     		sub	sp, sp, #4
+  30              	.LCFI1:
+  31              		.loc 1 247 0
+  32 000c 9A42     		cmp	r2, r3
+  33 000e 01D1     		bne	.L2
+  34 0010 0020     		mov	r0, #0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 6
+
+
+  35              	.LVL1:
+  36 0012 1AE0     		b	.L4
+  37              	.LVL2:
+  38              	.L2:
+ 248:uart.c        ****     return FALSE;
+ 249:uart.c        **** 
+ 250:uart.c        ****   tmpTail     = (uart1RxTail + 1) & RX_BUFFER_MASK;
+  39              		.loc 1 250 0
+  40 0014 0B68     		ldr	r3, [r1]
+  41 0016 104A     		ldr	r2, .L8+8
+  42 0018 0133     		add	r3, r3, #1
+  43 001a 1340     		and	r3, r3, r2
+  44              	.LVL3:
+ 251:uart.c        ****   uart1RxTail = tmpTail; 
+  45              		.loc 1 251 0
+  46 001c 0B60     		str	r3, [r1]
+ 252:uart.c        **** 
+ 253:uart.c        ****   *pRxChar = uart1RxBuf[tmpTail];
+  47              		.loc 1 253 0
+  48 001e 0F4A     		ldr	r2, .L8+12
+  49 0020 D35C     		ldrb	r3, [r2, r3]
+  50              	.LVL4:
+  51 0022 0370     		strb	r3, [r0]
+ 254:uart.c        **** 
+ 255:uart.c        ****   //disable IRQ
+ 256:uart.c        ****   cpsrReg = disIrq();
+  52              		.loc 1 256 0
+  53 0024 FFF7FEFF 		bl	disIrq
+  54              	.LVL5:
+ 257:uart.c        **** 
+ 258:uart.c        ****   uart1RxInBuff--;
+  55              		.loc 1 258 0
+  56 0028 0D4A     		ldr	r2, .L8+16
+  57              		.loc 1 256 0
+  58 002a 0090     		str	r0, [sp]
+  59              	.LVL6:
+  60              		.loc 1 258 0
+  61 002c 1368     		ldr	r3, [r2]
+  62 002e 013B     		sub	r3, r3, #1
+  63 0030 1360     		str	r3, [r2]
+ 259:uart.c        ****   if(uart1RxInBuff == (RX_BUFFER_SIZE - RX_BUFFER_LIMIT))
+  64              		.loc 1 259 0
+  65 0032 F023     		mov	r3, #240
+  66 0034 1268     		ldr	r2, [r2]
+  67 0036 9B00     		lsl	r3, r3, #2
+  68 0038 9A42     		cmp	r2, r3
+  69 003a 02D1     		bne	.L5
+ 260:uart.c        ****   {
+ 261:uart.c        ****     //pull RTS high = accept bytes from other side again
+ 262:uart.c        ****     UART1_MCR = 0x02;
+  70              		.loc 1 262 0
+  71 003c 094B     		ldr	r3, .L8+20
+  72 003e 0222     		mov	r2, #2
+  73 0040 1A60     		str	r2, [r3]
+  74              	.L5:
+ 263:uart.c        ****   }
+ 264:uart.c        **** 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 7
+
+
+ 265:uart.c        ****   //enable IRQ
+ 266:uart.c        ****   restoreIrq(cpsrReg);
+  75              		.loc 1 266 0
+  76 0042 0098     		ldr	r0, [sp]
+  77 0044 FFF7FEFF 		bl	restoreIrq
+  78 0048 0120     		mov	r0, #1
+  79              	.L4:
+ 267:uart.c        **** 
+ 268:uart.c        ****   return TRUE;
+ 269:uart.c        **** }
+  80              		.loc 1 269 0
+  81 004a 01B0     		add	sp, sp, #4
+  82              		@ sp needed for prologue
+  83 004c 02BC     		pop	{r1}
+  84 004e 0847     		bx	r1
+  85              	.L9:
+  86              		.align	2
+  87              	.L8:
+  88 0050 00000000 		.word	uart1RxHead
+  89 0054 00000000 		.word	uart1RxTail
+  90 0058 FF030000 		.word	1023
+  91 005c 00000000 		.word	uart1RxBuf
+  92 0060 00000000 		.word	uart1RxInBuff
+  93 0064 100001E0 		.word	-536805360
+  94              	.LFE8:
+  95              		.size	uart1GetChar, .-uart1GetChar
+  96              		.align	2
+  97              		.global	uart1GetChSem
+  98              		.code 16
+  99              		.thumb_func
+ 100              		.type	uart1GetChSem, %function
+ 101              	uart1GetChSem:
+ 102              	.LFB9:
+ 270:uart.c        **** 
+ 271:uart.c        **** /*****************************************************************************
+ 272:uart.c        ****  *
+ 273:uart.c        ****  * Description:
+ 274:uart.c        ****  *    Blocking (with semaphore) function that waits for a received character. 
+ 275:uart.c        ****  *
+ 276:uart.c        ****  * Return:
+ 277:uart.c        ****  *    The received character. 
+ 278:uart.c        ****  *
+ 279:uart.c        ****  ****************************************************************************/
+ 280:uart.c        **** tU8
+ 281:uart.c        **** uart1GetChSem(void)
+ 282:uart.c        **** {
+ 103              		.loc 1 282 0
+ 104 0068 10B5     		push	{r4, lr}
+ 105              	.LCFI2:
+ 106 006a 81B0     		sub	sp, sp, #4
+ 107              	.LCFI3:
+ 283:uart.c        **** 	tU8 rxChar;
+ 284:uart.c        **** 	tU8 error;
+ 285:uart.c        **** 
+ 286:uart.c        ****   //wait for a character to be available
+ 287:uart.c        ****   osSemTake(&receiveSem, 0, &error); //wait forever, no timeout
+ 108              		.loc 1 287 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 8
+
+
+ 109 006c 6A46     		mov	r2, sp
+ 110 006e 0848     		ldr	r0, .L16
+ 111 0070 0021     		mov	r1, #0
+ 112 0072 0232     		add	r2, r2, #2
+ 113 0074 FFF7FEFF 		bl	osSemTake
+ 114              	.L11:
+ 288:uart.c        **** 
+ 289:uart.c        ****   //should never loop here, but just in case...
+ 290:uart.c        ****   while(uart1GetChar(&rxChar) == FALSE)
+ 115              		.loc 1 290 0
+ 116 0078 6C46     		mov	r4, sp
+ 117 007a 0334     		add	r4, r4, #3
+ 118 007c 201C     		mov	r0, r4
+ 119 007e FFF7FEFF 		bl	uart1GetChar
+ 120 0082 0028     		cmp	r0, #0
+ 121 0084 F8D0     		beq	.L11
+ 122              	.LVL7:
+ 123 0086 2078     		ldrb	r0, [r4]
+ 291:uart.c        ****     ;
+ 292:uart.c        ****   return rxChar;
+ 293:uart.c        **** }
+ 124              		.loc 1 293 0
+ 125 0088 01B0     		add	sp, sp, #4
+ 126              		@ sp needed for prologue
+ 127 008a 10BC     		pop	{r4}
+ 128 008c 02BC     		pop	{r1}
+ 129 008e 0847     		bx	r1
+ 130              	.L17:
+ 131              		.align	2
+ 132              	.L16:
+ 133 0090 00000000 		.word	receiveSem
+ 134              	.LFE9:
+ 135              		.size	uart1GetChSem, .-uart1GetChSem
+ 136              		.align	2
+ 137              		.global	uart1GetCh
+ 138              		.code 16
+ 139              		.thumb_func
+ 140              		.type	uart1GetCh, %function
+ 141              	uart1GetCh:
+ 142              	.LFB7:
+ 143              		.loc 1 218 0
+ 144 0094 10B5     		push	{r4, lr}
+ 145              	.LCFI4:
+ 146 0096 81B0     		sub	sp, sp, #4
+ 147              	.LCFI5:
+ 148              	.L20:
+ 149              		.loc 1 222 0
+ 150 0098 6C46     		mov	r4, sp
+ 151 009a 0334     		add	r4, r4, #3
+ 152 009c 201C     		mov	r0, r4
+ 153 009e FFF7FEFF 		bl	uart1GetChar
+ 154 00a2 0028     		cmp	r0, #0
+ 155 00a4 F8D0     		beq	.L20
+ 156              	.LVL8:
+ 157 00a6 2078     		ldrb	r0, [r4]
+ 158              		.loc 1 225 0
+ 159 00a8 01B0     		add	sp, sp, #4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 9
+
+
+ 160              		@ sp needed for prologue
+ 161 00aa 10BC     		pop	{r4}
+ 162 00ac 02BC     		pop	{r1}
+ 163 00ae 0847     		bx	r1
+ 164              	.LFE7:
+ 165              		.size	uart1GetCh, .-uart1GetCh
+ 166              		.align	2
+ 167              		.global	uart1SendChar
+ 168              		.code 16
+ 169              		.thumb_func
+ 170              		.type	uart1SendChar, %function
+ 171              	uart1SendChar:
+ 172              	.LFB3:
+ 173              		.loc 1 115 0
+ 174 00b0 30B5     		push	{r4, r5, lr}
+ 175              	.LCFI6:
+ 176              	.LVL9:
+ 177              		.loc 1 120 0
+ 178 00b2 1A4B     		ldr	r3, .L34
+ 179 00b4 1B68     		ldr	r3, [r3]
+ 180 00b6 0133     		add	r3, r3, #1
+ 181 00b8 FF22     		mov	r2, #255
+ 182 00ba 1C1C     		mov	r4, r3
+ 183              	.LVL10:
+ 184              		.loc 1 115 0
+ 185 00bc 0006     		lsl	r0, r0, #24
+ 186              	.LVL11:
+ 187              		.loc 1 120 0
+ 188 00be 1440     		and	r4, r4, r2
+ 189 00c0 174A     		ldr	r2, .L34+4
+ 190              		.loc 1 115 0
+ 191 00c2 81B0     		sub	sp, sp, #4
+ 192              	.LCFI7:
+ 193              		.loc 1 115 0
+ 194 00c4 050E     		lsr	r5, r0, #24
+ 195              	.LVL12:
+ 196              	.L26:
+ 197              		.loc 1 123 0
+ 198 00c6 1368     		ldr	r3, [r2]
+ 199 00c8 9C42     		cmp	r4, r3
+ 200 00ca FCD0     		beq	.L26
+ 201              		.loc 1 127 0
+ 202 00cc FFF7FEFF 		bl	disIrq
+ 203              		.loc 1 129 0
+ 204 00d0 1449     		ldr	r1, .L34+8
+ 205              		.loc 1 127 0
+ 206 00d2 0090     		str	r0, [sp]
+ 207              	.LVL13:
+ 208              		.loc 1 129 0
+ 209 00d4 0B68     		ldr	r3, [r1]
+ 210 00d6 0222     		mov	r2, #2
+ 211 00d8 9343     		bic	r3, r3, r2
+ 212 00da 0B60     		str	r3, [r1]
+ 213              		.loc 1 132 0
+ 214 00dc 0098     		ldr	r0, [sp]
+ 215 00de FFF7FEFF 		bl	restoreIrq
+ 216              		.loc 1 134 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 10
+
+
+ 217 00e2 114A     		ldr	r2, .L34+12
+ 218 00e4 1378     		ldrb	r3, [r2]
+ 219 00e6 012B     		cmp	r3, #1
+ 220 00e8 04D1     		bne	.L28
+ 221              		.loc 1 136 0
+ 222 00ea 104B     		ldr	r3, .L34+16
+ 223 00ec 1D55     		strb	r5, [r3, r4]
+ 224              		.loc 1 137 0
+ 225 00ee 0B4B     		ldr	r3, .L34
+ 226 00f0 1C60     		str	r4, [r3]
+ 227 00f2 03E0     		b	.L30
+ 228              	.L28:
+ 229              		.loc 1 141 0
+ 230 00f4 0123     		mov	r3, #1
+ 231 00f6 1370     		strb	r3, [r2]
+ 232              		.loc 1 142 0
+ 233 00f8 0D4B     		ldr	r3, .L34+20
+ 234 00fa 1D60     		str	r5, [r3]
+ 235              	.L30:
+ 236              		.loc 1 146 0
+ 237 00fc FFF7FEFF 		bl	disIrq
+ 238              		.loc 1 148 0
+ 239 0100 0849     		ldr	r1, .L34+8
+ 240              		.loc 1 146 0
+ 241 0102 0090     		str	r0, [sp]
+ 242              		.loc 1 148 0
+ 243 0104 0B68     		ldr	r3, [r1]
+ 244 0106 0222     		mov	r2, #2
+ 245 0108 1343     		orr	r3, r3, r2
+ 246 010a 0B60     		str	r3, [r1]
+ 247              		.loc 1 151 0
+ 248 010c 0098     		ldr	r0, [sp]
+ 249 010e FFF7FEFF 		bl	restoreIrq
+ 250              		.loc 1 152 0
+ 251 0112 01B0     		add	sp, sp, #4
+ 252              		@ sp needed for prologue
+ 253              	.LVL14:
+ 254              	.LVL15:
+ 255 0114 30BC     		pop	{r4, r5}
+ 256 0116 01BC     		pop	{r0}
+ 257 0118 0047     		bx	r0
+ 258              	.L35:
+ 259 011a 0000     		.align	2
+ 260              	.L34:
+ 261 011c 00000000 		.word	uart1TxHead
+ 262 0120 00000000 		.word	uart1TxTail
+ 263 0124 040001E0 		.word	-536805372
+ 264 0128 00000000 		.word	uart1TxRunning
+ 265 012c 00000000 		.word	uart1TxBuf
+ 266 0130 000001E0 		.word	-536805376
+ 267              	.LFE3:
+ 268              		.size	uart1SendChar, .-uart1SendChar
+ 269              		.align	2
+ 270              		.global	uart1SendChars
+ 271              		.code 16
+ 272              		.thumb_func
+ 273              		.type	uart1SendChars, %function
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 11
+
+
+ 274              	uart1SendChars:
+ 275              	.LFB6:
+ 276              		.loc 1 202 0
+ 277 0134 30B5     		push	{r4, r5, lr}
+ 278              	.LCFI8:
+ 279              	.LVL16:
+ 280              		.loc 1 202 0
+ 281 0136 0904     		lsl	r1, r1, #16
+ 282              	.LVL17:
+ 283 0138 051C     		mov	r5, r0
+ 284 013a 0C0C     		lsr	r4, r1, #16
+ 285              	.LVL18:
+ 286 013c 03E0     		b	.L37
+ 287              	.LVL19:
+ 288              	.L38:
+ 289              		.loc 1 204 0
+ 290 013e 2878     		ldrb	r0, [r5]
+ 291 0140 0135     		add	r5, r5, #1
+ 292 0142 FFF7FEFF 		bl	uart1SendChar
+ 293              	.LVL20:
+ 294              	.L37:
+ 295              		.loc 1 203 0
+ 296 0146 631E     		sub	r3, r4, #1
+ 297 0148 1B04     		lsl	r3, r3, #16
+ 298 014a 1C0C     		lsr	r4, r3, #16
+ 299 014c 024B     		ldr	r3, .L41
+ 300 014e 9C42     		cmp	r4, r3
+ 301 0150 F5D1     		bne	.L38
+ 302              		.loc 1 205 0
+ 303              		@ sp needed for prologue
+ 304              	.LVL21:
+ 305              	.LVL22:
+ 306 0152 30BC     		pop	{r4, r5}
+ 307 0154 01BC     		pop	{r0}
+ 308 0156 0047     		bx	r0
+ 309              	.L42:
+ 310              		.align	2
+ 311              	.L41:
+ 312 0158 FFFF0000 		.word	65535
+ 313              	.LFE6:
+ 314              		.size	uart1SendChars, .-uart1SendChars
+ 315              		.align	2
+ 316              		.global	uart1SendCh
+ 317              		.code 16
+ 318              		.thumb_func
+ 319              		.type	uart1SendCh, %function
+ 320              	uart1SendCh:
+ 321              	.LFB4:
+ 322              		.loc 1 166 0
+ 323 015c 10B5     		push	{r4, lr}
+ 324              	.LCFI9:
+ 325              	.LVL23:
+ 326              		.loc 1 166 0
+ 327 015e 0006     		lsl	r0, r0, #24
+ 328              	.LVL24:
+ 329 0160 040E     		lsr	r4, r0, #24
+ 330              	.LVL25:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 12
+
+
+ 331              		.loc 1 167 0
+ 332 0162 0A2C     		cmp	r4, #10
+ 333 0164 02D1     		bne	.L44
+ 334              		.loc 1 168 0
+ 335 0166 0D20     		mov	r0, #13
+ 336 0168 FFF7FEFF 		bl	uart1SendChar
+ 337              	.L44:
+ 338              		.loc 1 170 0
+ 339 016c 201C     		mov	r0, r4
+ 340 016e FFF7FEFF 		bl	uart1SendChar
+ 341              		.loc 1 171 0
+ 342              		@ sp needed for prologue
+ 343              	.LVL26:
+ 344 0172 10BC     		pop	{r4}
+ 345 0174 01BC     		pop	{r0}
+ 346 0176 0047     		bx	r0
+ 347              	.LFE4:
+ 348              		.size	uart1SendCh, .-uart1SendCh
+ 349              		.align	2
+ 350              		.global	uart1SendString
+ 351              		.code 16
+ 352              		.thumb_func
+ 353              		.type	uart1SendString, %function
+ 354              	uart1SendString:
+ 355              	.LFB5:
+ 356              		.loc 1 185 0
+ 357 0178 10B5     		push	{r4, lr}
+ 358              	.LCFI10:
+ 359              	.LVL27:
+ 360              		.loc 1 185 0
+ 361 017a 041C     		mov	r4, r0
+ 362 017c 02E0     		b	.L48
+ 363              	.LVL28:
+ 364              	.L49:
+ 365              		.loc 1 187 0
+ 366 017e 0134     		add	r4, r4, #1
+ 367 0180 FFF7FEFF 		bl	uart1SendCh
+ 368              	.LVL29:
+ 369              	.L48:
+ 370              		.loc 1 186 0
+ 371 0184 2078     		ldrb	r0, [r4]
+ 372 0186 0028     		cmp	r0, #0
+ 373 0188 F9D1     		bne	.L49
+ 374              		.loc 1 188 0
+ 375              		@ sp needed for prologue
+ 376              	.LVL30:
+ 377 018a 10BC     		pop	{r4}
+ 378 018c 01BC     		pop	{r0}
+ 379 018e 0047     		bx	r0
+ 380              	.LFE5:
+ 381              		.size	uart1SendString, .-uart1SendString
+ 382              		.align	2
+ 383              		.global	initUart1
+ 384              		.code 16
+ 385              		.thumb_func
+ 386              		.type	initUart1, %function
+ 387              	initUart1:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 13
+
+
+ 388              	.LFB2:
+ 389              		.loc 1 56 0
+ 390 0190 F0B5     		push	{r4, r5, r6, r7, lr}
+ 391              	.LCFI11:
+ 392              	.LVL31:
+ 393 0192 1206     		lsl	r2, r2, #24
+ 394              	.LVL32:
+ 395 0194 82B0     		sub	sp, sp, #8
+ 396              	.LCFI12:
+ 397              		.loc 1 56 0
+ 398 0196 0604     		lsl	r6, r0, #16
+ 399 0198 120E     		lsr	r2, r2, #24
+ 400 019a 0C06     		lsl	r4, r1, #24
+ 401              		.loc 1 60 0
+ 402 019c 2548     		ldr	r0, .L54
+ 403              	.LVL33:
+ 404 019e 0021     		mov	r1, #0
+ 405              	.LVL34:
+ 406              		.loc 1 56 0
+ 407 01a0 0092     		str	r2, [sp]
+ 408              	.LVL35:
+ 409              		.loc 1 60 0
+ 410 01a2 FFF7FEFF 		bl	osSemInit
+ 411              		.loc 1 64 0
+ 412 01a6 2449     		ldr	r1, .L54+4
+ 413 01a8 244B     		ldr	r3, .L54+8
+ 414 01aa 0A68     		ldr	r2, [r1]
+ 415 01ac 1A40     		and	r2, r2, r3
+ 416 01ae AA23     		mov	r3, #170
+ 417 01b0 DB03     		lsl	r3, r3, #15
+ 418              		.loc 1 66 0
+ 419 01b2 234F     		ldr	r7, .L54+12
+ 420              		.loc 1 64 0
+ 421 01b4 1A43     		orr	r2, r2, r3
+ 422 01b6 0A60     		str	r2, [r1]
+ 423              		.loc 1 66 0
+ 424 01b8 0021     		mov	r1, #0
+ 425 01ba 3960     		str	r1, [r7]
+ 426              		.loc 1 67 0
+ 427 01bc 214A     		ldr	r2, .L54+16
+ 428 01be 1368     		ldr	r3, [r2]
+ 429 01c0 0193     		str	r3, [sp, #4]
+ 430              	.LVL36:
+ 431 01c2 9446     		mov	ip, r2
+ 432              		.loc 1 68 0
+ 433 01c4 083A     		sub	r2, r2, #8
+ 434 01c6 1368     		ldr	r3, [r2]
+ 435 01c8 0193     		str	r3, [sp, #4]
+ 436              		.loc 1 69 0
+ 437 01ca 1F4B     		ldr	r3, .L54+20
+ 438 01cc 1B68     		ldr	r3, [r3]
+ 439              		.loc 1 56 0
+ 440 01ce 350C     		lsr	r5, r6, #16
+ 441              	.LVL37:
+ 442              		.loc 1 69 0
+ 443 01d0 0193     		str	r3, [sp, #4]
+ 444              		.loc 1 72 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 14
+
+
+ 445 01d2 8020     		mov	r0, #128
+ 446 01d4 1D4B     		ldr	r3, .L54+24
+ 447              		.loc 1 56 0
+ 448 01d6 240E     		lsr	r4, r4, #24
+ 449              	.LVL38:
+ 450              		.loc 1 73 0
+ 451 01d8 2D06     		lsl	r5, r5, #24
+ 452              	.LVL39:
+ 453 01da 2D0E     		lsr	r5, r5, #24
+ 454              		.loc 1 74 0
+ 455 01dc 360E     		lsr	r6, r6, #24
+ 456              		.loc 1 77 0
+ 457 01de 8443     		bic	r4, r4, r0
+ 458              	.LVL40:
+ 459              		.loc 1 72 0
+ 460 01e0 1860     		str	r0, [r3]
+ 461              		.loc 1 73 0
+ 462 01e2 1560     		str	r5, [r2]
+ 463              		.loc 1 74 0
+ 464 01e4 3E60     		str	r6, [r7]
+ 465              		.loc 1 77 0
+ 466 01e6 1C60     		str	r4, [r3]
+ 467              		.loc 1 78 0
+ 468 01e8 009B     		ldr	r3, [sp]
+ 469 01ea 6246     		mov	r2, ip
+ 470 01ec 1360     		str	r3, [r2]
+ 471              		.loc 1 81 0
+ 472 01ee 184A     		ldr	r2, .L54+28
+ 473 01f0 1368     		ldr	r3, [r2]
+ 474 01f2 8343     		bic	r3, r3, r0
+ 475 01f4 1360     		str	r3, [r2]
+ 476              		.loc 1 82 0
+ 477 01f6 174B     		ldr	r3, .L54+32
+ 478 01f8 2722     		mov	r2, #39
+ 479 01fa 1A60     		str	r2, [r3]
+ 480              		.loc 1 83 0
+ 481 01fc 164A     		ldr	r2, .L54+36
+ 482 01fe 174B     		ldr	r3, .L54+40
+ 483 0200 1A60     		str	r2, [r3]
+ 484              		.loc 1 84 0
+ 485 0202 174A     		ldr	r2, .L54+44
+ 486 0204 1368     		ldr	r3, [r2]
+ 487 0206 0343     		orr	r3, r3, r0
+ 488 0208 1360     		str	r3, [r2]
+ 489              		.loc 1 87 0
+ 490 020a 164B     		ldr	r3, .L54+48
+ 491 020c 1960     		str	r1, [r3]
+ 492              		.loc 1 88 0
+ 493 020e 164B     		ldr	r3, .L54+52
+ 494 0210 1960     		str	r1, [r3]
+ 495              		.loc 1 89 0
+ 496 0212 164B     		ldr	r3, .L54+56
+ 497 0214 1970     		strb	r1, [r3]
+ 498              		.loc 1 92 0
+ 499 0216 164B     		ldr	r3, .L54+60
+ 500 0218 1960     		str	r1, [r3]
+ 501              		.loc 1 93 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 15
+
+
+ 502 021a 164B     		ldr	r3, .L54+64
+ 503 021c 1960     		str	r1, [r3]
+ 504              		.loc 1 94 0
+ 505 021e 164B     		ldr	r3, .L54+68
+ 506 0220 1960     		str	r1, [r3]
+ 507              		.loc 1 97 0
+ 508 0222 164B     		ldr	r3, .L54+72
+ 509 0224 0222     		mov	r2, #2
+ 510 0226 1A60     		str	r2, [r3]
+ 511              		.loc 1 101 0
+ 512 0228 02B0     		add	sp, sp, #8
+ 513              		.loc 1 100 0
+ 514 022a 0D23     		mov	r3, #13
+ 515 022c 3B60     		str	r3, [r7]
+ 516              		.loc 1 101 0
+ 517              		@ sp needed for prologue
+ 518 022e F0BC     		pop	{r4, r5, r6, r7}
+ 519 0230 01BC     		pop	{r0}
+ 520 0232 0047     		bx	r0
+ 521              	.L55:
+ 522              		.align	2
+ 523              	.L54:
+ 524 0234 00000000 		.word	receiveSem
+ 525 0238 00C002E0 		.word	-536690688
+ 526 023c FFFF00FF 		.word	-16711681
+ 527 0240 040001E0 		.word	-536805372
+ 528 0244 080001E0 		.word	-536805368
+ 529 0248 140001E0 		.word	-536805356
+ 530 024c 0C0001E0 		.word	-536805364
+ 531 0250 0CF0FFFF 		.word	-4084
+ 532 0254 1CF2FFFF 		.word	-3556
+ 533 0258 00000000 		.word	uart1ISR
+ 534 025c 1CF1FFFF 		.word	-3812
+ 535 0260 10F0FFFF 		.word	-4080
+ 536 0264 00000000 		.word	uart1TxHead
+ 537 0268 00000000 		.word	uart1TxTail
+ 538 026c 00000000 		.word	uart1TxRunning
+ 539 0270 00000000 		.word	uart1RxHead
+ 540 0274 00000000 		.word	uart1RxTail
+ 541 0278 00000000 		.word	uart1RxInBuff
+ 542 027c 100001E0 		.word	-536805360
+ 543              	.LFE2:
+ 544              		.size	initUart1, .-initUart1
+ 545              		.global	uart1TxHead
+ 546              		.bss
+ 547              		.align	2
+ 548              		.type	uart1TxHead, %object
+ 549              		.size	uart1TxHead, 4
+ 550              	uart1TxHead:
+ 551 0000 00000000 		.space	4
+ 552              		.global	uart1TxTail
+ 553              		.align	2
+ 554              		.type	uart1TxTail, %object
+ 555              		.size	uart1TxTail, 4
+ 556              	uart1TxTail:
+ 557 0004 00000000 		.space	4
+ 558              		.global	uart1TxRunning
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 16
+
+
+ 559              		.type	uart1TxRunning, %object
+ 560              		.size	uart1TxRunning, 1
+ 561              	uart1TxRunning:
+ 562 0008 00       		.space	1
+ 563              		.global	uart1RxHead
+ 564 0009 000000   		.align	2
+ 565              		.type	uart1RxHead, %object
+ 566              		.size	uart1RxHead, 4
+ 567              	uart1RxHead:
+ 568 000c 00000000 		.space	4
+ 569              		.global	uart1RxTail
+ 570              		.align	2
+ 571              		.type	uart1RxTail, %object
+ 572              		.size	uart1RxTail, 4
+ 573              	uart1RxTail:
+ 574 0010 00000000 		.space	4
+ 575              		.global	uart1RxInBuff
+ 576              		.align	2
+ 577              		.type	uart1RxInBuff, %object
+ 578              		.size	uart1RxInBuff, 4
+ 579              	uart1RxInBuff:
+ 580 0014 00000000 		.space	4
+ 581              		.comm	uart1TxBuf,256,1
+ 582              		.comm	uart1RxBuf,1024,1
+ 583              		.comm	receiveSem,28,4
+ 584              		.section	.debug_frame,"",%progbits
+ 585              	.Lframe0:
+ 586 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
+ 587              	.LSCIE0:
+ 588 0004 FFFFFFFF 		.4byte	0xffffffff
+ 589 0008 01       		.byte	0x1
+ 590 0009 00       		.ascii	"\000"
+ 591 000a 01       		.uleb128 0x1
+ 592 000b 7C       		.sleb128 -4
+ 593 000c 0E       		.byte	0xe
+ 594 000d 0C       		.byte	0xc
+ 595 000e 0D       		.uleb128 0xd
+ 596 000f 00       		.uleb128 0x0
+ 597              		.align	2
+ 598              	.LECIE0:
+ 599              	.LSFDE0:
+ 600 0010 14000000 		.4byte	.LEFDE0-.LASFDE0
+ 601              	.LASFDE0:
+ 602 0014 00000000 		.4byte	.Lframe0
+ 603 0018 00000000 		.4byte	.LFB8
+ 604 001c 68000000 		.4byte	.LFE8-.LFB8
+ 605 0020 42       		.byte	0x4
+ 606              		.4byte	.LCFI0-.LFB8
+ 607 0021 0E       		.byte	0xe
+ 608 0022 04       		.uleb128 0x4
+ 609 0023 8E       		.byte	0x8e
+ 610 0024 01       		.uleb128 0x1
+ 611 0025 4A       		.byte	0x4
+ 612              		.4byte	.LCFI1-.LCFI0
+ 613 0026 0E       		.byte	0xe
+ 614 0027 08       		.uleb128 0x8
+ 615              		.align	2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 17
+
+
+ 616              	.LEFDE0:
+ 617              	.LSFDE2:
+ 618 0028 18000000 		.4byte	.LEFDE2-.LASFDE2
+ 619              	.LASFDE2:
+ 620 002c 00000000 		.4byte	.Lframe0
+ 621 0030 68000000 		.4byte	.LFB9
+ 622 0034 2C000000 		.4byte	.LFE9-.LFB9
+ 623 0038 42       		.byte	0x4
+ 624              		.4byte	.LCFI2-.LFB9
+ 625 0039 0E       		.byte	0xe
+ 626 003a 08       		.uleb128 0x8
+ 627 003b 84       		.byte	0x84
+ 628 003c 02       		.uleb128 0x2
+ 629 003d 8E       		.byte	0x8e
+ 630 003e 01       		.uleb128 0x1
+ 631 003f 42       		.byte	0x4
+ 632              		.4byte	.LCFI3-.LCFI2
+ 633 0040 0E       		.byte	0xe
+ 634 0041 0C       		.uleb128 0xc
+ 635 0042 0000     		.align	2
+ 636              	.LEFDE2:
+ 637              	.LSFDE4:
+ 638 0044 18000000 		.4byte	.LEFDE4-.LASFDE4
+ 639              	.LASFDE4:
+ 640 0048 00000000 		.4byte	.Lframe0
+ 641 004c 94000000 		.4byte	.LFB7
+ 642 0050 1C000000 		.4byte	.LFE7-.LFB7
+ 643 0054 42       		.byte	0x4
+ 644              		.4byte	.LCFI4-.LFB7
+ 645 0055 0E       		.byte	0xe
+ 646 0056 08       		.uleb128 0x8
+ 647 0057 84       		.byte	0x84
+ 648 0058 02       		.uleb128 0x2
+ 649 0059 8E       		.byte	0x8e
+ 650 005a 01       		.uleb128 0x1
+ 651 005b 42       		.byte	0x4
+ 652              		.4byte	.LCFI5-.LCFI4
+ 653 005c 0E       		.byte	0xe
+ 654 005d 0C       		.uleb128 0xc
+ 655 005e 0000     		.align	2
+ 656              	.LEFDE4:
+ 657              	.LSFDE6:
+ 658 0060 18000000 		.4byte	.LEFDE6-.LASFDE6
+ 659              	.LASFDE6:
+ 660 0064 00000000 		.4byte	.Lframe0
+ 661 0068 B0000000 		.4byte	.LFB3
+ 662 006c 84000000 		.4byte	.LFE3-.LFB3
+ 663 0070 42       		.byte	0x4
+ 664              		.4byte	.LCFI6-.LFB3
+ 665 0071 0E       		.byte	0xe
+ 666 0072 0C       		.uleb128 0xc
+ 667 0073 84       		.byte	0x84
+ 668 0074 03       		.uleb128 0x3
+ 669 0075 85       		.byte	0x85
+ 670 0076 02       		.uleb128 0x2
+ 671 0077 8E       		.byte	0x8e
+ 672 0078 01       		.uleb128 0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 18
+
+
+ 673 0079 52       		.byte	0x4
+ 674              		.4byte	.LCFI7-.LCFI6
+ 675 007a 0E       		.byte	0xe
+ 676 007b 10       		.uleb128 0x10
+ 677              		.align	2
+ 678              	.LEFDE6:
+ 679              	.LSFDE8:
+ 680 007c 18000000 		.4byte	.LEFDE8-.LASFDE8
+ 681              	.LASFDE8:
+ 682 0080 00000000 		.4byte	.Lframe0
+ 683 0084 34010000 		.4byte	.LFB6
+ 684 0088 28000000 		.4byte	.LFE6-.LFB6
+ 685 008c 42       		.byte	0x4
+ 686              		.4byte	.LCFI8-.LFB6
+ 687 008d 0E       		.byte	0xe
+ 688 008e 0C       		.uleb128 0xc
+ 689 008f 84       		.byte	0x84
+ 690 0090 03       		.uleb128 0x3
+ 691 0091 85       		.byte	0x85
+ 692 0092 02       		.uleb128 0x2
+ 693 0093 8E       		.byte	0x8e
+ 694 0094 01       		.uleb128 0x1
+ 695 0095 000000   		.align	2
+ 696              	.LEFDE8:
+ 697              	.LSFDE10:
+ 698 0098 14000000 		.4byte	.LEFDE10-.LASFDE10
+ 699              	.LASFDE10:
+ 700 009c 00000000 		.4byte	.Lframe0
+ 701 00a0 5C010000 		.4byte	.LFB4
+ 702 00a4 1C000000 		.4byte	.LFE4-.LFB4
+ 703 00a8 42       		.byte	0x4
+ 704              		.4byte	.LCFI9-.LFB4
+ 705 00a9 0E       		.byte	0xe
+ 706 00aa 08       		.uleb128 0x8
+ 707 00ab 84       		.byte	0x84
+ 708 00ac 02       		.uleb128 0x2
+ 709 00ad 8E       		.byte	0x8e
+ 710 00ae 01       		.uleb128 0x1
+ 711 00af 00       		.align	2
+ 712              	.LEFDE10:
+ 713              	.LSFDE12:
+ 714 00b0 14000000 		.4byte	.LEFDE12-.LASFDE12
+ 715              	.LASFDE12:
+ 716 00b4 00000000 		.4byte	.Lframe0
+ 717 00b8 78010000 		.4byte	.LFB5
+ 718 00bc 18000000 		.4byte	.LFE5-.LFB5
+ 719 00c0 42       		.byte	0x4
+ 720              		.4byte	.LCFI10-.LFB5
+ 721 00c1 0E       		.byte	0xe
+ 722 00c2 08       		.uleb128 0x8
+ 723 00c3 84       		.byte	0x84
+ 724 00c4 02       		.uleb128 0x2
+ 725 00c5 8E       		.byte	0x8e
+ 726 00c6 01       		.uleb128 0x1
+ 727 00c7 00       		.align	2
+ 728              	.LEFDE12:
+ 729              	.LSFDE14:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 19
+
+
+ 730 00c8 1C000000 		.4byte	.LEFDE14-.LASFDE14
+ 731              	.LASFDE14:
+ 732 00cc 00000000 		.4byte	.Lframe0
+ 733 00d0 90010000 		.4byte	.LFB2
+ 734 00d4 F0000000 		.4byte	.LFE2-.LFB2
+ 735 00d8 42       		.byte	0x4
+ 736              		.4byte	.LCFI11-.LFB2
+ 737 00d9 0E       		.byte	0xe
+ 738 00da 14       		.uleb128 0x14
+ 739 00db 84       		.byte	0x84
+ 740 00dc 05       		.uleb128 0x5
+ 741 00dd 85       		.byte	0x85
+ 742 00de 04       		.uleb128 0x4
+ 743 00df 86       		.byte	0x86
+ 744 00e0 03       		.uleb128 0x3
+ 745 00e1 87       		.byte	0x87
+ 746 00e2 02       		.uleb128 0x2
+ 747 00e3 8E       		.byte	0x8e
+ 748 00e4 01       		.uleb128 0x1
+ 749 00e5 44       		.byte	0x4
+ 750              		.4byte	.LCFI12-.LCFI11
+ 751 00e6 0E       		.byte	0xe
+ 752 00e7 1C       		.uleb128 0x1c
+ 753              		.align	2
+ 754              	.LEFDE14:
+ 755              		.file 2 "./startup/../pre_emptive_os/api/../api/general.h"
+ 756              		.file 3 "./startup/../pre_emptive_os/api/osapi.h"
+ 757              		.text
+ 758              	.Letext0:
+ 759              		.section	.debug_loc,"",%progbits
+ 760              	.Ldebug_loc0:
+ 761              	.LLST0:
+ 762 0000 00000000 		.4byte	.LFB8-.Ltext0
+ 763 0004 02000000 		.4byte	.LCFI0-.Ltext0
+ 764 0008 0100     		.2byte	0x1
+ 765 000a 5D       		.byte	0x5d
+ 766 000b 02000000 		.4byte	.LCFI0-.Ltext0
+ 767 000f 0C000000 		.4byte	.LCFI1-.Ltext0
+ 768 0013 0200     		.2byte	0x2
+ 769 0015 7D       		.byte	0x7d
+ 770 0016 04       		.sleb128 4
+ 771 0017 0C000000 		.4byte	.LCFI1-.Ltext0
+ 772 001b 68000000 		.4byte	.LFE8-.Ltext0
+ 773 001f 0200     		.2byte	0x2
+ 774 0021 7D       		.byte	0x7d
+ 775 0022 08       		.sleb128 8
+ 776 0023 00000000 		.4byte	0x0
+ 777 0027 00000000 		.4byte	0x0
+ 778              	.LLST1:
+ 779 002b 02000000 		.4byte	.LVL0-.Ltext0
+ 780 002f 12000000 		.4byte	.LVL1-.Ltext0
+ 781 0033 0100     		.2byte	0x1
+ 782 0035 50       		.byte	0x50
+ 783 0036 14000000 		.4byte	.LVL2-.Ltext0
+ 784 003a 28000000 		.4byte	.LVL5-.Ltext0
+ 785 003e 0100     		.2byte	0x1
+ 786 0040 50       		.byte	0x50
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 20
+
+
+ 787 0041 00000000 		.4byte	0x0
+ 788 0045 00000000 		.4byte	0x0
+ 789              	.LLST2:
+ 790 0049 1C000000 		.4byte	.LVL3-.Ltext0
+ 791 004d 22000000 		.4byte	.LVL4-.Ltext0
+ 792 0051 0100     		.2byte	0x1
+ 793 0053 53       		.byte	0x53
+ 794 0054 00000000 		.4byte	0x0
+ 795 0058 00000000 		.4byte	0x0
+ 796              	.LLST3:
+ 797 005c 68000000 		.4byte	.LFB9-.Ltext0
+ 798 0060 6A000000 		.4byte	.LCFI2-.Ltext0
+ 799 0064 0100     		.2byte	0x1
+ 800 0066 5D       		.byte	0x5d
+ 801 0067 6A000000 		.4byte	.LCFI2-.Ltext0
+ 802 006b 6C000000 		.4byte	.LCFI3-.Ltext0
+ 803 006f 0200     		.2byte	0x2
+ 804 0071 7D       		.byte	0x7d
+ 805 0072 08       		.sleb128 8
+ 806 0073 6C000000 		.4byte	.LCFI3-.Ltext0
+ 807 0077 94000000 		.4byte	.LFE9-.Ltext0
+ 808 007b 0200     		.2byte	0x2
+ 809 007d 7D       		.byte	0x7d
+ 810 007e 0C       		.sleb128 12
+ 811 007f 00000000 		.4byte	0x0
+ 812 0083 00000000 		.4byte	0x0
+ 813              	.LLST4:
+ 814 0087 94000000 		.4byte	.LFB7-.Ltext0
+ 815 008b 96000000 		.4byte	.LCFI4-.Ltext0
+ 816 008f 0100     		.2byte	0x1
+ 817 0091 5D       		.byte	0x5d
+ 818 0092 96000000 		.4byte	.LCFI4-.Ltext0
+ 819 0096 98000000 		.4byte	.LCFI5-.Ltext0
+ 820 009a 0200     		.2byte	0x2
+ 821 009c 7D       		.byte	0x7d
+ 822 009d 08       		.sleb128 8
+ 823 009e 98000000 		.4byte	.LCFI5-.Ltext0
+ 824 00a2 B0000000 		.4byte	.LFE7-.Ltext0
+ 825 00a6 0200     		.2byte	0x2
+ 826 00a8 7D       		.byte	0x7d
+ 827 00a9 0C       		.sleb128 12
+ 828 00aa 00000000 		.4byte	0x0
+ 829 00ae 00000000 		.4byte	0x0
+ 830              	.LLST5:
+ 831 00b2 B0000000 		.4byte	.LFB3-.Ltext0
+ 832 00b6 B2000000 		.4byte	.LCFI6-.Ltext0
+ 833 00ba 0100     		.2byte	0x1
+ 834 00bc 5D       		.byte	0x5d
+ 835 00bd B2000000 		.4byte	.LCFI6-.Ltext0
+ 836 00c1 C4000000 		.4byte	.LCFI7-.Ltext0
+ 837 00c5 0200     		.2byte	0x2
+ 838 00c7 7D       		.byte	0x7d
+ 839 00c8 0C       		.sleb128 12
+ 840 00c9 C4000000 		.4byte	.LCFI7-.Ltext0
+ 841 00cd 34010000 		.4byte	.LFE3-.Ltext0
+ 842 00d1 0200     		.2byte	0x2
+ 843 00d3 7D       		.byte	0x7d
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 21
+
+
+ 844 00d4 10       		.sleb128 16
+ 845 00d5 00000000 		.4byte	0x0
+ 846 00d9 00000000 		.4byte	0x0
+ 847              	.LLST6:
+ 848 00dd B2000000 		.4byte	.LVL9-.Ltext0
+ 849 00e1 BE000000 		.4byte	.LVL11-.Ltext0
+ 850 00e5 0100     		.2byte	0x1
+ 851 00e7 50       		.byte	0x50
+ 852 00e8 C6000000 		.4byte	.LVL12-.Ltext0
+ 853 00ec 14010000 		.4byte	.LVL15-.Ltext0
+ 854 00f0 0100     		.2byte	0x1
+ 855 00f2 55       		.byte	0x55
+ 856 00f3 00000000 		.4byte	0x0
+ 857 00f7 00000000 		.4byte	0x0
+ 858              	.LLST7:
+ 859 00fb BC000000 		.4byte	.LVL10-.Ltext0
+ 860 00ff 14010000 		.4byte	.LVL14-.Ltext0
+ 861 0103 0100     		.2byte	0x1
+ 862 0105 54       		.byte	0x54
+ 863 0106 00000000 		.4byte	0x0
+ 864 010a 00000000 		.4byte	0x0
+ 865              	.LLST8:
+ 866 010e 34010000 		.4byte	.LFB6-.Ltext0
+ 867 0112 36010000 		.4byte	.LCFI8-.Ltext0
+ 868 0116 0100     		.2byte	0x1
+ 869 0118 5D       		.byte	0x5d
+ 870 0119 36010000 		.4byte	.LCFI8-.Ltext0
+ 871 011d 5C010000 		.4byte	.LFE6-.Ltext0
+ 872 0121 0200     		.2byte	0x2
+ 873 0123 7D       		.byte	0x7d
+ 874 0124 0C       		.sleb128 12
+ 875 0125 00000000 		.4byte	0x0
+ 876 0129 00000000 		.4byte	0x0
+ 877              	.LLST9:
+ 878 012d 36010000 		.4byte	.LVL16-.Ltext0
+ 879 0131 3E010000 		.4byte	.LVL19-.Ltext0
+ 880 0135 0100     		.2byte	0x1
+ 881 0137 50       		.byte	0x50
+ 882 0138 3E010000 		.4byte	.LVL19-.Ltext0
+ 883 013c 52010000 		.4byte	.LVL22-.Ltext0
+ 884 0140 0100     		.2byte	0x1
+ 885 0142 55       		.byte	0x55
+ 886 0143 52010000 		.4byte	.LVL22-.Ltext0
+ 887 0147 5C010000 		.4byte	.LFE6-.Ltext0
+ 888 014b 0100     		.2byte	0x1
+ 889 014d 50       		.byte	0x50
+ 890 014e 00000000 		.4byte	0x0
+ 891 0152 00000000 		.4byte	0x0
+ 892              	.LLST10:
+ 893 0156 36010000 		.4byte	.LVL16-.Ltext0
+ 894 015a 38010000 		.4byte	.LVL17-.Ltext0
+ 895 015e 0100     		.2byte	0x1
+ 896 0160 51       		.byte	0x51
+ 897 0161 3C010000 		.4byte	.LVL18-.Ltext0
+ 898 0165 52010000 		.4byte	.LVL21-.Ltext0
+ 899 0169 0100     		.2byte	0x1
+ 900 016b 54       		.byte	0x54
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 22
+
+
+ 901 016c 00000000 		.4byte	0x0
+ 902 0170 00000000 		.4byte	0x0
+ 903              	.LLST11:
+ 904 0174 5C010000 		.4byte	.LFB4-.Ltext0
+ 905 0178 5E010000 		.4byte	.LCFI9-.Ltext0
+ 906 017c 0100     		.2byte	0x1
+ 907 017e 5D       		.byte	0x5d
+ 908 017f 5E010000 		.4byte	.LCFI9-.Ltext0
+ 909 0183 78010000 		.4byte	.LFE4-.Ltext0
+ 910 0187 0200     		.2byte	0x2
+ 911 0189 7D       		.byte	0x7d
+ 912 018a 08       		.sleb128 8
+ 913 018b 00000000 		.4byte	0x0
+ 914 018f 00000000 		.4byte	0x0
+ 915              	.LLST12:
+ 916 0193 5E010000 		.4byte	.LVL23-.Ltext0
+ 917 0197 60010000 		.4byte	.LVL24-.Ltext0
+ 918 019b 0100     		.2byte	0x1
+ 919 019d 50       		.byte	0x50
+ 920 019e 62010000 		.4byte	.LVL25-.Ltext0
+ 921 01a2 72010000 		.4byte	.LVL26-.Ltext0
+ 922 01a6 0100     		.2byte	0x1
+ 923 01a8 54       		.byte	0x54
+ 924 01a9 00000000 		.4byte	0x0
+ 925 01ad 00000000 		.4byte	0x0
+ 926              	.LLST13:
+ 927 01b1 78010000 		.4byte	.LFB5-.Ltext0
+ 928 01b5 7A010000 		.4byte	.LCFI10-.Ltext0
+ 929 01b9 0100     		.2byte	0x1
+ 930 01bb 5D       		.byte	0x5d
+ 931 01bc 7A010000 		.4byte	.LCFI10-.Ltext0
+ 932 01c0 90010000 		.4byte	.LFE5-.Ltext0
+ 933 01c4 0200     		.2byte	0x2
+ 934 01c6 7D       		.byte	0x7d
+ 935 01c7 08       		.sleb128 8
+ 936 01c8 00000000 		.4byte	0x0
+ 937 01cc 00000000 		.4byte	0x0
+ 938              	.LLST14:
+ 939 01d0 7A010000 		.4byte	.LVL27-.Ltext0
+ 940 01d4 7E010000 		.4byte	.LVL28-.Ltext0
+ 941 01d8 0100     		.2byte	0x1
+ 942 01da 50       		.byte	0x50
+ 943 01db 7E010000 		.4byte	.LVL28-.Ltext0
+ 944 01df 8A010000 		.4byte	.LVL30-.Ltext0
+ 945 01e3 0100     		.2byte	0x1
+ 946 01e5 54       		.byte	0x54
+ 947 01e6 00000000 		.4byte	0x0
+ 948 01ea 00000000 		.4byte	0x0
+ 949              	.LLST15:
+ 950 01ee 90010000 		.4byte	.LFB2-.Ltext0
+ 951 01f2 92010000 		.4byte	.LCFI11-.Ltext0
+ 952 01f6 0100     		.2byte	0x1
+ 953 01f8 5D       		.byte	0x5d
+ 954 01f9 92010000 		.4byte	.LCFI11-.Ltext0
+ 955 01fd 96010000 		.4byte	.LCFI12-.Ltext0
+ 956 0201 0200     		.2byte	0x2
+ 957 0203 7D       		.byte	0x7d
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 23
+
+
+ 958 0204 14       		.sleb128 20
+ 959 0205 96010000 		.4byte	.LCFI12-.Ltext0
+ 960 0209 80020000 		.4byte	.LFE2-.Ltext0
+ 961 020d 0200     		.2byte	0x2
+ 962 020f 7D       		.byte	0x7d
+ 963 0210 1C       		.sleb128 28
+ 964 0211 00000000 		.4byte	0x0
+ 965 0215 00000000 		.4byte	0x0
+ 966              	.LLST16:
+ 967 0219 92010000 		.4byte	.LVL31-.Ltext0
+ 968 021d 9E010000 		.4byte	.LVL33-.Ltext0
+ 969 0221 0100     		.2byte	0x1
+ 970 0223 50       		.byte	0x50
+ 971 0224 D0010000 		.4byte	.LVL37-.Ltext0
+ 972 0228 DA010000 		.4byte	.LVL39-.Ltext0
+ 973 022c 0100     		.2byte	0x1
+ 974 022e 55       		.byte	0x55
+ 975 022f 00000000 		.4byte	0x0
+ 976 0233 00000000 		.4byte	0x0
+ 977              	.LLST17:
+ 978 0237 92010000 		.4byte	.LVL31-.Ltext0
+ 979 023b A0010000 		.4byte	.LVL34-.Ltext0
+ 980 023f 0100     		.2byte	0x1
+ 981 0241 51       		.byte	0x51
+ 982 0242 D8010000 		.4byte	.LVL38-.Ltext0
+ 983 0246 E0010000 		.4byte	.LVL40-.Ltext0
+ 984 024a 0100     		.2byte	0x1
+ 985 024c 54       		.byte	0x54
+ 986 024d 00000000 		.4byte	0x0
+ 987 0251 00000000 		.4byte	0x0
+ 988              	.LLST18:
+ 989 0255 92010000 		.4byte	.LVL31-.Ltext0
+ 990 0259 94010000 		.4byte	.LVL32-.Ltext0
+ 991 025d 0100     		.2byte	0x1
+ 992 025f 52       		.byte	0x52
+ 993 0260 A2010000 		.4byte	.LVL35-.Ltext0
+ 994 0264 80020000 		.4byte	.LFE2-.Ltext0
+ 995 0268 0200     		.2byte	0x2
+ 996 026a 91       		.byte	0x91
+ 997 026b 78       		.sleb128 -8
+ 998 026c 00000000 		.4byte	0x0
+ 999 0270 00000000 		.4byte	0x0
+ 1000              		.section	.debug_info
+ 1001 0000 95040000 		.4byte	0x495
+ 1002 0004 0200     		.2byte	0x2
+ 1003 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1004 000a 04       		.byte	0x4
+ 1005 000b 01       		.uleb128 0x1
+ 1006 000c 00000000 		.4byte	.Ldebug_line0
+ 1007 0010 80020000 		.4byte	.Letext0
+ 1008 0014 00000000 		.4byte	.Ltext0
+ 1009 0018 FB010000 		.4byte	.LASF62
+ 1010 001c 01       		.byte	0x1
+ 1011 001d 67000000 		.4byte	.LASF63
+ 1012 0021 18000000 		.4byte	.LASF64
+ 1013 0025 02       		.uleb128 0x2
+ 1014 0026 74553800 		.ascii	"tU8\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 24
+
+
+ 1015 002a 02       		.byte	0x2
+ 1016 002b 47       		.byte	0x47
+ 1017 002c 30000000 		.4byte	0x30
+ 1018 0030 03       		.uleb128 0x3
+ 1019 0031 D7000000 		.4byte	.LASF1
+ 1020 0035 01       		.byte	0x1
+ 1021 0036 08       		.byte	0x8
+ 1022 0037 04       		.uleb128 0x4
+ 1023 0038 2A020000 		.4byte	.LASF0
+ 1024 003c 02       		.byte	0x2
+ 1025 003d 48       		.byte	0x48
+ 1026 003e 42000000 		.4byte	0x42
+ 1027 0042 03       		.uleb128 0x3
+ 1028 0043 09010000 		.4byte	.LASF2
+ 1029 0047 02       		.byte	0x2
+ 1030 0048 07       		.byte	0x7
+ 1031 0049 04       		.uleb128 0x4
+ 1032 004a 2F020000 		.4byte	.LASF3
+ 1033 004e 02       		.byte	0x2
+ 1034 004f 49       		.byte	0x49
+ 1035 0050 54000000 		.4byte	0x54
+ 1036 0054 03       		.uleb128 0x3
+ 1037 0055 B5010000 		.4byte	.LASF4
+ 1038 0059 04       		.byte	0x4
+ 1039 005a 07       		.byte	0x7
+ 1040 005b 03       		.uleb128 0x3
+ 1041 005c A1020000 		.4byte	.LASF5
+ 1042 0060 01       		.byte	0x1
+ 1043 0061 06       		.byte	0x6
+ 1044 0062 03       		.uleb128 0x3
+ 1045 0063 62020000 		.4byte	.LASF6
+ 1046 0067 02       		.byte	0x2
+ 1047 0068 05       		.byte	0x5
+ 1048 0069 05       		.uleb128 0x5
+ 1049 006a 696E7400 		.ascii	"int\000"
+ 1050 006e 04       		.byte	0x4
+ 1051 006f 05       		.byte	0x5
+ 1052 0070 06       		.uleb128 0x6
+ 1053 0071 25010000 		.4byte	0x125
+ 1054 0075 3A010000 		.4byte	.LASF19
+ 1055 0079 28       		.byte	0x28
+ 1056 007a 03       		.byte	0x3
+ 1057 007b 58       		.byte	0x58
+ 1058 007c 07       		.uleb128 0x7
+ 1059 007d 05000000 		.4byte	.LASF7
+ 1060 0081 03       		.byte	0x3
+ 1061 0082 59       		.byte	0x59
+ 1062 0083 25010000 		.4byte	0x125
+ 1063 0087 02       		.byte	0x2
+ 1064 0088 23       		.byte	0x23
+ 1065 0089 00       		.uleb128 0x0
+ 1066 008a 07       		.uleb128 0x7
+ 1067 008b 58010000 		.4byte	.LASF8
+ 1068 008f 03       		.byte	0x3
+ 1069 0090 5A       		.byte	0x5a
+ 1070 0091 2B010000 		.4byte	0x12b
+ 1071 0095 02       		.byte	0x2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 25
+
+
+ 1072 0096 23       		.byte	0x23
+ 1073 0097 04       		.uleb128 0x4
+ 1074 0098 07       		.uleb128 0x7
+ 1075 0099 1C010000 		.4byte	.LASF9
+ 1076 009d 03       		.byte	0x3
+ 1077 009e 5B       		.byte	0x5b
+ 1078 009f 2B010000 		.4byte	0x12b
+ 1079 00a3 02       		.byte	0x2
+ 1080 00a4 23       		.byte	0x23
+ 1081 00a5 08       		.uleb128 0x8
+ 1082 00a6 07       		.uleb128 0x7
+ 1083 00a7 99010000 		.4byte	.LASF10
+ 1084 00ab 03       		.byte	0x3
+ 1085 00ac 5C       		.byte	0x5c
+ 1086 00ad 2B010000 		.4byte	0x12b
+ 1087 00b1 02       		.byte	0x2
+ 1088 00b2 23       		.byte	0x23
+ 1089 00b3 0C       		.uleb128 0xc
+ 1090 00b4 07       		.uleb128 0x7
+ 1091 00b5 44010000 		.4byte	.LASF11
+ 1092 00b9 03       		.byte	0x3
+ 1093 00ba 5D       		.byte	0x5d
+ 1094 00bb 2B010000 		.4byte	0x12b
+ 1095 00bf 02       		.byte	0x2
+ 1096 00c0 23       		.byte	0x23
+ 1097 00c1 10       		.uleb128 0x10
+ 1098 00c2 07       		.uleb128 0x7
+ 1099 00c3 92020000 		.4byte	.LASF12
+ 1100 00c7 03       		.byte	0x3
+ 1101 00c8 5E       		.byte	0x5e
+ 1102 00c9 2B010000 		.4byte	0x12b
+ 1103 00cd 02       		.byte	0x2
+ 1104 00ce 23       		.byte	0x23
+ 1105 00cf 14       		.uleb128 0x14
+ 1106 00d0 08       		.uleb128 0x8
+ 1107 00d1 70696400 		.ascii	"pid\000"
+ 1108 00d5 03       		.byte	0x3
+ 1109 00d6 5F       		.byte	0x5f
+ 1110 00d7 25000000 		.4byte	0x25
+ 1111 00db 02       		.byte	0x2
+ 1112 00dc 23       		.byte	0x23
+ 1113 00dd 18       		.uleb128 0x18
+ 1114 00de 07       		.uleb128 0x7
+ 1115 00df 00000000 		.4byte	.LASF13
+ 1116 00e3 03       		.byte	0x3
+ 1117 00e4 60       		.byte	0x60
+ 1118 00e5 25000000 		.4byte	0x25
+ 1119 00e9 02       		.byte	0x2
+ 1120 00ea 23       		.byte	0x23
+ 1121 00eb 19       		.uleb128 0x19
+ 1122 00ec 07       		.uleb128 0x7
+ 1123 00ed 88010000 		.4byte	.LASF14
+ 1124 00f1 03       		.byte	0x3
+ 1125 00f2 61       		.byte	0x61
+ 1126 00f3 25000000 		.4byte	0x25
+ 1127 00f7 02       		.byte	0x2
+ 1128 00f8 23       		.byte	0x23
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 26
+
+
+ 1129 00f9 1A       		.uleb128 0x1a
+ 1130 00fa 07       		.uleb128 0x7
+ 1131 00fb AD020000 		.4byte	.LASF15
+ 1132 00ff 03       		.byte	0x3
+ 1133 0100 62       		.byte	0x62
+ 1134 0101 49000000 		.4byte	0x49
+ 1135 0105 02       		.byte	0x2
+ 1136 0106 23       		.byte	0x23
+ 1137 0107 1C       		.uleb128 0x1c
+ 1138 0108 07       		.uleb128 0x7
+ 1139 0109 E4010000 		.4byte	.LASF16
+ 1140 010d 03       		.byte	0x3
+ 1141 010e 65       		.byte	0x65
+ 1142 010f 25010000 		.4byte	0x125
+ 1143 0113 02       		.byte	0x2
+ 1144 0114 23       		.byte	0x23
+ 1145 0115 20       		.uleb128 0x20
+ 1146 0116 07       		.uleb128 0x7
+ 1147 0117 C2010000 		.4byte	.LASF17
+ 1148 011b 03       		.byte	0x3
+ 1149 011c 66       		.byte	0x66
+ 1150 011d 37000000 		.4byte	0x37
+ 1151 0121 02       		.byte	0x2
+ 1152 0122 23       		.byte	0x23
+ 1153 0123 24       		.uleb128 0x24
+ 1154 0124 00       		.byte	0x0
+ 1155 0125 09       		.uleb128 0x9
+ 1156 0126 04       		.byte	0x4
+ 1157 0127 25000000 		.4byte	0x25
+ 1158 012b 09       		.uleb128 0x9
+ 1159 012c 04       		.byte	0x4
+ 1160 012d 70000000 		.4byte	0x70
+ 1161 0131 04       		.uleb128 0x4
+ 1162 0132 E5000000 		.4byte	.LASF18
+ 1163 0136 03       		.byte	0x3
+ 1164 0137 68       		.byte	0x68
+ 1165 0138 70000000 		.4byte	0x70
+ 1166 013c 06       		.uleb128 0x6
+ 1167 013d 65010000 		.4byte	0x165
+ 1168 0141 1D020000 		.4byte	.LASF20
+ 1169 0145 18       		.byte	0x18
+ 1170 0146 03       		.byte	0x3
+ 1171 0147 70       		.byte	0x70
+ 1172 0148 07       		.uleb128 0x7
+ 1173 0149 30010000 		.4byte	.LASF21
+ 1174 014d 03       		.byte	0x3
+ 1175 014e 71       		.byte	0x71
+ 1176 014f 65010000 		.4byte	0x165
+ 1177 0153 02       		.byte	0x2
+ 1178 0154 23       		.byte	0x23
+ 1179 0155 00       		.uleb128 0x0
+ 1180 0156 07       		.uleb128 0x7
+ 1181 0157 57000000 		.4byte	.LASF22
+ 1182 015b 03       		.byte	0x3
+ 1183 015c 72       		.byte	0x72
+ 1184 015d 7C010000 		.4byte	0x17c
+ 1185 0161 02       		.byte	0x2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 27
+
+
+ 1186 0162 23       		.byte	0x23
+ 1187 0163 14       		.uleb128 0x14
+ 1188 0164 00       		.byte	0x0
+ 1189 0165 0A       		.uleb128 0xa
+ 1190 0166 75010000 		.4byte	0x175
+ 1191 016a 7C010000 		.4byte	0x17c
+ 1192 016e 0B       		.uleb128 0xb
+ 1193 016f 75010000 		.4byte	0x175
+ 1194 0173 04       		.byte	0x4
+ 1195 0174 00       		.byte	0x0
+ 1196 0175 03       		.uleb128 0x3
+ 1197 0176 F7000000 		.4byte	.LASF23
+ 1198 017a 04       		.byte	0x4
+ 1199 017b 07       		.byte	0x7
+ 1200 017c 09       		.uleb128 0x9
+ 1201 017d 04       		.byte	0x4
+ 1202 017e 31010000 		.4byte	0x131
+ 1203 0182 04       		.uleb128 0x4
+ 1204 0183 EC000000 		.4byte	.LASF24
+ 1205 0187 03       		.byte	0x3
+ 1206 0188 73       		.byte	0x73
+ 1207 0189 3C010000 		.4byte	0x13c
+ 1208 018d 06       		.uleb128 0x6
+ 1209 018e A8010000 		.4byte	0x1a8
+ 1210 0192 4F020000 		.4byte	.LASF25
+ 1211 0196 18       		.byte	0x18
+ 1212 0197 03       		.byte	0x3
+ 1213 0198 76       		.byte	0x76
+ 1214 0199 07       		.uleb128 0x7
+ 1215 019a 73020000 		.4byte	.LASF26
+ 1216 019e 03       		.byte	0x3
+ 1217 019f 77       		.byte	0x77
+ 1218 01a0 82010000 		.4byte	0x182
+ 1219 01a4 02       		.byte	0x2
+ 1220 01a5 23       		.byte	0x23
+ 1221 01a6 00       		.uleb128 0x0
+ 1222 01a7 00       		.byte	0x0
+ 1223 01a8 04       		.uleb128 0x4
+ 1224 01a9 46020000 		.4byte	.LASF27
+ 1225 01ad 03       		.byte	0x3
+ 1226 01ae 78       		.byte	0x78
+ 1227 01af 8D010000 		.4byte	0x18d
+ 1228 01b3 06       		.uleb128 0x6
+ 1229 01b4 DB010000 		.4byte	0x1db
+ 1230 01b8 3B000000 		.4byte	.LASF28
+ 1231 01bc 1C       		.byte	0x1c
+ 1232 01bd 03       		.byte	0x3
+ 1233 01be 7B       		.byte	0x7b
+ 1234 01bf 08       		.uleb128 0x8
+ 1235 01c0 657600   		.ascii	"ev\000"
+ 1236 01c3 03       		.byte	0x3
+ 1237 01c4 7C       		.byte	0x7c
+ 1238 01c5 A8010000 		.4byte	0x1a8
+ 1239 01c9 02       		.byte	0x2
+ 1240 01ca 23       		.byte	0x23
+ 1241 01cb 00       		.uleb128 0x0
+ 1242 01cc 08       		.uleb128 0x8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 28
+
+
+ 1243 01cd 636E7400 		.ascii	"cnt\000"
+ 1244 01d1 03       		.byte	0x3
+ 1245 01d2 7D       		.byte	0x7d
+ 1246 01d3 37000000 		.4byte	0x37
+ 1247 01d7 02       		.byte	0x2
+ 1248 01d8 23       		.byte	0x23
+ 1249 01d9 18       		.uleb128 0x18
+ 1250 01da 00       		.byte	0x0
+ 1251 01db 04       		.uleb128 0x4
+ 1252 01dc D7010000 		.4byte	.LASF29
+ 1253 01e0 03       		.byte	0x3
+ 1254 01e1 7F       		.byte	0x7f
+ 1255 01e2 B3010000 		.4byte	0x1b3
+ 1256 01e6 0C       		.uleb128 0xc
+ 1257 01e7 30020000 		.4byte	0x230
+ 1258 01eb 01       		.byte	0x1
+ 1259 01ec 39020000 		.4byte	.LASF32
+ 1260 01f0 01       		.byte	0x1
+ 1261 01f1 F2       		.byte	0xf2
+ 1262 01f2 01       		.byte	0x1
+ 1263 01f3 25000000 		.4byte	0x25
+ 1264 01f7 00000000 		.4byte	.LFB8
+ 1265 01fb 68000000 		.4byte	.LFE8
+ 1266 01ff 00000000 		.4byte	.LLST0
+ 1267 0203 0D       		.uleb128 0xd
+ 1268 0204 AD010000 		.4byte	.LASF38
+ 1269 0208 01       		.byte	0x1
+ 1270 0209 F1       		.byte	0xf1
+ 1271 020a 25010000 		.4byte	0x125
+ 1272 020e 2B000000 		.4byte	.LLST1
+ 1273 0212 0E       		.uleb128 0xe
+ 1274 0213 80010000 		.4byte	.LASF30
+ 1275 0217 01       		.byte	0x1
+ 1276 0218 F3       		.byte	0xf3
+ 1277 0219 30020000 		.4byte	0x230
+ 1278 021d 02       		.byte	0x2
+ 1279 021e 91       		.byte	0x91
+ 1280 021f 7C       		.sleb128 -4
+ 1281 0220 0F       		.uleb128 0xf
+ 1282 0221 6E000000 		.4byte	.LASF31
+ 1283 0225 01       		.byte	0x1
+ 1284 0226 F4       		.byte	0xf4
+ 1285 0227 49000000 		.4byte	0x49
+ 1286 022b 49000000 		.4byte	.LLST2
+ 1287 022f 00       		.byte	0x0
+ 1288 0230 10       		.uleb128 0x10
+ 1289 0231 49000000 		.4byte	0x49
+ 1290 0235 11       		.uleb128 0x11
+ 1291 0236 72020000 		.4byte	0x272
+ 1292 023a 01       		.byte	0x1
+ 1293 023b A0000000 		.4byte	.LASF33
+ 1294 023f 01       		.byte	0x1
+ 1295 0240 1A01     		.2byte	0x11a
+ 1296 0242 01       		.byte	0x1
+ 1297 0243 25000000 		.4byte	0x25
+ 1298 0247 68000000 		.4byte	.LFB9
+ 1299 024b 94000000 		.4byte	.LFE9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 29
+
+
+ 1300 024f 5C000000 		.4byte	.LLST3
+ 1301 0253 12       		.uleb128 0x12
+ 1302 0254 6C020000 		.4byte	.LASF34
+ 1303 0258 01       		.byte	0x1
+ 1304 0259 1B01     		.2byte	0x11b
+ 1305 025b 25000000 		.4byte	0x25
+ 1306 025f 02       		.byte	0x2
+ 1307 0260 74       		.byte	0x74
+ 1308 0261 00       		.sleb128 0
+ 1309 0262 12       		.uleb128 0x12
+ 1310 0263 6C010000 		.4byte	.LASF35
+ 1311 0267 01       		.byte	0x1
+ 1312 0268 1C01     		.2byte	0x11c
+ 1313 026a 25000000 		.4byte	0x25
+ 1314 026e 02       		.byte	0x2
+ 1315 026f 91       		.byte	0x91
+ 1316 0270 76       		.sleb128 -10
+ 1317 0271 00       		.byte	0x0
+ 1318 0272 0C       		.uleb128 0xc
+ 1319 0273 9E020000 		.4byte	0x29e
+ 1320 0277 01       		.byte	0x1
+ 1321 0278 BE020000 		.4byte	.LASF36
+ 1322 027c 01       		.byte	0x1
+ 1323 027d DA       		.byte	0xda
+ 1324 027e 01       		.byte	0x1
+ 1325 027f 25000000 		.4byte	0x25
+ 1326 0283 94000000 		.4byte	.LFB7
+ 1327 0287 B0000000 		.4byte	.LFE7
+ 1328 028b 87000000 		.4byte	.LLST4
+ 1329 028f 0E       		.uleb128 0xe
+ 1330 0290 6C020000 		.4byte	.LASF34
+ 1331 0294 01       		.byte	0x1
+ 1332 0295 DB       		.byte	0xdb
+ 1333 0296 25000000 		.4byte	0x25
+ 1334 029a 02       		.byte	0x2
+ 1335 029b 74       		.byte	0x74
+ 1336 029c 00       		.sleb128 0
+ 1337 029d 00       		.byte	0x0
+ 1338 029e 13       		.uleb128 0x13
+ 1339 029f E4020000 		.4byte	0x2e4
+ 1340 02a3 01       		.byte	0x1
+ 1341 02a4 0A000000 		.4byte	.LASF37
+ 1342 02a8 01       		.byte	0x1
+ 1343 02a9 73       		.byte	0x73
+ 1344 02aa 01       		.byte	0x1
+ 1345 02ab B0000000 		.4byte	.LFB3
+ 1346 02af 34010000 		.4byte	.LFE3
+ 1347 02b3 B2000000 		.4byte	.LLST5
+ 1348 02b7 0D       		.uleb128 0xd
+ 1349 02b8 BA000000 		.4byte	.LASF39
+ 1350 02bc 01       		.byte	0x1
+ 1351 02bd 72       		.byte	0x72
+ 1352 02be 25000000 		.4byte	0x25
+ 1353 02c2 DD000000 		.4byte	.LLST6
+ 1354 02c6 0E       		.uleb128 0xe
+ 1355 02c7 80010000 		.4byte	.LASF30
+ 1356 02cb 01       		.byte	0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 30
+
+
+ 1357 02cc 74       		.byte	0x74
+ 1358 02cd 30020000 		.4byte	0x230
+ 1359 02d1 02       		.byte	0x2
+ 1360 02d2 91       		.byte	0x91
+ 1361 02d3 7C       		.sleb128 -4
+ 1362 02d4 0F       		.uleb128 0xf
+ 1363 02d5 5A020000 		.4byte	.LASF40
+ 1364 02d9 01       		.byte	0x1
+ 1365 02da 75       		.byte	0x75
+ 1366 02db 49000000 		.4byte	0x49
+ 1367 02df FB000000 		.4byte	.LLST7
+ 1368 02e3 00       		.byte	0x0
+ 1369 02e4 13       		.uleb128 0x13
+ 1370 02e5 1C030000 		.4byte	0x31c
+ 1371 02e9 01       		.byte	0x1
+ 1372 02ea 76000000 		.4byte	.LASF41
+ 1373 02ee 01       		.byte	0x1
+ 1374 02ef CA       		.byte	0xca
+ 1375 02f0 01       		.byte	0x1
+ 1376 02f1 34010000 		.4byte	.LFB6
+ 1377 02f5 5C010000 		.4byte	.LFE6
+ 1378 02f9 0E010000 		.4byte	.LLST8
+ 1379 02fd 0D       		.uleb128 0xd
+ 1380 02fe D1000000 		.4byte	.LASF42
+ 1381 0302 01       		.byte	0x1
+ 1382 0303 C9       		.byte	0xc9
+ 1383 0304 1C030000 		.4byte	0x31c
+ 1384 0308 2D010000 		.4byte	.LLST9
+ 1385 030c 0D       		.uleb128 0xd
+ 1386 030d 45000000 		.4byte	.LASF43
+ 1387 0311 01       		.byte	0x1
+ 1388 0312 C9       		.byte	0xc9
+ 1389 0313 37000000 		.4byte	0x37
+ 1390 0317 56010000 		.4byte	.LLST10
+ 1391 031b 00       		.byte	0x0
+ 1392 031c 09       		.uleb128 0x9
+ 1393 031d 04       		.byte	0x4
+ 1394 031e 22030000 		.4byte	0x322
+ 1395 0322 03       		.uleb128 0x3
+ 1396 0323 34020000 		.4byte	.LASF44
+ 1397 0327 01       		.byte	0x1
+ 1398 0328 08       		.byte	0x8
+ 1399 0329 13       		.uleb128 0x13
+ 1400 032a 52030000 		.4byte	0x352
+ 1401 032e 01       		.byte	0x1
+ 1402 032f AE000000 		.4byte	.LASF45
+ 1403 0333 01       		.byte	0x1
+ 1404 0334 A6       		.byte	0xa6
+ 1405 0335 01       		.byte	0x1
+ 1406 0336 5C010000 		.4byte	.LFB4
+ 1407 033a 78010000 		.4byte	.LFE4
+ 1408 033e 74010000 		.4byte	.LLST11
+ 1409 0342 0D       		.uleb128 0xd
+ 1410 0343 BA000000 		.4byte	.LASF39
+ 1411 0347 01       		.byte	0x1
+ 1412 0348 A5       		.byte	0xa5
+ 1413 0349 25000000 		.4byte	0x25
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 31
+
+
+ 1414 034d 93010000 		.4byte	.LLST12
+ 1415 0351 00       		.byte	0x0
+ 1416 0352 13       		.uleb128 0x13
+ 1417 0353 7B030000 		.4byte	0x37b
+ 1418 0357 01       		.byte	0x1
+ 1419 0358 85000000 		.4byte	.LASF46
+ 1420 035c 01       		.byte	0x1
+ 1421 035d B9       		.byte	0xb9
+ 1422 035e 01       		.byte	0x1
+ 1423 035f 78010000 		.4byte	.LFB5
+ 1424 0363 90010000 		.4byte	.LFE5
+ 1425 0367 B1010000 		.4byte	.LLST13
+ 1426 036b 0D       		.uleb128 0xd
+ 1427 036c 7F020000 		.4byte	.LASF47
+ 1428 0370 01       		.byte	0x1
+ 1429 0371 B8       		.byte	0xb8
+ 1430 0372 25010000 		.4byte	0x125
+ 1431 0376 D0010000 		.4byte	.LLST14
+ 1432 037a 00       		.byte	0x0
+ 1433 037b 13       		.uleb128 0x13
+ 1434 037c D0030000 		.4byte	0x3d0
+ 1435 0380 01       		.byte	0x1
+ 1436 0381 07020000 		.4byte	.LASF48
+ 1437 0385 01       		.byte	0x1
+ 1438 0386 38       		.byte	0x38
+ 1439 0387 01       		.byte	0x1
+ 1440 0388 90010000 		.4byte	.LFB2
+ 1441 038c 80020000 		.4byte	.LFE2
+ 1442 0390 EE010000 		.4byte	.LLST15
+ 1443 0394 0D       		.uleb128 0xd
+ 1444 0395 87020000 		.4byte	.LASF49
+ 1445 0399 01       		.byte	0x1
+ 1446 039a 37       		.byte	0x37
+ 1447 039b 37000000 		.4byte	0x37
+ 1448 039f 19020000 		.4byte	.LLST16
+ 1449 03a3 0D       		.uleb128 0xd
+ 1450 03a4 DF010000 		.4byte	.LASF50
+ 1451 03a8 01       		.byte	0x1
+ 1452 03a9 37       		.byte	0x37
+ 1453 03aa 25000000 		.4byte	0x25
+ 1454 03ae 37020000 		.4byte	.LLST17
+ 1455 03b2 0D       		.uleb128 0xd
+ 1456 03b3 5D000000 		.4byte	.LASF51
+ 1457 03b7 01       		.byte	0x1
+ 1458 03b8 37       		.byte	0x37
+ 1459 03b9 25000000 		.4byte	0x25
+ 1460 03bd 55020000 		.4byte	.LLST18
+ 1461 03c1 0E       		.uleb128 0xe
+ 1462 03c2 79020000 		.4byte	.LASF52
+ 1463 03c6 01       		.byte	0x1
+ 1464 03c7 39       		.byte	0x39
+ 1465 03c8 30020000 		.4byte	0x230
+ 1466 03cc 02       		.byte	0x2
+ 1467 03cd 91       		.byte	0x91
+ 1468 03ce 7C       		.sleb128 -4
+ 1469 03cf 00       		.byte	0x0
+ 1470 03d0 0A       		.uleb128 0xa
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 32
+
+
+ 1471 03d1 E0030000 		.4byte	0x3e0
+ 1472 03d5 25000000 		.4byte	0x25
+ 1473 03d9 0B       		.uleb128 0xb
+ 1474 03da 75010000 		.4byte	0x175
+ 1475 03de FF       		.byte	0xff
+ 1476 03df 00       		.byte	0x0
+ 1477 03e0 14       		.uleb128 0x14
+ 1478 03e1 CC010000 		.4byte	.LASF53
+ 1479 03e5 01       		.byte	0x1
+ 1480 03e6 1A       		.byte	0x1a
+ 1481 03e7 D0030000 		.4byte	0x3d0
+ 1482 03eb 01       		.byte	0x1
+ 1483 03ec 05       		.byte	0x5
+ 1484 03ed 03       		.byte	0x3
+ 1485 03ee 00000000 		.4byte	uart1TxBuf
+ 1486 03f2 14       		.uleb128 0x14
+ 1487 03f3 8D010000 		.4byte	.LASF54
+ 1488 03f7 01       		.byte	0x1
+ 1489 03f8 1B       		.byte	0x1b
+ 1490 03f9 30020000 		.4byte	0x230
+ 1491 03fd 01       		.byte	0x1
+ 1492 03fe 05       		.byte	0x5
+ 1493 03ff 03       		.byte	0x3
+ 1494 0400 00000000 		.4byte	uart1TxHead
+ 1495 0404 14       		.uleb128 0x14
+ 1496 0405 C5000000 		.4byte	.LASF55
+ 1497 0409 01       		.byte	0x1
+ 1498 040a 1C       		.byte	0x1c
+ 1499 040b 30020000 		.4byte	0x230
+ 1500 040f 01       		.byte	0x1
+ 1501 0410 05       		.byte	0x5
+ 1502 0411 03       		.byte	0x3
+ 1503 0412 00000000 		.4byte	uart1TxTail
+ 1504 0416 14       		.uleb128 0x14
+ 1505 0417 EC010000 		.4byte	.LASF56
+ 1506 041b 01       		.byte	0x1
+ 1507 041c 1D       		.byte	0x1d
+ 1508 041d 28040000 		.4byte	0x428
+ 1509 0421 01       		.byte	0x1
+ 1510 0422 05       		.byte	0x5
+ 1511 0423 03       		.byte	0x3
+ 1512 0424 00000000 		.4byte	uart1TxRunning
+ 1513 0428 10       		.uleb128 0x10
+ 1514 0429 25000000 		.4byte	0x25
+ 1515 042d 0A       		.uleb128 0xa
+ 1516 042e 3E040000 		.4byte	0x43e
+ 1517 0432 25000000 		.4byte	0x25
+ 1518 0436 15       		.uleb128 0x15
+ 1519 0437 75010000 		.4byte	0x175
+ 1520 043b FF03     		.2byte	0x3ff
+ 1521 043d 00       		.byte	0x0
+ 1522 043e 14       		.uleb128 0x14
+ 1523 043f B3020000 		.4byte	.LASF57
+ 1524 0443 01       		.byte	0x1
+ 1525 0444 1F       		.byte	0x1f
+ 1526 0445 2D040000 		.4byte	0x42d
+ 1527 0449 01       		.byte	0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 33
+
+
+ 1528 044a 05       		.byte	0x5
+ 1529 044b 03       		.byte	0x3
+ 1530 044c 00000000 		.4byte	uart1RxBuf
+ 1531 0450 14       		.uleb128 0x14
+ 1532 0451 11020000 		.4byte	.LASF58
+ 1533 0455 01       		.byte	0x1
+ 1534 0456 20       		.byte	0x20
+ 1535 0457 30020000 		.4byte	0x230
+ 1536 045b 01       		.byte	0x1
+ 1537 045c 05       		.byte	0x5
+ 1538 045d 03       		.byte	0x3
+ 1539 045e 00000000 		.4byte	uart1RxHead
+ 1540 0462 14       		.uleb128 0x14
+ 1541 0463 4B000000 		.4byte	.LASF59
+ 1542 0467 01       		.byte	0x1
+ 1543 0468 21       		.byte	0x21
+ 1544 0469 30020000 		.4byte	0x230
+ 1545 046d 01       		.byte	0x1
+ 1546 046e 05       		.byte	0x5
+ 1547 046f 03       		.byte	0x3
+ 1548 0470 00000000 		.4byte	uart1RxTail
+ 1549 0474 14       		.uleb128 0x14
+ 1550 0475 72010000 		.4byte	.LASF60
+ 1551 0479 01       		.byte	0x1
+ 1552 047a 22       		.byte	0x22
+ 1553 047b 30020000 		.4byte	0x230
+ 1554 047f 01       		.byte	0x1
+ 1555 0480 05       		.byte	0x5
+ 1556 0481 03       		.byte	0x3
+ 1557 0482 00000000 		.4byte	uart1RxInBuff
+ 1558 0486 14       		.uleb128 0x14
+ 1559 0487 95000000 		.4byte	.LASF61
+ 1560 048b 01       		.byte	0x1
+ 1561 048c 24       		.byte	0x24
+ 1562 048d DB010000 		.4byte	0x1db
+ 1563 0491 01       		.byte	0x1
+ 1564 0492 05       		.byte	0x5
+ 1565 0493 03       		.byte	0x3
+ 1566 0494 00000000 		.4byte	receiveSem
+ 1567 0498 00       		.byte	0x0
+ 1568              		.section	.debug_abbrev
+ 1569 0000 01       		.uleb128 0x1
+ 1570 0001 11       		.uleb128 0x11
+ 1571 0002 01       		.byte	0x1
+ 1572 0003 10       		.uleb128 0x10
+ 1573 0004 06       		.uleb128 0x6
+ 1574 0005 12       		.uleb128 0x12
+ 1575 0006 01       		.uleb128 0x1
+ 1576 0007 11       		.uleb128 0x11
+ 1577 0008 01       		.uleb128 0x1
+ 1578 0009 25       		.uleb128 0x25
+ 1579 000a 0E       		.uleb128 0xe
+ 1580 000b 13       		.uleb128 0x13
+ 1581 000c 0B       		.uleb128 0xb
+ 1582 000d 03       		.uleb128 0x3
+ 1583 000e 0E       		.uleb128 0xe
+ 1584 000f 1B       		.uleb128 0x1b
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 34
+
+
+ 1585 0010 0E       		.uleb128 0xe
+ 1586 0011 00       		.byte	0x0
+ 1587 0012 00       		.byte	0x0
+ 1588 0013 02       		.uleb128 0x2
+ 1589 0014 16       		.uleb128 0x16
+ 1590 0015 00       		.byte	0x0
+ 1591 0016 03       		.uleb128 0x3
+ 1592 0017 08       		.uleb128 0x8
+ 1593 0018 3A       		.uleb128 0x3a
+ 1594 0019 0B       		.uleb128 0xb
+ 1595 001a 3B       		.uleb128 0x3b
+ 1596 001b 0B       		.uleb128 0xb
+ 1597 001c 49       		.uleb128 0x49
+ 1598 001d 13       		.uleb128 0x13
+ 1599 001e 00       		.byte	0x0
+ 1600 001f 00       		.byte	0x0
+ 1601 0020 03       		.uleb128 0x3
+ 1602 0021 24       		.uleb128 0x24
+ 1603 0022 00       		.byte	0x0
+ 1604 0023 03       		.uleb128 0x3
+ 1605 0024 0E       		.uleb128 0xe
+ 1606 0025 0B       		.uleb128 0xb
+ 1607 0026 0B       		.uleb128 0xb
+ 1608 0027 3E       		.uleb128 0x3e
+ 1609 0028 0B       		.uleb128 0xb
+ 1610 0029 00       		.byte	0x0
+ 1611 002a 00       		.byte	0x0
+ 1612 002b 04       		.uleb128 0x4
+ 1613 002c 16       		.uleb128 0x16
+ 1614 002d 00       		.byte	0x0
+ 1615 002e 03       		.uleb128 0x3
+ 1616 002f 0E       		.uleb128 0xe
+ 1617 0030 3A       		.uleb128 0x3a
+ 1618 0031 0B       		.uleb128 0xb
+ 1619 0032 3B       		.uleb128 0x3b
+ 1620 0033 0B       		.uleb128 0xb
+ 1621 0034 49       		.uleb128 0x49
+ 1622 0035 13       		.uleb128 0x13
+ 1623 0036 00       		.byte	0x0
+ 1624 0037 00       		.byte	0x0
+ 1625 0038 05       		.uleb128 0x5
+ 1626 0039 24       		.uleb128 0x24
+ 1627 003a 00       		.byte	0x0
+ 1628 003b 03       		.uleb128 0x3
+ 1629 003c 08       		.uleb128 0x8
+ 1630 003d 0B       		.uleb128 0xb
+ 1631 003e 0B       		.uleb128 0xb
+ 1632 003f 3E       		.uleb128 0x3e
+ 1633 0040 0B       		.uleb128 0xb
+ 1634 0041 00       		.byte	0x0
+ 1635 0042 00       		.byte	0x0
+ 1636 0043 06       		.uleb128 0x6
+ 1637 0044 13       		.uleb128 0x13
+ 1638 0045 01       		.byte	0x1
+ 1639 0046 01       		.uleb128 0x1
+ 1640 0047 13       		.uleb128 0x13
+ 1641 0048 03       		.uleb128 0x3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 35
+
+
+ 1642 0049 0E       		.uleb128 0xe
+ 1643 004a 0B       		.uleb128 0xb
+ 1644 004b 0B       		.uleb128 0xb
+ 1645 004c 3A       		.uleb128 0x3a
+ 1646 004d 0B       		.uleb128 0xb
+ 1647 004e 3B       		.uleb128 0x3b
+ 1648 004f 0B       		.uleb128 0xb
+ 1649 0050 00       		.byte	0x0
+ 1650 0051 00       		.byte	0x0
+ 1651 0052 07       		.uleb128 0x7
+ 1652 0053 0D       		.uleb128 0xd
+ 1653 0054 00       		.byte	0x0
+ 1654 0055 03       		.uleb128 0x3
+ 1655 0056 0E       		.uleb128 0xe
+ 1656 0057 3A       		.uleb128 0x3a
+ 1657 0058 0B       		.uleb128 0xb
+ 1658 0059 3B       		.uleb128 0x3b
+ 1659 005a 0B       		.uleb128 0xb
+ 1660 005b 49       		.uleb128 0x49
+ 1661 005c 13       		.uleb128 0x13
+ 1662 005d 38       		.uleb128 0x38
+ 1663 005e 0A       		.uleb128 0xa
+ 1664 005f 00       		.byte	0x0
+ 1665 0060 00       		.byte	0x0
+ 1666 0061 08       		.uleb128 0x8
+ 1667 0062 0D       		.uleb128 0xd
+ 1668 0063 00       		.byte	0x0
+ 1669 0064 03       		.uleb128 0x3
+ 1670 0065 08       		.uleb128 0x8
+ 1671 0066 3A       		.uleb128 0x3a
+ 1672 0067 0B       		.uleb128 0xb
+ 1673 0068 3B       		.uleb128 0x3b
+ 1674 0069 0B       		.uleb128 0xb
+ 1675 006a 49       		.uleb128 0x49
+ 1676 006b 13       		.uleb128 0x13
+ 1677 006c 38       		.uleb128 0x38
+ 1678 006d 0A       		.uleb128 0xa
+ 1679 006e 00       		.byte	0x0
+ 1680 006f 00       		.byte	0x0
+ 1681 0070 09       		.uleb128 0x9
+ 1682 0071 0F       		.uleb128 0xf
+ 1683 0072 00       		.byte	0x0
+ 1684 0073 0B       		.uleb128 0xb
+ 1685 0074 0B       		.uleb128 0xb
+ 1686 0075 49       		.uleb128 0x49
+ 1687 0076 13       		.uleb128 0x13
+ 1688 0077 00       		.byte	0x0
+ 1689 0078 00       		.byte	0x0
+ 1690 0079 0A       		.uleb128 0xa
+ 1691 007a 01       		.uleb128 0x1
+ 1692 007b 01       		.byte	0x1
+ 1693 007c 01       		.uleb128 0x1
+ 1694 007d 13       		.uleb128 0x13
+ 1695 007e 49       		.uleb128 0x49
+ 1696 007f 13       		.uleb128 0x13
+ 1697 0080 00       		.byte	0x0
+ 1698 0081 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 36
+
+
+ 1699 0082 0B       		.uleb128 0xb
+ 1700 0083 21       		.uleb128 0x21
+ 1701 0084 00       		.byte	0x0
+ 1702 0085 49       		.uleb128 0x49
+ 1703 0086 13       		.uleb128 0x13
+ 1704 0087 2F       		.uleb128 0x2f
+ 1705 0088 0B       		.uleb128 0xb
+ 1706 0089 00       		.byte	0x0
+ 1707 008a 00       		.byte	0x0
+ 1708 008b 0C       		.uleb128 0xc
+ 1709 008c 2E       		.uleb128 0x2e
+ 1710 008d 01       		.byte	0x1
+ 1711 008e 01       		.uleb128 0x1
+ 1712 008f 13       		.uleb128 0x13
+ 1713 0090 3F       		.uleb128 0x3f
+ 1714 0091 0C       		.uleb128 0xc
+ 1715 0092 03       		.uleb128 0x3
+ 1716 0093 0E       		.uleb128 0xe
+ 1717 0094 3A       		.uleb128 0x3a
+ 1718 0095 0B       		.uleb128 0xb
+ 1719 0096 3B       		.uleb128 0x3b
+ 1720 0097 0B       		.uleb128 0xb
+ 1721 0098 27       		.uleb128 0x27
+ 1722 0099 0C       		.uleb128 0xc
+ 1723 009a 49       		.uleb128 0x49
+ 1724 009b 13       		.uleb128 0x13
+ 1725 009c 11       		.uleb128 0x11
+ 1726 009d 01       		.uleb128 0x1
+ 1727 009e 12       		.uleb128 0x12
+ 1728 009f 01       		.uleb128 0x1
+ 1729 00a0 40       		.uleb128 0x40
+ 1730 00a1 06       		.uleb128 0x6
+ 1731 00a2 00       		.byte	0x0
+ 1732 00a3 00       		.byte	0x0
+ 1733 00a4 0D       		.uleb128 0xd
+ 1734 00a5 05       		.uleb128 0x5
+ 1735 00a6 00       		.byte	0x0
+ 1736 00a7 03       		.uleb128 0x3
+ 1737 00a8 0E       		.uleb128 0xe
+ 1738 00a9 3A       		.uleb128 0x3a
+ 1739 00aa 0B       		.uleb128 0xb
+ 1740 00ab 3B       		.uleb128 0x3b
+ 1741 00ac 0B       		.uleb128 0xb
+ 1742 00ad 49       		.uleb128 0x49
+ 1743 00ae 13       		.uleb128 0x13
+ 1744 00af 02       		.uleb128 0x2
+ 1745 00b0 06       		.uleb128 0x6
+ 1746 00b1 00       		.byte	0x0
+ 1747 00b2 00       		.byte	0x0
+ 1748 00b3 0E       		.uleb128 0xe
+ 1749 00b4 34       		.uleb128 0x34
+ 1750 00b5 00       		.byte	0x0
+ 1751 00b6 03       		.uleb128 0x3
+ 1752 00b7 0E       		.uleb128 0xe
+ 1753 00b8 3A       		.uleb128 0x3a
+ 1754 00b9 0B       		.uleb128 0xb
+ 1755 00ba 3B       		.uleb128 0x3b
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 37
+
+
+ 1756 00bb 0B       		.uleb128 0xb
+ 1757 00bc 49       		.uleb128 0x49
+ 1758 00bd 13       		.uleb128 0x13
+ 1759 00be 02       		.uleb128 0x2
+ 1760 00bf 0A       		.uleb128 0xa
+ 1761 00c0 00       		.byte	0x0
+ 1762 00c1 00       		.byte	0x0
+ 1763 00c2 0F       		.uleb128 0xf
+ 1764 00c3 34       		.uleb128 0x34
+ 1765 00c4 00       		.byte	0x0
+ 1766 00c5 03       		.uleb128 0x3
+ 1767 00c6 0E       		.uleb128 0xe
+ 1768 00c7 3A       		.uleb128 0x3a
+ 1769 00c8 0B       		.uleb128 0xb
+ 1770 00c9 3B       		.uleb128 0x3b
+ 1771 00ca 0B       		.uleb128 0xb
+ 1772 00cb 49       		.uleb128 0x49
+ 1773 00cc 13       		.uleb128 0x13
+ 1774 00cd 02       		.uleb128 0x2
+ 1775 00ce 06       		.uleb128 0x6
+ 1776 00cf 00       		.byte	0x0
+ 1777 00d0 00       		.byte	0x0
+ 1778 00d1 10       		.uleb128 0x10
+ 1779 00d2 35       		.uleb128 0x35
+ 1780 00d3 00       		.byte	0x0
+ 1781 00d4 49       		.uleb128 0x49
+ 1782 00d5 13       		.uleb128 0x13
+ 1783 00d6 00       		.byte	0x0
+ 1784 00d7 00       		.byte	0x0
+ 1785 00d8 11       		.uleb128 0x11
+ 1786 00d9 2E       		.uleb128 0x2e
+ 1787 00da 01       		.byte	0x1
+ 1788 00db 01       		.uleb128 0x1
+ 1789 00dc 13       		.uleb128 0x13
+ 1790 00dd 3F       		.uleb128 0x3f
+ 1791 00de 0C       		.uleb128 0xc
+ 1792 00df 03       		.uleb128 0x3
+ 1793 00e0 0E       		.uleb128 0xe
+ 1794 00e1 3A       		.uleb128 0x3a
+ 1795 00e2 0B       		.uleb128 0xb
+ 1796 00e3 3B       		.uleb128 0x3b
+ 1797 00e4 05       		.uleb128 0x5
+ 1798 00e5 27       		.uleb128 0x27
+ 1799 00e6 0C       		.uleb128 0xc
+ 1800 00e7 49       		.uleb128 0x49
+ 1801 00e8 13       		.uleb128 0x13
+ 1802 00e9 11       		.uleb128 0x11
+ 1803 00ea 01       		.uleb128 0x1
+ 1804 00eb 12       		.uleb128 0x12
+ 1805 00ec 01       		.uleb128 0x1
+ 1806 00ed 40       		.uleb128 0x40
+ 1807 00ee 06       		.uleb128 0x6
+ 1808 00ef 00       		.byte	0x0
+ 1809 00f0 00       		.byte	0x0
+ 1810 00f1 12       		.uleb128 0x12
+ 1811 00f2 34       		.uleb128 0x34
+ 1812 00f3 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 38
+
+
+ 1813 00f4 03       		.uleb128 0x3
+ 1814 00f5 0E       		.uleb128 0xe
+ 1815 00f6 3A       		.uleb128 0x3a
+ 1816 00f7 0B       		.uleb128 0xb
+ 1817 00f8 3B       		.uleb128 0x3b
+ 1818 00f9 05       		.uleb128 0x5
+ 1819 00fa 49       		.uleb128 0x49
+ 1820 00fb 13       		.uleb128 0x13
+ 1821 00fc 02       		.uleb128 0x2
+ 1822 00fd 0A       		.uleb128 0xa
+ 1823 00fe 00       		.byte	0x0
+ 1824 00ff 00       		.byte	0x0
+ 1825 0100 13       		.uleb128 0x13
+ 1826 0101 2E       		.uleb128 0x2e
+ 1827 0102 01       		.byte	0x1
+ 1828 0103 01       		.uleb128 0x1
+ 1829 0104 13       		.uleb128 0x13
+ 1830 0105 3F       		.uleb128 0x3f
+ 1831 0106 0C       		.uleb128 0xc
+ 1832 0107 03       		.uleb128 0x3
+ 1833 0108 0E       		.uleb128 0xe
+ 1834 0109 3A       		.uleb128 0x3a
+ 1835 010a 0B       		.uleb128 0xb
+ 1836 010b 3B       		.uleb128 0x3b
+ 1837 010c 0B       		.uleb128 0xb
+ 1838 010d 27       		.uleb128 0x27
+ 1839 010e 0C       		.uleb128 0xc
+ 1840 010f 11       		.uleb128 0x11
+ 1841 0110 01       		.uleb128 0x1
+ 1842 0111 12       		.uleb128 0x12
+ 1843 0112 01       		.uleb128 0x1
+ 1844 0113 40       		.uleb128 0x40
+ 1845 0114 06       		.uleb128 0x6
+ 1846 0115 00       		.byte	0x0
+ 1847 0116 00       		.byte	0x0
+ 1848 0117 14       		.uleb128 0x14
+ 1849 0118 34       		.uleb128 0x34
+ 1850 0119 00       		.byte	0x0
+ 1851 011a 03       		.uleb128 0x3
+ 1852 011b 0E       		.uleb128 0xe
+ 1853 011c 3A       		.uleb128 0x3a
+ 1854 011d 0B       		.uleb128 0xb
+ 1855 011e 3B       		.uleb128 0x3b
+ 1856 011f 0B       		.uleb128 0xb
+ 1857 0120 49       		.uleb128 0x49
+ 1858 0121 13       		.uleb128 0x13
+ 1859 0122 3F       		.uleb128 0x3f
+ 1860 0123 0C       		.uleb128 0xc
+ 1861 0124 02       		.uleb128 0x2
+ 1862 0125 0A       		.uleb128 0xa
+ 1863 0126 00       		.byte	0x0
+ 1864 0127 00       		.byte	0x0
+ 1865 0128 15       		.uleb128 0x15
+ 1866 0129 21       		.uleb128 0x21
+ 1867 012a 00       		.byte	0x0
+ 1868 012b 49       		.uleb128 0x49
+ 1869 012c 13       		.uleb128 0x13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 39
+
+
+ 1870 012d 2F       		.uleb128 0x2f
+ 1871 012e 05       		.uleb128 0x5
+ 1872 012f 00       		.byte	0x0
+ 1873 0130 00       		.byte	0x0
+ 1874 0131 00       		.byte	0x0
+ 1875              		.section	.debug_pubnames,"",%progbits
+ 1876 0000 29010000 		.4byte	0x129
+ 1877 0004 0200     		.2byte	0x2
+ 1878 0006 00000000 		.4byte	.Ldebug_info0
+ 1879 000a 99040000 		.4byte	0x499
+ 1880 000e E6010000 		.4byte	0x1e6
+ 1881 0012 75617274 		.ascii	"uart1GetChar\000"
+ 1881      31476574 
+ 1881      43686172 
+ 1881      00
+ 1882 001f 35020000 		.4byte	0x235
+ 1883 0023 75617274 		.ascii	"uart1GetChSem\000"
+ 1883      31476574 
+ 1883      43685365 
+ 1883      6D00
+ 1884 0031 72020000 		.4byte	0x272
+ 1885 0035 75617274 		.ascii	"uart1GetCh\000"
+ 1885      31476574 
+ 1885      436800
+ 1886 0040 9E020000 		.4byte	0x29e
+ 1887 0044 75617274 		.ascii	"uart1SendChar\000"
+ 1887      3153656E 
+ 1887      64436861 
+ 1887      7200
+ 1888 0052 E4020000 		.4byte	0x2e4
+ 1889 0056 75617274 		.ascii	"uart1SendChars\000"
+ 1889      3153656E 
+ 1889      64436861 
+ 1889      727300
+ 1890 0065 29030000 		.4byte	0x329
+ 1891 0069 75617274 		.ascii	"uart1SendCh\000"
+ 1891      3153656E 
+ 1891      64436800 
+ 1892 0075 52030000 		.4byte	0x352
+ 1893 0079 75617274 		.ascii	"uart1SendString\000"
+ 1893      3153656E 
+ 1893      64537472 
+ 1893      696E6700 
+ 1894 0089 7B030000 		.4byte	0x37b
+ 1895 008d 696E6974 		.ascii	"initUart1\000"
+ 1895      55617274 
+ 1895      3100
+ 1896 0097 E0030000 		.4byte	0x3e0
+ 1897 009b 75617274 		.ascii	"uart1TxBuf\000"
+ 1897      31547842 
+ 1897      756600
+ 1898 00a6 F2030000 		.4byte	0x3f2
+ 1899 00aa 75617274 		.ascii	"uart1TxHead\000"
+ 1899      31547848 
+ 1899      65616400 
+ 1900 00b6 04040000 		.4byte	0x404
+ 1901 00ba 75617274 		.ascii	"uart1TxTail\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 40
+
+
+ 1901      31547854 
+ 1901      61696C00 
+ 1902 00c6 16040000 		.4byte	0x416
+ 1903 00ca 75617274 		.ascii	"uart1TxRunning\000"
+ 1903      31547852 
+ 1903      756E6E69 
+ 1903      6E6700
+ 1904 00d9 3E040000 		.4byte	0x43e
+ 1905 00dd 75617274 		.ascii	"uart1RxBuf\000"
+ 1905      31527842 
+ 1905      756600
+ 1906 00e8 50040000 		.4byte	0x450
+ 1907 00ec 75617274 		.ascii	"uart1RxHead\000"
+ 1907      31527848 
+ 1907      65616400 
+ 1908 00f8 62040000 		.4byte	0x462
+ 1909 00fc 75617274 		.ascii	"uart1RxTail\000"
+ 1909      31527854 
+ 1909      61696C00 
+ 1910 0108 74040000 		.4byte	0x474
+ 1911 010c 75617274 		.ascii	"uart1RxInBuff\000"
+ 1911      31527849 
+ 1911      6E427566 
+ 1911      6600
+ 1912 011a 86040000 		.4byte	0x486
+ 1913 011e 72656365 		.ascii	"receiveSem\000"
+ 1913      69766553 
+ 1913      656D00
+ 1914 0129 00000000 		.4byte	0x0
+ 1915              		.section	.debug_aranges,"",%progbits
+ 1916 0000 1C000000 		.4byte	0x1c
+ 1917 0004 0200     		.2byte	0x2
+ 1918 0006 00000000 		.4byte	.Ldebug_info0
+ 1919 000a 04       		.byte	0x4
+ 1920 000b 00       		.byte	0x0
+ 1921 000c 0000     		.2byte	0x0
+ 1922 000e 0000     		.2byte	0x0
+ 1923 0010 00000000 		.4byte	.Ltext0
+ 1924 0014 80020000 		.4byte	.Letext0-.Ltext0
+ 1925 0018 00000000 		.4byte	0x0
+ 1926 001c 00000000 		.4byte	0x0
+ 1927              		.section	.debug_str,"MS",%progbits,1
+ 1928              	.LASF13:
+ 1929 0000 7072696F 		.ascii	"prio\000"
+ 1929      00
+ 1930              	.LASF7:
+ 1931 0005 7053746B 		.ascii	"pStk\000"
+ 1931      00
+ 1932              	.LASF37:
+ 1933 000a 75617274 		.ascii	"uart1SendChar\000"
+ 1933      3153656E 
+ 1933      64436861 
+ 1933      7200
+ 1934              	.LASF64:
+ 1935 0018 2F637967 		.ascii	"/cygdrive/c/eclipse/workspace/2138\000"
+ 1935      64726976 
+ 1935      652F632F 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 41
+
+
+ 1935      65636C69 
+ 1935      7073652F 
+ 1936              	.LASF28:
+ 1937 003b 5F74436E 		.ascii	"_tCntSem_\000"
+ 1937      7453656D 
+ 1937      5F00
+ 1938              	.LASF43:
+ 1939 0045 636F756E 		.ascii	"count\000"
+ 1939      7400
+ 1940              	.LASF59:
+ 1941 004b 75617274 		.ascii	"uart1RxTail\000"
+ 1941      31527854 
+ 1941      61696C00 
+ 1942              	.LASF22:
+ 1943 0057 70504342 		.ascii	"pPCBs\000"
+ 1943      7300
+ 1944              	.LASF51:
+ 1945 005d 6669666F 		.ascii	"fifo_mode\000"
+ 1945      5F6D6F64 
+ 1945      6500
+ 1946              	.LASF63:
+ 1947 0067 75617274 		.ascii	"uart.c\000"
+ 1947      2E6300
+ 1948              	.LASF31:
+ 1949 006e 746D7054 		.ascii	"tmpTail\000"
+ 1949      61696C00 
+ 1950              	.LASF41:
+ 1951 0076 75617274 		.ascii	"uart1SendChars\000"
+ 1951      3153656E 
+ 1951      64436861 
+ 1951      727300
+ 1952              	.LASF46:
+ 1953 0085 75617274 		.ascii	"uart1SendString\000"
+ 1953      3153656E 
+ 1953      64537472 
+ 1953      696E6700 
+ 1954              	.LASF61:
+ 1955 0095 72656365 		.ascii	"receiveSem\000"
+ 1955      69766553 
+ 1955      656D00
+ 1956              	.LASF33:
+ 1957 00a0 75617274 		.ascii	"uart1GetChSem\000"
+ 1957      31476574 
+ 1957      43685365 
+ 1957      6D00
+ 1958              	.LASF45:
+ 1959 00ae 75617274 		.ascii	"uart1SendCh\000"
+ 1959      3153656E 
+ 1959      64436800 
+ 1960              	.LASF39:
+ 1961 00ba 63686172 		.ascii	"charToSend\000"
+ 1961      546F5365 
+ 1961      6E6400
+ 1962              	.LASF55:
+ 1963 00c5 75617274 		.ascii	"uart1TxTail\000"
+ 1963      31547854 
+ 1963      61696C00 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 42
+
+
+ 1964              	.LASF42:
+ 1965 00d1 70427566 		.ascii	"pBuff\000"
+ 1965      6600
+ 1966              	.LASF1:
+ 1967 00d7 756E7369 		.ascii	"unsigned char\000"
+ 1967      676E6564 
+ 1967      20636861 
+ 1967      7200
+ 1968              	.LASF18:
+ 1969 00e5 744F5350 		.ascii	"tOSPCB\000"
+ 1969      434200
+ 1970              	.LASF24:
+ 1971 00ec 74507269 		.ascii	"tPrioQueue\000"
+ 1971      6F517565 
+ 1971      756500
+ 1972              	.LASF23:
+ 1973 00f7 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1973      20756E73 
+ 1973      69676E65 
+ 1973      6420696E 
+ 1973      7400
+ 1974              	.LASF2:
+ 1975 0109 73686F72 		.ascii	"short unsigned int\000"
+ 1975      7420756E 
+ 1975      7369676E 
+ 1975      65642069 
+ 1975      6E7400
+ 1976              	.LASF9:
+ 1977 011c 70507265 		.ascii	"pPrevPrioQueueReady\000"
+ 1977      76507269 
+ 1977      6F517565 
+ 1977      75655265 
+ 1977      61647900 
+ 1978              	.LASF21:
+ 1979 0130 70507269 		.ascii	"pPrioList\000"
+ 1979      6F4C6973 
+ 1979      7400
+ 1980              	.LASF19:
+ 1981 013a 5F744F53 		.ascii	"_tOSPCB__\000"
+ 1981      5043425F 
+ 1981      5F00
+ 1982              	.LASF11:
+ 1983 0144 70507265 		.ascii	"pPrevPrioQueueEvent\000"
+ 1983      76507269 
+ 1983      6F517565 
+ 1983      75654576 
+ 1983      656E7400 
+ 1984              	.LASF8:
+ 1985 0158 704E6578 		.ascii	"pNextPrioQueueReady\000"
+ 1985      74507269 
+ 1985      6F517565 
+ 1985      75655265 
+ 1985      61647900 
+ 1986              	.LASF35:
+ 1987 016c 6572726F 		.ascii	"error\000"
+ 1987      7200
+ 1988              	.LASF60:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 43
+
+
+ 1989 0172 75617274 		.ascii	"uart1RxInBuff\000"
+ 1989      31527849 
+ 1989      6E427566 
+ 1989      6600
+ 1990              	.LASF30:
+ 1991 0180 63707372 		.ascii	"cpsrReg\000"
+ 1991      52656700 
+ 1992              	.LASF14:
+ 1993 0188 666C6167 		.ascii	"flag\000"
+ 1993      00
+ 1994              	.LASF54:
+ 1995 018d 75617274 		.ascii	"uart1TxHead\000"
+ 1995      31547848 
+ 1995      65616400 
+ 1996              	.LASF10:
+ 1997 0199 704E6578 		.ascii	"pNextPrioQueueEvent\000"
+ 1997      74507269 
+ 1997      6F517565 
+ 1997      75654576 
+ 1997      656E7400 
+ 1998              	.LASF38:
+ 1999 01ad 70527843 		.ascii	"pRxChar\000"
+ 1999      68617200 
+ 2000              	.LASF4:
+ 2001 01b5 756E7369 		.ascii	"unsigned int\000"
+ 2001      676E6564 
+ 2001      20696E74 
+ 2001      00
+ 2002              	.LASF17:
+ 2003 01c2 73746163 		.ascii	"stackSize\000"
+ 2003      6B53697A 
+ 2003      6500
+ 2004              	.LASF53:
+ 2005 01cc 75617274 		.ascii	"uart1TxBuf\000"
+ 2005      31547842 
+ 2005      756600
+ 2006              	.LASF29:
+ 2007 01d7 74436E74 		.ascii	"tCntSem\000"
+ 2007      53656D00 
+ 2008              	.LASF50:
+ 2009 01df 6D6F6465 		.ascii	"mode\000"
+ 2009      00
+ 2010              	.LASF16:
+ 2011 01e4 7053746B 		.ascii	"pStkOrg\000"
+ 2011      4F726700 
+ 2012              	.LASF56:
+ 2013 01ec 75617274 		.ascii	"uart1TxRunning\000"
+ 2013      31547852 
+ 2013      756E6E69 
+ 2013      6E6700
+ 2014              	.LASF62:
+ 2015 01fb 474E5520 		.ascii	"GNU C 4.1.1\000"
+ 2015      4320342E 
+ 2015      312E3100 
+ 2016              	.LASF48:
+ 2017 0207 696E6974 		.ascii	"initUart1\000"
+ 2017      55617274 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 44
+
+
+ 2017      3100
+ 2018              	.LASF58:
+ 2019 0211 75617274 		.ascii	"uart1RxHead\000"
+ 2019      31527848 
+ 2019      65616400 
+ 2020              	.LASF20:
+ 2021 021d 5F745072 		.ascii	"_tPrioQueue_\000"
+ 2021      696F5175 
+ 2021      6575655F 
+ 2021      00
+ 2022              	.LASF0:
+ 2023 022a 74553136 		.ascii	"tU16\000"
+ 2023      00
+ 2024              	.LASF3:
+ 2025 022f 74553332 		.ascii	"tU32\000"
+ 2025      00
+ 2026              	.LASF44:
+ 2027 0234 63686172 		.ascii	"char\000"
+ 2027      00
+ 2028              	.LASF32:
+ 2029 0239 75617274 		.ascii	"uart1GetChar\000"
+ 2029      31476574 
+ 2029      43686172 
+ 2029      00
+ 2030              	.LASF27:
+ 2031 0246 744F5345 		.ascii	"tOSEvent\000"
+ 2031      76656E74 
+ 2031      00
+ 2032              	.LASF25:
+ 2033 024f 5F744F53 		.ascii	"_tOSEvent_\000"
+ 2033      4576656E 
+ 2033      745F00
+ 2034              	.LASF40:
+ 2035 025a 746D7048 		.ascii	"tmpHead\000"
+ 2035      65616400 
+ 2036              	.LASF6:
+ 2037 0262 73686F72 		.ascii	"short int\000"
+ 2037      7420696E 
+ 2037      7400
+ 2038              	.LASF34:
+ 2039 026c 72784368 		.ascii	"rxChar\000"
+ 2039      617200
+ 2040              	.LASF26:
+ 2041 0273 77616974 		.ascii	"waitQ\000"
+ 2041      5100
+ 2042              	.LASF52:
+ 2043 0279 64756D6D 		.ascii	"dummy\000"
+ 2043      7900
+ 2044              	.LASF47:
+ 2045 027f 70537472 		.ascii	"pString\000"
+ 2045      696E6700 
+ 2046              	.LASF49:
+ 2047 0287 6469765F 		.ascii	"div_factor\000"
+ 2047      66616374 
+ 2047      6F7200
+ 2048              	.LASF12:
+ 2049 0292 704E6578 		.ascii	"pNextTimeQueue\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 45
+
+
+ 2049      7454696D 
+ 2049      65517565 
+ 2049      756500
+ 2050              	.LASF5:
+ 2051 02a1 7369676E 		.ascii	"signed char\000"
+ 2051      65642063 
+ 2051      68617200 
+ 2052              	.LASF15:
+ 2053 02ad 736C6565 		.ascii	"sleep\000"
+ 2053      7000
+ 2054              	.LASF57:
+ 2055 02b3 75617274 		.ascii	"uart1RxBuf\000"
+ 2055      31527842 
+ 2055      756600
+ 2056              	.LASF36:
+ 2057 02be 75617274 		.ascii	"uart1GetCh\000"
+ 2057      31476574 
+ 2057      436800
+ 2058              		.ident	"GCC: (GNU) 4.1.1"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s 			page 46
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 uart.c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:16     .text:00000000 uart1GetChar
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:88     .text:00000050 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:567    .bss:0000000c uart1RxHead
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:573    .bss:00000010 uart1RxTail
+                            *COM*:00000400 uart1RxBuf
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:579    .bss:00000014 uart1RxInBuff
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:101    .text:00000068 uart1GetChSem
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:98     .text:00000068 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:133    .text:00000090 $d
+                            *COM*:0000001c receiveSem
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:141    .text:00000094 uart1GetCh
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:138    .text:00000094 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:171    .text:000000b0 uart1SendChar
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:261    .text:0000011c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:550    .bss:00000000 uart1TxHead
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:556    .bss:00000004 uart1TxTail
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:561    .bss:00000008 uart1TxRunning
+                            *COM*:00000100 uart1TxBuf
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:274    .text:00000134 uart1SendChars
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:271    .text:00000134 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:312    .text:00000158 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:320    .text:0000015c uart1SendCh
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:317    .text:0000015c $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:354    .text:00000178 uart1SendString
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:387    .text:00000190 initUart1
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXOQyRI.s:524    .text:00000234 $d
+
+UNDEFINED SYMBOLS
+disIrq
+restoreIrq
+osSemTake
+osSemInit
+uart1ISR

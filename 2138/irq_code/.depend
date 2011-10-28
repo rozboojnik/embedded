@@ -1,0 +1,3 @@
+irqUart.o: irqUart.c ../pre_emptive_os/api/osapi.h \
+  ../pre_emptive_os/api/../api/general.h ../startup/lpc2xxx.h irqUart.h \
+  ../uart.h ../pre_emptive_os/api/osapi.h

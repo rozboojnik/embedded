@@ -1,0 +1,2722 @@
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
+
+
+   1              		.code	16
+   2              		.file	"hw.c"
+   3              		.section	.debug_abbrev,"",%progbits
+   4              	.Ldebug_abbrev0:
+   5              		.section	.debug_info,"",%progbits
+   6              	.Ldebug_info0:
+   7              		.section	.debug_line,"",%progbits
+   8              	.Ldebug_line0:
+   9 0000 2B010000 		.text
+   9      02004F00 
+   9      00000201 
+   9      FB0E0D00 
+   9      01010101 
+  10              	.Ltext0:
+  11              		.align	2
+  12              		.global	setBuzzer
+  13              		.code 16
+  14              		.thumb_func
+  15              		.type	setBuzzer, %function
+  16              	setBuzzer:
+  17              	.LFB5:
+  18              		.file 1 "hw.c"
+   1:hw.c          **** /******************************************************************************
+   2:hw.c          ****  *
+   3:hw.c          ****  * Copyright:
+   4:hw.c          ****  *    (C) 2006 Embedded Artists AB
+   5:hw.c          ****  *
+   6:hw.c          ****  * File:
+   7:hw.c          ****  *    hw.c
+   8:hw.c          ****  *
+   9:hw.c          ****  * Description:
+  10:hw.c          ****  *    Implements hardware specific routines
+  11:hw.c          ****  *
+  12:hw.c          ****  *****************************************************************************/
+  13:hw.c          **** 
+  14:hw.c          **** /******************************************************************************
+  15:hw.c          ****  * Includes
+  16:hw.c          ****  *****************************************************************************/
+  17:hw.c          **** #include "../pre_emptive_os/api/osapi.h"
+  18:hw.c          **** #include "../pre_emptive_os/api/general.h"
+  19:hw.c          **** #include <lpc2xxx.h>
+  20:hw.c          **** 
+  21:hw.c          **** #include "hw.h"
+  22:hw.c          **** #include "key.h"
+  23:hw.c          **** #include "pins.h"
+  24:hw.c          **** #include "eeprom.h"
+  25:hw.c          **** 
+  26:hw.c          **** /******************************************************************************
+  27:hw.c          ****  * Typedefs and defines
+  28:hw.c          ****  *****************************************************************************/
+  29:hw.c          **** 
+  30:hw.c          **** 
+  31:hw.c          **** /*****************************************************************************
+  32:hw.c          ****  * Global variables
+  33:hw.c          ****  ****************************************************************************/
+  34:hw.c          **** tBool ver1_0;
+  35:hw.c          **** tBool ver1_1;
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 2
+
+
+  36:hw.c          **** 
+  37:hw.c          **** /*****************************************************************************
+  38:hw.c          ****  * Local variables
+  39:hw.c          ****  ****************************************************************************/
+  40:hw.c          **** static tU8 greenLedShadow;
+  41:hw.c          **** static tU8 btResetShadow;
+  42:hw.c          **** 
+  43:hw.c          **** /*****************************************************************************
+  44:hw.c          ****  * Local prototypes
+  45:hw.c          ****  ****************************************************************************/
+  46:hw.c          **** 
+  47:hw.c          **** 
+  48:hw.c          **** /*****************************************************************************
+  49:hw.c          ****  *
+  50:hw.c          ****  * Description:
+  51:hw.c          ****  *    Initialize the io-pins and find out if HW is ver 1.0 or ver 1.1
+  52:hw.c          ****  *
+  53:hw.c          ****  ****************************************************************************/
+  54:hw.c          **** void
+  55:hw.c          **** immediateIoInit(void)
+  56:hw.c          **** {
+  57:hw.c          ****   tU8 initCommand[] = {0x12, 0x97, 0x80, 0x00, 0x40, 0x00, 0x14, 0x00, 0x00};
+  58:hw.c          ****   //                                                         04 = LCD_RST# low
+  59:hw.c          ****   //                                                         10 = BT_RST# low
+  60:hw.c          **** 
+  61:hw.c          ****   //make all key signals as inputs
+  62:hw.c          ****   IODIR &= ~(KEYPIN_CENTER | KEYPIN_UP | KEYPIN_DOWN | KEYPIN_LEFT | KEYPIN_RIGHT);
+  63:hw.c          **** 
+  64:hw.c          ****   IODIR |= BUZZER_PIN;
+  65:hw.c          ****   IOSET  = BUZZER_PIN;
+  66:hw.c          **** 
+  67:hw.c          ****   IODIR |= BACKLIGHT_PIN;
+  68:hw.c          ****   IOSET  = BACKLIGHT_PIN;
+  69:hw.c          **** 
+  70:hw.c          ****   //initialize PCA9532
+  71:hw.c          ****   i2cInit();
+  72:hw.c          ****   if (I2C_CODE_OK == pca9532(initCommand, sizeof(initCommand), NULL, 0))
+  73:hw.c          ****   {
+  74:hw.c          ****     ver1_0 = FALSE;
+  75:hw.c          ****     ver1_1 = TRUE;
+  76:hw.c          ****     greenLedShadow = FALSE;
+  77:hw.c          ****     btResetShadow  = TRUE;
+  78:hw.c          ****   }
+  79:hw.c          **** 
+  80:hw.c          ****   else
+  81:hw.c          ****   {
+  82:hw.c          ****     ver1_0 = TRUE;
+  83:hw.c          ****     ver1_1 = FALSE;
+  84:hw.c          ****     
+  85:hw.c          ****     IODIR |= LCD_RST;
+  86:hw.c          ****     IOCLR  = LCD_RST;
+  87:hw.c          ****     
+  88:hw.c          ****     IODIR |= BT_RST;
+  89:hw.c          ****     IOCLR  = BT_RST;
+  90:hw.c          ****     
+  91:hw.c          ****     IODIR |= (LED_GREEN_PIN | LED_RED_PIN);
+  92:hw.c          ****     IOSET  = (LED_GREEN_PIN | LED_RED_PIN);
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 3
+
+
+  93:hw.c          ****   }
+  94:hw.c          **** }
+  95:hw.c          **** 
+  96:hw.c          **** 
+  97:hw.c          **** /*****************************************************************************
+  98:hw.c          ****  *
+  99:hw.c          ****  * Description:
+ 100:hw.c          ****  *    Reset the LCD (by strobing the LCD reset pin)
+ 101:hw.c          ****  *
+ 102:hw.c          ****  ****************************************************************************/
+ 103:hw.c          **** void
+ 104:hw.c          **** resetLCD(void)
+ 105:hw.c          **** {
+ 106:hw.c          ****   tU8 command[] = {0x07, 0x00};
+ 107:hw.c          ****   //                       04 = LCD_RST# low
+ 108:hw.c          ****   //                       00 = LCD_RST# high
+ 109:hw.c          **** 
+ 110:hw.c          ****   //check if ver 1.0 of HW
+ 111:hw.c          ****   if (TRUE == ver1_0)
+ 112:hw.c          ****   {
+ 113:hw.c          ****     IOCLR  = LCD_RST;
+ 114:hw.c          ****     osSleep(2);
+ 115:hw.c          ****     IOSET  = LCD_RST;
+ 116:hw.c          ****     osSleep(5);
+ 117:hw.c          ****   }
+ 118:hw.c          ****   
+ 119:hw.c          ****   //HW is ver 1.1
+ 120:hw.c          ****   else
+ 121:hw.c          ****   {
+ 122:hw.c          ****     command[1] = 0x04;
+ 123:hw.c          ****     pca9532(command, sizeof(command), NULL, 0);
+ 124:hw.c          ****     osSleep(2);
+ 125:hw.c          ****     command[1] = 0x00;
+ 126:hw.c          ****     pca9532(command, sizeof(command), NULL, 0);
+ 127:hw.c          ****     osSleep(5);
+ 128:hw.c          ****   }
+ 129:hw.c          **** }
+ 130:hw.c          **** 
+ 131:hw.c          **** 
+ 132:hw.c          **** /*****************************************************************************
+ 133:hw.c          ****  *
+ 134:hw.c          ****  * Description:
+ 135:hw.c          ****  *    Controls the reset signal to the BGB203-S06 Bluetooth moduls
+ 136:hw.c          ****  *
+ 137:hw.c          ****  ****************************************************************************/
+ 138:hw.c          **** void
+ 139:hw.c          **** resetBT(tBool resetFlag)
+ 140:hw.c          **** {
+ 141:hw.c          ****   tU8 command[] = {0x07, 0x00};
+ 142:hw.c          ****   //                       10 = BT_RST# low
+ 143:hw.c          ****   //                       00 = BT_RST# high
+ 144:hw.c          ****   //                       40 = Green LED on  (must handle this also)
+ 145:hw.c          **** 
+ 146:hw.c          ****   //check if ver 1.0 of HW
+ 147:hw.c          ****   if (TRUE == ver1_0)
+ 148:hw.c          ****   {
+ 149:hw.c          ****     if (TRUE == resetFlag)
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 4
+
+
+ 150:hw.c          ****       IOCLR  = BT_RST;
+ 151:hw.c          ****     else
+ 152:hw.c          ****       IOSET  = BT_RST;
+ 153:hw.c          ****   }
+ 154:hw.c          ****   
+ 155:hw.c          ****   //HW is ver 1.1
+ 156:hw.c          ****   else
+ 157:hw.c          ****   {
+ 158:hw.c          ****     btResetShadow = resetFlag;
+ 159:hw.c          ****     if (TRUE == resetFlag)
+ 160:hw.c          ****       command[1] = 0x10;
+ 161:hw.c          ****     if (TRUE == greenLedShadow)
+ 162:hw.c          ****       command[1] |= 0x40;
+ 163:hw.c          ****     pca9532(command, sizeof(command), NULL, 0);
+ 164:hw.c          ****   }
+ 165:hw.c          **** }
+ 166:hw.c          **** 
+ 167:hw.c          **** 
+ 168:hw.c          **** /*****************************************************************************
+ 169:hw.c          ****  *
+ 170:hw.c          ****  * Description:
+ 171:hw.c          ****  *    Controls the buzzer (on or off)
+ 172:hw.c          ****  *
+ 173:hw.c          ****  ****************************************************************************/
+ 174:hw.c          **** void
+ 175:hw.c          **** setBuzzer(tBool on)
+ 176:hw.c          **** {
+  19              		.loc 1 176 0
+  20              	.LVL0:
+  21 0000 0006     		lsl	r0, r0, #24
+  22              	.LVL1:
+  23 0002 000E     		lsr	r0, r0, #24
+  24              	.LVL2:
+  25              		@ lr needed for prologue
+ 177:hw.c          ****   if (TRUE == on)
+  26              		.loc 1 177 0
+  27 0004 0128     		cmp	r0, #1
+  28 0006 03D1     		bne	.L2
+ 178:hw.c          ****     IOCLR = BUZZER_PIN;
+  29              		.loc 1 178 0
+  30 0008 8023     		mov	r3, #128
+  31 000a 044A     		ldr	r2, .L7
+  32 000c 9B01     		lsl	r3, r3, #6
+  33 000e 02E0     		b	.L6
+  34              	.L2:
+ 179:hw.c          ****   else
+ 180:hw.c          ****     IOSET = BUZZER_PIN;
+  35              		.loc 1 180 0
+  36 0010 8023     		mov	r3, #128
+  37 0012 034A     		ldr	r2, .L7+4
+  38 0014 9B01     		lsl	r3, r3, #6
+  39              	.L6:
+  40 0016 1360     		str	r3, [r2]
+ 181:hw.c          **** }
+  41              		.loc 1 181 0
+  42              		@ sp needed for prologue
+  43 0018 7047     		bx	lr
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 5
+
+
+  44              	.L8:
+  45 001a 0000     		.align	2
+  46              	.L7:
+  47 001c 0C8002E0 		.word	-536707060
+  48 0020 048002E0 		.word	-536707068
+  49              	.LFE5:
+  50              		.size	setBuzzer, .-setBuzzer
+  51              		.align	2
+  52              		.global	selectLCD
+  53              		.code 16
+  54              		.thumb_func
+  55              		.type	selectLCD, %function
+  56              	selectLCD:
+  57              	.LFB8:
+ 182:hw.c          **** 
+ 183:hw.c          **** 
+ 184:hw.c          **** /*****************************************************************************
+ 185:hw.c          ****  *
+ 186:hw.c          ****  * Description:
+ 187:hw.c          ****  *    Controls the two LEDs
+ 188:hw.c          ****  *
+ 189:hw.c          ****  ****************************************************************************/
+ 190:hw.c          **** void
+ 191:hw.c          **** setLED(tU8 ledSelect, tBool ledState)
+ 192:hw.c          **** {
+ 193:hw.c          ****   tU8 commandLedGreen[] = {0x07, 0x00};
+ 194:hw.c          ****   //                               40 = LED on
+ 195:hw.c          ****   //                               00 = LED off
+ 196:hw.c          ****   //                               10 = BT_RST# low   (must handle this also)
+ 197:hw.c          **** 
+ 198:hw.c          ****   tU8 commandLedRed[] =   {0x08, 0x00};
+ 199:hw.c          ****   //                               01 = LED on
+ 200:hw.c          ****   //                               00 = LED off
+ 201:hw.c          **** 
+ 202:hw.c          ****   //check if ver 1.0 of HW
+ 203:hw.c          ****   if (TRUE == ver1_0)
+ 204:hw.c          ****   {
+ 205:hw.c          ****     if (LED_GREEN == ledSelect)
+ 206:hw.c          ****     {
+ 207:hw.c          ****       if (TRUE == ledState)
+ 208:hw.c          ****         IOCLR = LED_GREEN_PIN;
+ 209:hw.c          ****       else
+ 210:hw.c          ****         IOSET = LED_GREEN_PIN;
+ 211:hw.c          ****     }
+ 212:hw.c          ****     else if (LED_RED == ledSelect)
+ 213:hw.c          ****     {
+ 214:hw.c          ****       if (TRUE == ledState)
+ 215:hw.c          ****         IOCLR = LED_RED_PIN;
+ 216:hw.c          ****       else
+ 217:hw.c          ****         IOSET = LED_RED_PIN;
+ 218:hw.c          ****     }
+ 219:hw.c          ****   }
+ 220:hw.c          **** 
+ 221:hw.c          ****   //HW is ver 1.1
+ 222:hw.c          ****   else
+ 223:hw.c          ****   {
+ 224:hw.c          ****     if (LED_GREEN == ledSelect)
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 6
+
+
+ 225:hw.c          ****     {
+ 226:hw.c          ****       greenLedShadow = ledState;
+ 227:hw.c          ****       if (TRUE == ledState)
+ 228:hw.c          ****         commandLedGreen[1] = 0x40;
+ 229:hw.c          ****       if(TRUE == btResetShadow)
+ 230:hw.c          ****         commandLedGreen[1] |= 0x10;
+ 231:hw.c          ****       pca9532(commandLedGreen, sizeof(commandLedGreen), NULL, 0);
+ 232:hw.c          ****     }
+ 233:hw.c          ****     else if (LED_RED == ledSelect)
+ 234:hw.c          ****     {
+ 235:hw.c          ****       if (TRUE == ledState)
+ 236:hw.c          ****         commandLedRed[1] = 0x01;
+ 237:hw.c          ****       pca9532(commandLedRed, sizeof(commandLedRed), NULL, 0);
+ 238:hw.c          ****     }
+ 239:hw.c          ****   }
+ 240:hw.c          **** }
+ 241:hw.c          **** 
+ 242:hw.c          **** 
+ 243:hw.c          **** /*****************************************************************************
+ 244:hw.c          ****  *
+ 245:hw.c          ****  * Description:
+ 246:hw.c          ****  *    Get current state of joystick switch
+ 247:hw.c          ****  *
+ 248:hw.c          ****  ****************************************************************************/
+ 249:hw.c          **** tU8
+ 250:hw.c          **** getKeys(void)
+ 251:hw.c          **** {
+ 252:hw.c          ****   tU8 commandReadKeys[] = {0x00};
+ 253:hw.c          ****   tU8 readKeys = KEY_NOTHING;
+ 254:hw.c          ****   tU8 keySample;
+ 255:hw.c          **** 
+ 256:hw.c          ****   //check if ver 1.0 of HW
+ 257:hw.c          ****   if (TRUE == ver1_0)
+ 258:hw.c          ****   {
+ 259:hw.c          ****     if ((IOPIN & KEYPIN_CENTER) == 0) readKeys |= KEY_CENTER;
+ 260:hw.c          ****     if ((IOPIN & KEYPIN_UP) == 0)     readKeys |= KEY_UP;
+ 261:hw.c          ****     if ((IOPIN & KEYPIN_DOWN) == 0)   readKeys |= KEY_DOWN;
+ 262:hw.c          ****     if ((IOPIN & KEYPIN_LEFT) == 0)   readKeys |= KEY_LEFT;
+ 263:hw.c          ****     if ((IOPIN & KEYPIN_RIGHT) == 0)  readKeys |= KEY_RIGHT;
+ 264:hw.c          ****   }
+ 265:hw.c          **** 
+ 266:hw.c          ****   //HW is ver 1.1
+ 267:hw.c          ****   else
+ 268:hw.c          ****   {
+ 269:hw.c          ****     pca9532(commandReadKeys, sizeof(commandReadKeys), &keySample, 1);
+ 270:hw.c          ****     if ((keySample & 0x01) == 0) readKeys |= KEY_CENTER;
+ 271:hw.c          ****     if ((keySample & 0x04) == 0) readKeys |= KEY_UP;
+ 272:hw.c          ****     if ((keySample & 0x10) == 0) readKeys |= KEY_DOWN;
+ 273:hw.c          ****     if ((keySample & 0x02) == 0) readKeys |= KEY_LEFT;
+ 274:hw.c          ****     if ((keySample & 0x08) == 0) readKeys |= KEY_RIGHT;
+ 275:hw.c          ****   }
+ 276:hw.c          **** 
+ 277:hw.c          ****   return readKeys;
+ 278:hw.c          **** }
+ 279:hw.c          **** 
+ 280:hw.c          **** 
+ 281:hw.c          **** /*****************************************************************************
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 7
+
+
+ 282:hw.c          ****  *
+ 283:hw.c          ****  * Description:
+ 284:hw.c          ****  *    Select/deselect LCD controller (by controlling chip select signal)
+ 285:hw.c          ****  *
+ 286:hw.c          ****  ****************************************************************************/
+ 287:hw.c          **** void
+ 288:hw.c          **** selectLCD(tBool select)
+ 289:hw.c          **** {
+  58              		.loc 1 289 0
+  59              	.LVL3:
+ 290:hw.c          ****   //check if ver 1.0 of HW
+ 291:hw.c          ****   if (TRUE == ver1_0)
+  60              		.loc 1 291 0
+  61 0024 0C4B     		ldr	r3, .L21
+  62 0026 1B78     		ldrb	r3, [r3]
+  63              		.loc 1 289 0
+  64 0028 0006     		lsl	r0, r0, #24
+  65              	.LVL4:
+  66              		@ lr needed for prologue
+  67              		.loc 1 289 0
+  68 002a 000E     		lsr	r0, r0, #24
+  69              	.LVL5:
+  70              		.loc 1 291 0
+  71 002c 012B     		cmp	r3, #1
+  72 002e 07D1     		bne	.L10
+ 292:hw.c          ****   {
+ 293:hw.c          ****     if (TRUE == select)
+  73              		.loc 1 293 0
+  74 0030 0128     		cmp	r0, #1
+  75 0032 02D1     		bne	.L12
+ 294:hw.c          ****       IOCLR = LCD_CS_V1_0;
+  76              		.loc 1 294 0
+  77 0034 8023     		mov	r3, #128
+  78 0036 5B04     		lsl	r3, r3, #17
+  79 0038 06E0     		b	.L19
+  80              	.L12:
+ 295:hw.c          ****     else
+ 296:hw.c          ****       IOSET = LCD_CS_V1_0;
+  81              		.loc 1 296 0
+  82 003a 8023     		mov	r3, #128
+  83 003c 5B04     		lsl	r3, r3, #17
+  84 003e 07E0     		b	.L20
+  85              	.L10:
+ 297:hw.c          ****   }
+ 298:hw.c          **** 
+ 299:hw.c          ****   //HW is ver 1.1
+ 300:hw.c          ****   else
+ 301:hw.c          ****   {
+ 302:hw.c          ****     if (TRUE == select)
+  86              		.loc 1 302 0
+  87 0040 0128     		cmp	r0, #1
+  88 0042 03D1     		bne	.L15
+ 303:hw.c          ****       IOCLR = LCD_CS_V1_1;
+  89              		.loc 1 303 0
+  90 0044 8023     		mov	r3, #128
+  91 0046 1B02     		lsl	r3, r3, #8
+  92              	.L19:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 8
+
+
+  93 0048 044A     		ldr	r2, .L21+4
+  94 004a 02E0     		b	.L18
+  95              	.L15:
+ 304:hw.c          ****     else
+ 305:hw.c          ****       IOSET = LCD_CS_V1_1;
+  96              		.loc 1 305 0
+  97 004c 8023     		mov	r3, #128
+  98 004e 1B02     		lsl	r3, r3, #8
+  99              	.L20:
+ 100 0050 034A     		ldr	r2, .L21+8
+ 101              	.L18:
+ 102 0052 1360     		str	r3, [r2]
+ 306:hw.c          ****   }
+ 307:hw.c          **** }
+ 103              		.loc 1 307 0
+ 104              		@ sp needed for prologue
+ 105 0054 7047     		bx	lr
+ 106              	.L22:
+ 107 0056 0000     		.align	2
+ 108              	.L21:
+ 109 0058 00000000 		.word	ver1_0
+ 110 005c 0C8002E0 		.word	-536707060
+ 111 0060 048002E0 		.word	-536707068
+ 112              	.LFE8:
+ 113              		.size	selectLCD, .-selectLCD
+ 114              		.align	2
+ 115              		.global	sendToLCD
+ 116              		.code 16
+ 117              		.thumb_func
+ 118              		.type	sendToLCD, %function
+ 119              	sendToLCD:
+ 120              	.LFB9:
+ 308:hw.c          **** 
+ 309:hw.c          **** 
+ 310:hw.c          **** /*****************************************************************************
+ 311:hw.c          ****  *
+ 312:hw.c          ****  * Description:
+ 313:hw.c          ****  *    Send 9-bit data to LCD controller
+ 314:hw.c          ****  *
+ 315:hw.c          ****  ****************************************************************************/
+ 316:hw.c          **** void
+ 317:hw.c          **** sendToLCD(tU8 firstBit, tU8 data)
+ 318:hw.c          **** {
+ 121              		.loc 1 318 0
+ 122 0064 30B5     		push	{r4, r5, lr}
+ 123              	.LCFI0:
+ 124              	.LVL6:
+ 319:hw.c          ****   //disable SPI
+ 320:hw.c          ****   IOCLR = LCD_CLK;
+ 125              		.loc 1 320 0
+ 126 0066 174C     		ldr	r4, .L32
+ 127              		.loc 1 318 0
+ 128 0068 0906     		lsl	r1, r1, #24
+ 129              	.LVL7:
+ 130              		.loc 1 320 0
+ 131 006a 1023     		mov	r3, #16
+ 132 006c 2360     		str	r3, [r4]
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 9
+
+
+ 133              		.loc 1 318 0
+ 134 006e 0D0E     		lsr	r5, r1, #24
+ 135              	.LVL8:
+ 321:hw.c          ****   PINSEL0 &= 0xffff00ff;
+ 136              		.loc 1 321 0
+ 137 0070 1549     		ldr	r1, .L32+4
+ 138 0072 164A     		ldr	r2, .L32+8
+ 139 0074 0B68     		ldr	r3, [r1]
+ 140              		.loc 1 318 0
+ 141 0076 0006     		lsl	r0, r0, #24
+ 142              	.LVL9:
+ 143              		.loc 1 321 0
+ 144 0078 1340     		and	r3, r3, r2
+ 145              		.loc 1 318 0
+ 146 007a 000E     		lsr	r0, r0, #24
+ 147              	.LVL10:
+ 148              		.loc 1 321 0
+ 149 007c 0B60     		str	r3, [r1]
+ 322:hw.c          ****   
+ 323:hw.c          ****   if (1 == firstBit)
+ 150              		.loc 1 323 0
+ 151 007e 0128     		cmp	r0, #1
+ 152 0080 03D1     		bne	.L24
+ 324:hw.c          ****     IOSET = LCD_MOSI;   //set MOSI
+ 153              		.loc 1 324 0
+ 154 0082 134B     		ldr	r3, .L32+12
+ 155 0084 4022     		mov	r2, #64
+ 156 0086 1A60     		str	r2, [r3]
+ 157 0088 01E0     		b	.L26
+ 158              	.L24:
+ 325:hw.c          ****   else
+ 326:hw.c          ****     IOCLR = LCD_MOSI;   //reset MOSI
+ 159              		.loc 1 326 0
+ 160 008a 4023     		mov	r3, #64
+ 161 008c 2360     		str	r3, [r4]
+ 162              	.L26:
+ 327:hw.c          ****   
+ 328:hw.c          ****   //Set clock high
+ 329:hw.c          ****   IOSET = LCD_CLK;
+ 163              		.loc 1 329 0
+ 164 008e 104B     		ldr	r3, .L32+12
+ 165 0090 1022     		mov	r2, #16
+ 166 0092 1A60     		str	r2, [r3]
+ 330:hw.c          ****   
+ 331:hw.c          ****   //Set clock low
+ 332:hw.c          ****   IOCLR = LCD_CLK;
+ 167              		.loc 1 332 0
+ 168 0094 0833     		add	r3, r3, #8
+ 169 0096 1A60     		str	r2, [r3]
+ 333:hw.c          ****   
+ 334:hw.c          ****   /*
+ 335:hw.c          ****    * Enable SPI again
+ 336:hw.c          ****    */
+ 337:hw.c          ****   //initialize SPI interface
+ 338:hw.c          ****   SPI_SPCCR = 0x08;    
+ 170              		.loc 1 338 0
+ 171 0098 0E4B     		ldr	r3, .L32+16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 10
+
+
+ 172 009a 0822     		mov	r2, #8
+ 173 009c 1A60     		str	r2, [r3]
+ 339:hw.c          ****   SPI_SPCR  = 0x20;
+ 174              		.loc 1 339 0
+ 175 009e 2022     		mov	r2, #32
+ 176 00a0 0C3B     		sub	r3, r3, #12
+ 177 00a2 1A60     		str	r2, [r3]
+ 340:hw.c          **** 
+ 341:hw.c          ****   //connect SPI bus to IO-pins
+ 342:hw.c          ****   PINSEL0 |= 0x00005500;
+ 178              		.loc 1 342 0
+ 179 00a4 0849     		ldr	r1, .L32+4
+ 180 00a6 AA23     		mov	r3, #170
+ 181 00a8 0A68     		ldr	r2, [r1]
+ 182 00aa DB01     		lsl	r3, r3, #7
+ 183 00ac 1A43     		orr	r2, r2, r3
+ 343:hw.c          ****   
+ 344:hw.c          ****   //send byte
+ 345:hw.c          ****   SPI_SPDR = data;
+ 184              		.loc 1 345 0
+ 185 00ae 0A4B     		ldr	r3, .L32+20
+ 186              		.loc 1 342 0
+ 187 00b0 0A60     		str	r2, [r1]
+ 188              		.loc 1 345 0
+ 189 00b2 1D60     		str	r5, [r3]
+ 190              	.L27:
+ 346:hw.c          ****   while((SPI_SPSR & 0x80) == 0)
+ 191              		.loc 1 346 0
+ 192 00b4 094B     		ldr	r3, .L32+24
+ 193 00b6 1B68     		ldr	r3, [r3]
+ 194 00b8 1A06     		lsl	r2, r3, #24
+ 195 00ba FBD5     		bpl	.L27
+ 347:hw.c          ****     ;
+ 348:hw.c          **** }
+ 196              		.loc 1 348 0
+ 197              		@ sp needed for prologue
+ 198              	.LVL11:
+ 199 00bc 30BC     		pop	{r4, r5}
+ 200 00be 01BC     		pop	{r0}
+ 201 00c0 0047     		bx	r0
+ 202              	.L33:
+ 203 00c2 0000     		.align	2
+ 204              	.L32:
+ 205 00c4 0C8002E0 		.word	-536707060
+ 206 00c8 00C002E0 		.word	-536690688
+ 207 00cc FF00FFFF 		.word	-65281
+ 208 00d0 048002E0 		.word	-536707068
+ 209 00d4 0C0002E0 		.word	-536739828
+ 210 00d8 080002E0 		.word	-536739832
+ 211 00dc 040002E0 		.word	-536739836
+ 212              	.LFE9:
+ 213              		.size	sendToLCD, .-sendToLCD
+ 214              		.align	2
+ 215              		.global	initSpiForLcd
+ 216              		.code 16
+ 217              		.thumb_func
+ 218              		.type	initSpiForLcd, %function
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 11
+
+
+ 219              	initSpiForLcd:
+ 220              	.LFB10:
+ 349:hw.c          **** 
+ 350:hw.c          **** 
+ 351:hw.c          **** /*****************************************************************************
+ 352:hw.c          ****  *
+ 353:hw.c          ****  * Description:
+ 354:hw.c          ****  *    Initialize the SPI interface for the LCD controller
+ 355:hw.c          ****  *
+ 356:hw.c          ****  ****************************************************************************/
+ 357:hw.c          **** void
+ 358:hw.c          **** initSpiForLcd(void)
+ 359:hw.c          **** {
+ 221              		.loc 1 359 0
+ 222 00e0 00B5     		push	{lr}
+ 223              	.LCFI1:
+ 360:hw.c          ****   //make SPI slave chip select an output and set signal high
+ 361:hw.c          ****   //check if ver 1.0 of HW
+ 362:hw.c          ****   if (TRUE == ver1_0)
+ 224              		.loc 1 362 0
+ 225 00e2 0F4B     		ldr	r3, .L40
+ 226 00e4 1B78     		ldrb	r3, [r3]
+ 227 00e6 012B     		cmp	r3, #1
+ 228 00e8 03D1     		bne	.L35
+ 363:hw.c          ****   {
+ 364:hw.c          ****     IODIR |= (LCD_CS_V1_0 | LCD_CLK | LCD_MOSI);
+ 229              		.loc 1 364 0
+ 230 00ea 0E4B     		ldr	r3, .L40+4
+ 231 00ec 0E49     		ldr	r1, .L40+8
+ 232 00ee 1A68     		ldr	r2, [r3]
+ 233 00f0 02E0     		b	.L39
+ 234              	.L35:
+ 365:hw.c          ****   }
+ 366:hw.c          **** 
+ 367:hw.c          ****   //HW is ver 1.1
+ 368:hw.c          ****   else
+ 369:hw.c          ****   {
+ 370:hw.c          ****     IODIR |= (LCD_CS_V1_1 | LCD_CLK | LCD_MOSI);
+ 235              		.loc 1 370 0
+ 236 00f2 0C4B     		ldr	r3, .L40+4
+ 237 00f4 0D49     		ldr	r1, .L40+12
+ 238 00f6 1A68     		ldr	r2, [r3]
+ 239              	.L39:
+ 240 00f8 0A43     		orr	r2, r2, r1
+ 241 00fa 1A60     		str	r2, [r3]
+ 371:hw.c          ****   }
+ 372:hw.c          ****   
+ 373:hw.c          ****   //deselect controller
+ 374:hw.c          ****   selectLCD(FALSE);
+ 242              		.loc 1 374 0
+ 243 00fc 0020     		mov	r0, #0
+ 244 00fe FFF7FEFF 		bl	selectLCD
+ 375:hw.c          **** 
+ 376:hw.c          ****   //connect SPI bus to IO-pins
+ 377:hw.c          ****   PINSEL0 |= 0x00005500;
+ 245              		.loc 1 377 0
+ 246 0102 0B49     		ldr	r1, .L40+16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 12
+
+
+ 247 0104 AA23     		mov	r3, #170
+ 248 0106 0A68     		ldr	r2, [r1]
+ 249 0108 DB01     		lsl	r3, r3, #7
+ 250 010a 1A43     		orr	r2, r2, r3
+ 378:hw.c          ****   
+ 379:hw.c          ****   //initialize SPI interface
+ 380:hw.c          ****   SPI_SPCCR = 0x08;    
+ 251              		.loc 1 380 0
+ 252 010c 094B     		ldr	r3, .L40+20
+ 253              		.loc 1 377 0
+ 254 010e 0A60     		str	r2, [r1]
+ 255              		.loc 1 380 0
+ 256 0110 0822     		mov	r2, #8
+ 257 0112 1A60     		str	r2, [r3]
+ 381:hw.c          ****   SPI_SPCR  = 0x20;
+ 258              		.loc 1 381 0
+ 259 0114 2022     		mov	r2, #32
+ 260 0116 0C3B     		sub	r3, r3, #12
+ 261 0118 1A60     		str	r2, [r3]
+ 382:hw.c          **** }
+ 262              		.loc 1 382 0
+ 263              		@ sp needed for prologue
+ 264 011a 01BC     		pop	{r0}
+ 265 011c 0047     		bx	r0
+ 266              	.L41:
+ 267 011e 0000     		.align	2
+ 268              	.L40:
+ 269 0120 00000000 		.word	ver1_0
+ 270 0124 088002E0 		.word	-536707064
+ 271 0128 50000001 		.word	16777296
+ 272 012c 50800000 		.word	32848
+ 273 0130 00C002E0 		.word	-536690688
+ 274 0134 0C0002E0 		.word	-536739828
+ 275              	.LFE10:
+ 276              		.size	initSpiForLcd, .-initSpiForLcd
+ 277              		.align	2
+ 278              		.global	getKeys
+ 279              		.code 16
+ 280              		.thumb_func
+ 281              		.type	getKeys, %function
+ 282              	getKeys:
+ 283              	.LFB7:
+ 284              		.loc 1 251 0
+ 285 0138 10B5     		push	{r4, lr}
+ 286              	.LCFI2:
+ 287              		.loc 1 257 0
+ 288 013a 294B     		ldr	r3, .L68
+ 289 013c 1B78     		ldrb	r3, [r3]
+ 290              		.loc 1 251 0
+ 291 013e 81B0     		sub	sp, sp, #4
+ 292              	.LCFI3:
+ 293              		.loc 1 257 0
+ 294 0140 012B     		cmp	r3, #1
+ 295 0142 20D1     		bne	.L43
+ 296              		.loc 1 259 0
+ 297 0144 274B     		ldr	r3, .L68+4
+ 298 0146 1B68     		ldr	r3, [r3]
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 13
+
+
+ 299 0148 5904     		lsl	r1, r3, #17
+ 300 014a 01D4     		bmi	.L45
+ 301 014c 1020     		mov	r0, #16
+ 302              	.LVL12:
+ 303 014e 00E0     		b	.L47
+ 304              	.LVL13:
+ 305              	.L45:
+ 306 0150 0020     		mov	r0, #0
+ 307              	.LVL14:
+ 308              	.L47:
+ 309              		.loc 1 260 0
+ 310 0152 244A     		ldr	r2, .L68+4
+ 311 0154 1368     		ldr	r3, [r2]
+ 312 0156 D903     		lsl	r1, r3, #15
+ 313 0158 03D4     		bmi	.L48
+ 314 015a 0123     		mov	r3, #1
+ 315 015c 0343     		orr	r3, r3, r0
+ 316 015e 1B06     		lsl	r3, r3, #24
+ 317 0160 180E     		lsr	r0, r3, #24
+ 318              	.L48:
+ 319              		.loc 1 261 0
+ 320 0162 1368     		ldr	r3, [r2]
+ 321 0164 1902     		lsl	r1, r3, #8
+ 322 0166 03D4     		bmi	.L50
+ 323 0168 0423     		mov	r3, #4
+ 324 016a 0343     		orr	r3, r3, r0
+ 325 016c 1B06     		lsl	r3, r3, #24
+ 326 016e 180E     		lsr	r0, r3, #24
+ 327              	.L50:
+ 328              		.loc 1 262 0
+ 329 0170 1368     		ldr	r3, [r2]
+ 330 0172 1904     		lsl	r1, r3, #16
+ 331 0174 03D4     		bmi	.L52
+ 332 0176 0823     		mov	r3, #8
+ 333 0178 0343     		orr	r3, r3, r0
+ 334 017a 1B06     		lsl	r3, r3, #24
+ 335 017c 180E     		lsr	r0, r3, #24
+ 336              	.L52:
+ 337              		.loc 1 263 0
+ 338 017e 1368     		ldr	r3, [r2]
+ 339 0180 5A02     		lsl	r2, r3, #9
+ 340 0182 29D4     		bmi	.L54
+ 341 0184 24E0     		b	.L67
+ 342              	.LVL15:
+ 343              	.L43:
+ 344              		.loc 1 252 0
+ 345 0186 6846     		mov	r0, sp
+ 346              		.loc 1 269 0
+ 347 0188 6C46     		mov	r4, sp
+ 348              		.loc 1 252 0
+ 349 018a 0330     		add	r0, r0, #3
+ 350 018c 0023     		mov	r3, #0
+ 351              		.loc 1 269 0
+ 352 018e 0234     		add	r4, r4, #2
+ 353              		.loc 1 252 0
+ 354 0190 0370     		strb	r3, [r0]
+ 355              		.loc 1 269 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 14
+
+
+ 356 0192 221C     		mov	r2, r4
+ 357 0194 0121     		mov	r1, #1
+ 358 0196 0123     		mov	r3, #1
+ 359 0198 FFF7FEFF 		bl	pca9532
+ 360              	.LVL16:
+ 361              		.loc 1 270 0
+ 362 019c 2278     		ldrb	r2, [r4]
+ 363 019e D307     		lsl	r3, r2, #31
+ 364 01a0 01D4     		bmi	.L56
+ 365 01a2 1020     		mov	r0, #16
+ 366              	.LVL17:
+ 367 01a4 00E0     		b	.L58
+ 368              	.LVL18:
+ 369              	.L56:
+ 370 01a6 0020     		mov	r0, #0
+ 371              	.LVL19:
+ 372              	.L58:
+ 373              		.loc 1 271 0
+ 374 01a8 5107     		lsl	r1, r2, #29
+ 375 01aa 03D4     		bmi	.L59
+ 376 01ac 0123     		mov	r3, #1
+ 377 01ae 0343     		orr	r3, r3, r0
+ 378 01b0 1B06     		lsl	r3, r3, #24
+ 379 01b2 180E     		lsr	r0, r3, #24
+ 380              	.L59:
+ 381              		.loc 1 272 0
+ 382 01b4 D306     		lsl	r3, r2, #27
+ 383 01b6 03D4     		bmi	.L61
+ 384 01b8 0423     		mov	r3, #4
+ 385 01ba 0343     		orr	r3, r3, r0
+ 386 01bc 1B06     		lsl	r3, r3, #24
+ 387 01be 180E     		lsr	r0, r3, #24
+ 388              	.L61:
+ 389              		.loc 1 273 0
+ 390 01c0 9107     		lsl	r1, r2, #30
+ 391 01c2 03D4     		bmi	.L63
+ 392 01c4 0823     		mov	r3, #8
+ 393 01c6 0343     		orr	r3, r3, r0
+ 394 01c8 1B06     		lsl	r3, r3, #24
+ 395 01ca 180E     		lsr	r0, r3, #24
+ 396              	.L63:
+ 397              		.loc 1 274 0
+ 398 01cc 1307     		lsl	r3, r2, #28
+ 399 01ce 03D4     		bmi	.L54
+ 400              	.L67:
+ 401 01d0 0223     		mov	r3, #2
+ 402 01d2 0343     		orr	r3, r3, r0
+ 403 01d4 1B06     		lsl	r3, r3, #24
+ 404 01d6 180E     		lsr	r0, r3, #24
+ 405              	.L54:
+ 406              		.loc 1 278 0
+ 407 01d8 01B0     		add	sp, sp, #4
+ 408              	.LVL20:
+ 409              		@ sp needed for prologue
+ 410 01da 10BC     		pop	{r4}
+ 411 01dc 02BC     		pop	{r1}
+ 412 01de 0847     		bx	r1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 15
+
+
+ 413              	.L69:
+ 414              		.align	2
+ 415              	.L68:
+ 416 01e0 00000000 		.word	ver1_0
+ 417 01e4 008002E0 		.word	-536707072
+ 418              	.LFE7:
+ 419              		.size	getKeys, .-getKeys
+ 420              		.align	2
+ 421              		.global	setLED
+ 422              		.code 16
+ 423              		.thumb_func
+ 424              		.type	setLED, %function
+ 425              	setLED:
+ 426              	.LFB6:
+ 427              		.loc 1 192 0
+ 428 01e8 F0B5     		push	{r4, r5, r6, r7, lr}
+ 429              	.LCFI4:
+ 430              	.LVL21:
+ 431 01ea 81B0     		sub	sp, sp, #4
+ 432              	.LCFI5:
+ 433              		.loc 1 193 0
+ 434 01ec 6F46     		mov	r7, sp
+ 435              		.loc 1 192 0
+ 436 01ee 0006     		lsl	r0, r0, #24
+ 437              	.LVL22:
+ 438 01f0 0906     		lsl	r1, r1, #24
+ 439              	.LVL23:
+ 440              		.loc 1 193 0
+ 441 01f2 0237     		add	r7, r7, #2
+ 442 01f4 0222     		mov	r2, #2
+ 443              		.loc 1 192 0
+ 444 01f6 050E     		lsr	r5, r0, #24
+ 445              	.LVL24:
+ 446 01f8 0C0E     		lsr	r4, r1, #24
+ 447              	.LVL25:
+ 448              		.loc 1 193 0
+ 449 01fa 381C     		mov	r0, r7
+ 450 01fc 2249     		ldr	r1, .L95
+ 451 01fe FFF7FEFF 		bl	memcpy
+ 452              		.loc 1 198 0
+ 453 0202 2249     		ldr	r1, .L95+4
+ 454 0204 6846     		mov	r0, sp
+ 455 0206 0222     		mov	r2, #2
+ 456 0208 FFF7FEFF 		bl	memcpy
+ 457              		.loc 1 203 0
+ 458 020c 204B     		ldr	r3, .L95+8
+ 459 020e 1B78     		ldrb	r3, [r3]
+ 460              		.loc 1 198 0
+ 461 0210 6E46     		mov	r6, sp
+ 462              		.loc 1 203 0
+ 463 0212 012B     		cmp	r3, #1
+ 464 0214 16D1     		bne	.L71
+ 465              		.loc 1 205 0
+ 466 0216 012D     		cmp	r5, #1
+ 467 0218 09D1     		bne	.L73
+ 468              		.loc 1 207 0
+ 469 021a 012C     		cmp	r4, #1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 16
+
+
+ 470 021c 02D1     		bne	.L75
+ 471              		.loc 1 208 0
+ 472 021e 8023     		mov	r3, #128
+ 473 0220 5B05     		lsl	r3, r3, #21
+ 474 0222 0AE0     		b	.L93
+ 475              	.L75:
+ 476              		.loc 1 210 0
+ 477 0224 8023     		mov	r3, #128
+ 478 0226 5B05     		lsl	r3, r3, #21
+ 479              	.L94:
+ 480 0228 1A4A     		ldr	r2, .L95+12
+ 481              	.L91:
+ 482 022a 1360     		str	r3, [r2]
+ 483 022c 27E0     		b	.L90
+ 484              	.L73:
+ 485              		.loc 1 212 0
+ 486 022e 022D     		cmp	r5, #2
+ 487 0230 25D1     		bne	.L90
+ 488              		.loc 1 214 0
+ 489 0232 012C     		cmp	r4, #1
+ 490 0234 03D1     		bne	.L79
+ 491              		.loc 1 215 0
+ 492 0236 8023     		mov	r3, #128
+ 493 0238 DB05     		lsl	r3, r3, #23
+ 494              	.L93:
+ 495 023a 174A     		ldr	r2, .L95+16
+ 496 023c F5E7     		b	.L91
+ 497              	.L79:
+ 498              		.loc 1 217 0
+ 499 023e 8023     		mov	r3, #128
+ 500 0240 DB05     		lsl	r3, r3, #23
+ 501 0242 F1E7     		b	.L94
+ 502              	.L71:
+ 503              		.loc 1 224 0
+ 504 0244 012D     		cmp	r5, #1
+ 505 0246 0FD1     		bne	.L81
+ 506              		.loc 1 226 0
+ 507 0248 144B     		ldr	r3, .L95+20
+ 508 024a 1C70     		strb	r4, [r3]
+ 509              		.loc 1 227 0
+ 510 024c 012C     		cmp	r4, #1
+ 511 024e 01D1     		bne	.L83
+ 512              		.loc 1 228 0
+ 513 0250 4023     		mov	r3, #64
+ 514 0252 7B70     		strb	r3, [r7, #1]
+ 515              	.L83:
+ 516              		.loc 1 229 0
+ 517 0254 124B     		ldr	r3, .L95+24
+ 518 0256 1B78     		ldrb	r3, [r3]
+ 519 0258 012B     		cmp	r3, #1
+ 520 025a 03D1     		bne	.L85
+ 521              		.loc 1 230 0
+ 522 025c 7B78     		ldrb	r3, [r7, #1]
+ 523 025e 1022     		mov	r2, #16
+ 524 0260 1343     		orr	r3, r3, r2
+ 525 0262 7B70     		strb	r3, [r7, #1]
+ 526              	.L85:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 17
+
+
+ 527              		.loc 1 231 0
+ 528 0264 381C     		mov	r0, r7
+ 529 0266 05E0     		b	.L92
+ 530              	.L81:
+ 531              		.loc 1 233 0
+ 532 0268 022D     		cmp	r5, #2
+ 533 026a 08D1     		bne	.L90
+ 534              		.loc 1 235 0
+ 535 026c 012C     		cmp	r4, #1
+ 536 026e 00D1     		bne	.L88
+ 537              		.loc 1 236 0
+ 538 0270 7470     		strb	r4, [r6, #1]
+ 539              	.L88:
+ 540              		.loc 1 237 0
+ 541 0272 6846     		mov	r0, sp
+ 542              	.L92:
+ 543 0274 0221     		mov	r1, #2
+ 544 0276 0022     		mov	r2, #0
+ 545 0278 0023     		mov	r3, #0
+ 546 027a FFF7FEFF 		bl	pca9532
+ 547              	.L90:
+ 548              		.loc 1 240 0
+ 549 027e 01B0     		add	sp, sp, #4
+ 550              		@ sp needed for prologue
+ 551              	.LVL26:
+ 552              	.LVL27:
+ 553 0280 F0BC     		pop	{r4, r5, r6, r7}
+ 554 0282 01BC     		pop	{r0}
+ 555 0284 0047     		bx	r0
+ 556              	.L96:
+ 557 0286 0000     		.align	2
+ 558              	.L95:
+ 559 0288 02000000 		.word	C.6.1502
+ 560 028c 00000000 		.word	C.7.1503
+ 561 0290 00000000 		.word	ver1_0
+ 562 0294 048002E0 		.word	-536707068
+ 563 0298 0C8002E0 		.word	-536707060
+ 564 029c 00000000 		.word	greenLedShadow
+ 565 02a0 01000000 		.word	btResetShadow
+ 566              	.LFE6:
+ 567              		.size	setLED, .-setLED
+ 568              		.align	2
+ 569              		.global	resetBT
+ 570              		.code 16
+ 571              		.thumb_func
+ 572              		.type	resetBT, %function
+ 573              	resetBT:
+ 574              	.LFB4:
+ 575              		.loc 1 140 0
+ 576 02a4 30B5     		push	{r4, r5, lr}
+ 577              	.LCFI6:
+ 578              	.LVL28:
+ 579 02a6 81B0     		sub	sp, sp, #4
+ 580              	.LCFI7:
+ 581              		.loc 1 141 0
+ 582 02a8 6D46     		mov	r5, sp
+ 583              		.loc 1 140 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 18
+
+
+ 584 02aa 0006     		lsl	r0, r0, #24
+ 585              	.LVL29:
+ 586              		.loc 1 141 0
+ 587 02ac 0235     		add	r5, r5, #2
+ 588              		.loc 1 140 0
+ 589 02ae 040E     		lsr	r4, r0, #24
+ 590              	.LVL30:
+ 591              		.loc 1 141 0
+ 592 02b0 1549     		ldr	r1, .L109
+ 593 02b2 281C     		mov	r0, r5
+ 594 02b4 0222     		mov	r2, #2
+ 595 02b6 FFF7FEFF 		bl	memcpy
+ 596              		.loc 1 147 0
+ 597 02ba 144B     		ldr	r3, .L109+4
+ 598 02bc 1B78     		ldrb	r3, [r3]
+ 599 02be 012B     		cmp	r3, #1
+ 600 02c0 0AD1     		bne	.L98
+ 601              		.loc 1 149 0
+ 602 02c2 012C     		cmp	r4, #1
+ 603 02c4 03D1     		bne	.L100
+ 604              		.loc 1 150 0
+ 605 02c6 8023     		mov	r3, #128
+ 606 02c8 114A     		ldr	r2, .L109+8
+ 607 02ca DB04     		lsl	r3, r3, #19
+ 608 02cc 02E0     		b	.L108
+ 609              	.L100:
+ 610              		.loc 1 152 0
+ 611 02ce 8023     		mov	r3, #128
+ 612 02d0 104A     		ldr	r2, .L109+12
+ 613 02d2 DB04     		lsl	r3, r3, #19
+ 614              	.L108:
+ 615 02d4 1360     		str	r3, [r2]
+ 616 02d6 13E0     		b	.L107
+ 617              	.L98:
+ 618              		.loc 1 158 0
+ 619 02d8 0F4B     		ldr	r3, .L109+16
+ 620 02da 1C70     		strb	r4, [r3]
+ 621              		.loc 1 159 0
+ 622 02dc 012C     		cmp	r4, #1
+ 623 02de 01D1     		bne	.L103
+ 624              		.loc 1 160 0
+ 625 02e0 1023     		mov	r3, #16
+ 626 02e2 6B70     		strb	r3, [r5, #1]
+ 627              	.L103:
+ 628              		.loc 1 161 0
+ 629 02e4 0D4B     		ldr	r3, .L109+20
+ 630 02e6 1B78     		ldrb	r3, [r3]
+ 631 02e8 012B     		cmp	r3, #1
+ 632 02ea 03D1     		bne	.L105
+ 633              		.loc 1 162 0
+ 634 02ec 6B78     		ldrb	r3, [r5, #1]
+ 635 02ee 4022     		mov	r2, #64
+ 636 02f0 1343     		orr	r3, r3, r2
+ 637 02f2 6B70     		strb	r3, [r5, #1]
+ 638              	.L105:
+ 639              		.loc 1 163 0
+ 640 02f4 281C     		mov	r0, r5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 19
+
+
+ 641 02f6 0221     		mov	r1, #2
+ 642 02f8 0022     		mov	r2, #0
+ 643 02fa 0023     		mov	r3, #0
+ 644 02fc FFF7FEFF 		bl	pca9532
+ 645              	.L107:
+ 646              		.loc 1 165 0
+ 647 0300 01B0     		add	sp, sp, #4
+ 648              		@ sp needed for prologue
+ 649              	.LVL31:
+ 650 0302 30BC     		pop	{r4, r5}
+ 651 0304 01BC     		pop	{r0}
+ 652 0306 0047     		bx	r0
+ 653              	.L110:
+ 654              		.align	2
+ 655              	.L109:
+ 656 0308 04000000 		.word	C.3.1484
+ 657 030c 00000000 		.word	ver1_0
+ 658 0310 0C8002E0 		.word	-536707060
+ 659 0314 048002E0 		.word	-536707068
+ 660 0318 01000000 		.word	btResetShadow
+ 661 031c 00000000 		.word	greenLedShadow
+ 662              	.LFE4:
+ 663              		.size	resetBT, .-resetBT
+ 664              		.align	2
+ 665              		.global	resetLCD
+ 666              		.code 16
+ 667              		.thumb_func
+ 668              		.type	resetLCD, %function
+ 669              	resetLCD:
+ 670              	.LFB3:
+ 671              		.loc 1 105 0
+ 672 0320 10B5     		push	{r4, lr}
+ 673              	.LCFI8:
+ 674 0322 81B0     		sub	sp, sp, #4
+ 675              	.LCFI9:
+ 676              		.loc 1 106 0
+ 677 0324 6C46     		mov	r4, sp
+ 678 0326 0234     		add	r4, r4, #2
+ 679 0328 1549     		ldr	r1, .L117
+ 680 032a 201C     		mov	r0, r4
+ 681 032c 0222     		mov	r2, #2
+ 682 032e FFF7FEFF 		bl	memcpy
+ 683              		.loc 1 111 0
+ 684 0332 144B     		ldr	r3, .L117+4
+ 685 0334 1B78     		ldrb	r3, [r3]
+ 686 0336 012B     		cmp	r3, #1
+ 687 0338 09D1     		bne	.L112
+ 688              		.loc 1 113 0
+ 689 033a 134B     		ldr	r3, .L117+8
+ 690 033c 8024     		mov	r4, #128
+ 691 033e A404     		lsl	r4, r4, #18
+ 692 0340 1C60     		str	r4, [r3]
+ 693              		.loc 1 114 0
+ 694 0342 0220     		mov	r0, #2
+ 695 0344 FFF7FEFF 		bl	osSleep
+ 696              		.loc 1 115 0
+ 697 0348 104B     		ldr	r3, .L117+12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 20
+
+
+ 698 034a 1C60     		str	r4, [r3]
+ 699 034c 11E0     		b	.L116
+ 700              	.L112:
+ 701              		.loc 1 122 0
+ 702 034e 0423     		mov	r3, #4
+ 703              		.loc 1 123 0
+ 704 0350 0221     		mov	r1, #2
+ 705 0352 0022     		mov	r2, #0
+ 706              		.loc 1 122 0
+ 707 0354 6370     		strb	r3, [r4, #1]
+ 708              		.loc 1 123 0
+ 709 0356 201C     		mov	r0, r4
+ 710 0358 0023     		mov	r3, #0
+ 711 035a FFF7FEFF 		bl	pca9532
+ 712              		.loc 1 124 0
+ 713 035e 0220     		mov	r0, #2
+ 714 0360 FFF7FEFF 		bl	osSleep
+ 715              		.loc 1 125 0
+ 716 0364 0023     		mov	r3, #0
+ 717 0366 6370     		strb	r3, [r4, #1]
+ 718              		.loc 1 126 0
+ 719 0368 201C     		mov	r0, r4
+ 720 036a 0221     		mov	r1, #2
+ 721 036c 0022     		mov	r2, #0
+ 722 036e FFF7FEFF 		bl	pca9532
+ 723              	.L116:
+ 724              		.loc 1 127 0
+ 725 0372 0520     		mov	r0, #5
+ 726 0374 FFF7FEFF 		bl	osSleep
+ 727              		.loc 1 129 0
+ 728 0378 01B0     		add	sp, sp, #4
+ 729              		@ sp needed for prologue
+ 730 037a 10BC     		pop	{r4}
+ 731 037c 01BC     		pop	{r0}
+ 732 037e 0047     		bx	r0
+ 733              	.L118:
+ 734              		.align	2
+ 735              	.L117:
+ 736 0380 06000000 		.word	C.1.1476
+ 737 0384 00000000 		.word	ver1_0
+ 738 0388 0C8002E0 		.word	-536707060
+ 739 038c 048002E0 		.word	-536707068
+ 740              	.LFE3:
+ 741              		.size	resetLCD, .-resetLCD
+ 742              		.align	2
+ 743              		.global	immediateIoInit
+ 744              		.code 16
+ 745              		.thumb_func
+ 746              		.type	immediateIoInit, %function
+ 747              	immediateIoInit:
+ 748              	.LFB2:
+ 749              		.loc 1 56 0
+ 750 0390 70B5     		push	{r4, r5, r6, lr}
+ 751              	.LCFI10:
+ 752 0392 83B0     		sub	sp, sp, #12
+ 753              	.LCFI11:
+ 754              		.loc 1 57 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 21
+
+
+ 755 0394 6C46     		mov	r4, sp
+ 756              		.loc 1 62 0
+ 757 0396 244D     		ldr	r5, .L124
+ 758              		.loc 1 57 0
+ 759 0398 0334     		add	r4, r4, #3
+ 760 039a 2449     		ldr	r1, .L124+4
+ 761 039c 0922     		mov	r2, #9
+ 762 039e 201C     		mov	r0, r4
+ 763 03a0 FFF7FEFF 		bl	memcpy
+ 764              		.loc 1 62 0
+ 765 03a4 2B68     		ldr	r3, [r5]
+ 766 03a6 224A     		ldr	r2, .L124+8
+ 767 03a8 1340     		and	r3, r3, r2
+ 768 03aa 2B60     		str	r3, [r5]
+ 769              		.loc 1 64 0
+ 770 03ac 8022     		mov	r2, #128
+ 771 03ae 2B68     		ldr	r3, [r5]
+ 772 03b0 9201     		lsl	r2, r2, #6
+ 773              		.loc 1 65 0
+ 774 03b2 204E     		ldr	r6, .L124+12
+ 775              		.loc 1 64 0
+ 776 03b4 1343     		orr	r3, r3, r2
+ 777 03b6 2B60     		str	r3, [r5]
+ 778              		.loc 1 65 0
+ 779 03b8 3260     		str	r2, [r6]
+ 780              		.loc 1 67 0
+ 781 03ba 8023     		mov	r3, #128
+ 782 03bc 2A68     		ldr	r2, [r5]
+ 783 03be 5B01     		lsl	r3, r3, #5
+ 784 03c0 1A43     		orr	r2, r2, r3
+ 785 03c2 2A60     		str	r2, [r5]
+ 786              		.loc 1 68 0
+ 787 03c4 3360     		str	r3, [r6]
+ 788              		.loc 1 71 0
+ 789 03c6 FFF7FEFF 		bl	i2cInit
+ 790              		.loc 1 72 0
+ 791 03ca 0921     		mov	r1, #9
+ 792 03cc 0022     		mov	r2, #0
+ 793 03ce 201C     		mov	r0, r4
+ 794 03d0 0023     		mov	r3, #0
+ 795 03d2 FFF7FEFF 		bl	pca9532
+ 796 03d6 0006     		lsl	r0, r0, #24
+ 797 03d8 0016     		asr	r0, r0, #24
+ 798 03da 174A     		ldr	r2, .L124+16
+ 799 03dc 1749     		ldr	r1, .L124+20
+ 800 03de 0128     		cmp	r0, #1
+ 801 03e0 07D1     		bne	.L120
+ 802              		.loc 1 74 0
+ 803 03e2 0023     		mov	r3, #0
+ 804 03e4 1370     		strb	r3, [r2]
+ 805              		.loc 1 76 0
+ 806 03e6 164A     		ldr	r2, .L124+24
+ 807 03e8 1370     		strb	r3, [r2]
+ 808              		.loc 1 77 0
+ 809 03ea 164B     		ldr	r3, .L124+28
+ 810              		.loc 1 75 0
+ 811 03ec 0870     		strb	r0, [r1]
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 22
+
+
+ 812              		.loc 1 77 0
+ 813 03ee 1870     		strb	r0, [r3]
+ 814 03f0 16E0     		b	.L123
+ 815              	.L120:
+ 816              		.loc 1 82 0
+ 817 03f2 0123     		mov	r3, #1
+ 818 03f4 1370     		strb	r3, [r2]
+ 819              		.loc 1 83 0
+ 820 03f6 0023     		mov	r3, #0
+ 821 03f8 0B70     		strb	r3, [r1]
+ 822              		.loc 1 85 0
+ 823 03fa 8022     		mov	r2, #128
+ 824 03fc 2B68     		ldr	r3, [r5]
+ 825 03fe 9204     		lsl	r2, r2, #18
+ 826              		.loc 1 86 0
+ 827 0400 1149     		ldr	r1, .L124+32
+ 828              		.loc 1 85 0
+ 829 0402 1343     		orr	r3, r3, r2
+ 830 0404 2B60     		str	r3, [r5]
+ 831              		.loc 1 86 0
+ 832 0406 0A60     		str	r2, [r1]
+ 833              		.loc 1 88 0
+ 834 0408 8023     		mov	r3, #128
+ 835 040a 2A68     		ldr	r2, [r5]
+ 836 040c DB04     		lsl	r3, r3, #19
+ 837 040e 1A43     		orr	r2, r2, r3
+ 838 0410 2A60     		str	r2, [r5]
+ 839              		.loc 1 89 0
+ 840 0412 0B60     		str	r3, [r1]
+ 841              		.loc 1 91 0
+ 842 0414 A023     		mov	r3, #160
+ 843 0416 2A68     		ldr	r2, [r5]
+ 844 0418 DB05     		lsl	r3, r3, #23
+ 845 041a 1A43     		orr	r2, r2, r3
+ 846 041c 2A60     		str	r2, [r5]
+ 847              		.loc 1 92 0
+ 848 041e 3360     		str	r3, [r6]
+ 849              	.L123:
+ 850              		.loc 1 94 0
+ 851 0420 03B0     		add	sp, sp, #12
+ 852              		@ sp needed for prologue
+ 853 0422 70BC     		pop	{r4, r5, r6}
+ 854 0424 01BC     		pop	{r0}
+ 855 0426 0047     		bx	r0
+ 856              	.L125:
+ 857              		.align	2
+ 858              	.L124:
+ 859 0428 088002E0 		.word	-536707064
+ 860 042c 08000000 		.word	C.0.1455
+ 861 0430 FF3F3EFF 		.word	-12697601
+ 862 0434 048002E0 		.word	-536707068
+ 863 0438 00000000 		.word	ver1_0
+ 864 043c 00000000 		.word	ver1_1
+ 865 0440 00000000 		.word	greenLedShadow
+ 866 0444 01000000 		.word	btResetShadow
+ 867 0448 0C8002E0 		.word	-536707060
+ 868              	.LFE2:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 23
+
+
+ 869              		.size	immediateIoInit, .-immediateIoInit
+ 870              		.section	.rodata
+ 871              		.type	C.7.1503, %object
+ 872              		.size	C.7.1503, 2
+ 873              	C.7.1503:
+ 874 0000 08       		.byte	8
+ 875 0001 00       		.byte	0
+ 876              		.type	C.6.1502, %object
+ 877              		.size	C.6.1502, 2
+ 878              	C.6.1502:
+ 879 0002 07       		.byte	7
+ 880 0003 00       		.byte	0
+ 881              		.type	C.3.1484, %object
+ 882              		.size	C.3.1484, 2
+ 883              	C.3.1484:
+ 884 0004 07       		.byte	7
+ 885 0005 00       		.byte	0
+ 886              		.type	C.1.1476, %object
+ 887              		.size	C.1.1476, 2
+ 888              	C.1.1476:
+ 889 0006 07       		.byte	7
+ 890 0007 00       		.byte	0
+ 891              		.type	C.0.1455, %object
+ 892              		.size	C.0.1455, 9
+ 893              	C.0.1455:
+ 894 0008 12       		.byte	18
+ 895 0009 97       		.byte	-105
+ 896 000a 80       		.byte	-128
+ 897 000b 00       		.byte	0
+ 898 000c 40       		.byte	64
+ 899 000d 00       		.byte	0
+ 900 000e 14       		.byte	20
+ 901 000f 00       		.byte	0
+ 902 0010 00       		.byte	0
+ 903              		.bss
+ 904              	greenLedShadow:
+ 905 0000 00       		.space	1
+ 906              	btResetShadow:
+ 907 0001 00       		.space	1
+ 908              		.comm	ver1_0,1,1
+ 909              		.comm	ver1_1,1,1
+ 910              		.section	.debug_frame,"",%progbits
+ 911              	.Lframe0:
+ 912 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
+ 913              	.LSCIE0:
+ 914 0004 FFFFFFFF 		.4byte	0xffffffff
+ 915 0008 01       		.byte	0x1
+ 916 0009 00       		.ascii	"\000"
+ 917 000a 01       		.uleb128 0x1
+ 918 000b 7C       		.sleb128 -4
+ 919 000c 0E       		.byte	0xe
+ 920 000d 0C       		.byte	0xc
+ 921 000e 0D       		.uleb128 0xd
+ 922 000f 00       		.uleb128 0x0
+ 923              		.align	2
+ 924              	.LECIE0:
+ 925              	.LSFDE0:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 24
+
+
+ 926 0010 0C000000 		.4byte	.LEFDE0-.LASFDE0
+ 927              	.LASFDE0:
+ 928 0014 00000000 		.4byte	.Lframe0
+ 929 0018 00000000 		.4byte	.LFB5
+ 930 001c 24000000 		.4byte	.LFE5-.LFB5
+ 931              		.align	2
+ 932              	.LEFDE0:
+ 933              	.LSFDE2:
+ 934 0020 0C000000 		.4byte	.LEFDE2-.LASFDE2
+ 935              	.LASFDE2:
+ 936 0024 00000000 		.4byte	.Lframe0
+ 937 0028 24000000 		.4byte	.LFB8
+ 938 002c 40000000 		.4byte	.LFE8-.LFB8
+ 939              		.align	2
+ 940              	.LEFDE2:
+ 941              	.LSFDE4:
+ 942 0030 18000000 		.4byte	.LEFDE4-.LASFDE4
+ 943              	.LASFDE4:
+ 944 0034 00000000 		.4byte	.Lframe0
+ 945 0038 64000000 		.4byte	.LFB9
+ 946 003c 7C000000 		.4byte	.LFE9-.LFB9
+ 947 0040 42       		.byte	0x4
+ 948              		.4byte	.LCFI0-.LFB9
+ 949 0041 0E       		.byte	0xe
+ 950 0042 0C       		.uleb128 0xc
+ 951 0043 84       		.byte	0x84
+ 952 0044 03       		.uleb128 0x3
+ 953 0045 85       		.byte	0x85
+ 954 0046 02       		.uleb128 0x2
+ 955 0047 8E       		.byte	0x8e
+ 956 0048 01       		.uleb128 0x1
+ 957 0049 000000   		.align	2
+ 958              	.LEFDE4:
+ 959              	.LSFDE6:
+ 960 004c 14000000 		.4byte	.LEFDE6-.LASFDE6
+ 961              	.LASFDE6:
+ 962 0050 00000000 		.4byte	.Lframe0
+ 963 0054 E0000000 		.4byte	.LFB10
+ 964 0058 58000000 		.4byte	.LFE10-.LFB10
+ 965 005c 42       		.byte	0x4
+ 966              		.4byte	.LCFI1-.LFB10
+ 967 005d 0E       		.byte	0xe
+ 968 005e 04       		.uleb128 0x4
+ 969 005f 8E       		.byte	0x8e
+ 970 0060 01       		.uleb128 0x1
+ 971 0061 000000   		.align	2
+ 972              	.LEFDE6:
+ 973              	.LSFDE8:
+ 974 0064 18000000 		.4byte	.LEFDE8-.LASFDE8
+ 975              	.LASFDE8:
+ 976 0068 00000000 		.4byte	.Lframe0
+ 977 006c 38010000 		.4byte	.LFB7
+ 978 0070 B0000000 		.4byte	.LFE7-.LFB7
+ 979 0074 42       		.byte	0x4
+ 980              		.4byte	.LCFI2-.LFB7
+ 981 0075 0E       		.byte	0xe
+ 982 0076 08       		.uleb128 0x8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 25
+
+
+ 983 0077 84       		.byte	0x84
+ 984 0078 02       		.uleb128 0x2
+ 985 0079 8E       		.byte	0x8e
+ 986 007a 01       		.uleb128 0x1
+ 987 007b 46       		.byte	0x4
+ 988              		.4byte	.LCFI3-.LCFI2
+ 989 007c 0E       		.byte	0xe
+ 990 007d 0C       		.uleb128 0xc
+ 991 007e 0000     		.align	2
+ 992              	.LEFDE8:
+ 993              	.LSFDE10:
+ 994 0080 1C000000 		.4byte	.LEFDE10-.LASFDE10
+ 995              	.LASFDE10:
+ 996 0084 00000000 		.4byte	.Lframe0
+ 997 0088 E8010000 		.4byte	.LFB6
+ 998 008c BC000000 		.4byte	.LFE6-.LFB6
+ 999 0090 42       		.byte	0x4
+ 1000              		.4byte	.LCFI4-.LFB6
+ 1001 0091 0E       		.byte	0xe
+ 1002 0092 14       		.uleb128 0x14
+ 1003 0093 84       		.byte	0x84
+ 1004 0094 05       		.uleb128 0x5
+ 1005 0095 85       		.byte	0x85
+ 1006 0096 04       		.uleb128 0x4
+ 1007 0097 86       		.byte	0x86
+ 1008 0098 03       		.uleb128 0x3
+ 1009 0099 87       		.byte	0x87
+ 1010 009a 02       		.uleb128 0x2
+ 1011 009b 8E       		.byte	0x8e
+ 1012 009c 01       		.uleb128 0x1
+ 1013 009d 42       		.byte	0x4
+ 1014              		.4byte	.LCFI5-.LCFI4
+ 1015 009e 0E       		.byte	0xe
+ 1016 009f 18       		.uleb128 0x18
+ 1017              		.align	2
+ 1018              	.LEFDE10:
+ 1019              	.LSFDE12:
+ 1020 00a0 18000000 		.4byte	.LEFDE12-.LASFDE12
+ 1021              	.LASFDE12:
+ 1022 00a4 00000000 		.4byte	.Lframe0
+ 1023 00a8 A4020000 		.4byte	.LFB4
+ 1024 00ac 7C000000 		.4byte	.LFE4-.LFB4
+ 1025 00b0 42       		.byte	0x4
+ 1026              		.4byte	.LCFI6-.LFB4
+ 1027 00b1 0E       		.byte	0xe
+ 1028 00b2 0C       		.uleb128 0xc
+ 1029 00b3 84       		.byte	0x84
+ 1030 00b4 03       		.uleb128 0x3
+ 1031 00b5 85       		.byte	0x85
+ 1032 00b6 02       		.uleb128 0x2
+ 1033 00b7 8E       		.byte	0x8e
+ 1034 00b8 01       		.uleb128 0x1
+ 1035 00b9 42       		.byte	0x4
+ 1036              		.4byte	.LCFI7-.LCFI6
+ 1037 00ba 0E       		.byte	0xe
+ 1038 00bb 10       		.uleb128 0x10
+ 1039              		.align	2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 26
+
+
+ 1040              	.LEFDE12:
+ 1041              	.LSFDE14:
+ 1042 00bc 18000000 		.4byte	.LEFDE14-.LASFDE14
+ 1043              	.LASFDE14:
+ 1044 00c0 00000000 		.4byte	.Lframe0
+ 1045 00c4 20030000 		.4byte	.LFB3
+ 1046 00c8 70000000 		.4byte	.LFE3-.LFB3
+ 1047 00cc 42       		.byte	0x4
+ 1048              		.4byte	.LCFI8-.LFB3
+ 1049 00cd 0E       		.byte	0xe
+ 1050 00ce 08       		.uleb128 0x8
+ 1051 00cf 84       		.byte	0x84
+ 1052 00d0 02       		.uleb128 0x2
+ 1053 00d1 8E       		.byte	0x8e
+ 1054 00d2 01       		.uleb128 0x1
+ 1055 00d3 42       		.byte	0x4
+ 1056              		.4byte	.LCFI9-.LCFI8
+ 1057 00d4 0E       		.byte	0xe
+ 1058 00d5 0C       		.uleb128 0xc
+ 1059 00d6 0000     		.align	2
+ 1060              	.LEFDE14:
+ 1061              	.LSFDE16:
+ 1062 00d8 1C000000 		.4byte	.LEFDE16-.LASFDE16
+ 1063              	.LASFDE16:
+ 1064 00dc 00000000 		.4byte	.Lframe0
+ 1065 00e0 90030000 		.4byte	.LFB2
+ 1066 00e4 BC000000 		.4byte	.LFE2-.LFB2
+ 1067 00e8 42       		.byte	0x4
+ 1068              		.4byte	.LCFI10-.LFB2
+ 1069 00e9 0E       		.byte	0xe
+ 1070 00ea 10       		.uleb128 0x10
+ 1071 00eb 84       		.byte	0x84
+ 1072 00ec 04       		.uleb128 0x4
+ 1073 00ed 85       		.byte	0x85
+ 1074 00ee 03       		.uleb128 0x3
+ 1075 00ef 86       		.byte	0x86
+ 1076 00f0 02       		.uleb128 0x2
+ 1077 00f1 8E       		.byte	0x8e
+ 1078 00f2 01       		.uleb128 0x1
+ 1079 00f3 42       		.byte	0x4
+ 1080              		.4byte	.LCFI11-.LCFI10
+ 1081 00f4 0E       		.byte	0xe
+ 1082 00f5 1C       		.uleb128 0x1c
+ 1083 00f6 0000     		.align	2
+ 1084              	.LEFDE16:
+ 1085              		.file 2 "./startup/../pre_emptive_os/api/../api/general.h"
+ 1086              		.text
+ 1087              	.Letext0:
+ 1088              		.section	.debug_loc,"",%progbits
+ 1089              	.Ldebug_loc0:
+ 1090              	.LLST1:
+ 1091 0000 00000000 		.4byte	.LVL0-.Ltext0
+ 1092 0004 02000000 		.4byte	.LVL1-.Ltext0
+ 1093 0008 0100     		.2byte	0x1
+ 1094 000a 50       		.byte	0x50
+ 1095 000b 04000000 		.4byte	.LVL2-.Ltext0
+ 1096 000f 24000000 		.4byte	.LFE5-.Ltext0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 27
+
+
+ 1097 0013 0100     		.2byte	0x1
+ 1098 0015 50       		.byte	0x50
+ 1099 0016 00000000 		.4byte	0x0
+ 1100 001a 00000000 		.4byte	0x0
+ 1101              	.LLST3:
+ 1102 001e 24000000 		.4byte	.LVL3-.Ltext0
+ 1103 0022 2A000000 		.4byte	.LVL4-.Ltext0
+ 1104 0026 0100     		.2byte	0x1
+ 1105 0028 50       		.byte	0x50
+ 1106 0029 2C000000 		.4byte	.LVL5-.Ltext0
+ 1107 002d 64000000 		.4byte	.LFE8-.Ltext0
+ 1108 0031 0100     		.2byte	0x1
+ 1109 0033 50       		.byte	0x50
+ 1110 0034 00000000 		.4byte	0x0
+ 1111 0038 00000000 		.4byte	0x0
+ 1112              	.LLST4:
+ 1113 003c 64000000 		.4byte	.LFB9-.Ltext0
+ 1114 0040 66000000 		.4byte	.LCFI0-.Ltext0
+ 1115 0044 0100     		.2byte	0x1
+ 1116 0046 5D       		.byte	0x5d
+ 1117 0047 66000000 		.4byte	.LCFI0-.Ltext0
+ 1118 004b E0000000 		.4byte	.LFE9-.Ltext0
+ 1119 004f 0200     		.2byte	0x2
+ 1120 0051 7D       		.byte	0x7d
+ 1121 0052 0C       		.sleb128 12
+ 1122 0053 00000000 		.4byte	0x0
+ 1123 0057 00000000 		.4byte	0x0
+ 1124              	.LLST5:
+ 1125 005b 66000000 		.4byte	.LVL6-.Ltext0
+ 1126 005f 78000000 		.4byte	.LVL9-.Ltext0
+ 1127 0063 0100     		.2byte	0x1
+ 1128 0065 50       		.byte	0x50
+ 1129 0066 7C000000 		.4byte	.LVL10-.Ltext0
+ 1130 006a E0000000 		.4byte	.LFE9-.Ltext0
+ 1131 006e 0100     		.2byte	0x1
+ 1132 0070 50       		.byte	0x50
+ 1133 0071 00000000 		.4byte	0x0
+ 1134 0075 00000000 		.4byte	0x0
+ 1135              	.LLST6:
+ 1136 0079 66000000 		.4byte	.LVL6-.Ltext0
+ 1137 007d 6A000000 		.4byte	.LVL7-.Ltext0
+ 1138 0081 0100     		.2byte	0x1
+ 1139 0083 51       		.byte	0x51
+ 1140 0084 70000000 		.4byte	.LVL8-.Ltext0
+ 1141 0088 BC000000 		.4byte	.LVL11-.Ltext0
+ 1142 008c 0100     		.2byte	0x1
+ 1143 008e 55       		.byte	0x55
+ 1144 008f 00000000 		.4byte	0x0
+ 1145 0093 00000000 		.4byte	0x0
+ 1146              	.LLST7:
+ 1147 0097 E0000000 		.4byte	.LFB10-.Ltext0
+ 1148 009b E2000000 		.4byte	.LCFI1-.Ltext0
+ 1149 009f 0100     		.2byte	0x1
+ 1150 00a1 5D       		.byte	0x5d
+ 1151 00a2 E2000000 		.4byte	.LCFI1-.Ltext0
+ 1152 00a6 38010000 		.4byte	.LFE10-.Ltext0
+ 1153 00aa 0200     		.2byte	0x2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 28
+
+
+ 1154 00ac 7D       		.byte	0x7d
+ 1155 00ad 04       		.sleb128 4
+ 1156 00ae 00000000 		.4byte	0x0
+ 1157 00b2 00000000 		.4byte	0x0
+ 1158              	.LLST8:
+ 1159 00b6 38010000 		.4byte	.LFB7-.Ltext0
+ 1160 00ba 3A010000 		.4byte	.LCFI2-.Ltext0
+ 1161 00be 0100     		.2byte	0x1
+ 1162 00c0 5D       		.byte	0x5d
+ 1163 00c1 3A010000 		.4byte	.LCFI2-.Ltext0
+ 1164 00c5 40010000 		.4byte	.LCFI3-.Ltext0
+ 1165 00c9 0200     		.2byte	0x2
+ 1166 00cb 7D       		.byte	0x7d
+ 1167 00cc 08       		.sleb128 8
+ 1168 00cd 40010000 		.4byte	.LCFI3-.Ltext0
+ 1169 00d1 E8010000 		.4byte	.LFE7-.Ltext0
+ 1170 00d5 0200     		.2byte	0x2
+ 1171 00d7 7D       		.byte	0x7d
+ 1172 00d8 0C       		.sleb128 12
+ 1173 00d9 00000000 		.4byte	0x0
+ 1174 00dd 00000000 		.4byte	0x0
+ 1175              	.LLST9:
+ 1176 00e1 4E010000 		.4byte	.LVL12-.Ltext0
+ 1177 00e5 50010000 		.4byte	.LVL13-.Ltext0
+ 1178 00e9 0100     		.2byte	0x1
+ 1179 00eb 50       		.byte	0x50
+ 1180 00ec 52010000 		.4byte	.LVL14-.Ltext0
+ 1181 00f0 86010000 		.4byte	.LVL15-.Ltext0
+ 1182 00f4 0100     		.2byte	0x1
+ 1183 00f6 50       		.byte	0x50
+ 1184 00f7 A4010000 		.4byte	.LVL17-.Ltext0
+ 1185 00fb A6010000 		.4byte	.LVL18-.Ltext0
+ 1186 00ff 0100     		.2byte	0x1
+ 1187 0101 50       		.byte	0x50
+ 1188 0102 A8010000 		.4byte	.LVL19-.Ltext0
+ 1189 0106 DA010000 		.4byte	.LVL20-.Ltext0
+ 1190 010a 0100     		.2byte	0x1
+ 1191 010c 50       		.byte	0x50
+ 1192 010d 00000000 		.4byte	0x0
+ 1193 0111 00000000 		.4byte	0x0
+ 1194              	.LLST10:
+ 1195 0115 E8010000 		.4byte	.LFB6-.Ltext0
+ 1196 0119 EA010000 		.4byte	.LCFI4-.Ltext0
+ 1197 011d 0100     		.2byte	0x1
+ 1198 011f 5D       		.byte	0x5d
+ 1199 0120 EA010000 		.4byte	.LCFI4-.Ltext0
+ 1200 0124 EC010000 		.4byte	.LCFI5-.Ltext0
+ 1201 0128 0200     		.2byte	0x2
+ 1202 012a 7D       		.byte	0x7d
+ 1203 012b 14       		.sleb128 20
+ 1204 012c EC010000 		.4byte	.LCFI5-.Ltext0
+ 1205 0130 A4020000 		.4byte	.LFE6-.Ltext0
+ 1206 0134 0200     		.2byte	0x2
+ 1207 0136 7D       		.byte	0x7d
+ 1208 0137 18       		.sleb128 24
+ 1209 0138 00000000 		.4byte	0x0
+ 1210 013c 00000000 		.4byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 29
+
+
+ 1211              	.LLST11:
+ 1212 0140 EA010000 		.4byte	.LVL21-.Ltext0
+ 1213 0144 F0010000 		.4byte	.LVL22-.Ltext0
+ 1214 0148 0100     		.2byte	0x1
+ 1215 014a 50       		.byte	0x50
+ 1216 014b F8010000 		.4byte	.LVL24-.Ltext0
+ 1217 014f 80020000 		.4byte	.LVL27-.Ltext0
+ 1218 0153 0100     		.2byte	0x1
+ 1219 0155 55       		.byte	0x55
+ 1220 0156 00000000 		.4byte	0x0
+ 1221 015a 00000000 		.4byte	0x0
+ 1222              	.LLST12:
+ 1223 015e EA010000 		.4byte	.LVL21-.Ltext0
+ 1224 0162 F2010000 		.4byte	.LVL23-.Ltext0
+ 1225 0166 0100     		.2byte	0x1
+ 1226 0168 51       		.byte	0x51
+ 1227 0169 FA010000 		.4byte	.LVL25-.Ltext0
+ 1228 016d 80020000 		.4byte	.LVL26-.Ltext0
+ 1229 0171 0100     		.2byte	0x1
+ 1230 0173 54       		.byte	0x54
+ 1231 0174 00000000 		.4byte	0x0
+ 1232 0178 00000000 		.4byte	0x0
+ 1233              	.LLST13:
+ 1234 017c A4020000 		.4byte	.LFB4-.Ltext0
+ 1235 0180 A6020000 		.4byte	.LCFI6-.Ltext0
+ 1236 0184 0100     		.2byte	0x1
+ 1237 0186 5D       		.byte	0x5d
+ 1238 0187 A6020000 		.4byte	.LCFI6-.Ltext0
+ 1239 018b A8020000 		.4byte	.LCFI7-.Ltext0
+ 1240 018f 0200     		.2byte	0x2
+ 1241 0191 7D       		.byte	0x7d
+ 1242 0192 0C       		.sleb128 12
+ 1243 0193 A8020000 		.4byte	.LCFI7-.Ltext0
+ 1244 0197 20030000 		.4byte	.LFE4-.Ltext0
+ 1245 019b 0200     		.2byte	0x2
+ 1246 019d 7D       		.byte	0x7d
+ 1247 019e 10       		.sleb128 16
+ 1248 019f 00000000 		.4byte	0x0
+ 1249 01a3 00000000 		.4byte	0x0
+ 1250              	.LLST14:
+ 1251 01a7 A6020000 		.4byte	.LVL28-.Ltext0
+ 1252 01ab AC020000 		.4byte	.LVL29-.Ltext0
+ 1253 01af 0100     		.2byte	0x1
+ 1254 01b1 50       		.byte	0x50
+ 1255 01b2 B0020000 		.4byte	.LVL30-.Ltext0
+ 1256 01b6 02030000 		.4byte	.LVL31-.Ltext0
+ 1257 01ba 0100     		.2byte	0x1
+ 1258 01bc 54       		.byte	0x54
+ 1259 01bd 00000000 		.4byte	0x0
+ 1260 01c1 00000000 		.4byte	0x0
+ 1261              	.LLST15:
+ 1262 01c5 20030000 		.4byte	.LFB3-.Ltext0
+ 1263 01c9 22030000 		.4byte	.LCFI8-.Ltext0
+ 1264 01cd 0100     		.2byte	0x1
+ 1265 01cf 5D       		.byte	0x5d
+ 1266 01d0 22030000 		.4byte	.LCFI8-.Ltext0
+ 1267 01d4 24030000 		.4byte	.LCFI9-.Ltext0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 30
+
+
+ 1268 01d8 0200     		.2byte	0x2
+ 1269 01da 7D       		.byte	0x7d
+ 1270 01db 08       		.sleb128 8
+ 1271 01dc 24030000 		.4byte	.LCFI9-.Ltext0
+ 1272 01e0 90030000 		.4byte	.LFE3-.Ltext0
+ 1273 01e4 0200     		.2byte	0x2
+ 1274 01e6 7D       		.byte	0x7d
+ 1275 01e7 0C       		.sleb128 12
+ 1276 01e8 00000000 		.4byte	0x0
+ 1277 01ec 00000000 		.4byte	0x0
+ 1278              	.LLST16:
+ 1279 01f0 90030000 		.4byte	.LFB2-.Ltext0
+ 1280 01f4 92030000 		.4byte	.LCFI10-.Ltext0
+ 1281 01f8 0100     		.2byte	0x1
+ 1282 01fa 5D       		.byte	0x5d
+ 1283 01fb 92030000 		.4byte	.LCFI10-.Ltext0
+ 1284 01ff 94030000 		.4byte	.LCFI11-.Ltext0
+ 1285 0203 0200     		.2byte	0x2
+ 1286 0205 7D       		.byte	0x7d
+ 1287 0206 10       		.sleb128 16
+ 1288 0207 94030000 		.4byte	.LCFI11-.Ltext0
+ 1289 020b 4C040000 		.4byte	.LFE2-.Ltext0
+ 1290 020f 0200     		.2byte	0x2
+ 1291 0211 7D       		.byte	0x7d
+ 1292 0212 1C       		.sleb128 28
+ 1293 0213 00000000 		.4byte	0x0
+ 1294 0217 00000000 		.4byte	0x0
+ 1295              		.section	.debug_info
+ 1296 0000 D3020000 		.4byte	0x2d3
+ 1297 0004 0200     		.2byte	0x2
+ 1298 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1299 000a 04       		.byte	0x4
+ 1300 000b 01       		.uleb128 0x1
+ 1301 000c 00000000 		.4byte	.Ldebug_line0
+ 1302 0010 4C040000 		.4byte	.Letext0
+ 1303 0014 00000000 		.4byte	.Ltext0
+ 1304 0018 2F010000 		.4byte	.LASF32
+ 1305 001c 01       		.byte	0x1
+ 1306 001d 85010000 		.4byte	.LASF33
+ 1307 0021 17000000 		.4byte	.LASF34
+ 1308 0025 02       		.uleb128 0x2
+ 1309 0026 74553800 		.ascii	"tU8\000"
+ 1310 002a 02       		.byte	0x2
+ 1311 002b 47       		.byte	0x47
+ 1312 002c 30000000 		.4byte	0x30
+ 1313 0030 03       		.uleb128 0x3
+ 1314 0031 9D000000 		.4byte	.LASF0
+ 1315 0035 01       		.byte	0x1
+ 1316 0036 08       		.byte	0x8
+ 1317 0037 03       		.uleb128 0x3
+ 1318 0038 BD000000 		.4byte	.LASF1
+ 1319 003c 02       		.byte	0x2
+ 1320 003d 07       		.byte	0x7
+ 1321 003e 03       		.uleb128 0x3
+ 1322 003f 04010000 		.4byte	.LASF2
+ 1323 0043 04       		.byte	0x4
+ 1324 0044 07       		.byte	0x7
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 31
+
+
+ 1325 0045 03       		.uleb128 0x3
+ 1326 0046 71010000 		.4byte	.LASF3
+ 1327 004a 01       		.byte	0x1
+ 1328 004b 06       		.byte	0x6
+ 1329 004c 03       		.uleb128 0x3
+ 1330 004d 55010000 		.4byte	.LASF4
+ 1331 0051 02       		.byte	0x2
+ 1332 0052 05       		.byte	0x5
+ 1333 0053 04       		.uleb128 0x4
+ 1334 0054 696E7400 		.ascii	"int\000"
+ 1335 0058 04       		.byte	0x4
+ 1336 0059 05       		.byte	0x5
+ 1337 005a 05       		.uleb128 0x5
+ 1338 005b 8A010000 		.4byte	.LASF5
+ 1339 005f 02       		.byte	0x2
+ 1340 0060 4D       		.byte	0x4d
+ 1341 0061 30000000 		.4byte	0x30
+ 1342 0065 03       		.uleb128 0x3
+ 1343 0066 AB000000 		.4byte	.LASF6
+ 1344 006a 04       		.byte	0x4
+ 1345 006b 07       		.byte	0x7
+ 1346 006c 06       		.uleb128 0x6
+ 1347 006d 92000000 		.4byte	0x92
+ 1348 0071 01       		.byte	0x1
+ 1349 0072 67010000 		.4byte	.LASF7
+ 1350 0076 01       		.byte	0x1
+ 1351 0077 B0       		.byte	0xb0
+ 1352 0078 01       		.byte	0x1
+ 1353 0079 00000000 		.4byte	.LFB5
+ 1354 007d 24000000 		.4byte	.LFE5
+ 1355 0081 01       		.byte	0x1
+ 1356 0082 5D       		.byte	0x5d
+ 1357 0083 07       		.uleb128 0x7
+ 1358 0084 6F6E00   		.ascii	"on\000"
+ 1359 0087 01       		.byte	0x1
+ 1360 0088 AF       		.byte	0xaf
+ 1361 0089 5A000000 		.4byte	0x5a
+ 1362 008d 00000000 		.4byte	.LLST1
+ 1363 0091 00       		.byte	0x0
+ 1364 0092 08       		.uleb128 0x8
+ 1365 0093 BB000000 		.4byte	0xbb
+ 1366 0097 01       		.byte	0x1
+ 1367 0098 D0000000 		.4byte	.LASF8
+ 1368 009c 01       		.byte	0x1
+ 1369 009d 2101     		.2byte	0x121
+ 1370 009f 01       		.byte	0x1
+ 1371 00a0 24000000 		.4byte	.LFB8
+ 1372 00a4 64000000 		.4byte	.LFE8
+ 1373 00a8 01       		.byte	0x1
+ 1374 00a9 5D       		.byte	0x5d
+ 1375 00aa 09       		.uleb128 0x9
+ 1376 00ab 77000000 		.4byte	.LASF9
+ 1377 00af 01       		.byte	0x1
+ 1378 00b0 2001     		.2byte	0x120
+ 1379 00b2 5A000000 		.4byte	0x5a
+ 1380 00b6 1E000000 		.4byte	.LLST3
+ 1381 00ba 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 32
+
+
+ 1382 00bb 0A       		.uleb128 0xa
+ 1383 00bc F6000000 		.4byte	0xf6
+ 1384 00c0 01       		.byte	0x1
+ 1385 00c1 4B010000 		.4byte	.LASF10
+ 1386 00c5 01       		.byte	0x1
+ 1387 00c6 3E01     		.2byte	0x13e
+ 1388 00c8 01       		.byte	0x1
+ 1389 00c9 64000000 		.4byte	.LFB9
+ 1390 00cd E0000000 		.4byte	.LFE9
+ 1391 00d1 3C000000 		.4byte	.LLST4
+ 1392 00d5 09       		.uleb128 0x9
+ 1393 00d6 E2000000 		.4byte	.LASF11
+ 1394 00da 01       		.byte	0x1
+ 1395 00db 3D01     		.2byte	0x13d
+ 1396 00dd 25000000 		.4byte	0x25
+ 1397 00e1 5B000000 		.4byte	.LLST5
+ 1398 00e5 09       		.uleb128 0x9
+ 1399 00e6 5D000000 		.4byte	.LASF12
+ 1400 00ea 01       		.byte	0x1
+ 1401 00eb 3D01     		.2byte	0x13d
+ 1402 00ed 25000000 		.4byte	0x25
+ 1403 00f1 79000000 		.4byte	.LLST6
+ 1404 00f5 00       		.byte	0x0
+ 1405 00f6 0B       		.uleb128 0xb
+ 1406 00f7 01       		.byte	0x1
+ 1407 00f8 69000000 		.4byte	.LASF35
+ 1408 00fc 01       		.byte	0x1
+ 1409 00fd 6701     		.2byte	0x167
+ 1410 00ff 01       		.byte	0x1
+ 1411 0100 E0000000 		.4byte	.LFB10
+ 1412 0104 38010000 		.4byte	.LFE10
+ 1413 0108 97000000 		.4byte	.LLST7
+ 1414 010c 0C       		.uleb128 0xc
+ 1415 010d 55010000 		.4byte	0x155
+ 1416 0111 01       		.byte	0x1
+ 1417 0112 DA000000 		.4byte	.LASF13
+ 1418 0116 01       		.byte	0x1
+ 1419 0117 FB       		.byte	0xfb
+ 1420 0118 01       		.byte	0x1
+ 1421 0119 25000000 		.4byte	0x25
+ 1422 011d 38010000 		.4byte	.LFB7
+ 1423 0121 E8010000 		.4byte	.LFE7
+ 1424 0125 B6000000 		.4byte	.LLST8
+ 1425 0129 0D       		.uleb128 0xd
+ 1426 012a 07000000 		.4byte	.LASF14
+ 1427 012e 01       		.byte	0x1
+ 1428 012f FC       		.byte	0xfc
+ 1429 0130 55010000 		.4byte	0x155
+ 1430 0134 02       		.byte	0x2
+ 1431 0135 91       		.byte	0x91
+ 1432 0136 77       		.sleb128 -9
+ 1433 0137 0E       		.uleb128 0xe
+ 1434 0138 11010000 		.4byte	.LASF15
+ 1435 013c 01       		.byte	0x1
+ 1436 013d FD       		.byte	0xfd
+ 1437 013e 25000000 		.4byte	0x25
+ 1438 0142 E1000000 		.4byte	.LLST9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 33
+
+
+ 1439 0146 0D       		.uleb128 0xd
+ 1440 0147 3A000000 		.4byte	.LASF16
+ 1441 014b 01       		.byte	0x1
+ 1442 014c FE       		.byte	0xfe
+ 1443 014d 25000000 		.4byte	0x25
+ 1444 0151 02       		.byte	0x2
+ 1445 0152 74       		.byte	0x74
+ 1446 0153 00       		.sleb128 0
+ 1447 0154 00       		.byte	0x0
+ 1448 0155 0F       		.uleb128 0xf
+ 1449 0156 65010000 		.4byte	0x165
+ 1450 015a 25000000 		.4byte	0x25
+ 1451 015e 10       		.uleb128 0x10
+ 1452 015f 65000000 		.4byte	0x65
+ 1453 0163 00       		.byte	0x0
+ 1454 0164 00       		.byte	0x0
+ 1455 0165 11       		.uleb128 0x11
+ 1456 0166 B9010000 		.4byte	0x1b9
+ 1457 016a 01       		.byte	0x1
+ 1458 016b 00000000 		.4byte	.LASF17
+ 1459 016f 01       		.byte	0x1
+ 1460 0170 C0       		.byte	0xc0
+ 1461 0171 01       		.byte	0x1
+ 1462 0172 E8010000 		.4byte	.LFB6
+ 1463 0176 A4020000 		.4byte	.LFE6
+ 1464 017a 15010000 		.4byte	.LLST10
+ 1465 017e 12       		.uleb128 0x12
+ 1466 017f 93000000 		.4byte	.LASF18
+ 1467 0183 01       		.byte	0x1
+ 1468 0184 BF       		.byte	0xbf
+ 1469 0185 25000000 		.4byte	0x25
+ 1470 0189 40010000 		.4byte	.LLST11
+ 1471 018d 12       		.uleb128 0x12
+ 1472 018e 54000000 		.4byte	.LASF19
+ 1473 0192 01       		.byte	0x1
+ 1474 0193 BF       		.byte	0xbf
+ 1475 0194 5A000000 		.4byte	0x5a
+ 1476 0198 5E010000 		.4byte	.LLST12
+ 1477 019c 0D       		.uleb128 0xd
+ 1478 019d 44000000 		.4byte	.LASF20
+ 1479 01a1 01       		.byte	0x1
+ 1480 01a2 C1       		.byte	0xc1
+ 1481 01a3 B9010000 		.4byte	0x1b9
+ 1482 01a7 02       		.byte	0x2
+ 1483 01a8 91       		.byte	0x91
+ 1484 01a9 6A       		.sleb128 -22
+ 1485 01aa 0D       		.uleb128 0xd
+ 1486 01ab 85000000 		.4byte	.LASF21
+ 1487 01af 01       		.byte	0x1
+ 1488 01b0 C6       		.byte	0xc6
+ 1489 01b1 C9010000 		.4byte	0x1c9
+ 1490 01b5 02       		.byte	0x2
+ 1491 01b6 91       		.byte	0x91
+ 1492 01b7 68       		.sleb128 -24
+ 1493 01b8 00       		.byte	0x0
+ 1494 01b9 0F       		.uleb128 0xf
+ 1495 01ba C9010000 		.4byte	0x1c9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 34
+
+
+ 1496 01be 25000000 		.4byte	0x25
+ 1497 01c2 10       		.uleb128 0x10
+ 1498 01c3 65000000 		.4byte	0x65
+ 1499 01c7 01       		.byte	0x1
+ 1500 01c8 00       		.byte	0x0
+ 1501 01c9 0F       		.uleb128 0xf
+ 1502 01ca D9010000 		.4byte	0x1d9
+ 1503 01ce 25000000 		.4byte	0x25
+ 1504 01d2 10       		.uleb128 0x10
+ 1505 01d3 65000000 		.4byte	0x65
+ 1506 01d7 01       		.byte	0x1
+ 1507 01d8 00       		.byte	0x0
+ 1508 01d9 11       		.uleb128 0x11
+ 1509 01da 10020000 		.4byte	0x210
+ 1510 01de 01       		.byte	0x1
+ 1511 01df 7D010000 		.4byte	.LASF22
+ 1512 01e3 01       		.byte	0x1
+ 1513 01e4 8C       		.byte	0x8c
+ 1514 01e5 01       		.byte	0x1
+ 1515 01e6 A4020000 		.4byte	.LFB4
+ 1516 01ea 20030000 		.4byte	.LFE4
+ 1517 01ee 7C010000 		.4byte	.LLST13
+ 1518 01f2 12       		.uleb128 0x12
+ 1519 01f3 FA000000 		.4byte	.LASF23
+ 1520 01f7 01       		.byte	0x1
+ 1521 01f8 8B       		.byte	0x8b
+ 1522 01f9 5A000000 		.4byte	0x5a
+ 1523 01fd A7010000 		.4byte	.LLST14
+ 1524 0201 0D       		.uleb128 0xd
+ 1525 0202 5F010000 		.4byte	.LASF24
+ 1526 0206 01       		.byte	0x1
+ 1527 0207 8D       		.byte	0x8d
+ 1528 0208 10020000 		.4byte	0x210
+ 1529 020c 02       		.byte	0x2
+ 1530 020d 91       		.byte	0x91
+ 1531 020e 72       		.sleb128 -14
+ 1532 020f 00       		.byte	0x0
+ 1533 0210 0F       		.uleb128 0xf
+ 1534 0211 20020000 		.4byte	0x220
+ 1535 0215 25000000 		.4byte	0x25
+ 1536 0219 10       		.uleb128 0x10
+ 1537 021a 65000000 		.4byte	0x65
+ 1538 021e 01       		.byte	0x1
+ 1539 021f 00       		.byte	0x0
+ 1540 0220 11       		.uleb128 0x11
+ 1541 0221 48020000 		.4byte	0x248
+ 1542 0225 01       		.byte	0x1
+ 1543 0226 26010000 		.4byte	.LASF25
+ 1544 022a 01       		.byte	0x1
+ 1545 022b 69       		.byte	0x69
+ 1546 022c 01       		.byte	0x1
+ 1547 022d 20030000 		.4byte	.LFB3
+ 1548 0231 90030000 		.4byte	.LFE3
+ 1549 0235 C5010000 		.4byte	.LLST15
+ 1550 0239 0D       		.uleb128 0xd
+ 1551 023a 5F010000 		.4byte	.LASF24
+ 1552 023e 01       		.byte	0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 35
+
+
+ 1553 023f 6A       		.byte	0x6a
+ 1554 0240 48020000 		.4byte	0x248
+ 1555 0244 02       		.byte	0x2
+ 1556 0245 91       		.byte	0x91
+ 1557 0246 76       		.sleb128 -10
+ 1558 0247 00       		.byte	0x0
+ 1559 0248 0F       		.uleb128 0xf
+ 1560 0249 58020000 		.4byte	0x258
+ 1561 024d 25000000 		.4byte	0x25
+ 1562 0251 10       		.uleb128 0x10
+ 1563 0252 65000000 		.4byte	0x65
+ 1564 0256 01       		.byte	0x1
+ 1565 0257 00       		.byte	0x0
+ 1566 0258 11       		.uleb128 0x11
+ 1567 0259 80020000 		.4byte	0x280
+ 1568 025d 01       		.byte	0x1
+ 1569 025e 3B010000 		.4byte	.LASF26
+ 1570 0262 01       		.byte	0x1
+ 1571 0263 38       		.byte	0x38
+ 1572 0264 01       		.byte	0x1
+ 1573 0265 90030000 		.4byte	.LFB2
+ 1574 0269 4C040000 		.4byte	.LFE2
+ 1575 026d F0010000 		.4byte	.LLST16
+ 1576 0271 0D       		.uleb128 0xd
+ 1577 0272 1A010000 		.4byte	.LASF27
+ 1578 0276 01       		.byte	0x1
+ 1579 0277 39       		.byte	0x39
+ 1580 0278 80020000 		.4byte	0x280
+ 1581 027c 02       		.byte	0x2
+ 1582 027d 91       		.byte	0x91
+ 1583 027e 67       		.sleb128 -25
+ 1584 027f 00       		.byte	0x0
+ 1585 0280 0F       		.uleb128 0xf
+ 1586 0281 90020000 		.4byte	0x290
+ 1587 0285 25000000 		.4byte	0x25
+ 1588 0289 10       		.uleb128 0x10
+ 1589 028a 65000000 		.4byte	0x65
+ 1590 028e 08       		.byte	0x8
+ 1591 028f 00       		.byte	0x0
+ 1592 0290 0D       		.uleb128 0xd
+ 1593 0291 EB000000 		.4byte	.LASF28
+ 1594 0295 01       		.byte	0x1
+ 1595 0296 28       		.byte	0x28
+ 1596 0297 25000000 		.4byte	0x25
+ 1597 029b 05       		.byte	0x5
+ 1598 029c 03       		.byte	0x3
+ 1599 029d 00000000 		.4byte	greenLedShadow
+ 1600 02a1 0D       		.uleb128 0xd
+ 1601 02a2 90010000 		.4byte	.LASF29
+ 1602 02a6 01       		.byte	0x1
+ 1603 02a7 29       		.byte	0x29
+ 1604 02a8 25000000 		.4byte	0x25
+ 1605 02ac 05       		.byte	0x5
+ 1606 02ad 03       		.byte	0x3
+ 1607 02ae 01000000 		.4byte	btResetShadow
+ 1608 02b2 13       		.uleb128 0x13
+ 1609 02b3 62000000 		.4byte	.LASF30
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 36
+
+
+ 1610 02b7 01       		.byte	0x1
+ 1611 02b8 22       		.byte	0x22
+ 1612 02b9 5A000000 		.4byte	0x5a
+ 1613 02bd 01       		.byte	0x1
+ 1614 02be 05       		.byte	0x5
+ 1615 02bf 03       		.byte	0x3
+ 1616 02c0 00000000 		.4byte	ver1_0
+ 1617 02c4 13       		.uleb128 0x13
+ 1618 02c5 7E000000 		.4byte	.LASF31
+ 1619 02c9 01       		.byte	0x1
+ 1620 02ca 23       		.byte	0x23
+ 1621 02cb 5A000000 		.4byte	0x5a
+ 1622 02cf 01       		.byte	0x1
+ 1623 02d0 05       		.byte	0x5
+ 1624 02d1 03       		.byte	0x3
+ 1625 02d2 00000000 		.4byte	ver1_1
+ 1626 02d6 00       		.byte	0x0
+ 1627              		.section	.debug_abbrev
+ 1628 0000 01       		.uleb128 0x1
+ 1629 0001 11       		.uleb128 0x11
+ 1630 0002 01       		.byte	0x1
+ 1631 0003 10       		.uleb128 0x10
+ 1632 0004 06       		.uleb128 0x6
+ 1633 0005 12       		.uleb128 0x12
+ 1634 0006 01       		.uleb128 0x1
+ 1635 0007 11       		.uleb128 0x11
+ 1636 0008 01       		.uleb128 0x1
+ 1637 0009 25       		.uleb128 0x25
+ 1638 000a 0E       		.uleb128 0xe
+ 1639 000b 13       		.uleb128 0x13
+ 1640 000c 0B       		.uleb128 0xb
+ 1641 000d 03       		.uleb128 0x3
+ 1642 000e 0E       		.uleb128 0xe
+ 1643 000f 1B       		.uleb128 0x1b
+ 1644 0010 0E       		.uleb128 0xe
+ 1645 0011 00       		.byte	0x0
+ 1646 0012 00       		.byte	0x0
+ 1647 0013 02       		.uleb128 0x2
+ 1648 0014 16       		.uleb128 0x16
+ 1649 0015 00       		.byte	0x0
+ 1650 0016 03       		.uleb128 0x3
+ 1651 0017 08       		.uleb128 0x8
+ 1652 0018 3A       		.uleb128 0x3a
+ 1653 0019 0B       		.uleb128 0xb
+ 1654 001a 3B       		.uleb128 0x3b
+ 1655 001b 0B       		.uleb128 0xb
+ 1656 001c 49       		.uleb128 0x49
+ 1657 001d 13       		.uleb128 0x13
+ 1658 001e 00       		.byte	0x0
+ 1659 001f 00       		.byte	0x0
+ 1660 0020 03       		.uleb128 0x3
+ 1661 0021 24       		.uleb128 0x24
+ 1662 0022 00       		.byte	0x0
+ 1663 0023 03       		.uleb128 0x3
+ 1664 0024 0E       		.uleb128 0xe
+ 1665 0025 0B       		.uleb128 0xb
+ 1666 0026 0B       		.uleb128 0xb
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 37
+
+
+ 1667 0027 3E       		.uleb128 0x3e
+ 1668 0028 0B       		.uleb128 0xb
+ 1669 0029 00       		.byte	0x0
+ 1670 002a 00       		.byte	0x0
+ 1671 002b 04       		.uleb128 0x4
+ 1672 002c 24       		.uleb128 0x24
+ 1673 002d 00       		.byte	0x0
+ 1674 002e 03       		.uleb128 0x3
+ 1675 002f 08       		.uleb128 0x8
+ 1676 0030 0B       		.uleb128 0xb
+ 1677 0031 0B       		.uleb128 0xb
+ 1678 0032 3E       		.uleb128 0x3e
+ 1679 0033 0B       		.uleb128 0xb
+ 1680 0034 00       		.byte	0x0
+ 1681 0035 00       		.byte	0x0
+ 1682 0036 05       		.uleb128 0x5
+ 1683 0037 16       		.uleb128 0x16
+ 1684 0038 00       		.byte	0x0
+ 1685 0039 03       		.uleb128 0x3
+ 1686 003a 0E       		.uleb128 0xe
+ 1687 003b 3A       		.uleb128 0x3a
+ 1688 003c 0B       		.uleb128 0xb
+ 1689 003d 3B       		.uleb128 0x3b
+ 1690 003e 0B       		.uleb128 0xb
+ 1691 003f 49       		.uleb128 0x49
+ 1692 0040 13       		.uleb128 0x13
+ 1693 0041 00       		.byte	0x0
+ 1694 0042 00       		.byte	0x0
+ 1695 0043 06       		.uleb128 0x6
+ 1696 0044 2E       		.uleb128 0x2e
+ 1697 0045 01       		.byte	0x1
+ 1698 0046 01       		.uleb128 0x1
+ 1699 0047 13       		.uleb128 0x13
+ 1700 0048 3F       		.uleb128 0x3f
+ 1701 0049 0C       		.uleb128 0xc
+ 1702 004a 03       		.uleb128 0x3
+ 1703 004b 0E       		.uleb128 0xe
+ 1704 004c 3A       		.uleb128 0x3a
+ 1705 004d 0B       		.uleb128 0xb
+ 1706 004e 3B       		.uleb128 0x3b
+ 1707 004f 0B       		.uleb128 0xb
+ 1708 0050 27       		.uleb128 0x27
+ 1709 0051 0C       		.uleb128 0xc
+ 1710 0052 11       		.uleb128 0x11
+ 1711 0053 01       		.uleb128 0x1
+ 1712 0054 12       		.uleb128 0x12
+ 1713 0055 01       		.uleb128 0x1
+ 1714 0056 40       		.uleb128 0x40
+ 1715 0057 0A       		.uleb128 0xa
+ 1716 0058 00       		.byte	0x0
+ 1717 0059 00       		.byte	0x0
+ 1718 005a 07       		.uleb128 0x7
+ 1719 005b 05       		.uleb128 0x5
+ 1720 005c 00       		.byte	0x0
+ 1721 005d 03       		.uleb128 0x3
+ 1722 005e 08       		.uleb128 0x8
+ 1723 005f 3A       		.uleb128 0x3a
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 38
+
+
+ 1724 0060 0B       		.uleb128 0xb
+ 1725 0061 3B       		.uleb128 0x3b
+ 1726 0062 0B       		.uleb128 0xb
+ 1727 0063 49       		.uleb128 0x49
+ 1728 0064 13       		.uleb128 0x13
+ 1729 0065 02       		.uleb128 0x2
+ 1730 0066 06       		.uleb128 0x6
+ 1731 0067 00       		.byte	0x0
+ 1732 0068 00       		.byte	0x0
+ 1733 0069 08       		.uleb128 0x8
+ 1734 006a 2E       		.uleb128 0x2e
+ 1735 006b 01       		.byte	0x1
+ 1736 006c 01       		.uleb128 0x1
+ 1737 006d 13       		.uleb128 0x13
+ 1738 006e 3F       		.uleb128 0x3f
+ 1739 006f 0C       		.uleb128 0xc
+ 1740 0070 03       		.uleb128 0x3
+ 1741 0071 0E       		.uleb128 0xe
+ 1742 0072 3A       		.uleb128 0x3a
+ 1743 0073 0B       		.uleb128 0xb
+ 1744 0074 3B       		.uleb128 0x3b
+ 1745 0075 05       		.uleb128 0x5
+ 1746 0076 27       		.uleb128 0x27
+ 1747 0077 0C       		.uleb128 0xc
+ 1748 0078 11       		.uleb128 0x11
+ 1749 0079 01       		.uleb128 0x1
+ 1750 007a 12       		.uleb128 0x12
+ 1751 007b 01       		.uleb128 0x1
+ 1752 007c 40       		.uleb128 0x40
+ 1753 007d 0A       		.uleb128 0xa
+ 1754 007e 00       		.byte	0x0
+ 1755 007f 00       		.byte	0x0
+ 1756 0080 09       		.uleb128 0x9
+ 1757 0081 05       		.uleb128 0x5
+ 1758 0082 00       		.byte	0x0
+ 1759 0083 03       		.uleb128 0x3
+ 1760 0084 0E       		.uleb128 0xe
+ 1761 0085 3A       		.uleb128 0x3a
+ 1762 0086 0B       		.uleb128 0xb
+ 1763 0087 3B       		.uleb128 0x3b
+ 1764 0088 05       		.uleb128 0x5
+ 1765 0089 49       		.uleb128 0x49
+ 1766 008a 13       		.uleb128 0x13
+ 1767 008b 02       		.uleb128 0x2
+ 1768 008c 06       		.uleb128 0x6
+ 1769 008d 00       		.byte	0x0
+ 1770 008e 00       		.byte	0x0
+ 1771 008f 0A       		.uleb128 0xa
+ 1772 0090 2E       		.uleb128 0x2e
+ 1773 0091 01       		.byte	0x1
+ 1774 0092 01       		.uleb128 0x1
+ 1775 0093 13       		.uleb128 0x13
+ 1776 0094 3F       		.uleb128 0x3f
+ 1777 0095 0C       		.uleb128 0xc
+ 1778 0096 03       		.uleb128 0x3
+ 1779 0097 0E       		.uleb128 0xe
+ 1780 0098 3A       		.uleb128 0x3a
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 39
+
+
+ 1781 0099 0B       		.uleb128 0xb
+ 1782 009a 3B       		.uleb128 0x3b
+ 1783 009b 05       		.uleb128 0x5
+ 1784 009c 27       		.uleb128 0x27
+ 1785 009d 0C       		.uleb128 0xc
+ 1786 009e 11       		.uleb128 0x11
+ 1787 009f 01       		.uleb128 0x1
+ 1788 00a0 12       		.uleb128 0x12
+ 1789 00a1 01       		.uleb128 0x1
+ 1790 00a2 40       		.uleb128 0x40
+ 1791 00a3 06       		.uleb128 0x6
+ 1792 00a4 00       		.byte	0x0
+ 1793 00a5 00       		.byte	0x0
+ 1794 00a6 0B       		.uleb128 0xb
+ 1795 00a7 2E       		.uleb128 0x2e
+ 1796 00a8 00       		.byte	0x0
+ 1797 00a9 3F       		.uleb128 0x3f
+ 1798 00aa 0C       		.uleb128 0xc
+ 1799 00ab 03       		.uleb128 0x3
+ 1800 00ac 0E       		.uleb128 0xe
+ 1801 00ad 3A       		.uleb128 0x3a
+ 1802 00ae 0B       		.uleb128 0xb
+ 1803 00af 3B       		.uleb128 0x3b
+ 1804 00b0 05       		.uleb128 0x5
+ 1805 00b1 27       		.uleb128 0x27
+ 1806 00b2 0C       		.uleb128 0xc
+ 1807 00b3 11       		.uleb128 0x11
+ 1808 00b4 01       		.uleb128 0x1
+ 1809 00b5 12       		.uleb128 0x12
+ 1810 00b6 01       		.uleb128 0x1
+ 1811 00b7 40       		.uleb128 0x40
+ 1812 00b8 06       		.uleb128 0x6
+ 1813 00b9 00       		.byte	0x0
+ 1814 00ba 00       		.byte	0x0
+ 1815 00bb 0C       		.uleb128 0xc
+ 1816 00bc 2E       		.uleb128 0x2e
+ 1817 00bd 01       		.byte	0x1
+ 1818 00be 01       		.uleb128 0x1
+ 1819 00bf 13       		.uleb128 0x13
+ 1820 00c0 3F       		.uleb128 0x3f
+ 1821 00c1 0C       		.uleb128 0xc
+ 1822 00c2 03       		.uleb128 0x3
+ 1823 00c3 0E       		.uleb128 0xe
+ 1824 00c4 3A       		.uleb128 0x3a
+ 1825 00c5 0B       		.uleb128 0xb
+ 1826 00c6 3B       		.uleb128 0x3b
+ 1827 00c7 0B       		.uleb128 0xb
+ 1828 00c8 27       		.uleb128 0x27
+ 1829 00c9 0C       		.uleb128 0xc
+ 1830 00ca 49       		.uleb128 0x49
+ 1831 00cb 13       		.uleb128 0x13
+ 1832 00cc 11       		.uleb128 0x11
+ 1833 00cd 01       		.uleb128 0x1
+ 1834 00ce 12       		.uleb128 0x12
+ 1835 00cf 01       		.uleb128 0x1
+ 1836 00d0 40       		.uleb128 0x40
+ 1837 00d1 06       		.uleb128 0x6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 40
+
+
+ 1838 00d2 00       		.byte	0x0
+ 1839 00d3 00       		.byte	0x0
+ 1840 00d4 0D       		.uleb128 0xd
+ 1841 00d5 34       		.uleb128 0x34
+ 1842 00d6 00       		.byte	0x0
+ 1843 00d7 03       		.uleb128 0x3
+ 1844 00d8 0E       		.uleb128 0xe
+ 1845 00d9 3A       		.uleb128 0x3a
+ 1846 00da 0B       		.uleb128 0xb
+ 1847 00db 3B       		.uleb128 0x3b
+ 1848 00dc 0B       		.uleb128 0xb
+ 1849 00dd 49       		.uleb128 0x49
+ 1850 00de 13       		.uleb128 0x13
+ 1851 00df 02       		.uleb128 0x2
+ 1852 00e0 0A       		.uleb128 0xa
+ 1853 00e1 00       		.byte	0x0
+ 1854 00e2 00       		.byte	0x0
+ 1855 00e3 0E       		.uleb128 0xe
+ 1856 00e4 34       		.uleb128 0x34
+ 1857 00e5 00       		.byte	0x0
+ 1858 00e6 03       		.uleb128 0x3
+ 1859 00e7 0E       		.uleb128 0xe
+ 1860 00e8 3A       		.uleb128 0x3a
+ 1861 00e9 0B       		.uleb128 0xb
+ 1862 00ea 3B       		.uleb128 0x3b
+ 1863 00eb 0B       		.uleb128 0xb
+ 1864 00ec 49       		.uleb128 0x49
+ 1865 00ed 13       		.uleb128 0x13
+ 1866 00ee 02       		.uleb128 0x2
+ 1867 00ef 06       		.uleb128 0x6
+ 1868 00f0 00       		.byte	0x0
+ 1869 00f1 00       		.byte	0x0
+ 1870 00f2 0F       		.uleb128 0xf
+ 1871 00f3 01       		.uleb128 0x1
+ 1872 00f4 01       		.byte	0x1
+ 1873 00f5 01       		.uleb128 0x1
+ 1874 00f6 13       		.uleb128 0x13
+ 1875 00f7 49       		.uleb128 0x49
+ 1876 00f8 13       		.uleb128 0x13
+ 1877 00f9 00       		.byte	0x0
+ 1878 00fa 00       		.byte	0x0
+ 1879 00fb 10       		.uleb128 0x10
+ 1880 00fc 21       		.uleb128 0x21
+ 1881 00fd 00       		.byte	0x0
+ 1882 00fe 49       		.uleb128 0x49
+ 1883 00ff 13       		.uleb128 0x13
+ 1884 0100 2F       		.uleb128 0x2f
+ 1885 0101 0B       		.uleb128 0xb
+ 1886 0102 00       		.byte	0x0
+ 1887 0103 00       		.byte	0x0
+ 1888 0104 11       		.uleb128 0x11
+ 1889 0105 2E       		.uleb128 0x2e
+ 1890 0106 01       		.byte	0x1
+ 1891 0107 01       		.uleb128 0x1
+ 1892 0108 13       		.uleb128 0x13
+ 1893 0109 3F       		.uleb128 0x3f
+ 1894 010a 0C       		.uleb128 0xc
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 41
+
+
+ 1895 010b 03       		.uleb128 0x3
+ 1896 010c 0E       		.uleb128 0xe
+ 1897 010d 3A       		.uleb128 0x3a
+ 1898 010e 0B       		.uleb128 0xb
+ 1899 010f 3B       		.uleb128 0x3b
+ 1900 0110 0B       		.uleb128 0xb
+ 1901 0111 27       		.uleb128 0x27
+ 1902 0112 0C       		.uleb128 0xc
+ 1903 0113 11       		.uleb128 0x11
+ 1904 0114 01       		.uleb128 0x1
+ 1905 0115 12       		.uleb128 0x12
+ 1906 0116 01       		.uleb128 0x1
+ 1907 0117 40       		.uleb128 0x40
+ 1908 0118 06       		.uleb128 0x6
+ 1909 0119 00       		.byte	0x0
+ 1910 011a 00       		.byte	0x0
+ 1911 011b 12       		.uleb128 0x12
+ 1912 011c 05       		.uleb128 0x5
+ 1913 011d 00       		.byte	0x0
+ 1914 011e 03       		.uleb128 0x3
+ 1915 011f 0E       		.uleb128 0xe
+ 1916 0120 3A       		.uleb128 0x3a
+ 1917 0121 0B       		.uleb128 0xb
+ 1918 0122 3B       		.uleb128 0x3b
+ 1919 0123 0B       		.uleb128 0xb
+ 1920 0124 49       		.uleb128 0x49
+ 1921 0125 13       		.uleb128 0x13
+ 1922 0126 02       		.uleb128 0x2
+ 1923 0127 06       		.uleb128 0x6
+ 1924 0128 00       		.byte	0x0
+ 1925 0129 00       		.byte	0x0
+ 1926 012a 13       		.uleb128 0x13
+ 1927 012b 34       		.uleb128 0x34
+ 1928 012c 00       		.byte	0x0
+ 1929 012d 03       		.uleb128 0x3
+ 1930 012e 0E       		.uleb128 0xe
+ 1931 012f 3A       		.uleb128 0x3a
+ 1932 0130 0B       		.uleb128 0xb
+ 1933 0131 3B       		.uleb128 0x3b
+ 1934 0132 0B       		.uleb128 0xb
+ 1935 0133 49       		.uleb128 0x49
+ 1936 0134 13       		.uleb128 0x13
+ 1937 0135 3F       		.uleb128 0x3f
+ 1938 0136 0C       		.uleb128 0xc
+ 1939 0137 02       		.uleb128 0x2
+ 1940 0138 0A       		.uleb128 0xa
+ 1941 0139 00       		.byte	0x0
+ 1942 013a 00       		.byte	0x0
+ 1943 013b 00       		.byte	0x0
+ 1944              		.section	.debug_pubnames,"",%progbits
+ 1945 0000 A4000000 		.4byte	0xa4
+ 1946 0004 0200     		.2byte	0x2
+ 1947 0006 00000000 		.4byte	.Ldebug_info0
+ 1948 000a D7020000 		.4byte	0x2d7
+ 1949 000e 6C000000 		.4byte	0x6c
+ 1950 0012 73657442 		.ascii	"setBuzzer\000"
+ 1950      757A7A65 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 42
+
+
+ 1950      7200
+ 1951 001c 92000000 		.4byte	0x92
+ 1952 0020 73656C65 		.ascii	"selectLCD\000"
+ 1952      63744C43 
+ 1952      4400
+ 1953 002a BB000000 		.4byte	0xbb
+ 1954 002e 73656E64 		.ascii	"sendToLCD\000"
+ 1954      546F4C43 
+ 1954      4400
+ 1955 0038 F6000000 		.4byte	0xf6
+ 1956 003c 696E6974 		.ascii	"initSpiForLcd\000"
+ 1956      53706946 
+ 1956      6F724C63 
+ 1956      6400
+ 1957 004a 0C010000 		.4byte	0x10c
+ 1958 004e 6765744B 		.ascii	"getKeys\000"
+ 1958      65797300 
+ 1959 0056 65010000 		.4byte	0x165
+ 1960 005a 7365744C 		.ascii	"setLED\000"
+ 1960      454400
+ 1961 0061 D9010000 		.4byte	0x1d9
+ 1962 0065 72657365 		.ascii	"resetBT\000"
+ 1962      74425400 
+ 1963 006d 20020000 		.4byte	0x220
+ 1964 0071 72657365 		.ascii	"resetLCD\000"
+ 1964      744C4344 
+ 1964      00
+ 1965 007a 58020000 		.4byte	0x258
+ 1966 007e 696D6D65 		.ascii	"immediateIoInit\000"
+ 1966      64696174 
+ 1966      65496F49 
+ 1966      6E697400 
+ 1967 008e B2020000 		.4byte	0x2b2
+ 1968 0092 76657231 		.ascii	"ver1_0\000"
+ 1968      5F3000
+ 1969 0099 C4020000 		.4byte	0x2c4
+ 1970 009d 76657231 		.ascii	"ver1_1\000"
+ 1970      5F3100
+ 1971 00a4 00000000 		.4byte	0x0
+ 1972              		.section	.debug_aranges,"",%progbits
+ 1973 0000 1C000000 		.4byte	0x1c
+ 1974 0004 0200     		.2byte	0x2
+ 1975 0006 00000000 		.4byte	.Ldebug_info0
+ 1976 000a 04       		.byte	0x4
+ 1977 000b 00       		.byte	0x0
+ 1978 000c 0000     		.2byte	0x0
+ 1979 000e 0000     		.2byte	0x0
+ 1980 0010 00000000 		.4byte	.Ltext0
+ 1981 0014 4C040000 		.4byte	.Letext0-.Ltext0
+ 1982 0018 00000000 		.4byte	0x0
+ 1983 001c 00000000 		.4byte	0x0
+ 1984              		.section	.debug_str,"MS",%progbits,1
+ 1985              	.LASF17:
+ 1986 0000 7365744C 		.ascii	"setLED\000"
+ 1986      454400
+ 1987              	.LASF14:
+ 1988 0007 636F6D6D 		.ascii	"commandReadKeys\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 43
+
+
+ 1988      616E6452 
+ 1988      6561644B 
+ 1988      65797300 
+ 1989              	.LASF34:
+ 1990 0017 2F637967 		.ascii	"/cygdrive/c/eclipse/workspace/2138\000"
+ 1990      64726976 
+ 1990      652F632F 
+ 1990      65636C69 
+ 1990      7073652F 
+ 1991              	.LASF16:
+ 1992 003a 6B657953 		.ascii	"keySample\000"
+ 1992      616D706C 
+ 1992      6500
+ 1993              	.LASF20:
+ 1994 0044 636F6D6D 		.ascii	"commandLedGreen\000"
+ 1994      616E644C 
+ 1994      65644772 
+ 1994      65656E00 
+ 1995              	.LASF19:
+ 1996 0054 6C656453 		.ascii	"ledState\000"
+ 1996      74617465 
+ 1996      00
+ 1997              	.LASF12:
+ 1998 005d 64617461 		.ascii	"data\000"
+ 1998      00
+ 1999              	.LASF30:
+ 2000 0062 76657231 		.ascii	"ver1_0\000"
+ 2000      5F3000
+ 2001              	.LASF35:
+ 2002 0069 696E6974 		.ascii	"initSpiForLcd\000"
+ 2002      53706946 
+ 2002      6F724C63 
+ 2002      6400
+ 2003              	.LASF9:
+ 2004 0077 73656C65 		.ascii	"select\000"
+ 2004      637400
+ 2005              	.LASF31:
+ 2006 007e 76657231 		.ascii	"ver1_1\000"
+ 2006      5F3100
+ 2007              	.LASF21:
+ 2008 0085 636F6D6D 		.ascii	"commandLedRed\000"
+ 2008      616E644C 
+ 2008      65645265 
+ 2008      6400
+ 2009              	.LASF18:
+ 2010 0093 6C656453 		.ascii	"ledSelect\000"
+ 2010      656C6563 
+ 2010      7400
+ 2011              	.LASF0:
+ 2012 009d 756E7369 		.ascii	"unsigned char\000"
+ 2012      676E6564 
+ 2012      20636861 
+ 2012      7200
+ 2013              	.LASF6:
+ 2014 00ab 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2014      20756E73 
+ 2014      69676E65 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 44
+
+
+ 2014      6420696E 
+ 2014      7400
+ 2015              	.LASF1:
+ 2016 00bd 73686F72 		.ascii	"short unsigned int\000"
+ 2016      7420756E 
+ 2016      7369676E 
+ 2016      65642069 
+ 2016      6E7400
+ 2017              	.LASF8:
+ 2018 00d0 73656C65 		.ascii	"selectLCD\000"
+ 2018      63744C43 
+ 2018      4400
+ 2019              	.LASF13:
+ 2020 00da 6765744B 		.ascii	"getKeys\000"
+ 2020      65797300 
+ 2021              	.LASF11:
+ 2022 00e2 66697273 		.ascii	"firstBit\000"
+ 2022      74426974 
+ 2022      00
+ 2023              	.LASF28:
+ 2024 00eb 67726565 		.ascii	"greenLedShadow\000"
+ 2024      6E4C6564 
+ 2024      53686164 
+ 2024      6F7700
+ 2025              	.LASF23:
+ 2026 00fa 72657365 		.ascii	"resetFlag\000"
+ 2026      74466C61 
+ 2026      6700
+ 2027              	.LASF2:
+ 2028 0104 756E7369 		.ascii	"unsigned int\000"
+ 2028      676E6564 
+ 2028      20696E74 
+ 2028      00
+ 2029              	.LASF15:
+ 2030 0111 72656164 		.ascii	"readKeys\000"
+ 2030      4B657973 
+ 2030      00
+ 2031              	.LASF27:
+ 2032 011a 696E6974 		.ascii	"initCommand\000"
+ 2032      436F6D6D 
+ 2032      616E6400 
+ 2033              	.LASF25:
+ 2034 0126 72657365 		.ascii	"resetLCD\000"
+ 2034      744C4344 
+ 2034      00
+ 2035              	.LASF32:
+ 2036 012f 474E5520 		.ascii	"GNU C 4.1.1\000"
+ 2036      4320342E 
+ 2036      312E3100 
+ 2037              	.LASF26:
+ 2038 013b 696D6D65 		.ascii	"immediateIoInit\000"
+ 2038      64696174 
+ 2038      65496F49 
+ 2038      6E697400 
+ 2039              	.LASF10:
+ 2040 014b 73656E64 		.ascii	"sendToLCD\000"
+ 2040      546F4C43 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 45
+
+
+ 2040      4400
+ 2041              	.LASF4:
+ 2042 0155 73686F72 		.ascii	"short int\000"
+ 2042      7420696E 
+ 2042      7400
+ 2043              	.LASF24:
+ 2044 015f 636F6D6D 		.ascii	"command\000"
+ 2044      616E6400 
+ 2045              	.LASF7:
+ 2046 0167 73657442 		.ascii	"setBuzzer\000"
+ 2046      757A7A65 
+ 2046      7200
+ 2047              	.LASF3:
+ 2048 0171 7369676E 		.ascii	"signed char\000"
+ 2048      65642063 
+ 2048      68617200 
+ 2049              	.LASF22:
+ 2050 017d 72657365 		.ascii	"resetBT\000"
+ 2050      74425400 
+ 2051              	.LASF33:
+ 2052 0185 68772E63 		.ascii	"hw.c\000"
+ 2052      00
+ 2053              	.LASF5:
+ 2054 018a 74426F6F 		.ascii	"tBool\000"
+ 2054      6C00
+ 2055              	.LASF29:
+ 2056 0190 62745265 		.ascii	"btResetShadow\000"
+ 2056      73657453 
+ 2056      6861646F 
+ 2056      7700
+ 2057              		.ident	"GCC: (GNU) 4.1.1"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 46
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 hw.c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:16     .text:00000000 setBuzzer
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:47     .text:0000001c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:56     .text:00000024 selectLCD
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:53     .text:00000024 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:109    .text:00000058 $d
+                            *COM*:00000001 ver1_0
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:119    .text:00000064 sendToLCD
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:116    .text:00000064 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:205    .text:000000c4 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:219    .text:000000e0 initSpiForLcd
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:216    .text:000000e0 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:269    .text:00000120 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:282    .text:00000138 getKeys
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:279    .text:00000138 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:416    .text:000001e0 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:425    .text:000001e8 setLED
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:422    .text:000001e8 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:559    .text:00000288 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:878    .rodata:00000002 C.6.1502
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:873    .rodata:00000000 C.7.1503
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:904    .bss:00000000 greenLedShadow
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:906    .bss:00000001 btResetShadow
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:573    .text:000002a4 resetBT
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:570    .text:000002a4 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:656    .text:00000308 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:883    .rodata:00000004 C.3.1484
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:669    .text:00000320 resetLCD
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:666    .text:00000320 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:736    .text:00000380 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:888    .rodata:00000006 C.1.1476
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:747    .text:00000390 immediateIoInit
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:744    .text:00000390 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:859    .text:00000428 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:893    .rodata:00000008 C.0.1455
+                            *COM*:00000001 ver1_1
+                             .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+pca9532
+memcpy
+osSleep
+i2cInit

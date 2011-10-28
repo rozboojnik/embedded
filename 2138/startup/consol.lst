@@ -1,0 +1,4208 @@
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 1
+
+
+   1              		.file	"consol.c"
+   2              		.section	.debug_abbrev,"",%progbits
+   3              	.Ldebug_abbrev0:
+   4              		.section	.debug_info,"",%progbits
+   5              	.Ldebug_info0:
+   6              		.section	.debug_line,"",%progbits
+   7              	.Ldebug_line0:
+   8 0000 86010000 		.text
+   8      02006300 
+   8      00000201 
+   8      FB0E0D00 
+   8      01010101 
+   9              	.Ltext0:
+  10              		.global	__umodsi3
+  11              		.global	__udivsi3
+  12              		.section	.rodata.str1.4,"aMS",%progbits,1
+  13              		.align	2
+  14              	.LC0:
+  15 0000 30313233 		.ascii	"0123456789abcdef\000"
+  15      34353637 
+  15      38396162 
+  15      63646566 
+  15      00
+  16              		.text
+  17              		.align	2
+  18              		.type	printNum, %function
+  19              	printNum:
+  20              	.LFB2:
+  21              		.file 1 "consol.c"
+   1:consol.c      **** /******************************************************************************
+   2:consol.c      ****  *
+   3:consol.c      ****  * Copyright:
+   4:consol.c      ****  *    (C) 2000 - 2005 Embedded Artists AB
+   5:consol.c      ****  *
+   6:consol.c      ****  * Description:
+   7:consol.c      ****  *    Framework specific implementation of consol
+   8:consol.c      ****  *
+   9:consol.c      ****  *****************************************************************************/
+  10:consol.c      **** 
+  11:consol.c      **** 
+  12:consol.c      **** /******************************************************************************
+  13:consol.c      ****  * Includes
+  14:consol.c      ****  *****************************************************************************/
+  15:consol.c      **** 
+  16:consol.c      **** #include "lpc2xxx.h"                            /* LPC2xxx definitions */
+  17:consol.c      **** #include <string.h>
+  18:consol.c      **** #include <stdlib.h>
+  19:consol.c      **** #include "config.h"
+  20:consol.c      **** #include "consol.h"
+  21:consol.c      **** #include "framework.h"
+  22:consol.c      **** 
+  23:consol.c      **** #if (CONSOLE_API_PRINTF == 1) || (CONSOLE_API_SCANF == 1) //own simple printf() or scanf()
+  24:consol.c      **** #include <stdarg.h>
+  25:consol.c      **** #endif
+  26:consol.c      **** 
+  27:consol.c      **** #define UART_DLL_VALUE (unsigned short)((PCLK / (CONSOL_BITRATE * 16.0)) + 0.5)
+  28:consol.c      **** 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 2
+
+
+  29:consol.c      **** #if (CONSOLE_API_SCANF == 1)  //SIMPLE
+  30:consol.c      **** #define __isalpha(c) (c >'9')
+  31:consol.c      **** #define __isupper(c) !(c & 0x20)
+  32:consol.c      **** #define __ishex(c) (((c >= '0')&&(c <= '9'))||((c >= 'A')&&(c <= 'F')))
+  33:consol.c      **** #define __ascii2hex(c) ((c <= '9')? c-'0': c-'A'+10)
+  34:consol.c      **** #endif
+  35:consol.c      **** 
+  36:consol.c      **** /******************************************************************************
+  37:consol.c      ****  * Implementation of local functions
+  38:consol.c      ****  *****************************************************************************/
+  39:consol.c      **** 
+  40:consol.c      **** #if (CONSOLE_API_PRINTF == 1)  //OWN_PRINTF
+  41:consol.c      **** /*****************************************************************************
+  42:consol.c      ****  *
+  43:consol.c      ****  * Description:
+  44:consol.c      ****  *    Print a number. 
+  45:consol.c      ****  *
+  46:consol.c      ****  * Params:
+  47:consol.c      ****  *    [in] outputFnk - Output function where characters to be printed are 
+  48:consol.c      ****  *                      sent 
+  49:consol.c      ****  * 
+  50:consol.c      ****  *                Params (callback):
+  51:consol.c      ****  *                   ch - Character to be printed 
+  52:consol.c      ****  *    [in] number    - Number to be printed 
+  53:consol.c      ****  *    [in] base      - Base when printing number (2-16) 
+  54:consol.c      ****  *
+  55:consol.c      ****  ****************************************************************************/
+  56:consol.c      **** static void
+  57:consol.c      **** printNum(void (*outputFnk) (char ch),
+  58:consol.c      ****          unsigned int number,
+  59:consol.c      ****          unsigned int base)
+  60:consol.c      **** {
+  22              		.loc 1 60 0
+  23              		@ Function supports interworking.
+  24              		@ args = 0, pretend = 0, frame = 52
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26              	.LVL0:
+  27 0000 F0402DE9 		stmfd	sp!, {r4, r5, r6, r7, lr}
+  28              	.LCFI0:
+  29 0004 34D04DE2 		sub	sp, sp, #52
+  30              	.LCFI1:
+  31              		.loc 1 60 0
+  32 0008 0070A0E1 		mov	r7, r0
+  33 000c 0140A0E1 		mov	r4, r1
+  34 0010 0260A0E1 		mov	r6, r2
+  61:consol.c      **** 	char *p;
+  62:consol.c      **** 	char  buf[33];
+  63:consol.c      **** 	char  hexChars[] = "0123456789abcdef";
+  35              		.loc 1 63 0
+  36 0014 23008DE2 		add	r0, sp, #35
+  37              	.LVL1:
+  38 0018 60109FE5 		ldr	r1, .L11
+  39              	.LVL2:
+  40 001c 1120A0E3 		mov	r2, #17
+  41              	.LVL3:
+  42 0020 FEFFFFEB 		bl	memcpy
+  43 0024 02508DE2 		add	r5, sp, #2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 3
+
+
+  44              	.LVL4:
+  45              	.L2:
+  64:consol.c      **** 	
+  65:consol.c      **** 	p = buf;
+  66:consol.c      **** 	
+  67:consol.c      **** 	do {
+  68:consol.c      **** 		*p++ = hexChars[number % base];
+  46              		.loc 1 68 0
+  47 0028 0400A0E1 		mov	r0, r4
+  48 002c 0610A0E1 		mov	r1, r6
+  49 0030 FEFFFFEB 		bl	__umodsi3
+  50 0034 34308DE2 		add	r3, sp, #52
+  51 0038 000083E0 		add	r0, r3, r0
+  52 003c 113050E5 		ldrb	r3, [r0, #-17]	@ zero_extendqisi2
+  69:consol.c      **** 	} while (number /= base);
+  53              		.loc 1 69 0
+  54 0040 0610A0E1 		mov	r1, r6
+  55 0044 0400A0E1 		mov	r0, r4
+  56              		.loc 1 68 0
+  57 0048 0130C5E4 		strb	r3, [r5], #1
+  58              		.loc 1 69 0
+  59 004c FEFFFFEB 		bl	__udivsi3
+  60 0050 004050E2 		subs	r4, r0, #0
+  61 0054 F3FFFF1A 		bne	.L2
+  62 0058 0540A0E1 		mov	r4, r5
+  63              	.LVL5:
+  64              	.L4:
+  70:consol.c      **** 	
+  71:consol.c      **** 	do {
+  72:consol.c      **** 		outputFnk(*--p);
+  65              		.loc 1 72 0
+  66 005c 010074E5 		ldrb	r0, [r4, #-1]!	@ zero_extendqisi2
+  67 0060 0FE0A0E1 		mov	lr, pc
+  68 0064 17FF2FE1 		bx	r7
+  73:consol.c      **** 	} while (p > buf);
+  69              		.loc 1 73 0
+  70 0068 02308DE2 		add	r3, sp, #2
+  71 006c 030054E1 		cmp	r4, r3
+  72 0070 F9FFFF8A 		bhi	.L4
+  74:consol.c      **** }
+  73              		.loc 1 74 0
+  74 0074 34D08DE2 		add	sp, sp, #52
+  75 0078 F040BDE8 		ldmfd	sp!, {r4, r5, r6, r7, lr}
+  76 007c 1EFF2FE1 		bx	lr
+  77              	.L12:
+  78              		.align	2
+  79              	.L11:
+  80 0080 00000000 		.word	.LC0
+  81              	.LFE2:
+  82              		.size	printNum, .-printNum
+  83              		.align	2
+  84              		.global	consolInit
+  85              		.type	consolInit, %function
+  86              	consolInit:
+  87              	.LFB4:
+  75:consol.c      **** 
+  76:consol.c      **** /*****************************************************************************
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 4
+
+
+  77:consol.c      ****  *
+  78:consol.c      ****  * Description:
+  79:consol.c      ****  *    A simple implementation of printf that uses a minimum of stack space.
+  80:consol.c      ****  *
+  81:consol.c      ****  * Params:
+  82:consol.c      ****  *    [in] outputFnk - Output function where characters to be printed are 
+  83:consol.c      ****  *                      sent 
+  84:consol.c      ****  * 
+  85:consol.c      ****  *                Params (callback):
+  86:consol.c      ****  *                   ch - Character to be printed 
+  87:consol.c      ****  *    [in] fmt       - Format string that specifies what to be printed 
+  88:consol.c      ****  *    [in] ap        - Structure that hold information about the variable 
+  89:consol.c      ****  *                     number of parameters 
+  90:consol.c      ****  *
+  91:consol.c      ****  ****************************************************************************/
+  92:consol.c      **** static void
+  93:consol.c      **** simplePrint(void         (*outputFnk) (char ch),
+  94:consol.c      ****             const char * fmt,
+  95:consol.c      ****             va_list      ap)
+  96:consol.c      **** {
+  97:consol.c      ****   char          *p;
+  98:consol.c      ****   char           ch;
+  99:consol.c      ****   unsigned long  ul;
+ 100:consol.c      ****   unsigned char  lflag;
+ 101:consol.c      **** 
+ 102:consol.c      ****   for (;;)
+ 103:consol.c      ****   {
+ 104:consol.c      ****     while ((ch = *fmt++) != '%')
+ 105:consol.c      ****     {
+ 106:consol.c      ****       if (ch == '\0')
+ 107:consol.c      ****         	return;
+ 108:consol.c      ****       outputFnk(ch);
+ 109:consol.c      ****     }
+ 110:consol.c      ****     lflag = 0;
+ 111:consol.c      **** 
+ 112:consol.c      **** reswitch:
+ 113:consol.c      **** 
+ 114:consol.c      ****     switch (ch = *fmt++)
+ 115:consol.c      ****     {
+ 116:consol.c      ****     case '\0':
+ 117:consol.c      ****       return;
+ 118:consol.c      **** 
+ 119:consol.c      ****     case 'l':
+ 120:consol.c      ****       lflag = 1;
+ 121:consol.c      ****       goto reswitch;
+ 122:consol.c      **** 
+ 123:consol.c      ****     case 'c':
+ 124:consol.c      **** 	    ch = va_arg(ap, unsigned int);
+ 125:consol.c      **** 	    outputFnk(ch & 0x7f);
+ 126:consol.c      **** 	    break;
+ 127:consol.c      **** 
+ 128:consol.c      ****     case 's':
+ 129:consol.c      ****       p = va_arg(ap, char *);
+ 130:consol.c      ****       while ((ch = *p++) != 0)
+ 131:consol.c      ****         outputFnk(ch);
+ 132:consol.c      ****       break;
+ 133:consol.c      **** 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 5
+
+
+ 134:consol.c      ****     case 'd':
+ 135:consol.c      ****       ul = lflag ? va_arg(ap, long) : va_arg(ap, unsigned int);
+ 136:consol.c      ****       if ((long)ul < 0)
+ 137:consol.c      ****       {
+ 138:consol.c      ****         outputFnk('-');
+ 139:consol.c      ****         ul = -(long)ul;
+ 140:consol.c      ****       }
+ 141:consol.c      ****       printNum(outputFnk, ul, 10);
+ 142:consol.c      ****       break;
+ 143:consol.c      **** 
+ 144:consol.c      ****     case 'o':
+ 145:consol.c      ****       ul = va_arg(ap, unsigned int);
+ 146:consol.c      ****       printNum(outputFnk, ul, 8);
+ 147:consol.c      ****       break;
+ 148:consol.c      **** 
+ 149:consol.c      ****     case 'u':
+ 150:consol.c      ****       ul = va_arg(ap, unsigned int);
+ 151:consol.c      ****       printNum(outputFnk, ul, 10);
+ 152:consol.c      ****       break;
+ 153:consol.c      **** 
+ 154:consol.c      ****     case 'p':
+ 155:consol.c      ****       outputFnk('0');
+ 156:consol.c      ****       outputFnk('x');
+ 157:consol.c      ****       lflag = 1;
+ 158:consol.c      ****       // fall through
+ 159:consol.c      **** 
+ 160:consol.c      ****     case 'x':
+ 161:consol.c      ****       ul = va_arg(ap, unsigned int);
+ 162:consol.c      ****       printNum(outputFnk, ul, 16);
+ 163:consol.c      ****       break;
+ 164:consol.c      **** 
+ 165:consol.c      ****     default:
+ 166:consol.c      **** //      outputFnk('%');
+ 167:consol.c      ****       if (lflag)
+ 168:consol.c      ****         outputFnk('l');
+ 169:consol.c      ****       outputFnk(ch);
+ 170:consol.c      ****     }
+ 171:consol.c      ****   }
+ 172:consol.c      ****   va_end(ap);
+ 173:consol.c      **** }
+ 174:consol.c      **** #endif
+ 175:consol.c      **** 
+ 176:consol.c      **** /******************************************************************************
+ 177:consol.c      ****  * Implementation of public functions
+ 178:consol.c      ****  *****************************************************************************/
+ 179:consol.c      **** 
+ 180:consol.c      **** 
+ 181:consol.c      **** /*****************************************************************************
+ 182:consol.c      ****  *
+ 183:consol.c      ****  * Description:
+ 184:consol.c      ****  *    Initializes the consol channel (init UART, including setting bitrate and 
+ 185:consol.c      ****  *    GPIO). 
+ 186:consol.c      ****  *
+ 187:consol.c      ****  ****************************************************************************/
+ 188:consol.c      **** void
+ 189:consol.c      **** consolInit(void)
+ 190:consol.c      **** {
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 6
+
+
+  88              		.loc 1 190 0
+  89              		@ Function supports interworking.
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+ 191:consol.c      **** #if (CONSOL_UART == 0)
+ 192:consol.c      ****   //enable uart #0 pins in GPIO (P0.0 = TxD0, P0.1 = RxD0)
+ 193:consol.c      ****   PINSEL0 = (PINSEL0 & 0xfffffff0) | 0x00000005;
+  93              		.loc 1 193 0
+  94 0084 44009FE5 		ldr	r0, .L15
+  95 0088 003090E5 		ldr	r3, [r0, #0]
+  96 008c 0F30C3E3 		bic	r3, r3, #15
+ 194:consol.c      **** #else
+ 195:consol.c      ****   //enable uart #1 pins in GPIO (P0.8 = TxD1, P9.1 = RxD1)
+ 196:consol.c      ****   PINSEL0 = (PINSEL0 & 0xfff0ffff) | 0x00050000;
+ 197:consol.c      **** #endif
+ 198:consol.c      **** 
+ 199:consol.c      ****   //initialize bitrate (by first enable DL registers, DLAB-bit = 1)
+ 200:consol.c      ****   UART_LCR = 0x80;
+  97              		.loc 1 200 0
+  98 0090 3C209FE5 		ldr	r2, .L15+4
+  99              		.loc 1 193 0
+ 100 0094 053083E3 		orr	r3, r3, #5
+ 101 0098 003080E5 		str	r3, [r0, #0]
+ 102              		.loc 1 200 0
+ 103 009c 8030A0E3 		mov	r3, #128
+ 104 00a0 0C3082E5 		str	r3, [r2, #12]
+ 201:consol.c      ****   UART_DLL = (unsigned char)(UART_DLL_VALUE & 0x00ff);
+ 105              		.loc 1 201 0
+ 106 00a4 0830A0E3 		mov	r3, #8
+ 107 00a8 003082E5 		str	r3, [r2, #0]
+ 202:consol.c      ****   UART_DLM = (unsigned char)(UART_DLL_VALUE>>8);
+ 108              		.loc 1 202 0
+ 109 00ac 0010A0E3 		mov	r1, #0
+ 203:consol.c      ****   UART_LCR = 0x00;
+ 204:consol.c      **** 
+ 205:consol.c      ****   //initialize LCR: 8N1
+ 206:consol.c      ****   UART_LCR = 0x03;
+ 110              		.loc 1 206 0
+ 111 00b0 0330A0E3 		mov	r3, #3
+ 112              		.loc 1 202 0
+ 113 00b4 041082E5 		str	r1, [r2, #4]
+ 114              		.loc 1 203 0
+ 115 00b8 0C1082E5 		str	r1, [r2, #12]
+ 116              		.loc 1 206 0
+ 117 00bc 0C3082E5 		str	r3, [r2, #12]
+ 207:consol.c      **** 
+ 208:consol.c      ****   //reset FIFO and enable FIFO
+ 209:consol.c      ****   UART_FCR = 0x07;
+ 118              		.loc 1 209 0
+ 119 00c0 043083E2 		add	r3, r3, #4
+ 120 00c4 083082E5 		str	r3, [r2, #8]
+ 121              		.loc 1 190 0
+ 122              		@ lr needed for prologue
+ 210:consol.c      **** 
+ 211:consol.c      ****   //clear interrupt bits
+ 212:consol.c      ****   UART_IER = 0x00;
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 7
+
+
+ 123              		.loc 1 212 0
+ 124 00c8 041082E5 		str	r1, [r2, #4]
+ 213:consol.c      **** }
+ 125              		.loc 1 213 0
+ 126 00cc 1EFF2FE1 		bx	lr
+ 127              	.L16:
+ 128              		.align	2
+ 129              	.L15:
+ 130 00d0 00C002E0 		.word	-536690688
+ 131 00d4 00C000E0 		.word	-536821760
+ 132              	.LFE4:
+ 133              		.size	consolInit, .-consolInit
+ 134              		.align	2
+ 135              		.global	consolSendChar
+ 136              		.type	consolSendChar, %function
+ 137              	consolSendChar:
+ 138              	.LFB5:
+ 214:consol.c      **** 
+ 215:consol.c      **** /*****************************************************************************
+ 216:consol.c      ****  *
+ 217:consol.c      ****  * Description:
+ 218:consol.c      ****  *    Blocking consol output routine, i.e., the routine waits until the uart 
+ 219:consol.c      ****  *    buffer is free and then sends the character. 
+ 220:consol.c      ****  *
+ 221:consol.c      ****  * Params:
+ 222:consol.c      ****  *    [in] charToSend - The character to print (to the consol) 
+ 223:consol.c      ****  *
+ 224:consol.c      ****  ****************************************************************************/
+ 225:consol.c      **** void
+ 226:consol.c      **** consolSendChar(char charToSend)
+ 227:consol.c      **** {
+ 139              		.loc 1 227 0
+ 140              		@ Function supports interworking.
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143              		@ link register save eliminated.
+ 144              	.LVL6:
+ 145              		@ lr needed for prologue
+ 146 00d8 FF0000E2 		and	r0, r0, #255
+ 147              	.L19:
+ 228:consol.c      ****   //Wait until THR is empty
+ 229:consol.c      ****   while(!(UART_LSR & 0x20))
+ 148              		.loc 1 229 0
+ 149 00dc 10209FE5 		ldr	r2, .L24
+ 150 00e0 143092E5 		ldr	r3, [r2, #20]
+ 151 00e4 200013E3 		tst	r3, #32
+ 152 00e8 FBFFFF0A 		beq	.L19
+ 230:consol.c      ****     ;
+ 231:consol.c      ****   UART_THR = charToSend;
+ 153              		.loc 1 231 0
+ 154 00ec 000082E5 		str	r0, [r2, #0]
+ 232:consol.c      **** }
+ 155              		.loc 1 232 0
+ 156 00f0 1EFF2FE1 		bx	lr
+ 157              	.L25:
+ 158              		.align	2
+ 159              	.L24:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 8
+
+
+ 160 00f4 00C000E0 		.word	-536821760
+ 161              	.LFE5:
+ 162              		.size	consolSendChar, .-consolSendChar
+ 163              		.align	2
+ 164              		.global	consolSendCh
+ 165              		.type	consolSendCh, %function
+ 166              	consolSendCh:
+ 167              	.LFB6:
+ 233:consol.c      **** 
+ 234:consol.c      **** /*****************************************************************************
+ 235:consol.c      ****  *
+ 236:consol.c      ****  * Description:
+ 237:consol.c      ****  *    Consol output routine that adds extra line feeds at line breaks. 
+ 238:consol.c      ****  *
+ 239:consol.c      ****  * Params:
+ 240:consol.c      ****  *    [in] charToSend - The character to print (to the consol) 
+ 241:consol.c      ****  *
+ 242:consol.c      ****  ****************************************************************************/
+ 243:consol.c      **** void
+ 244:consol.c      **** consolSendCh(char charToSend)
+ 245:consol.c      **** {
+ 168              		.loc 1 245 0
+ 169              		@ Function supports interworking.
+ 170              		@ args = 0, pretend = 0, frame = 0
+ 171              		@ frame_needed = 0, uses_anonymous_args = 0
+ 172              		@ link register save eliminated.
+ 173              	.LVL7:
+ 174 00f8 FF0000E2 		and	r0, r0, #255
+ 246:consol.c      ****   if(charToSend == '\n')
+ 175              		.loc 1 246 0
+ 176 00fc 0A0050E3 		cmp	r0, #10
+ 177              		.loc 1 245 0
+ 178              		@ lr needed for prologue
+ 179              		.loc 1 246 0
+ 180 0100 0500001A 		bne	.L34
+ 181              	.L33:
+ 182              	.LBB8:
+ 183              	.LBB9:
+ 184              		.loc 1 229 0
+ 185 0104 2C209FE5 		ldr	r2, .L39
+ 186 0108 143092E5 		ldr	r3, [r2, #20]
+ 187 010c 200013E3 		tst	r3, #32
+ 188 0110 FBFFFF0A 		beq	.L33
+ 189              		.loc 1 231 0
+ 190 0114 0D30A0E3 		mov	r3, #13
+ 191 0118 003082E5 		str	r3, [r2, #0]
+ 192              	.L34:
+ 193              	.LBE9:
+ 194              	.LBE8:
+ 195              	.LBB10:
+ 196              	.LBB11:
+ 197              		.loc 1 229 0
+ 198 011c 14209FE5 		ldr	r2, .L39
+ 199 0120 143092E5 		ldr	r3, [r2, #20]
+ 200 0124 200013E3 		tst	r3, #32
+ 201 0128 FBFFFF0A 		beq	.L34
+ 202              		.loc 1 231 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 9
+
+
+ 203 012c FF3000E2 		and	r3, r0, #255
+ 204 0130 003082E5 		str	r3, [r2, #0]
+ 205              	.LBE11:
+ 206              	.LBE10:
+ 247:consol.c      ****     consolSendChar('\r');
+ 248:consol.c      **** 
+ 249:consol.c      ****   consolSendChar(charToSend);
+ 250:consol.c      **** }
+ 207              		.loc 1 250 0
+ 208 0134 1EFF2FE1 		bx	lr
+ 209              	.L40:
+ 210              		.align	2
+ 211              	.L39:
+ 212 0138 00C000E0 		.word	-536821760
+ 213              	.LFE6:
+ 214              		.size	consolSendCh, .-consolSendCh
+ 215              		.align	2
+ 216              		.global	consolSendString
+ 217              		.type	consolSendString, %function
+ 218              	consolSendString:
+ 219              	.LFB7:
+ 251:consol.c      **** 
+ 252:consol.c      **** /*****************************************************************************
+ 253:consol.c      ****  *
+ 254:consol.c      ****  * Description:
+ 255:consol.c      ****  *    Print string to consol. 
+ 256:consol.c      ****  *
+ 257:consol.c      ****  * Params:
+ 258:consol.c      ****  *    [in] pString - Pointer to string to be printed 
+ 259:consol.c      ****  *
+ 260:consol.c      ****  ****************************************************************************/
+ 261:consol.c      **** void
+ 262:consol.c      **** consolSendString(char *pString)
+ 263:consol.c      **** {
+ 220              		.loc 1 263 0
+ 221              		@ Function supports interworking.
+ 222              		@ args = 0, pretend = 0, frame = 0
+ 223              		@ frame_needed = 0, uses_anonymous_args = 0
+ 224              	.LVL8:
+ 225 013c 10402DE9 		stmfd	sp!, {r4, lr}
+ 226              	.LCFI2:
+ 227              		.loc 1 263 0
+ 228 0140 0040A0E1 		mov	r4, r0
+ 229 0144 000000EA 		b	.L42
+ 230              	.LVL9:
+ 231              	.L43:
+ 264:consol.c      ****   while(*pString)
+ 265:consol.c      ****     consolSendCh(*pString++);
+ 232              		.loc 1 265 0
+ 233 0148 FEFFFFEB 		bl	consolSendCh
+ 234              	.LVL10:
+ 235              	.L42:
+ 236              		.loc 1 264 0
+ 237 014c 0030D4E5 		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 238 0150 000053E3 		cmp	r3, #0
+ 239              		.loc 1 265 0
+ 240 0154 0300A0E1 		mov	r0, r3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 10
+
+
+ 241 0158 014084E2 		add	r4, r4, #1
+ 242              		.loc 1 264 0
+ 243 015c F9FFFF1A 		bne	.L43
+ 266:consol.c      **** }
+ 244              		.loc 1 266 0
+ 245 0160 1040BDE8 		ldmfd	sp!, {r4, lr}
+ 246 0164 1EFF2FE1 		bx	lr
+ 247              	.LFE7:
+ 248              		.size	consolSendString, .-consolSendString
+ 249              		.align	2
+ 250              		.global	consolSendNumber
+ 251              		.type	consolSendNumber, %function
+ 252              	consolSendNumber:
+ 253              	.LFB8:
+ 267:consol.c      **** 
+ 268:consol.c      **** /*****************************************************************************
+ 269:consol.c      ****  *
+ 270:consol.c      ****  * Description:
+ 271:consol.c      ****  *    Routine for printing integer numbers in various formats. The number is 
+ 272:consol.c      ****  *    printed in the specified 'base' using exactly 'noDigits', using +/- if 
+ 273:consol.c      ****  *    signed flag 'sign' is TRUE, and using the character specified in 'pad' 
+ 274:consol.c      ****  *    to pad extra characters. 
+ 275:consol.c      ****  *
+ 276:consol.c      ****  * Params:
+ 277:consol.c      ****  *    [in] base     - Base to print number in (2-16) 
+ 278:consol.c      ****  *    [in] noDigits - Number of digits to print (max 32) 
+ 279:consol.c      ****  *    [in] sign     - Flag if sign is to be used (TRUE), or not (FALSE) 
+ 280:consol.c      ****  *    [in] pad      - Character to pad any unused positions 
+ 281:consol.c      ****  *    [in] number   - Signed number to print 
+ 282:consol.c      ****  *
+ 283:consol.c      ****  ****************************************************************************/
+ 284:consol.c      **** void
+ 285:consol.c      **** consolSendNumber(unsigned char base,
+ 286:consol.c      ****                  unsigned char noDigits,
+ 287:consol.c      ****                  unsigned char sign,
+ 288:consol.c      ****                  char          pad,
+ 289:consol.c      ****                  int           number)
+ 290:consol.c      **** {
+ 254              		.loc 1 290 0
+ 255              		@ Function supports interworking.
+ 256              		@ args = 4, pretend = 0, frame = 32
+ 257              		@ frame_needed = 0, uses_anonymous_args = 0
+ 258              	.LVL11:
+ 259 0168 F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 260              	.LCFI3:
+ 261 016c 20D04DE2 		sub	sp, sp, #32
+ 262              	.LCFI4:
+ 263              		.loc 1 290 0
+ 264 0170 44809DE5 		ldr	r8, [sp, #68]
+ 291:consol.c      ****   static char    hexChars[16] = "0123456789ABCDEF";
+ 292:consol.c      ****   char          *pBuf;
+ 293:consol.c      ****   char           buf[32];
+ 294:consol.c      ****   unsigned int   numberAbs;
+ 295:consol.c      ****   unsigned char  count;
+ 296:consol.c      **** 
+ 297:consol.c      ****   // prepare negative number
+ 298:consol.c      ****   if(sign && (number < 0))
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 11
+
+
+ 265              		.loc 1 298 0
+ 266 0174 FF2012E2 		ands	r2, r2, #255
+ 267 0178 00A0A003 		moveq	sl, #0
+ 268 017c 01A0A013 		movne	sl, #1
+ 269 0180 A89FA0E1 		mov	r9, r8, lsr #31
+ 270 0184 09001AE1 		tst	sl, r9
+ 299:consol.c      ****     numberAbs = -number;
+ 271              		.loc 1 299 0
+ 272 0188 00406812 		rsbne	r4, r8, #0
+ 273              	.LVL12:
+ 300:consol.c      ****   else
+ 301:consol.c      ****     numberAbs = number;
+ 274              		.loc 1 301 0
+ 275 018c 0840A001 		moveq	r4, r8
+ 276              		.loc 1 290 0
+ 277 0190 FF7000E2 		and	r7, r0, #255
+ 278 0194 FF1001E2 		and	r1, r1, #255
+ 302:consol.c      **** 
+ 303:consol.c      ****   // setup little string buffer
+ 304:consol.c      ****   count = (noDigits - 1) - (sign ? 1 : 0);
+ 279              		.loc 1 304 0
+ 280 0198 000052E3 		cmp	r2, #0
+ 281 019c 0120A001 		moveq	r2, r1
+ 282 01a0 01204112 		subne	r2, r1, #1
+ 283              	.LVL13:
+ 305:consol.c      ****   pBuf = buf + sizeof(buf);
+ 306:consol.c      ****   *--pBuf = '\0';
+ 307:consol.c      **** 
+ 308:consol.c      ****   // force calculation of first digit
+ 309:consol.c      ****   // (to prevent zero from not printing at all!!!)
+ 310:consol.c      ****   *--pBuf = hexChars[(numberAbs % base)];
+ 284              		.loc 1 310 0
+ 285 01a4 0400A0E1 		mov	r0, r4
+ 286              	.LVL14:
+ 287 01a8 0710A0E1 		mov	r1, r7
+ 288              	.LVL15:
+ 289              		.loc 1 290 0
+ 290 01ac FFB003E2 		and	fp, r3, #255
+ 291              		.loc 1 306 0
+ 292 01b0 0030A0E3 		mov	r3, #0
+ 293              	.LVL16:
+ 294 01b4 1F30CDE5 		strb	r3, [sp, #31]
+ 295              		.loc 1 304 0
+ 296 01b8 FF6002E2 		and	r6, r2, #255
+ 297              		.loc 1 310 0
+ 298 01bc FEFFFFEB 		bl	__umodsi3
+ 299 01c0 B4309FE5 		ldr	r3, .L64
+ 300 01c4 0030D3E7 		ldrb	r3, [r3, r0]	@ zero_extendqisi2
+ 311:consol.c      ****   numberAbs /= base;
+ 301              		.loc 1 311 0
+ 302 01c8 0710A0E1 		mov	r1, r7
+ 303 01cc 0400A0E1 		mov	r0, r4
+ 304              		.loc 1 310 0
+ 305 01d0 1E30CDE5 		strb	r3, [sp, #30]
+ 306              		.loc 1 311 0
+ 307 01d4 FEFFFFEB 		bl	__udivsi3
+ 308 01d8 1E408DE2 		add	r4, sp, #30
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 12
+
+
+ 309              	.LVL17:
+ 310 01dc 0050A0E1 		mov	r5, r0
+ 311              	.LVL18:
+ 312 01e0 0F0000EA 		b	.L50
+ 313              	.LVL19:
+ 314              	.L51:
+ 312:consol.c      **** 
+ 313:consol.c      ****   // calculate remaining digits
+ 314:consol.c      ****   while(count--)
+ 315:consol.c      ****   {
+ 316:consol.c      ****     if(numberAbs != 0)
+ 315              		.loc 1 316 0
+ 316 01e4 000055E3 		cmp	r5, #0
+ 317 01e8 013044E2 		sub	r3, r4, #1
+ 317:consol.c      ****     {
+ 318:consol.c      ****       //calculate next digit
+ 319:consol.c      ****       *--pBuf = hexChars[(numberAbs % base)];
+ 318              		.loc 1 319 0
+ 319 01ec 0340A0E1 		mov	r4, r3
+ 320:consol.c      ****       numberAbs /= base;
+ 321:consol.c      ****     }
+ 322:consol.c      ****     else
+ 323:consol.c      ****       // no more digits left, pad out to desired length
+ 324:consol.c      ****       *--pBuf = pad;
+ 320              		.loc 1 324 0
+ 321 01f0 0340A001 		moveq	r4, r3
+ 322 01f4 00B0C405 		streqb	fp, [r4, #0]
+ 323              		.loc 1 316 0
+ 324 01f8 0700000A 		beq	.L54
+ 325              	.LVL20:
+ 326              		.loc 1 319 0
+ 327 01fc FEFFFFEB 		bl	__umodsi3
+ 328 0200 74309FE5 		ldr	r3, .L64
+ 329 0204 0030D3E7 		ldrb	r3, [r3, r0]	@ zero_extendqisi2
+ 330              		.loc 1 320 0
+ 331 0208 0710A0E1 		mov	r1, r7
+ 332 020c 0500A0E1 		mov	r0, r5
+ 333              		.loc 1 319 0
+ 334 0210 0030C4E5 		strb	r3, [r4, #0]
+ 335              		.loc 1 320 0
+ 336 0214 FEFFFFEB 		bl	__udivsi3
+ 337 0218 0050A0E1 		mov	r5, r0
+ 338              	.LVL21:
+ 339              	.L54:
+ 340              		.loc 1 324 0
+ 341 021c 013046E2 		sub	r3, r6, #1
+ 342 0220 FF6003E2 		and	r6, r3, #255
+ 343              	.L50:
+ 344              		.loc 1 314 0
+ 345 0224 010056E3 		cmp	r6, #1
+ 346              		.loc 1 319 0
+ 347 0228 0500A0E1 		mov	r0, r5
+ 348 022c 0710A0E1 		mov	r1, r7
+ 349              		.loc 1 314 0
+ 350 0230 EBFFFF1A 		bne	.L51
+ 351              	.LVL22:
+ 325:consol.c      ****   }
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 13
+
+
+ 326:consol.c      **** 
+ 327:consol.c      ****   // apply signed notation if requested
+ 328:consol.c      ****   if(sign)
+ 352              		.loc 1 328 0
+ 353 0234 00005AE3 		cmp	sl, #0
+ 354 0238 0A00000A 		beq	.L56
+ 329:consol.c      ****   {
+ 330:consol.c      ****     if(number < 0)
+ 355              		.loc 1 330 0
+ 356 023c 000059E3 		cmp	r9, #0
+ 331:consol.c      ****       *--pBuf = '-';
+ 357              		.loc 1 331 0
+ 358 0240 2D30A013 		movne	r3, #45
+ 359 0244 01306415 		strneb	r3, [r4, #-1]!
+ 360              		.loc 1 330 0
+ 361 0248 0600001A 		bne	.L56
+ 362 024c 013044E2 		sub	r3, r4, #1
+ 332:consol.c      ****     else if(number > 0)
+ 363              		.loc 1 332 0
+ 364 0250 000058E3 		cmp	r8, #0
+ 333:consol.c      ****        *--pBuf = '+';
+ 365              		.loc 1 333 0
+ 366 0254 0340A011 		movne	r4, r3
+ 334:consol.c      ****     else
+ 335:consol.c      ****        *--pBuf = ' ';
+ 367              		.loc 1 335 0
+ 368 0258 0340A001 		moveq	r4, r3
+ 369              		.loc 1 333 0
+ 370 025c 2B30A013 		movne	r3, #43
+ 371              		.loc 1 335 0
+ 372 0260 2030A003 		moveq	r3, #32
+ 373 0264 0030C4E5 		strb	r3, [r4, #0]
+ 374              	.L56:
+ 336:consol.c      ****   }
+ 337:consol.c      **** 
+ 338:consol.c      ****   // print the string right-justified
+ 339:consol.c      ****   consolSendString(pBuf);
+ 375              		.loc 1 339 0
+ 376 0268 0400A0E1 		mov	r0, r4
+ 377              	.LVL23:
+ 378 026c FEFFFFEB 		bl	consolSendString
+ 340:consol.c      **** }
+ 379              		.loc 1 340 0
+ 380 0270 20D08DE2 		add	sp, sp, #32
+ 381 0274 F04FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 382 0278 1EFF2FE1 		bx	lr
+ 383              	.L65:
+ 384              		.align	2
+ 385              	.L64:
+ 386 027c 00000000 		.word	hexChars.2029
+ 387              	.LFE8:
+ 388              		.size	consolSendNumber, .-consolSendNumber
+ 389              		.align	2
+ 390              		.global	consolGetCh
+ 391              		.type	consolGetCh, %function
+ 392              	consolGetCh:
+ 393              	.LFB10:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 14
+
+
+ 341:consol.c      **** 
+ 342:consol.c      **** #if (CONSOLE_API_PRINTF == 1)  //OWN_PRINTF
+ 343:consol.c      **** /*****************************************************************************
+ 344:consol.c      ****  *
+ 345:consol.c      ****  * Description:
+ 346:consol.c      ****  *    Simple implementation of printf 
+ 347:consol.c      ****  *
+ 348:consol.c      ****  * Params:
+ 349:consol.c      ****  *    [in] fmt - Format string that specifies what to be printed 
+ 350:consol.c      ****  *    [in] ... - Variable number of parameters to match format string 
+ 351:consol.c      ****  *
+ 352:consol.c      ****  ****************************************************************************/
+ 353:consol.c      **** void
+ 354:consol.c      **** simplePrintf(const char * fmt,
+ 355:consol.c      ****              ...          )
+ 356:consol.c      **** {
+ 357:consol.c      **** 	va_list ap;
+ 358:consol.c      **** 
+ 359:consol.c      **** 	va_start(ap, fmt);
+ 360:consol.c      **** 	simplePrint(consolSendCh, fmt, ap);
+ 361:consol.c      **** 	va_end(ap);
+ 362:consol.c      **** }
+ 363:consol.c      **** #endif
+ 364:consol.c      **** 
+ 365:consol.c      **** 
+ 366:consol.c      **** #if (CONSOLE_API_SCANF == 1)  //SIMPLE
+ 367:consol.c      **** 
+ 368:consol.c      **** /*****************************************************************************
+ 369:consol.c      ****  *
+ 370:consol.c      ****  * Description:
+ 371:consol.c      ****  *    Wait (blocking call) for a character to be received. 
+ 372:consol.c      ****  *
+ 373:consol.c      ****  * Returns:
+ 374:consol.c      ****  *    char - Received character
+ 375:consol.c      ****  *
+ 376:consol.c      ****  ****************************************************************************/
+ 377:consol.c      **** char
+ 378:consol.c      **** consolGetCh(void)
+ 379:consol.c      **** {
+ 394              		.loc 1 379 0
+ 395              		@ Function supports interworking.
+ 396              		@ args = 0, pretend = 0, frame = 0
+ 397              		@ frame_needed = 0, uses_anonymous_args = 0
+ 398              		@ link register save eliminated.
+ 399              		@ lr needed for prologue
+ 400              	.L68:
+ 380:consol.c      ****   while(!(UART_LSR & (0x01<<0)))
+ 401              		.loc 1 380 0
+ 402 0280 14209FE5 		ldr	r2, .L73
+ 403 0284 143092E5 		ldr	r3, [r2, #20]
+ 404 0288 010013E3 		tst	r3, #1
+ 405 028c FBFFFF0A 		beq	.L68
+ 381:consol.c      ****     ;
+ 382:consol.c      ****   return UART_RBR;
+ 406              		.loc 1 382 0
+ 407 0290 000092E5 		ldr	r0, [r2, #0]
+ 408 0294 FF0000E2 		and	r0, r0, #255
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 15
+
+
+ 383:consol.c      **** }
+ 409              		.loc 1 383 0
+ 410 0298 1EFF2FE1 		bx	lr
+ 411              	.L74:
+ 412              		.align	2
+ 413              	.L73:
+ 414 029c 00C000E0 		.word	-536821760
+ 415              	.LFE10:
+ 416              		.size	consolGetCh, .-consolGetCh
+ 417              		.align	2
+ 418              		.global	consolGetChar
+ 419              		.type	consolGetChar, %function
+ 420              	consolGetChar:
+ 421              	.LFB11:
+ 384:consol.c      **** 
+ 385:consol.c      **** /*****************************************************************************
+ 386:consol.c      ****  *
+ 387:consol.c      ****  * Description:
+ 388:consol.c      ****  *    Check (non-blocking call) if a character has been received. 
+ 389:consol.c      ****  *
+ 390:consol.c      ****  * Params:
+ 391:consol.c      ****  *    [inout] pChar - pointer to where to place received character
+ 392:consol.c      ****  *
+ 393:consol.c      ****  * Returns:
+ 394:consol.c      ****  *    char - TRUE if character has been received (placed at pointed location)
+ 395:consol.c      ****  *           FALSE if no character has been received.
+ 396:consol.c      ****  *
+ 397:consol.c      ****  ****************************************************************************/
+ 398:consol.c      **** char
+ 399:consol.c      **** consolGetChar(char *pChar)
+ 400:consol.c      **** {
+ 422              		.loc 1 400 0
+ 423              		@ Function supports interworking.
+ 424              		@ args = 0, pretend = 0, frame = 0
+ 425              		@ frame_needed = 0, uses_anonymous_args = 0
+ 426              		@ link register save eliminated.
+ 427              	.LVL24:
+ 401:consol.c      ****   if((UART_LSR & 0x01) != 0x00)
+ 428              		.loc 1 401 0
+ 429 02a0 18209FE5 		ldr	r2, .L80
+ 430 02a4 143092E5 		ldr	r3, [r2, #20]
+ 431 02a8 013013E2 		ands	r3, r3, #1
+ 402:consol.c      ****   {
+ 403:consol.c      ****     *pChar = UART_RBR;
+ 432              		.loc 1 403 0
+ 433 02ac 00309215 		ldrne	r3, [r2, #0]
+ 434 02b0 0030C015 		strneb	r3, [r0, #0]
+ 435 02b4 0130A013 		movne	r3, #1
+ 404:consol.c      ****     return 1;
+ 405:consol.c      ****   }
+ 406:consol.c      ****   return 0;
+ 407:consol.c      **** }
+ 436              		.loc 1 407 0
+ 437 02b8 0300A0E1 		mov	r0, r3
+ 438              	.LVL25:
+ 439              		.loc 1 400 0
+ 440              		@ lr needed for prologue
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 16
+
+
+ 441              		.loc 1 407 0
+ 442 02bc 1EFF2FE1 		bx	lr
+ 443              	.L81:
+ 444              		.align	2
+ 445              	.L80:
+ 446 02c0 00C000E0 		.word	-536821760
+ 447              	.LFE11:
+ 448              		.size	consolGetChar, .-consolGetChar
+ 449              		.section	.rodata.str1.4
+ 450 0011 000000   		.align	2
+ 451              	.LC1:
+ 452 0014 08200800 		.ascii	"\010 \010\000"
+ 453              		.text
+ 454              		.align	2
+ 455              		.global	consolGetString
+ 456              		.type	consolGetString, %function
+ 457              	consolGetString:
+ 458              	.LFB12:
+ 408:consol.c      **** 
+ 409:consol.c      **** /*****************************************************************************
+ 410:consol.c      ****  *
+ 411:consol.c      ****  * Description:
+ 412:consol.c      ****  *    Receive (blocking call) a string (end with '\r'). 
+ 413:consol.c      ****  *
+ 414:consol.c      ****  * Params:
+ 415:consol.c      ****  *    [inout] pString - pointer to return the received string
+ 416:consol.c      ****  *
+ 417:consol.c      ****  ****************************************************************************/
+ 418:consol.c      **** void
+ 419:consol.c      **** consolGetString(char *pString)
+ 420:consol.c      **** {
+ 459              		.loc 1 420 0
+ 460              		@ Function supports interworking.
+ 461              		@ args = 0, pretend = 0, frame = 0
+ 462              		@ frame_needed = 0, uses_anonymous_args = 0
+ 463              	.LVL26:
+ 464 02c4 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 465              	.LCFI5:
+ 466              		.loc 1 420 0
+ 467 02c8 0040A0E1 		mov	r4, r0
+ 468              	.LVL27:
+ 469 02cc 0050A0E1 		mov	r5, r0
+ 470              	.LVL28:
+ 471 02d0 090000EA 		b	.L96
+ 472              	.LVL29:
+ 473              	.L84:
+ 421:consol.c      ****   char *pString2;
+ 422:consol.c      ****   char rxChar;
+ 423:consol.c      **** 
+ 424:consol.c      ****   pString2 = pString;
+ 425:consol.c      ****   while((rxChar = consolGetCh()) != '\r')
+ 426:consol.c      ****   {
+ 427:consol.c      ****     if (rxChar == '\b')
+ 474              		.loc 1 427 0
+ 475 02d4 080053E3 		cmp	r3, #8
+ 476 02d8 0500001A 		bne	.L85
+ 477              	.LVL30:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 17
+
+
+ 428:consol.c      ****     {
+ 429:consol.c      ****       if ((int)pString2 < (int)pString)
+ 478              		.loc 1 429 0
+ 479 02dc 040055E1 		cmp	r5, r4
+ 430:consol.c      ****       {
+ 431:consol.c      ****         consolSendString("\b \b");
+ 480              		.loc 1 431 0
+ 481 02e0 4C009FE5 		ldr	r0, .L97
+ 482              		.loc 1 429 0
+ 483 02e4 040000AA 		bge	.L96
+ 484              		.loc 1 431 0
+ 485 02e8 FEFFFFEB 		bl	consolSendString
+ 486              	.LVL31:
+ 432:consol.c      ****         pString--;
+ 487              		.loc 1 432 0
+ 488 02ec 014044E2 		sub	r4, r4, #1
+ 489 02f0 010000EA 		b	.L96
+ 490              	.LVL32:
+ 491              	.L85:
+ 433:consol.c      ****       }
+ 434:consol.c      ****     }
+ 435:consol.c      ****     else
+ 436:consol.c      ****     {
+ 437:consol.c      ****       *pString++ = rxChar;
+ 492              		.loc 1 437 0
+ 493 02f4 0130C4E4 		strb	r3, [r4], #1
+ 438:consol.c      ****       consolSendCh(rxChar);
+ 494              		.loc 1 438 0
+ 495 02f8 FEFFFFEB 		bl	consolSendCh
+ 496              	.LVL33:
+ 497              	.L96:
+ 498              	.LBB12:
+ 499              	.LBB13:
+ 500              		.loc 1 380 0
+ 501 02fc 34209FE5 		ldr	r2, .L97+4
+ 502 0300 143092E5 		ldr	r3, [r2, #20]
+ 503              	.LVL34:
+ 504 0304 010013E3 		tst	r3, #1
+ 505 0308 FBFFFF0A 		beq	.L96
+ 506              	.LVL35:
+ 507              		.loc 1 382 0
+ 508 030c 003092E5 		ldr	r3, [r2, #0]
+ 509              	.LBE13:
+ 510              	.LBE12:
+ 511              		.loc 1 425 0
+ 512 0310 FF3003E2 		and	r3, r3, #255
+ 513              	.LVL36:
+ 514 0314 0D0053E3 		cmp	r3, #13
+ 515              		.loc 1 438 0
+ 516 0318 0300A0E1 		mov	r0, r3
+ 517              	.LVL37:
+ 518              		.loc 1 425 0
+ 519 031c ECFFFF1A 		bne	.L84
+ 520              	.LVL38:
+ 439:consol.c      ****     }
+ 440:consol.c      ****   }
+ 441:consol.c      ****   *pString = '\0';
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 18
+
+
+ 521              		.loc 1 441 0
+ 522 0320 0030A0E3 		mov	r3, #0
+ 442:consol.c      ****   consolSendCh('\n');
+ 523              		.loc 1 442 0
+ 524 0324 0A00A0E3 		mov	r0, #10
+ 525              	.LVL39:
+ 526              		.loc 1 441 0
+ 527 0328 0030C4E5 		strb	r3, [r4, #0]
+ 443:consol.c      **** }
+ 528              		.loc 1 443 0
+ 529 032c 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 530              		.loc 1 442 0
+ 531 0330 FEFFFFEA 		b	consolSendCh
+ 532              	.L98:
+ 533              		.align	2
+ 534              	.L97:
+ 535 0334 14000000 		.word	.LC1
+ 536 0338 00C000E0 		.word	-536821760
+ 537              	.LFE12:
+ 538              		.size	consolGetString, .-consolGetString
+ 539              		.align	2
+ 540              		.global	simplePrintf
+ 541              		.type	simplePrintf, %function
+ 542              	simplePrintf:
+ 543              	.LFB9:
+ 544              		.loc 1 356 0
+ 545              		@ Function supports interworking.
+ 546              		@ args = 4, pretend = 16, frame = 4
+ 547              		@ frame_needed = 0, uses_anonymous_args = 1
+ 548              	.LVL40:
+ 549 033c 0F002DE9 		stmfd	sp!, {r0, r1, r2, r3}
+ 550              	.LCFI6:
+ 551 0340 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 552              	.LCFI7:
+ 553 0344 04D04DE2 		sub	sp, sp, #4
+ 554              	.LCFI8:
+ 555              		.loc 1 359 0
+ 556 0348 18308DE2 		add	r3, sp, #24
+ 557              		.loc 1 356 0
+ 558 034c 14609DE5 		ldr	r6, [sp, #20]
+ 559              		.loc 1 360 0
+ 560 0350 0350A0E1 		mov	r5, r3
+ 561              	.LVL41:
+ 562              		.loc 1 359 0
+ 563 0354 00308DE5 		str	r3, [sp, #0]
+ 564              	.LVL42:
+ 565 0358 020000EA 		b	.L138
+ 566              	.LVL43:
+ 567              	.L101:
+ 568              	.LBB16:
+ 569              	.LBB17:
+ 570              		.loc 1 106 0
+ 571 035c 000050E3 		cmp	r0, #0
+ 572 0360 5000000A 		beq	.L128
+ 573              	.LVL44:
+ 574              	.L136:
+ 575              		.loc 1 108 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 19
+
+
+ 576 0364 FEFFFFEB 		bl	consolSendCh
+ 577              	.LVL45:
+ 578              	.L138:
+ 579              		.loc 1 104 0
+ 580 0368 0100D6E4 		ldrb	r0, [r6], #1	@ zero_extendqisi2
+ 581              	.LVL46:
+ 582 036c 250050E3 		cmp	r0, #37
+ 583 0370 F9FFFF1A 		bne	.L101
+ 584 0374 0030A0E3 		mov	r3, #0
+ 585              	.LVL47:
+ 586              	.L105:
+ 587              		.loc 1 114 0
+ 588 0378 0140D6E4 		ldrb	r4, [r6], #1	@ zero_extendqisi2
+ 589              	.LVL48:
+ 590 037c 6F0054E3 		cmp	r4, #111
+ 591 0380 3000000A 		beq	.L110
+ 592 0384 0A00008A 		bhi	.L115
+ 593 0388 640054E3 		cmp	r4, #100
+ 594 038c 2100000A 		beq	.L108
+ 595 0390 0400008A 		bhi	.L116
+ 596 0394 000054E3 		cmp	r4, #0
+ 597 0398 4200000A 		beq	.L128
+ 598 039c 630054E3 		cmp	r4, #99
+ 599 03a0 3B00001A 		bne	.L106
+ 600 03a4 0F0000EA 		b	.L107
+ 601              	.L116:
+ 602 03a8 6C0054E3 		cmp	r4, #108
+ 603 03ac 3800001A 		bne	.L106
+ 604 03b0 0A0000EA 		b	.L109
+ 605              	.L115:
+ 606 03b4 730054E3 		cmp	r4, #115
+ 607 03b8 0E00000A 		beq	.L112
+ 608 03bc 0200008A 		bhi	.L117
+ 609 03c0 700054E3 		cmp	r4, #112
+ 610 03c4 3200001A 		bne	.L106
+ 611 03c8 290000EA 		b	.L111
+ 612              	.L117:
+ 613 03cc 750054E3 		cmp	r4, #117
+ 614 03d0 2300000A 		beq	.L113
+ 615 03d4 780054E3 		cmp	r4, #120
+ 616 03d8 2D00001A 		bne	.L106
+ 617 03dc 280000EA 		b	.L114
+ 618              	.L109:
+ 619 03e0 0130A0E3 		mov	r3, #1
+ 620 03e4 E3FFFFEA 		b	.L105
+ 621              	.L107:
+ 622              		.loc 1 125 0
+ 623 03e8 000095E5 		ldr	r0, [r5, #0]
+ 624              	.LVL49:
+ 625 03ec 7F0000E2 		and	r0, r0, #127
+ 626 03f0 FEFFFFEB 		bl	consolSendCh
+ 627              	.LVL50:
+ 628 03f4 170000EA 		b	.L135
+ 629              	.LVL51:
+ 630              	.L112:
+ 631              		.loc 1 129 0
+ 632 03f8 004095E5 		ldr	r4, [r5, #0]
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 20
+
+
+ 633              	.LVL52:
+ 634 03fc 000000EA 		b	.L118
+ 635              	.LVL53:
+ 636              	.L119:
+ 637              		.loc 1 131 0
+ 638 0400 FEFFFFEB 		bl	consolSendCh
+ 639              	.LVL54:
+ 640              	.L118:
+ 641              		.loc 1 130 0
+ 642 0404 0130D4E4 		ldrb	r3, [r4], #1	@ zero_extendqisi2
+ 643              	.LVL55:
+ 644 0408 000053E2 		subs	r0, r3, #0
+ 645              	.LVL56:
+ 646 040c FBFFFF1A 		bne	.L119
+ 647              	.LVL57:
+ 648              		.loc 1 129 0
+ 649 0410 045085E2 		add	r5, r5, #4
+ 650 0414 D3FFFFEA 		b	.L138
+ 651              	.LVL58:
+ 652              	.L108:
+ 653              		.loc 1 135 0
+ 654 0418 004095E5 		ldr	r4, [r5, #0]
+ 655              	.LVL59:
+ 656              		.loc 1 136 0
+ 657 041c 000054E3 		cmp	r4, #0
+ 658 0420 045085E2 		add	r5, r5, #4
+ 659              	.LVL60:
+ 660 0424 020000AA 		bge	.L124
+ 661              		.loc 1 138 0
+ 662 0428 2D00A0E3 		mov	r0, #45
+ 663              	.LVL61:
+ 664 042c FEFFFFEB 		bl	consolSendCh
+ 665              	.LVL62:
+ 666              		.loc 1 139 0
+ 667 0430 004064E2 		rsb	r4, r4, #0
+ 668              	.LVL63:
+ 669              	.L124:
+ 670              		.loc 1 141 0
+ 671 0434 0410A0E1 		mov	r1, r4
+ 672 0438 78009FE5 		ldr	r0, .L139
+ 673              	.LVL64:
+ 674 043c 0A20A0E3 		mov	r2, #10
+ 675 0440 EEFEFFEB 		bl	printNum
+ 676              	.LVL65:
+ 677 0444 C7FFFFEA 		b	.L138
+ 678              	.LVL66:
+ 679              	.L110:
+ 680              		.loc 1 146 0
+ 681 0448 001095E5 		ldr	r1, [r5, #0]
+ 682 044c 64009FE5 		ldr	r0, .L139
+ 683              	.LVL67:
+ 684 0450 0820A0E3 		mov	r2, #8
+ 685              	.L137:
+ 686 0454 E9FEFFEB 		bl	printNum
+ 687              	.LVL68:
+ 688              	.L135:
+ 689              		.loc 1 145 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 21
+
+
+ 690 0458 043085E2 		add	r3, r5, #4
+ 691              	.LVL69:
+ 692              		.loc 1 146 0
+ 693 045c 0350A0E1 		mov	r5, r3
+ 694 0460 C0FFFFEA 		b	.L138
+ 695              	.LVL70:
+ 696              	.L113:
+ 697              		.loc 1 151 0
+ 698 0464 001095E5 		ldr	r1, [r5, #0]
+ 699 0468 48009FE5 		ldr	r0, .L139
+ 700              	.LVL71:
+ 701 046c 0A20A0E3 		mov	r2, #10
+ 702 0470 F7FFFFEA 		b	.L137
+ 703              	.LVL72:
+ 704              	.L111:
+ 705              		.loc 1 155 0
+ 706 0474 3000A0E3 		mov	r0, #48
+ 707              	.LVL73:
+ 708 0478 FEFFFFEB 		bl	consolSendCh
+ 709              	.LVL74:
+ 710              		.loc 1 156 0
+ 711 047c 7800A0E3 		mov	r0, #120
+ 712 0480 FEFFFFEB 		bl	consolSendCh
+ 713              	.LVL75:
+ 714              	.L114:
+ 715              		.loc 1 162 0
+ 716 0484 001095E5 		ldr	r1, [r5, #0]
+ 717 0488 28009FE5 		ldr	r0, .L139
+ 718              	.LVL76:
+ 719 048c 1020A0E3 		mov	r2, #16
+ 720 0490 EFFFFFEA 		b	.L137
+ 721              	.LVL77:
+ 722              	.L106:
+ 723              		.loc 1 167 0
+ 724 0494 000053E3 		cmp	r3, #0
+ 725              		.loc 1 168 0
+ 726 0498 6C00A013 		movne	r0, #108
+ 727              	.LVL78:
+ 728 049c FEFFFF1B 		blne	consolSendCh
+ 729              	.LVL79:
+ 730              	.L126:
+ 731              		.loc 1 169 0
+ 732 04a0 0400A0E1 		mov	r0, r4
+ 733              	.LVL80:
+ 734 04a4 AEFFFFEA 		b	.L136
+ 735              	.LVL81:
+ 736              	.L128:
+ 737              	.LBE17:
+ 738              	.LBE16:
+ 739              		.loc 1 362 0
+ 740 04a8 04D08DE2 		add	sp, sp, #4
+ 741 04ac 7040BDE8 		ldmfd	sp!, {r4, r5, r6, lr}
+ 742 04b0 10D08DE2 		add	sp, sp, #16
+ 743 04b4 1EFF2FE1 		bx	lr
+ 744              	.L140:
+ 745              		.align	2
+ 746              	.L139:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 22
+
+
+ 747 04b8 00000000 		.word	consolSendCh
+ 748              	.LFE9:
+ 749              		.size	simplePrintf, .-simplePrintf
+ 750              		.align	2
+ 751              		.global	consolGetIntNum
+ 752              		.type	consolGetIntNum, %function
+ 753              	consolGetIntNum:
+ 754              	.LFB13:
+ 444:consol.c      **** 
+ 445:consol.c      **** /*****************************************************************************
+ 446:consol.c      ****  *
+ 447:consol.c      ****  * Description:
+ 448:consol.c      ****  *    Receive (blocking call) a number (end with '\r').
+ 449:consol.c      ****  *    Accepts hexadecimal (radix 16) and integer (radix 10) numbers.
+ 450:consol.c      ****  *
+ 451:consol.c      ****  * Returns:
+ 452:consol.c      ****  *    int - the received number
+ 453:consol.c      ****  *
+ 454:consol.c      ****  ****************************************************************************/
+ 455:consol.c      **** int
+ 456:consol.c      **** consolGetIntNum(void)
+ 457:consol.c      **** {
+ 755              		.loc 1 457 0
+ 756              		@ Function supports interworking.
+ 757              		@ args = 0, pretend = 0, frame = 32
+ 758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 759 04bc 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 760              	.LCFI9:
+ 761 04c0 20D04DE2 		sub	sp, sp, #32
+ 762              	.LCFI10:
+ 458:consol.c      ****   char  abStr[30];
+ 459:consol.c      ****   char *pString = abStr;
+ 460:consol.c      ****   int   wBase=10;
+ 461:consol.c      ****   int   wMinus=0;
+ 462:consol.c      ****   int   wLastIndex;
+ 463:consol.c      ****   int   wResult=0;
+ 464:consol.c      ****   int   wI;
+ 465:consol.c      ****         
+ 466:consol.c      ****   consolGetString(pString);
+ 763              		.loc 1 466 0
+ 764 04c4 02408DE2 		add	r4, sp, #2
+ 765 04c8 0400A0E1 		mov	r0, r4
+ 766 04cc FEFFFFEB 		bl	consolGetString
+ 467:consol.c      ****         
+ 468:consol.c      ****   if(pString[0] == '-')
+ 767              		.loc 1 468 0
+ 768 04d0 0230DDE5 		ldrb	r3, [sp, #2]	@ zero_extendqisi2
+ 769 04d4 2D0053E3 		cmp	r3, #45
+ 770 04d8 01408402 		addeq	r4, r4, #1
+ 771              	.LVL82:
+ 469:consol.c      ****   {
+ 470:consol.c      ****     wMinus = 1;
+ 471:consol.c      ****     pString++;
+ 472:consol.c      ****   }
+ 473:consol.c      **** 
+ 474:consol.c      ****   if(pString[0] == '0' && (pString[1] == 'x' || pString[1] == 'X'))
+ 772              		.loc 1 474 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 23
+
+
+ 773 04dc 0030D4E5 		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 774              		.loc 1 468 0
+ 775 04e0 0160A003 		moveq	r6, #1
+ 776              	.LVL83:
+ 777 04e4 0060A013 		movne	r6, #0
+ 778              		.loc 1 474 0
+ 779 04e8 300053E3 		cmp	r3, #48
+ 780 04ec 0500001A 		bne	.L145
+ 781 04f0 0130D4E5 		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 782 04f4 580053E3 		cmp	r3, #88
+ 783 04f8 78005313 		cmpne	r3, #120
+ 475:consol.c      ****   {
+ 476:consol.c      ****     wBase = 16;
+ 477:consol.c      ****     pString += 2;
+ 784              		.loc 1 477 0
+ 785 04fc 02408402 		addeq	r4, r4, #2
+ 786 0500 1050A003 		moveq	r5, #16
+ 787              	.LVL84:
+ 788              		.loc 1 474 0
+ 789 0504 0000000A 		beq	.L148
+ 790              	.L145:
+ 791              		.loc 1 477 0
+ 792 0508 0A50A0E3 		mov	r5, #10
+ 793              	.L148:
+ 478:consol.c      ****   }
+ 479:consol.c      **** 
+ 480:consol.c      ****   wLastIndex = strlen(pString) - 1;
+ 794              		.loc 1 480 0
+ 795 050c 0400A0E1 		mov	r0, r4
+ 796 0510 FEFFFFEB 		bl	strlen
+ 797 0514 01C040E2 		sub	ip, r0, #1
+ 798              	.LVL85:
+ 481:consol.c      ****   if(pString[wLastIndex] == 'h' || pString[wLastIndex] == 'H')
+ 799              		.loc 1 481 0
+ 800 0518 0C30D4E7 		ldrb	r3, [r4, ip]	@ zero_extendqisi2
+ 801 051c 480053E3 		cmp	r3, #72
+ 802 0520 68005313 		cmpne	r3, #104
+ 803 0524 0500001A 		bne	.L149
+ 482:consol.c      ****   {
+ 483:consol.c      ****     wBase = 16;
+ 484:consol.c      ****     pString[wLastIndex] = 0;
+ 804              		.loc 1 484 0
+ 805 0528 0030A0E3 		mov	r3, #0
+ 806 052c 0C30C4E7 		strb	r3, [r4, ip]
+ 485:consol.c      ****     wLastIndex--;
+ 807              		.loc 1 485 0
+ 808 0530 01C04CE2 		sub	ip, ip, #1
+ 809              	.L151:
+ 810 0534 0000A0E3 		mov	r0, #0
+ 811              	.LVL86:
+ 812 0538 00E0A0E1 		mov	lr, r0
+ 813              	.LVL87:
+ 814 053c 0F0000EA 		b	.L152
+ 815              	.LVL88:
+ 816              	.L149:
+ 486:consol.c      ****   }
+ 487:consol.c      **** 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 24
+
+
+ 488:consol.c      ****   if(wBase == 10)
+ 817              		.loc 1 488 0
+ 818 0540 0A0055E3 		cmp	r5, #10
+ 819 0544 FAFFFF1A 		bne	.L151
+ 489:consol.c      ****   {
+ 490:consol.c      ****     wResult = atoi(pString);
+ 820              		.loc 1 490 0
+ 821 0548 0400A0E1 		mov	r0, r4
+ 822 054c FEFFFFEB 		bl	atoi
+ 823              	.LVL89:
+ 824 0550 0C0000EA 		b	.L166
+ 825              	.LVL90:
+ 826              	.L156:
+ 491:consol.c      ****     wResult = wMinus ? (-1*wResult):wResult;
+ 492:consol.c      ****   }
+ 493:consol.c      ****   else
+ 494:consol.c      ****   {
+ 495:consol.c      ****     for(wI=0; wI<=wLastIndex; wI++)
+ 496:consol.c      ****     {
+ 497:consol.c      ****       if(__isalpha(pString[wI]))
+ 827              		.loc 1 497 0
+ 828 0554 0420DEE7 		ldrb	r2, [lr, r4]	@ zero_extendqisi2
+ 829 0558 0012A0E1 		mov	r1, r0, asl #4
+ 830 055c 390052E3 		cmp	r2, #57
+ 498:consol.c      ****       {
+ 499:consol.c      ****         if(__isupper(pString[wI]))
+ 500:consol.c      ****           wResult = (wResult<<4) + pString[wI] - 'A' + 10;
+ 501:consol.c      ****         else
+ 502:consol.c      ****           wResult = (wResult<<4) + pString[wI] - 'a' + 10;
+ 503:consol.c      ****       }
+ 504:consol.c      ****       else
+ 505:consol.c      ****       {
+ 506:consol.c      ****         wResult = (wResult<<4) + pString[wI] - '0';
+ 831              		.loc 1 506 0
+ 832 0560 000282E0 		add	r0, r2, r0, asl #4
+ 833              	.LVL91:
+ 834 0564 30004092 		subls	r0, r0, #48
+ 835              	.LVL92:
+ 836              		.loc 1 497 0
+ 837 0568 0300009A 		bls	.L161
+ 838              		.loc 1 500 0
+ 839 056c 023081E0 		add	r3, r1, r2
+ 840              		.loc 1 499 0
+ 841 0570 200012E3 		tst	r2, #32
+ 842              		.loc 1 500 0
+ 843 0574 370043E2 		sub	r0, r3, #55
+ 844              		.loc 1 502 0
+ 845 0578 57004312 		subne	r0, r3, #87
+ 846              	.L161:
+ 847              		.loc 1 495 0
+ 848 057c 01E08EE2 		add	lr, lr, #1
+ 849              	.L152:
+ 850 0580 0C005EE1 		cmp	lr, ip
+ 851 0584 F2FFFFDA 		ble	.L156
+ 852              	.L166:
+ 507:consol.c      ****       }
+ 508:consol.c      ****     }
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 25
+
+
+ 509:consol.c      ****     wResult = wMinus ? (-1*wResult):wResult;
+ 853              		.loc 1 509 0
+ 854 0588 000056E3 		cmp	r6, #0
+ 855 058c 00006012 		rsbne	r0, r0, #0
+ 856              	.LVL93:
+ 510:consol.c      ****   }
+ 511:consol.c      ****   return wResult;
+ 512:consol.c      **** }
+ 857              		.loc 1 512 0
+ 858 0590 20D08DE2 		add	sp, sp, #32
+ 859 0594 7040BDE8 		ldmfd	sp!, {r4, r5, r6, lr}
+ 860 0598 1EFF2FE1 		bx	lr
+ 861              	.LFE13:
+ 862              		.size	consolGetIntNum, .-consolGetIntNum
+ 863              		.align	2
+ 864              		.global	consolScanf
+ 865              		.type	consolScanf, %function
+ 866              	consolScanf:
+ 867              	.LFB14:
+ 513:consol.c      **** 
+ 514:consol.c      **** /*****************************************************************************
+ 515:consol.c      ****  *
+ 516:consol.c      ****  * Description:
+ 517:consol.c      ****  *    A simple implementation of the scanf()-function. 
+ 518:consol.c      ****  *
+ 519:consol.c      ****  * Params:
+ 520:consol.c      ****  *    [inout] pFmt - format string, accepts:
+ 521:consol.c      ****  *                   %s - string
+ 522:consol.c      ****  *                   %c - character
+ 523:consol.c      ****  *                   %i - integer
+ 524:consol.c      ****  *
+ 525:consol.c      ****  ****************************************************************************/
+ 526:consol.c      **** void
+ 527:consol.c      **** consolScanf(char *pFmt, ...)
+ 528:consol.c      **** {
+ 868              		.loc 1 528 0
+ 869              		@ Function supports interworking.
+ 870              		@ args = 4, pretend = 16, frame = 4
+ 871              		@ frame_needed = 0, uses_anonymous_args = 1
+ 872              	.LVL94:
+ 873 059c 0F002DE9 		stmfd	sp!, {r0, r1, r2, r3}
+ 874              	.LCFI11:
+ 875 05a0 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 876              	.LCFI12:
+ 877 05a4 04D04DE2 		sub	sp, sp, #4
+ 878              	.LCFI13:
+ 879              		.loc 1 528 0
+ 880 05a8 10509DE5 		ldr	r5, [sp, #16]
+ 529:consol.c      ****   va_list pArg;
+ 530:consol.c      ****   char    character;
+ 531:consol.c      ****   int    *pInt;
+ 532:consol.c      ****   char   *pChar;
+ 533:consol.c      ****         
+ 534:consol.c      ****   va_start(pArg, pFmt);
+ 881              		.loc 1 534 0
+ 882 05ac 14308DE2 		add	r3, sp, #20
+ 883 05b0 00308DE5 		str	r3, [sp, #0]
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 26
+
+
+ 884              	.LVL95:
+ 885 05b4 290000EA 		b	.L187
+ 886              	.LVL96:
+ 887              	.L169:
+ 535:consol.c      ****   while((character = *pFmt++) != '\0')
+ 536:consol.c      ****   {
+ 537:consol.c      ****     if(character != '%')continue;
+ 888              		.loc 1 537 0
+ 889 05b8 250053E3 		cmp	r3, #37
+ 890              		.loc 1 535 0
+ 891 05bc 015085E2 		add	r5, r5, #1
+ 892              		.loc 1 537 0
+ 893 05c0 2600001A 		bne	.L187
+ 538:consol.c      ****     switch(*pFmt)
+ 894              		.loc 1 538 0
+ 895 05c4 0030D5E5 		ldrb	r3, [r5, #0]	@ zero_extendqisi2
+ 896              	.LVL97:
+ 897 05c8 530053E3 		cmp	r3, #83
+ 898 05cc 0C00000A 		beq	.L173
+ 899 05d0 0400008A 		bhi	.L174
+ 900 05d4 430053E3 		cmp	r3, #67
+ 901 05d8 1600000A 		beq	.L171
+ 902 05dc 490053E3 		cmp	r3, #73
+ 903 05e0 1E00001A 		bne	.L187
+ 904 05e4 0C0000EA 		b	.L172
+ 905              	.L174:
+ 906 05e8 690053E3 		cmp	r3, #105
+ 907 05ec 0A00000A 		beq	.L172
+ 908 05f0 730053E3 		cmp	r3, #115
+ 909 05f4 0200000A 		beq	.L173
+ 910 05f8 630053E3 		cmp	r3, #99
+ 911 05fc 1700001A 		bne	.L187
+ 912 0600 0C0000EA 		b	.L171
+ 913              	.L173:
+ 539:consol.c      ****     {
+ 540:consol.c      ****     case 's':
+ 541:consol.c      ****     case 'S':
+ 542:consol.c      ****       pChar = va_arg (pArg, char *);
+ 914              		.loc 1 542 0
+ 915 0604 00309DE5 		ldr	r3, [sp, #0]
+ 543:consol.c      ****       consolGetString(pChar);
+ 916              		.loc 1 543 0
+ 917 0608 000093E5 		ldr	r0, [r3, #0]
+ 918              		.loc 1 542 0
+ 919 060c 043083E2 		add	r3, r3, #4
+ 920 0610 00308DE5 		str	r3, [sp, #0]
+ 921              		.loc 1 543 0
+ 922 0614 FEFFFFEB 		bl	consolGetString
+ 923              	.LVL98:
+ 924 0618 100000EA 		b	.L187
+ 925              	.LVL99:
+ 926              	.L172:
+ 544:consol.c      ****       break;
+ 545:consol.c      ****     case 'i':
+ 546:consol.c      ****     case 'I':
+ 547:consol.c      ****       pInt  = va_arg (pArg, int *);
+ 927              		.loc 1 547 0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 27
+
+
+ 928 061c 00309DE5 		ldr	r3, [sp, #0]
+ 929 0620 042083E2 		add	r2, r3, #4
+ 930              	.LVL100:
+ 931 0624 004093E5 		ldr	r4, [r3, #0]
+ 932 0628 00208DE5 		str	r2, [sp, #0]
+ 548:consol.c      ****       *pInt = consolGetIntNum();
+ 933              		.loc 1 548 0
+ 934 062c FEFFFFEB 		bl	consolGetIntNum
+ 935 0630 000084E5 		str	r0, [r4, #0]
+ 936 0634 090000EA 		b	.L187
+ 937              	.LVL101:
+ 938              	.L171:
+ 549:consol.c      ****       break;
+ 550:consol.c      ****     case 'c':
+ 551:consol.c      ****     case 'C':
+ 552:consol.c      ****       pChar  = va_arg (pArg, char *);
+ 939              		.loc 1 552 0
+ 940 0638 00209DE5 		ldr	r2, [sp, #0]
+ 941              	.LVL102:
+ 942 063c 043082E2 		add	r3, r2, #4
+ 943 0640 00308DE5 		str	r3, [sp, #0]
+ 944 0644 002092E5 		ldr	r2, [r2, #0]
+ 945              	.LVL103:
+ 946              	.L175:
+ 947              	.LBB20:
+ 948              	.LBB21:
+ 949              		.loc 1 380 0
+ 950 0648 2C109FE5 		ldr	r1, .L188
+ 951 064c 143091E5 		ldr	r3, [r1, #20]
+ 952 0650 010013E3 		tst	r3, #1
+ 953 0654 FBFFFF0A 		beq	.L175
+ 954              		.loc 1 382 0
+ 955 0658 003091E5 		ldr	r3, [r1, #0]
+ 956              	.LBE21:
+ 957              	.LBE20:
+ 553:consol.c      ****       *pChar = consolGetCh();
+ 958              		.loc 1 553 0
+ 959 065c 0030C2E5 		strb	r3, [r2, #0]
+ 960              	.LVL104:
+ 961              	.L187:
+ 962              		.loc 1 535 0
+ 963 0660 0030D5E5 		ldrb	r3, [r5, #0]	@ zero_extendqisi2
+ 964 0664 000053E3 		cmp	r3, #0
+ 965 0668 D2FFFF1A 		bne	.L169
+ 554:consol.c      ****       break;
+ 555:consol.c      ****     }
+ 556:consol.c      ****   }
+ 557:consol.c      ****   va_end(pArg);
+ 558:consol.c      **** }
+ 966              		.loc 1 558 0
+ 967 066c 04D08DE2 		add	sp, sp, #4
+ 968 0670 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 969 0674 10D08DE2 		add	sp, sp, #16
+ 970 0678 1EFF2FE1 		bx	lr
+ 971              	.L189:
+ 972              		.align	2
+ 973              	.L188:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 28
+
+
+ 974 067c 00C000E0 		.word	-536821760
+ 975              	.LFE14:
+ 976              		.size	consolScanf, .-consolScanf
+ 977              		.section	.rodata
+ 978              		.align	2
+ 979              		.type	hexChars.2029, %object
+ 980              		.size	hexChars.2029, 16
+ 981              	hexChars.2029:
+ 982 0000 30313233 		.ascii	"0123456789ABCDEF"
+ 982      34353637 
+ 982      38394142 
+ 982      43444546 
+ 983              		.section	.debug_frame,"",%progbits
+ 984              	.Lframe0:
+ 985 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
+ 986              	.LSCIE0:
+ 987 0004 FFFFFFFF 		.4byte	0xffffffff
+ 988 0008 01       		.byte	0x1
+ 989 0009 00       		.ascii	"\000"
+ 990 000a 01       		.uleb128 0x1
+ 991 000b 7C       		.sleb128 -4
+ 992 000c 0E       		.byte	0xe
+ 993 000d 0C       		.byte	0xc
+ 994 000e 0D       		.uleb128 0xd
+ 995 000f 00       		.uleb128 0x0
+ 996              		.align	2
+ 997              	.LECIE0:
+ 998              	.LSFDE0:
+ 999 0010 1C000000 		.4byte	.LEFDE0-.LASFDE0
+ 1000              	.LASFDE0:
+ 1001 0014 00000000 		.4byte	.Lframe0
+ 1002 0018 00000000 		.4byte	.LFB2
+ 1003 001c 84000000 		.4byte	.LFE2-.LFB2
+ 1004 0020 44       		.byte	0x4
+ 1005              		.4byte	.LCFI0-.LFB2
+ 1006 0021 0E       		.byte	0xe
+ 1007 0022 14       		.uleb128 0x14
+ 1008 0023 44       		.byte	0x4
+ 1009              		.4byte	.LCFI1-.LCFI0
+ 1010 0024 0E       		.byte	0xe
+ 1011 0025 48       		.uleb128 0x48
+ 1012 0026 8E       		.byte	0x8e
+ 1013 0027 01       		.uleb128 0x1
+ 1014 0028 87       		.byte	0x87
+ 1015 0029 02       		.uleb128 0x2
+ 1016 002a 86       		.byte	0x86
+ 1017 002b 03       		.uleb128 0x3
+ 1018 002c 85       		.byte	0x85
+ 1019 002d 04       		.uleb128 0x4
+ 1020 002e 84       		.byte	0x84
+ 1021 002f 05       		.uleb128 0x5
+ 1022              		.align	2
+ 1023              	.LEFDE0:
+ 1024              	.LSFDE2:
+ 1025 0030 0C000000 		.4byte	.LEFDE2-.LASFDE2
+ 1026              	.LASFDE2:
+ 1027 0034 00000000 		.4byte	.Lframe0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 29
+
+
+ 1028 0038 84000000 		.4byte	.LFB4
+ 1029 003c 54000000 		.4byte	.LFE4-.LFB4
+ 1030              		.align	2
+ 1031              	.LEFDE2:
+ 1032              	.LSFDE4:
+ 1033 0040 0C000000 		.4byte	.LEFDE4-.LASFDE4
+ 1034              	.LASFDE4:
+ 1035 0044 00000000 		.4byte	.Lframe0
+ 1036 0048 D8000000 		.4byte	.LFB5
+ 1037 004c 20000000 		.4byte	.LFE5-.LFB5
+ 1038              		.align	2
+ 1039              	.LEFDE4:
+ 1040              	.LSFDE6:
+ 1041 0050 0C000000 		.4byte	.LEFDE6-.LASFDE6
+ 1042              	.LASFDE6:
+ 1043 0054 00000000 		.4byte	.Lframe0
+ 1044 0058 F8000000 		.4byte	.LFB6
+ 1045 005c 44000000 		.4byte	.LFE6-.LFB6
+ 1046              		.align	2
+ 1047              	.LEFDE6:
+ 1048              	.LSFDE8:
+ 1049 0060 14000000 		.4byte	.LEFDE8-.LASFDE8
+ 1050              	.LASFDE8:
+ 1051 0064 00000000 		.4byte	.Lframe0
+ 1052 0068 3C010000 		.4byte	.LFB7
+ 1053 006c 2C000000 		.4byte	.LFE7-.LFB7
+ 1054 0070 44       		.byte	0x4
+ 1055              		.4byte	.LCFI2-.LFB7
+ 1056 0071 0E       		.byte	0xe
+ 1057 0072 08       		.uleb128 0x8
+ 1058 0073 8E       		.byte	0x8e
+ 1059 0074 01       		.uleb128 0x1
+ 1060 0075 84       		.byte	0x84
+ 1061 0076 02       		.uleb128 0x2
+ 1062 0077 00       		.align	2
+ 1063              	.LEFDE8:
+ 1064              	.LSFDE10:
+ 1065 0078 24000000 		.4byte	.LEFDE10-.LASFDE10
+ 1066              	.LASFDE10:
+ 1067 007c 00000000 		.4byte	.Lframe0
+ 1068 0080 68010000 		.4byte	.LFB8
+ 1069 0084 18010000 		.4byte	.LFE8-.LFB8
+ 1070 0088 44       		.byte	0x4
+ 1071              		.4byte	.LCFI3-.LFB8
+ 1072 0089 0E       		.byte	0xe
+ 1073 008a 24       		.uleb128 0x24
+ 1074 008b 44       		.byte	0x4
+ 1075              		.4byte	.LCFI4-.LCFI3
+ 1076 008c 0E       		.byte	0xe
+ 1077 008d 44       		.uleb128 0x44
+ 1078 008e 8E       		.byte	0x8e
+ 1079 008f 01       		.uleb128 0x1
+ 1080 0090 8B       		.byte	0x8b
+ 1081 0091 02       		.uleb128 0x2
+ 1082 0092 8A       		.byte	0x8a
+ 1083 0093 03       		.uleb128 0x3
+ 1084 0094 89       		.byte	0x89
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 30
+
+
+ 1085 0095 04       		.uleb128 0x4
+ 1086 0096 88       		.byte	0x88
+ 1087 0097 05       		.uleb128 0x5
+ 1088 0098 87       		.byte	0x87
+ 1089 0099 06       		.uleb128 0x6
+ 1090 009a 86       		.byte	0x86
+ 1091 009b 07       		.uleb128 0x7
+ 1092 009c 85       		.byte	0x85
+ 1093 009d 08       		.uleb128 0x8
+ 1094 009e 84       		.byte	0x84
+ 1095 009f 09       		.uleb128 0x9
+ 1096              		.align	2
+ 1097              	.LEFDE10:
+ 1098              	.LSFDE12:
+ 1099 00a0 0C000000 		.4byte	.LEFDE12-.LASFDE12
+ 1100              	.LASFDE12:
+ 1101 00a4 00000000 		.4byte	.Lframe0
+ 1102 00a8 80020000 		.4byte	.LFB10
+ 1103 00ac 20000000 		.4byte	.LFE10-.LFB10
+ 1104              		.align	2
+ 1105              	.LEFDE12:
+ 1106              	.LSFDE14:
+ 1107 00b0 0C000000 		.4byte	.LEFDE14-.LASFDE14
+ 1108              	.LASFDE14:
+ 1109 00b4 00000000 		.4byte	.Lframe0
+ 1110 00b8 A0020000 		.4byte	.LFB11
+ 1111 00bc 24000000 		.4byte	.LFE11-.LFB11
+ 1112              		.align	2
+ 1113              	.LEFDE14:
+ 1114              	.LSFDE16:
+ 1115 00c0 18000000 		.4byte	.LEFDE16-.LASFDE16
+ 1116              	.LASFDE16:
+ 1117 00c4 00000000 		.4byte	.Lframe0
+ 1118 00c8 C4020000 		.4byte	.LFB12
+ 1119 00cc 78000000 		.4byte	.LFE12-.LFB12
+ 1120 00d0 44       		.byte	0x4
+ 1121              		.4byte	.LCFI5-.LFB12
+ 1122 00d1 0E       		.byte	0xe
+ 1123 00d2 0C       		.uleb128 0xc
+ 1124 00d3 8E       		.byte	0x8e
+ 1125 00d4 01       		.uleb128 0x1
+ 1126 00d5 85       		.byte	0x85
+ 1127 00d6 02       		.uleb128 0x2
+ 1128 00d7 84       		.byte	0x84
+ 1129 00d8 03       		.uleb128 0x3
+ 1130 00d9 000000   		.align	2
+ 1131              	.LEFDE16:
+ 1132              	.LSFDE18:
+ 1133 00dc 28000000 		.4byte	.LEFDE18-.LASFDE18
+ 1134              	.LASFDE18:
+ 1135 00e0 00000000 		.4byte	.Lframe0
+ 1136 00e4 3C030000 		.4byte	.LFB9
+ 1137 00e8 80010000 		.4byte	.LFE9-.LFB9
+ 1138 00ec 44       		.byte	0x4
+ 1139              		.4byte	.LCFI6-.LFB9
+ 1140 00ed 0E       		.byte	0xe
+ 1141 00ee 10       		.uleb128 0x10
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 31
+
+
+ 1142 00ef 44       		.byte	0x4
+ 1143              		.4byte	.LCFI7-.LCFI6
+ 1144 00f0 0E       		.byte	0xe
+ 1145 00f1 20       		.uleb128 0x20
+ 1146 00f2 44       		.byte	0x4
+ 1147              		.4byte	.LCFI8-.LCFI7
+ 1148 00f3 0E       		.byte	0xe
+ 1149 00f4 24       		.uleb128 0x24
+ 1150 00f5 8E       		.byte	0x8e
+ 1151 00f6 05       		.uleb128 0x5
+ 1152 00f7 86       		.byte	0x86
+ 1153 00f8 06       		.uleb128 0x6
+ 1154 00f9 85       		.byte	0x85
+ 1155 00fa 07       		.uleb128 0x7
+ 1156 00fb 84       		.byte	0x84
+ 1157 00fc 08       		.uleb128 0x8
+ 1158 00fd 83       		.byte	0x83
+ 1159 00fe 01       		.uleb128 0x1
+ 1160 00ff 82       		.byte	0x82
+ 1161 0100 02       		.uleb128 0x2
+ 1162 0101 81       		.byte	0x81
+ 1163 0102 03       		.uleb128 0x3
+ 1164 0103 80       		.byte	0x80
+ 1165 0104 04       		.uleb128 0x4
+ 1166 0105 000000   		.align	2
+ 1167              	.LEFDE18:
+ 1168              	.LSFDE20:
+ 1169 0108 1C000000 		.4byte	.LEFDE20-.LASFDE20
+ 1170              	.LASFDE20:
+ 1171 010c 00000000 		.4byte	.Lframe0
+ 1172 0110 BC040000 		.4byte	.LFB13
+ 1173 0114 E0000000 		.4byte	.LFE13-.LFB13
+ 1174 0118 44       		.byte	0x4
+ 1175              		.4byte	.LCFI9-.LFB13
+ 1176 0119 0E       		.byte	0xe
+ 1177 011a 10       		.uleb128 0x10
+ 1178 011b 44       		.byte	0x4
+ 1179              		.4byte	.LCFI10-.LCFI9
+ 1180 011c 0E       		.byte	0xe
+ 1181 011d 30       		.uleb128 0x30
+ 1182 011e 8E       		.byte	0x8e
+ 1183 011f 01       		.uleb128 0x1
+ 1184 0120 86       		.byte	0x86
+ 1185 0121 02       		.uleb128 0x2
+ 1186 0122 85       		.byte	0x85
+ 1187 0123 03       		.uleb128 0x3
+ 1188 0124 84       		.byte	0x84
+ 1189 0125 04       		.uleb128 0x4
+ 1190 0126 0000     		.align	2
+ 1191              	.LEFDE20:
+ 1192              	.LSFDE22:
+ 1193 0128 24000000 		.4byte	.LEFDE22-.LASFDE22
+ 1194              	.LASFDE22:
+ 1195 012c 00000000 		.4byte	.Lframe0
+ 1196 0130 9C050000 		.4byte	.LFB14
+ 1197 0134 E4000000 		.4byte	.LFE14-.LFB14
+ 1198 0138 44       		.byte	0x4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 32
+
+
+ 1199              		.4byte	.LCFI11-.LFB14
+ 1200 0139 0E       		.byte	0xe
+ 1201 013a 10       		.uleb128 0x10
+ 1202 013b 44       		.byte	0x4
+ 1203              		.4byte	.LCFI12-.LCFI11
+ 1204 013c 0E       		.byte	0xe
+ 1205 013d 1C       		.uleb128 0x1c
+ 1206 013e 44       		.byte	0x4
+ 1207              		.4byte	.LCFI13-.LCFI12
+ 1208 013f 0E       		.byte	0xe
+ 1209 0140 20       		.uleb128 0x20
+ 1210 0141 8E       		.byte	0x8e
+ 1211 0142 05       		.uleb128 0x5
+ 1212 0143 85       		.byte	0x85
+ 1213 0144 06       		.uleb128 0x6
+ 1214 0145 84       		.byte	0x84
+ 1215 0146 07       		.uleb128 0x7
+ 1216 0147 83       		.byte	0x83
+ 1217 0148 01       		.uleb128 0x1
+ 1218 0149 82       		.byte	0x82
+ 1219 014a 02       		.uleb128 0x2
+ 1220 014b 81       		.byte	0x81
+ 1221 014c 03       		.uleb128 0x3
+ 1222 014d 80       		.byte	0x80
+ 1223 014e 04       		.uleb128 0x4
+ 1224 014f 00       		.align	2
+ 1225              	.LEFDE22:
+ 1226              		.file 2 "/cygdrive/c/GNUARM/bin/../lib/gcc/arm-elf/4.1.1/include/stdarg.h"
+ 1227              		.text
+ 1228              	.Letext0:
+ 1229              		.section	.debug_loc,"",%progbits
+ 1230              	.Ldebug_loc0:
+ 1231              	.LLST0:
+ 1232 0000 00000000 		.4byte	.LFB2-.Ltext0
+ 1233 0004 04000000 		.4byte	.LCFI0-.Ltext0
+ 1234 0008 0100     		.2byte	0x1
+ 1235 000a 5D       		.byte	0x5d
+ 1236 000b 04000000 		.4byte	.LCFI0-.Ltext0
+ 1237 000f 08000000 		.4byte	.LCFI1-.Ltext0
+ 1238 0013 0200     		.2byte	0x2
+ 1239 0015 7D       		.byte	0x7d
+ 1240 0016 14       		.sleb128 20
+ 1241 0017 08000000 		.4byte	.LCFI1-.Ltext0
+ 1242 001b 84000000 		.4byte	.LFE2-.Ltext0
+ 1243 001f 0300     		.2byte	0x3
+ 1244 0021 7D       		.byte	0x7d
+ 1245 0022 C800     		.sleb128 72
+ 1246 0024 00000000 		.4byte	0x0
+ 1247 0028 00000000 		.4byte	0x0
+ 1248              	.LLST1:
+ 1249 002c 00000000 		.4byte	.LVL0-.Ltext0
+ 1250 0030 18000000 		.4byte	.LVL1-.Ltext0
+ 1251 0034 0100     		.2byte	0x1
+ 1252 0036 50       		.byte	0x50
+ 1253 0037 18000000 		.4byte	.LVL1-.Ltext0
+ 1254 003b 84000000 		.4byte	.LFE2-.Ltext0
+ 1255 003f 0100     		.2byte	0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 33
+
+
+ 1256 0041 57       		.byte	0x57
+ 1257 0042 00000000 		.4byte	0x0
+ 1258 0046 00000000 		.4byte	0x0
+ 1259              	.LLST2:
+ 1260 004a 00000000 		.4byte	.LVL0-.Ltext0
+ 1261 004e 1C000000 		.4byte	.LVL2-.Ltext0
+ 1262 0052 0100     		.2byte	0x1
+ 1263 0054 51       		.byte	0x51
+ 1264 0055 1C000000 		.4byte	.LVL2-.Ltext0
+ 1265 0059 5C000000 		.4byte	.LVL5-.Ltext0
+ 1266 005d 0100     		.2byte	0x1
+ 1267 005f 54       		.byte	0x54
+ 1268 0060 00000000 		.4byte	0x0
+ 1269 0064 00000000 		.4byte	0x0
+ 1270              	.LLST3:
+ 1271 0068 00000000 		.4byte	.LVL0-.Ltext0
+ 1272 006c 20000000 		.4byte	.LVL3-.Ltext0
+ 1273 0070 0100     		.2byte	0x1
+ 1274 0072 52       		.byte	0x52
+ 1275 0073 20000000 		.4byte	.LVL3-.Ltext0
+ 1276 0077 84000000 		.4byte	.LFE2-.Ltext0
+ 1277 007b 0100     		.2byte	0x1
+ 1278 007d 56       		.byte	0x56
+ 1279 007e 00000000 		.4byte	0x0
+ 1280 0082 00000000 		.4byte	0x0
+ 1281              	.LLST7:
+ 1282 0086 3C010000 		.4byte	.LFB7-.Ltext0
+ 1283 008a 40010000 		.4byte	.LCFI2-.Ltext0
+ 1284 008e 0100     		.2byte	0x1
+ 1285 0090 5D       		.byte	0x5d
+ 1286 0091 40010000 		.4byte	.LCFI2-.Ltext0
+ 1287 0095 68010000 		.4byte	.LFE7-.Ltext0
+ 1288 0099 0200     		.2byte	0x2
+ 1289 009b 7D       		.byte	0x7d
+ 1290 009c 08       		.sleb128 8
+ 1291 009d 00000000 		.4byte	0x0
+ 1292 00a1 00000000 		.4byte	0x0
+ 1293              	.LLST8:
+ 1294 00a5 3C010000 		.4byte	.LVL8-.Ltext0
+ 1295 00a9 48010000 		.4byte	.LVL9-.Ltext0
+ 1296 00ad 0100     		.2byte	0x1
+ 1297 00af 50       		.byte	0x50
+ 1298 00b0 48010000 		.4byte	.LVL9-.Ltext0
+ 1299 00b4 68010000 		.4byte	.LFE7-.Ltext0
+ 1300 00b8 0100     		.2byte	0x1
+ 1301 00ba 54       		.byte	0x54
+ 1302 00bb 00000000 		.4byte	0x0
+ 1303 00bf 00000000 		.4byte	0x0
+ 1304              	.LLST9:
+ 1305 00c3 68010000 		.4byte	.LFB8-.Ltext0
+ 1306 00c7 6C010000 		.4byte	.LCFI3-.Ltext0
+ 1307 00cb 0100     		.2byte	0x1
+ 1308 00cd 5D       		.byte	0x5d
+ 1309 00ce 6C010000 		.4byte	.LCFI3-.Ltext0
+ 1310 00d2 70010000 		.4byte	.LCFI4-.Ltext0
+ 1311 00d6 0200     		.2byte	0x2
+ 1312 00d8 7D       		.byte	0x7d
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 34
+
+
+ 1313 00d9 24       		.sleb128 36
+ 1314 00da 70010000 		.4byte	.LCFI4-.Ltext0
+ 1315 00de 80020000 		.4byte	.LFE8-.Ltext0
+ 1316 00e2 0300     		.2byte	0x3
+ 1317 00e4 7D       		.byte	0x7d
+ 1318 00e5 C400     		.sleb128 68
+ 1319 00e7 00000000 		.4byte	0x0
+ 1320 00eb 00000000 		.4byte	0x0
+ 1321              	.LLST10:
+ 1322 00ef 68010000 		.4byte	.LVL11-.Ltext0
+ 1323 00f3 A8010000 		.4byte	.LVL14-.Ltext0
+ 1324 00f7 0100     		.2byte	0x1
+ 1325 00f9 50       		.byte	0x50
+ 1326 00fa A8010000 		.4byte	.LVL14-.Ltext0
+ 1327 00fe 80020000 		.4byte	.LFE8-.Ltext0
+ 1328 0102 0100     		.2byte	0x1
+ 1329 0104 57       		.byte	0x57
+ 1330 0105 00000000 		.4byte	0x0
+ 1331 0109 00000000 		.4byte	0x0
+ 1332              	.LLST11:
+ 1333 010d 68010000 		.4byte	.LVL11-.Ltext0
+ 1334 0111 AC010000 		.4byte	.LVL15-.Ltext0
+ 1335 0115 0100     		.2byte	0x1
+ 1336 0117 51       		.byte	0x51
+ 1337 0118 00000000 		.4byte	0x0
+ 1338 011c 00000000 		.4byte	0x0
+ 1339              	.LLST12:
+ 1340 0120 68010000 		.4byte	.LVL11-.Ltext0
+ 1341 0124 A4010000 		.4byte	.LVL13-.Ltext0
+ 1342 0128 0100     		.2byte	0x1
+ 1343 012a 52       		.byte	0x52
+ 1344 012b 00000000 		.4byte	0x0
+ 1345 012f 00000000 		.4byte	0x0
+ 1346              	.LLST13:
+ 1347 0133 68010000 		.4byte	.LVL11-.Ltext0
+ 1348 0137 B4010000 		.4byte	.LVL16-.Ltext0
+ 1349 013b 0100     		.2byte	0x1
+ 1350 013d 53       		.byte	0x53
+ 1351 013e B4010000 		.4byte	.LVL16-.Ltext0
+ 1352 0142 80020000 		.4byte	.LFE8-.Ltext0
+ 1353 0146 0100     		.2byte	0x1
+ 1354 0148 5B       		.byte	0x5b
+ 1355 0149 00000000 		.4byte	0x0
+ 1356 014d 00000000 		.4byte	0x0
+ 1357              	.LLST14:
+ 1358 0151 68010000 		.4byte	.LVL11-.Ltext0
+ 1359 0155 E4010000 		.4byte	.LVL19-.Ltext0
+ 1360 0159 0200     		.2byte	0x2
+ 1361 015b 91       		.byte	0x91
+ 1362 015c 00       		.sleb128 0
+ 1363 015d E4010000 		.4byte	.LVL19-.Ltext0
+ 1364 0161 80020000 		.4byte	.LFE8-.Ltext0
+ 1365 0165 0100     		.2byte	0x1
+ 1366 0167 58       		.byte	0x58
+ 1367 0168 00000000 		.4byte	0x0
+ 1368 016c 00000000 		.4byte	0x0
+ 1369              	.LLST15:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 35
+
+
+ 1370 0170 8C010000 		.4byte	.LVL12-.Ltext0
+ 1371 0174 DC010000 		.4byte	.LVL17-.Ltext0
+ 1372 0178 0100     		.2byte	0x1
+ 1373 017a 54       		.byte	0x54
+ 1374 017b E0010000 		.4byte	.LVL18-.Ltext0
+ 1375 017f E4010000 		.4byte	.LVL19-.Ltext0
+ 1376 0183 0100     		.2byte	0x1
+ 1377 0185 55       		.byte	0x55
+ 1378 0186 E4010000 		.4byte	.LVL19-.Ltext0
+ 1379 018a FC010000 		.4byte	.LVL20-.Ltext0
+ 1380 018e 0100     		.2byte	0x1
+ 1381 0190 50       		.byte	0x50
+ 1382 0191 FC010000 		.4byte	.LVL20-.Ltext0
+ 1383 0195 34020000 		.4byte	.LVL22-.Ltext0
+ 1384 0199 0100     		.2byte	0x1
+ 1385 019b 55       		.byte	0x55
+ 1386 019c 34020000 		.4byte	.LVL22-.Ltext0
+ 1387 01a0 6C020000 		.4byte	.LVL23-.Ltext0
+ 1388 01a4 0100     		.2byte	0x1
+ 1389 01a6 50       		.byte	0x50
+ 1390 01a7 6C020000 		.4byte	.LVL23-.Ltext0
+ 1391 01ab 80020000 		.4byte	.LFE8-.Ltext0
+ 1392 01af 0100     		.2byte	0x1
+ 1393 01b1 55       		.byte	0x55
+ 1394 01b2 00000000 		.4byte	0x0
+ 1395 01b6 00000000 		.4byte	0x0
+ 1396              	.LLST18:
+ 1397 01ba A0020000 		.4byte	.LVL24-.Ltext0
+ 1398 01be BC020000 		.4byte	.LVL25-.Ltext0
+ 1399 01c2 0100     		.2byte	0x1
+ 1400 01c4 50       		.byte	0x50
+ 1401 01c5 00000000 		.4byte	0x0
+ 1402 01c9 00000000 		.4byte	0x0
+ 1403              	.LLST19:
+ 1404 01cd C4020000 		.4byte	.LFB12-.Ltext0
+ 1405 01d1 C8020000 		.4byte	.LCFI5-.Ltext0
+ 1406 01d5 0100     		.2byte	0x1
+ 1407 01d7 5D       		.byte	0x5d
+ 1408 01d8 C8020000 		.4byte	.LCFI5-.Ltext0
+ 1409 01dc 3C030000 		.4byte	.LFE12-.Ltext0
+ 1410 01e0 0200     		.2byte	0x2
+ 1411 01e2 7D       		.byte	0x7d
+ 1412 01e3 0C       		.sleb128 12
+ 1413 01e4 00000000 		.4byte	0x0
+ 1414 01e8 00000000 		.4byte	0x0
+ 1415              	.LLST20:
+ 1416 01ec C4020000 		.4byte	.LVL26-.Ltext0
+ 1417 01f0 CC020000 		.4byte	.LVL27-.Ltext0
+ 1418 01f4 0100     		.2byte	0x1
+ 1419 01f6 50       		.byte	0x50
+ 1420 01f7 CC020000 		.4byte	.LVL27-.Ltext0
+ 1421 01fb CC020000 		.4byte	.LVL27-.Ltext0
+ 1422 01ff 0100     		.2byte	0x1
+ 1423 0201 54       		.byte	0x54
+ 1424 0202 D0020000 		.4byte	.LVL28-.Ltext0
+ 1425 0206 D4020000 		.4byte	.LVL29-.Ltext0
+ 1426 020a 0100     		.2byte	0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 36
+
+
+ 1427 020c 55       		.byte	0x55
+ 1428 020d D4020000 		.4byte	.LVL29-.Ltext0
+ 1429 0211 0C030000 		.4byte	.LVL35-.Ltext0
+ 1430 0215 0100     		.2byte	0x1
+ 1431 0217 54       		.byte	0x54
+ 1432 0218 0C030000 		.4byte	.LVL35-.Ltext0
+ 1433 021c 1C030000 		.4byte	.LVL37-.Ltext0
+ 1434 0220 0100     		.2byte	0x1
+ 1435 0222 50       		.byte	0x50
+ 1436 0223 1C030000 		.4byte	.LVL37-.Ltext0
+ 1437 0227 3C030000 		.4byte	.LFE12-.Ltext0
+ 1438 022b 0100     		.2byte	0x1
+ 1439 022d 54       		.byte	0x54
+ 1440 022e 00000000 		.4byte	0x0
+ 1441 0232 00000000 		.4byte	0x0
+ 1442              	.LLST21:
+ 1443 0236 D4020000 		.4byte	.LVL29-.Ltext0
+ 1444 023a DC020000 		.4byte	.LVL30-.Ltext0
+ 1445 023e 0100     		.2byte	0x1
+ 1446 0240 50       		.byte	0x50
+ 1447 0241 DC020000 		.4byte	.LVL30-.Ltext0
+ 1448 0245 EC020000 		.4byte	.LVL31-.Ltext0
+ 1449 0249 0100     		.2byte	0x1
+ 1450 024b 53       		.byte	0x53
+ 1451 024c F4020000 		.4byte	.LVL32-.Ltext0
+ 1452 0250 FC020000 		.4byte	.LVL33-.Ltext0
+ 1453 0254 0100     		.2byte	0x1
+ 1454 0256 53       		.byte	0x53
+ 1455 0257 FC020000 		.4byte	.LVL33-.Ltext0
+ 1456 025b 04030000 		.4byte	.LVL34-.Ltext0
+ 1457 025f 0100     		.2byte	0x1
+ 1458 0261 53       		.byte	0x53
+ 1459 0262 14030000 		.4byte	.LVL36-.Ltext0
+ 1460 0266 20030000 		.4byte	.LVL38-.Ltext0
+ 1461 026a 0100     		.2byte	0x1
+ 1462 026c 53       		.byte	0x53
+ 1463 026d 20030000 		.4byte	.LVL38-.Ltext0
+ 1464 0271 28030000 		.4byte	.LVL39-.Ltext0
+ 1465 0275 0100     		.2byte	0x1
+ 1466 0277 50       		.byte	0x50
+ 1467 0278 00000000 		.4byte	0x0
+ 1468 027c 00000000 		.4byte	0x0
+ 1469              	.LLST22:
+ 1470 0280 3C030000 		.4byte	.LFB9-.Ltext0
+ 1471 0284 40030000 		.4byte	.LCFI6-.Ltext0
+ 1472 0288 0100     		.2byte	0x1
+ 1473 028a 5D       		.byte	0x5d
+ 1474 028b 40030000 		.4byte	.LCFI6-.Ltext0
+ 1475 028f 44030000 		.4byte	.LCFI7-.Ltext0
+ 1476 0293 0200     		.2byte	0x2
+ 1477 0295 7D       		.byte	0x7d
+ 1478 0296 10       		.sleb128 16
+ 1479 0297 44030000 		.4byte	.LCFI7-.Ltext0
+ 1480 029b 48030000 		.4byte	.LCFI8-.Ltext0
+ 1481 029f 0200     		.2byte	0x2
+ 1482 02a1 7D       		.byte	0x7d
+ 1483 02a2 20       		.sleb128 32
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 37
+
+
+ 1484 02a3 48030000 		.4byte	.LCFI8-.Ltext0
+ 1485 02a7 BC040000 		.4byte	.LFE9-.Ltext0
+ 1486 02ab 0200     		.2byte	0x2
+ 1487 02ad 7D       		.byte	0x7d
+ 1488 02ae 24       		.sleb128 36
+ 1489 02af 00000000 		.4byte	0x0
+ 1490 02b3 00000000 		.4byte	0x0
+ 1491              	.LLST23:
+ 1492 02b7 3C030000 		.4byte	.LVL40-.Ltext0
+ 1493 02bb 5C030000 		.4byte	.LVL43-.Ltext0
+ 1494 02bf 0200     		.2byte	0x2
+ 1495 02c1 91       		.byte	0x91
+ 1496 02c2 00       		.sleb128 0
+ 1497 02c3 5C030000 		.4byte	.LVL43-.Ltext0
+ 1498 02c7 BC040000 		.4byte	.LFE9-.Ltext0
+ 1499 02cb 0100     		.2byte	0x1
+ 1500 02cd 56       		.byte	0x56
+ 1501 02ce 00000000 		.4byte	0x0
+ 1502 02d2 00000000 		.4byte	0x0
+ 1503              	.LLST24:
+ 1504 02d6 54030000 		.4byte	.LVL41-.Ltext0
+ 1505 02da 5C030000 		.4byte	.LVL43-.Ltext0
+ 1506 02de 0100     		.2byte	0x1
+ 1507 02e0 55       		.byte	0x55
+ 1508 02e1 5C030000 		.4byte	.LVL43-.Ltext0
+ 1509 02e5 68030000 		.4byte	.LVL45-.Ltext0
+ 1510 02e9 0100     		.2byte	0x1
+ 1511 02eb 53       		.byte	0x53
+ 1512 02ec 68030000 		.4byte	.LVL45-.Ltext0
+ 1513 02f0 78030000 		.4byte	.LVL47-.Ltext0
+ 1514 02f4 0100     		.2byte	0x1
+ 1515 02f6 53       		.byte	0x53
+ 1516 02f7 48040000 		.4byte	.LVL66-.Ltext0
+ 1517 02fb 5C040000 		.4byte	.LVL69-.Ltext0
+ 1518 02ff 0100     		.2byte	0x1
+ 1519 0301 55       		.byte	0x55
+ 1520 0302 5C040000 		.4byte	.LVL69-.Ltext0
+ 1521 0306 64040000 		.4byte	.LVL70-.Ltext0
+ 1522 030a 0100     		.2byte	0x1
+ 1523 030c 53       		.byte	0x53
+ 1524 030d A8040000 		.4byte	.LVL81-.Ltext0
+ 1525 0311 BC040000 		.4byte	.LFE9-.Ltext0
+ 1526 0315 0100     		.2byte	0x1
+ 1527 0317 53       		.byte	0x53
+ 1528 0318 00000000 		.4byte	0x0
+ 1529 031c 00000000 		.4byte	0x0
+ 1530              	.LLST25:
+ 1531 0320 5C030000 		.4byte	.LVL43-.Ltext0
+ 1532 0324 7C030000 		.4byte	.LVL48-.Ltext0
+ 1533 0328 0100     		.2byte	0x1
+ 1534 032a 54       		.byte	0x54
+ 1535 032b FC030000 		.4byte	.LVL52-.Ltext0
+ 1536 032f 18040000 		.4byte	.LVL58-.Ltext0
+ 1537 0333 0100     		.2byte	0x1
+ 1538 0335 54       		.byte	0x54
+ 1539 0336 A8040000 		.4byte	.LVL81-.Ltext0
+ 1540 033a BC040000 		.4byte	.LFE9-.Ltext0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 38
+
+
+ 1541 033e 0100     		.2byte	0x1
+ 1542 0340 54       		.byte	0x54
+ 1543 0341 00000000 		.4byte	0x0
+ 1544 0345 00000000 		.4byte	0x0
+ 1545              	.LLST26:
+ 1546 0349 5C030000 		.4byte	.LVL43-.Ltext0
+ 1547 034d 5C030000 		.4byte	.LVL43-.Ltext0
+ 1548 0351 0100     		.2byte	0x1
+ 1549 0353 53       		.byte	0x53
+ 1550 0354 5C030000 		.4byte	.LVL43-.Ltext0
+ 1551 0358 68030000 		.4byte	.LVL45-.Ltext0
+ 1552 035c 0100     		.2byte	0x1
+ 1553 035e 50       		.byte	0x50
+ 1554 035f 68030000 		.4byte	.LVL45-.Ltext0
+ 1555 0363 6C030000 		.4byte	.LVL46-.Ltext0
+ 1556 0367 0100     		.2byte	0x1
+ 1557 0369 50       		.byte	0x50
+ 1558 036a 6C030000 		.4byte	.LVL46-.Ltext0
+ 1559 036e 78030000 		.4byte	.LVL47-.Ltext0
+ 1560 0372 0100     		.2byte	0x1
+ 1561 0374 53       		.byte	0x53
+ 1562 0375 F8030000 		.4byte	.LVL51-.Ltext0
+ 1563 0379 00040000 		.4byte	.LVL53-.Ltext0
+ 1564 037d 0100     		.2byte	0x1
+ 1565 037f 50       		.byte	0x50
+ 1566 0380 04040000 		.4byte	.LVL54-.Ltext0
+ 1567 0384 08040000 		.4byte	.LVL55-.Ltext0
+ 1568 0388 0100     		.2byte	0x1
+ 1569 038a 50       		.byte	0x50
+ 1570 038b 08040000 		.4byte	.LVL55-.Ltext0
+ 1571 038f 0C040000 		.4byte	.LVL56-.Ltext0
+ 1572 0393 0100     		.2byte	0x1
+ 1573 0395 53       		.byte	0x53
+ 1574 0396 10040000 		.4byte	.LVL57-.Ltext0
+ 1575 039a 18040000 		.4byte	.LVL58-.Ltext0
+ 1576 039e 0100     		.2byte	0x1
+ 1577 03a0 50       		.byte	0x50
+ 1578 03a1 18040000 		.4byte	.LVL58-.Ltext0
+ 1579 03a5 2C040000 		.4byte	.LVL61-.Ltext0
+ 1580 03a9 0100     		.2byte	0x1
+ 1581 03ab 50       		.byte	0x50
+ 1582 03ac 34040000 		.4byte	.LVL63-.Ltext0
+ 1583 03b0 3C040000 		.4byte	.LVL64-.Ltext0
+ 1584 03b4 0100     		.2byte	0x1
+ 1585 03b6 50       		.byte	0x50
+ 1586 03b7 48040000 		.4byte	.LVL66-.Ltext0
+ 1587 03bb 50040000 		.4byte	.LVL67-.Ltext0
+ 1588 03bf 0100     		.2byte	0x1
+ 1589 03c1 50       		.byte	0x50
+ 1590 03c2 64040000 		.4byte	.LVL70-.Ltext0
+ 1591 03c6 6C040000 		.4byte	.LVL71-.Ltext0
+ 1592 03ca 0100     		.2byte	0x1
+ 1593 03cc 50       		.byte	0x50
+ 1594 03cd 74040000 		.4byte	.LVL72-.Ltext0
+ 1595 03d1 78040000 		.4byte	.LVL73-.Ltext0
+ 1596 03d5 0100     		.2byte	0x1
+ 1597 03d7 50       		.byte	0x50
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 39
+
+
+ 1598 03d8 84040000 		.4byte	.LVL75-.Ltext0
+ 1599 03dc 8C040000 		.4byte	.LVL76-.Ltext0
+ 1600 03e0 0100     		.2byte	0x1
+ 1601 03e2 50       		.byte	0x50
+ 1602 03e3 94040000 		.4byte	.LVL77-.Ltext0
+ 1603 03e7 9C040000 		.4byte	.LVL78-.Ltext0
+ 1604 03eb 0100     		.2byte	0x1
+ 1605 03ed 50       		.byte	0x50
+ 1606 03ee A0040000 		.4byte	.LVL79-.Ltext0
+ 1607 03f2 A4040000 		.4byte	.LVL80-.Ltext0
+ 1608 03f6 0100     		.2byte	0x1
+ 1609 03f8 50       		.byte	0x50
+ 1610 03f9 A8040000 		.4byte	.LVL81-.Ltext0
+ 1611 03fd A8040000 		.4byte	.LVL81-.Ltext0
+ 1612 0401 0100     		.2byte	0x1
+ 1613 0403 53       		.byte	0x53
+ 1614 0404 A8040000 		.4byte	.LVL81-.Ltext0
+ 1615 0408 BC040000 		.4byte	.LFE9-.Ltext0
+ 1616 040c 0100     		.2byte	0x1
+ 1617 040e 50       		.byte	0x50
+ 1618 040f 00000000 		.4byte	0x0
+ 1619 0413 00000000 		.4byte	0x0
+ 1620              	.LLST27:
+ 1621 0417 5C030000 		.4byte	.LVL43-.Ltext0
+ 1622 041b 7C030000 		.4byte	.LVL48-.Ltext0
+ 1623 041f 0100     		.2byte	0x1
+ 1624 0421 54       		.byte	0x54
+ 1625 0422 1C040000 		.4byte	.LVL59-.Ltext0
+ 1626 0426 48040000 		.4byte	.LVL66-.Ltext0
+ 1627 042a 0100     		.2byte	0x1
+ 1628 042c 54       		.byte	0x54
+ 1629 042d A8040000 		.4byte	.LVL81-.Ltext0
+ 1630 0431 BC040000 		.4byte	.LFE9-.Ltext0
+ 1631 0435 0100     		.2byte	0x1
+ 1632 0437 54       		.byte	0x54
+ 1633 0438 00000000 		.4byte	0x0
+ 1634 043c 00000000 		.4byte	0x0
+ 1635              	.LLST28:
+ 1636 0440 64030000 		.4byte	.LVL44-.Ltext0
+ 1637 0444 68030000 		.4byte	.LVL45-.Ltext0
+ 1638 0448 0100     		.2byte	0x1
+ 1639 044a 53       		.byte	0x53
+ 1640 044b 78030000 		.4byte	.LVL47-.Ltext0
+ 1641 044f F4030000 		.4byte	.LVL50-.Ltext0
+ 1642 0453 0100     		.2byte	0x1
+ 1643 0455 53       		.byte	0x53
+ 1644 0456 F8030000 		.4byte	.LVL51-.Ltext0
+ 1645 045a 00040000 		.4byte	.LVL53-.Ltext0
+ 1646 045e 0100     		.2byte	0x1
+ 1647 0460 53       		.byte	0x53
+ 1648 0461 04040000 		.4byte	.LVL54-.Ltext0
+ 1649 0465 08040000 		.4byte	.LVL55-.Ltext0
+ 1650 0469 0100     		.2byte	0x1
+ 1651 046b 53       		.byte	0x53
+ 1652 046c 18040000 		.4byte	.LVL58-.Ltext0
+ 1653 0470 30040000 		.4byte	.LVL62-.Ltext0
+ 1654 0474 0100     		.2byte	0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 40
+
+
+ 1655 0476 53       		.byte	0x53
+ 1656 0477 34040000 		.4byte	.LVL63-.Ltext0
+ 1657 047b 44040000 		.4byte	.LVL65-.Ltext0
+ 1658 047f 0100     		.2byte	0x1
+ 1659 0481 53       		.byte	0x53
+ 1660 0482 48040000 		.4byte	.LVL66-.Ltext0
+ 1661 0486 58040000 		.4byte	.LVL68-.Ltext0
+ 1662 048a 0100     		.2byte	0x1
+ 1663 048c 53       		.byte	0x53
+ 1664 048d 64040000 		.4byte	.LVL70-.Ltext0
+ 1665 0491 7C040000 		.4byte	.LVL74-.Ltext0
+ 1666 0495 0100     		.2byte	0x1
+ 1667 0497 53       		.byte	0x53
+ 1668 0498 84040000 		.4byte	.LVL75-.Ltext0
+ 1669 049c A0040000 		.4byte	.LVL79-.Ltext0
+ 1670 04a0 0100     		.2byte	0x1
+ 1671 04a2 53       		.byte	0x53
+ 1672 04a3 A0040000 		.4byte	.LVL79-.Ltext0
+ 1673 04a7 BC040000 		.4byte	.LFE9-.Ltext0
+ 1674 04ab 0100     		.2byte	0x1
+ 1675 04ad 53       		.byte	0x53
+ 1676 04ae 00000000 		.4byte	0x0
+ 1677 04b2 00000000 		.4byte	0x0
+ 1678              	.LLST29:
+ 1679 04b6 BC040000 		.4byte	.LFB13-.Ltext0
+ 1680 04ba C0040000 		.4byte	.LCFI9-.Ltext0
+ 1681 04be 0100     		.2byte	0x1
+ 1682 04c0 5D       		.byte	0x5d
+ 1683 04c1 C0040000 		.4byte	.LCFI9-.Ltext0
+ 1684 04c5 C4040000 		.4byte	.LCFI10-.Ltext0
+ 1685 04c9 0200     		.2byte	0x2
+ 1686 04cb 7D       		.byte	0x7d
+ 1687 04cc 10       		.sleb128 16
+ 1688 04cd C4040000 		.4byte	.LCFI10-.Ltext0
+ 1689 04d1 9C050000 		.4byte	.LFE13-.Ltext0
+ 1690 04d5 0200     		.2byte	0x2
+ 1691 04d7 7D       		.byte	0x7d
+ 1692 04d8 30       		.sleb128 48
+ 1693 04d9 00000000 		.4byte	0x0
+ 1694 04dd 00000000 		.4byte	0x0
+ 1695              	.LLST30:
+ 1696 04e1 18050000 		.4byte	.LVL85-.Ltext0
+ 1697 04e5 50050000 		.4byte	.LVL89-.Ltext0
+ 1698 04e9 0100     		.2byte	0x1
+ 1699 04eb 5C       		.byte	0x5c
+ 1700 04ec 54050000 		.4byte	.LVL90-.Ltext0
+ 1701 04f0 9C050000 		.4byte	.LFE13-.Ltext0
+ 1702 04f4 0100     		.2byte	0x1
+ 1703 04f6 5C       		.byte	0x5c
+ 1704 04f7 00000000 		.4byte	0x0
+ 1705 04fb 00000000 		.4byte	0x0
+ 1706              	.LLST31:
+ 1707 04ff 38050000 		.4byte	.LVL86-.Ltext0
+ 1708 0503 40050000 		.4byte	.LVL88-.Ltext0
+ 1709 0507 0100     		.2byte	0x1
+ 1710 0509 50       		.byte	0x50
+ 1711 050a 54050000 		.4byte	.LVL90-.Ltext0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 41
+
+
+ 1712 050e 64050000 		.4byte	.LVL91-.Ltext0
+ 1713 0512 0100     		.2byte	0x1
+ 1714 0514 50       		.byte	0x50
+ 1715 0515 68050000 		.4byte	.LVL92-.Ltext0
+ 1716 0519 90050000 		.4byte	.LVL93-.Ltext0
+ 1717 051d 0100     		.2byte	0x1
+ 1718 051f 50       		.byte	0x50
+ 1719 0520 00000000 		.4byte	0x0
+ 1720 0524 00000000 		.4byte	0x0
+ 1721              	.LLST32:
+ 1722 0528 3C050000 		.4byte	.LVL87-.Ltext0
+ 1723 052c 40050000 		.4byte	.LVL88-.Ltext0
+ 1724 0530 0100     		.2byte	0x1
+ 1725 0532 5E       		.byte	0x5e
+ 1726 0533 54050000 		.4byte	.LVL90-.Ltext0
+ 1727 0537 9C050000 		.4byte	.LFE13-.Ltext0
+ 1728 053b 0100     		.2byte	0x1
+ 1729 053d 5E       		.byte	0x5e
+ 1730 053e 00000000 		.4byte	0x0
+ 1731 0542 00000000 		.4byte	0x0
+ 1732              	.LLST33:
+ 1733 0546 9C050000 		.4byte	.LFB14-.Ltext0
+ 1734 054a A0050000 		.4byte	.LCFI11-.Ltext0
+ 1735 054e 0100     		.2byte	0x1
+ 1736 0550 5D       		.byte	0x5d
+ 1737 0551 A0050000 		.4byte	.LCFI11-.Ltext0
+ 1738 0555 A4050000 		.4byte	.LCFI12-.Ltext0
+ 1739 0559 0200     		.2byte	0x2
+ 1740 055b 7D       		.byte	0x7d
+ 1741 055c 10       		.sleb128 16
+ 1742 055d A4050000 		.4byte	.LCFI12-.Ltext0
+ 1743 0561 A8050000 		.4byte	.LCFI13-.Ltext0
+ 1744 0565 0200     		.2byte	0x2
+ 1745 0567 7D       		.byte	0x7d
+ 1746 0568 1C       		.sleb128 28
+ 1747 0569 A8050000 		.4byte	.LCFI13-.Ltext0
+ 1748 056d 80060000 		.4byte	.LFE14-.Ltext0
+ 1749 0571 0200     		.2byte	0x2
+ 1750 0573 7D       		.byte	0x7d
+ 1751 0574 20       		.sleb128 32
+ 1752 0575 00000000 		.4byte	0x0
+ 1753 0579 00000000 		.4byte	0x0
+ 1754              	.LLST34:
+ 1755 057d 9C050000 		.4byte	.LVL94-.Ltext0
+ 1756 0581 B8050000 		.4byte	.LVL96-.Ltext0
+ 1757 0585 0200     		.2byte	0x2
+ 1758 0587 91       		.byte	0x91
+ 1759 0588 00       		.sleb128 0
+ 1760 0589 B8050000 		.4byte	.LVL96-.Ltext0
+ 1761 058d 80060000 		.4byte	.LFE14-.Ltext0
+ 1762 0591 0100     		.2byte	0x1
+ 1763 0593 55       		.byte	0x55
+ 1764 0594 00000000 		.4byte	0x0
+ 1765 0598 00000000 		.4byte	0x0
+ 1766              	.LLST35:
+ 1767 059c B8050000 		.4byte	.LVL96-.Ltext0
+ 1768 05a0 C8050000 		.4byte	.LVL97-.Ltext0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 42
+
+
+ 1769 05a4 0100     		.2byte	0x1
+ 1770 05a6 53       		.byte	0x53
+ 1771 05a7 60060000 		.4byte	.LVL104-.Ltext0
+ 1772 05ab 80060000 		.4byte	.LFE14-.Ltext0
+ 1773 05af 0100     		.2byte	0x1
+ 1774 05b1 53       		.byte	0x53
+ 1775 05b2 00000000 		.4byte	0x0
+ 1776 05b6 00000000 		.4byte	0x0
+ 1777              	.LLST36:
+ 1778 05ba B8050000 		.4byte	.LVL96-.Ltext0
+ 1779 05be 18060000 		.4byte	.LVL98-.Ltext0
+ 1780 05c2 0100     		.2byte	0x1
+ 1781 05c4 52       		.byte	0x52
+ 1782 05c5 1C060000 		.4byte	.LVL99-.Ltext0
+ 1783 05c9 24060000 		.4byte	.LVL100-.Ltext0
+ 1784 05cd 0100     		.2byte	0x1
+ 1785 05cf 52       		.byte	0x52
+ 1786 05d0 38060000 		.4byte	.LVL101-.Ltext0
+ 1787 05d4 3C060000 		.4byte	.LVL102-.Ltext0
+ 1788 05d8 0100     		.2byte	0x1
+ 1789 05da 52       		.byte	0x52
+ 1790 05db 48060000 		.4byte	.LVL103-.Ltext0
+ 1791 05df 80060000 		.4byte	.LFE14-.Ltext0
+ 1792 05e3 0100     		.2byte	0x1
+ 1793 05e5 52       		.byte	0x52
+ 1794 05e6 00000000 		.4byte	0x0
+ 1795 05ea 00000000 		.4byte	0x0
+ 1796              		.section	.debug_info
+ 1797 0000 80050000 		.4byte	0x580
+ 1798 0004 0200     		.2byte	0x2
+ 1799 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1800 000a 04       		.byte	0x4
+ 1801 000b 01       		.uleb128 0x1
+ 1802 000c 00000000 		.4byte	.Ldebug_line0
+ 1803 0010 80060000 		.4byte	.Letext0
+ 1804 0014 00000000 		.4byte	.Ltext0
+ 1805 0018 8F000000 		.4byte	.LASF48
+ 1806 001c 01       		.byte	0x1
+ 1807 001d AD010000 		.4byte	.LASF49
+ 1808 0021 EC010000 		.4byte	.LASF50
+ 1809 0025 02       		.uleb128 0x2
+ 1810 0026 696E7400 		.ascii	"int\000"
+ 1811 002a 04       		.byte	0x4
+ 1812 002b 05       		.byte	0x5
+ 1813 002c 03       		.uleb128 0x3
+ 1814 002d D9000000 		.4byte	.LASF0
+ 1815 0031 04       		.byte	0x4
+ 1816 0032 05       		.byte	0x5
+ 1817 0033 03       		.uleb128 0x3
+ 1818 0034 CB000000 		.4byte	.LASF1
+ 1819 0038 08       		.byte	0x8
+ 1820 0039 05       		.byte	0x5
+ 1821 003a 03       		.uleb128 0x3
+ 1822 003b 67010000 		.4byte	.LASF2
+ 1823 003f 04       		.byte	0x4
+ 1824 0040 07       		.byte	0x7
+ 1825 0041 03       		.uleb128 0x3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 43
+
+
+ 1826 0042 C0010000 		.4byte	.LASF3
+ 1827 0046 04       		.byte	0x4
+ 1828 0047 07       		.byte	0x7
+ 1829 0048 03       		.uleb128 0x3
+ 1830 0049 18010000 		.4byte	.LASF4
+ 1831 004d 01       		.byte	0x1
+ 1832 004e 08       		.byte	0x8
+ 1833 004f 03       		.uleb128 0x3
+ 1834 0050 C0010000 		.4byte	.LASF3
+ 1835 0054 04       		.byte	0x4
+ 1836 0055 07       		.byte	0x7
+ 1837 0056 03       		.uleb128 0x3
+ 1838 0057 64000000 		.4byte	.LASF5
+ 1839 005b 02       		.byte	0x2
+ 1840 005c 05       		.byte	0x5
+ 1841 005d 04       		.uleb128 0x4
+ 1842 005e 04       		.byte	0x4
+ 1843 005f 63000000 		.4byte	0x63
+ 1844 0063 03       		.uleb128 0x3
+ 1845 0064 A2010000 		.4byte	.LASF6
+ 1846 0068 01       		.byte	0x1
+ 1847 0069 08       		.byte	0x8
+ 1848 006a 04       		.uleb128 0x4
+ 1849 006b 04       		.byte	0x4
+ 1850 006c 70000000 		.4byte	0x70
+ 1851 0070 05       		.uleb128 0x5
+ 1852 0071 63000000 		.4byte	0x63
+ 1853 0075 03       		.uleb128 0x3
+ 1854 0076 8F010000 		.4byte	.LASF7
+ 1855 007a 02       		.byte	0x2
+ 1856 007b 07       		.byte	0x7
+ 1857 007c 03       		.uleb128 0x3
+ 1858 007d 3F010000 		.4byte	.LASF8
+ 1859 0081 08       		.byte	0x8
+ 1860 0082 07       		.byte	0x7
+ 1861 0083 06       		.uleb128 0x6
+ 1862 0084 73000000 		.4byte	.LASF9
+ 1863 0088 02       		.byte	0x2
+ 1864 0089 2B       		.byte	0x2b
+ 1865 008a 8E000000 		.4byte	0x8e
+ 1866 008e 07       		.uleb128 0x7
+ 1867 008f 04       		.byte	0x4
+ 1868 0090 06       		.uleb128 0x6
+ 1869 0091 C3000000 		.4byte	.LASF10
+ 1870 0095 02       		.byte	0x2
+ 1871 0096 69       		.byte	0x69
+ 1872 0097 83000000 		.4byte	0x83
+ 1873 009b 08       		.uleb128 0x8
+ 1874 009c B5000000 		.4byte	0xb5
+ 1875 00a0 01       		.byte	0x1
+ 1876 00a1 55000000 		.4byte	.LASF18
+ 1877 00a5 01       		.byte	0x1
+ 1878 00a6 E3       		.byte	0xe3
+ 1879 00a7 01       		.byte	0x1
+ 1880 00a8 01       		.byte	0x1
+ 1881 00a9 09       		.uleb128 0x9
+ 1882 00aa E7000000 		.4byte	.LASF11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 44
+
+
+ 1883 00ae 01       		.byte	0x1
+ 1884 00af E2       		.byte	0xe2
+ 1885 00b0 63000000 		.4byte	0x63
+ 1886 00b4 00       		.byte	0x0
+ 1887 00b5 0A       		.uleb128 0xa
+ 1888 00b6 01       		.byte	0x1
+ 1889 00b7 38000000 		.4byte	.LASF16
+ 1890 00bb 01       		.byte	0x1
+ 1891 00bc 7B01     		.2byte	0x17b
+ 1892 00be 01       		.byte	0x1
+ 1893 00bf 63000000 		.4byte	0x63
+ 1894 00c3 01       		.byte	0x1
+ 1895 00c4 0B       		.uleb128 0xb
+ 1896 00c5 32010000 		.4byte	0x132
+ 1897 00c9 F2000000 		.4byte	.LASF33
+ 1898 00cd 01       		.byte	0x1
+ 1899 00ce 3C       		.byte	0x3c
+ 1900 00cf 01       		.byte	0x1
+ 1901 00d0 00000000 		.4byte	.LFB2
+ 1902 00d4 84000000 		.4byte	.LFE2
+ 1903 00d8 00000000 		.4byte	.LLST0
+ 1904 00dc 0C       		.uleb128 0xc
+ 1905 00dd D2010000 		.4byte	.LASF12
+ 1906 00e1 01       		.byte	0x1
+ 1907 00e2 39       		.byte	0x39
+ 1908 00e3 3E010000 		.4byte	0x13e
+ 1909 00e7 2C000000 		.4byte	.LLST1
+ 1910 00eb 0C       		.uleb128 0xc
+ 1911 00ec 37020000 		.4byte	.LASF13
+ 1912 00f0 01       		.byte	0x1
+ 1913 00f1 3A       		.byte	0x3a
+ 1914 00f2 3A000000 		.4byte	0x3a
+ 1915 00f6 4A000000 		.4byte	.LLST2
+ 1916 00fa 0C       		.uleb128 0xc
+ 1917 00fb E2000000 		.4byte	.LASF14
+ 1918 00ff 01       		.byte	0x1
+ 1919 0100 3B       		.byte	0x3b
+ 1920 0101 3A000000 		.4byte	0x3a
+ 1921 0105 68000000 		.4byte	.LLST3
+ 1922 0109 0D       		.uleb128 0xd
+ 1923 010a 7000     		.ascii	"p\000"
+ 1924 010c 01       		.byte	0x1
+ 1925 010d 3D       		.byte	0x3d
+ 1926 010e 5D000000 		.4byte	0x5d
+ 1927 0112 01       		.byte	0x1
+ 1928 0113 55       		.byte	0x55
+ 1929 0114 0D       		.uleb128 0xd
+ 1930 0115 62756600 		.ascii	"buf\000"
+ 1931 0119 01       		.byte	0x1
+ 1932 011a 3E       		.byte	0x3e
+ 1933 011b 44010000 		.4byte	0x144
+ 1934 011f 03       		.byte	0x3
+ 1935 0120 91       		.byte	0x91
+ 1936 0121 BA7F     		.sleb128 -70
+ 1937 0123 0E       		.uleb128 0xe
+ 1938 0124 2D010000 		.4byte	.LASF15
+ 1939 0128 01       		.byte	0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 45
+
+
+ 1940 0129 3F       		.byte	0x3f
+ 1941 012a 54010000 		.4byte	0x154
+ 1942 012e 02       		.byte	0x2
+ 1943 012f 91       		.byte	0x91
+ 1944 0130 5B       		.sleb128 -37
+ 1945 0131 00       		.byte	0x0
+ 1946 0132 0F       		.uleb128 0xf
+ 1947 0133 3E010000 		.4byte	0x13e
+ 1948 0137 01       		.byte	0x1
+ 1949 0138 10       		.uleb128 0x10
+ 1950 0139 63000000 		.4byte	0x63
+ 1951 013d 00       		.byte	0x0
+ 1952 013e 04       		.uleb128 0x4
+ 1953 013f 04       		.byte	0x4
+ 1954 0140 32010000 		.4byte	0x132
+ 1955 0144 11       		.uleb128 0x11
+ 1956 0145 54010000 		.4byte	0x154
+ 1957 0149 63000000 		.4byte	0x63
+ 1958 014d 12       		.uleb128 0x12
+ 1959 014e 41000000 		.4byte	0x41
+ 1960 0152 20       		.byte	0x20
+ 1961 0153 00       		.byte	0x0
+ 1962 0154 11       		.uleb128 0x11
+ 1963 0155 64010000 		.4byte	0x164
+ 1964 0159 63000000 		.4byte	0x63
+ 1965 015d 12       		.uleb128 0x12
+ 1966 015e 41000000 		.4byte	0x41
+ 1967 0162 10       		.byte	0x10
+ 1968 0163 00       		.byte	0x0
+ 1969 0164 13       		.uleb128 0x13
+ 1970 0165 01       		.byte	0x1
+ 1971 0166 0D010000 		.4byte	.LASF17
+ 1972 016a 01       		.byte	0x1
+ 1973 016b BE       		.byte	0xbe
+ 1974 016c 01       		.byte	0x1
+ 1975 016d 84000000 		.4byte	.LFB4
+ 1976 0171 D8000000 		.4byte	.LFE4
+ 1977 0175 01       		.byte	0x1
+ 1978 0176 5D       		.byte	0x5d
+ 1979 0177 14       		.uleb128 0x14
+ 1980 0178 92010000 		.4byte	0x192
+ 1981 017c 9B000000 		.4byte	0x9b
+ 1982 0180 D8000000 		.4byte	.LFB5
+ 1983 0184 F8000000 		.4byte	.LFE5
+ 1984 0188 01       		.byte	0x1
+ 1985 0189 5D       		.byte	0x5d
+ 1986 018a 15       		.uleb128 0x15
+ 1987 018b A9000000 		.4byte	0xa9
+ 1988 018f 01       		.byte	0x1
+ 1989 0190 50       		.byte	0x50
+ 1990 0191 00       		.byte	0x0
+ 1991 0192 16       		.uleb128 0x16
+ 1992 0193 E5010000 		.4byte	0x1e5
+ 1993 0197 01       		.byte	0x1
+ 1994 0198 7D010000 		.4byte	.LASF19
+ 1995 019c 01       		.byte	0x1
+ 1996 019d F5       		.byte	0xf5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 46
+
+
+ 1997 019e 01       		.byte	0x1
+ 1998 019f F8000000 		.4byte	.LFB6
+ 1999 01a3 3C010000 		.4byte	.LFE6
+ 2000 01a7 01       		.byte	0x1
+ 2001 01a8 5D       		.byte	0x5d
+ 2002 01a9 17       		.uleb128 0x17
+ 2003 01aa E7000000 		.4byte	.LASF11
+ 2004 01ae 01       		.byte	0x1
+ 2005 01af F4       		.byte	0xf4
+ 2006 01b0 63000000 		.4byte	0x63
+ 2007 01b4 01       		.byte	0x1
+ 2008 01b5 50       		.byte	0x50
+ 2009 01b6 18       		.uleb128 0x18
+ 2010 01b7 CF010000 		.4byte	0x1cf
+ 2011 01bb 9B000000 		.4byte	0x9b
+ 2012 01bf 04010000 		.4byte	.LBB8
+ 2013 01c3 1C010000 		.4byte	.LBE8
+ 2014 01c7 01       		.byte	0x1
+ 2015 01c8 F7       		.byte	0xf7
+ 2016 01c9 19       		.uleb128 0x19
+ 2017 01ca 8A010000 		.4byte	0x18a
+ 2018 01ce 00       		.byte	0x0
+ 2019 01cf 1A       		.uleb128 0x1a
+ 2020 01d0 9B000000 		.4byte	0x9b
+ 2021 01d4 1C010000 		.4byte	.LBB10
+ 2022 01d8 34010000 		.4byte	.LBE10
+ 2023 01dc 01       		.byte	0x1
+ 2024 01dd F9       		.byte	0xf9
+ 2025 01de 19       		.uleb128 0x19
+ 2026 01df 8A010000 		.4byte	0x18a
+ 2027 01e3 00       		.byte	0x0
+ 2028 01e4 00       		.byte	0x0
+ 2029 01e5 1B       		.uleb128 0x1b
+ 2030 01e6 10020000 		.4byte	0x210
+ 2031 01ea 01       		.byte	0x1
+ 2032 01eb 56010000 		.4byte	.LASF20
+ 2033 01ef 01       		.byte	0x1
+ 2034 01f0 0701     		.2byte	0x107
+ 2035 01f2 01       		.byte	0x1
+ 2036 01f3 3C010000 		.4byte	.LFB7
+ 2037 01f7 68010000 		.4byte	.LFE7
+ 2038 01fb 86000000 		.4byte	.LLST7
+ 2039 01ff 1C       		.uleb128 0x1c
+ 2040 0200 9B000000 		.4byte	.LASF21
+ 2041 0204 01       		.byte	0x1
+ 2042 0205 0601     		.2byte	0x106
+ 2043 0207 5D000000 		.4byte	0x5d
+ 2044 020b A5000000 		.4byte	.LLST8
+ 2045 020f 00       		.byte	0x0
+ 2046 0210 1B       		.uleb128 0x1b
+ 2047 0211 C7020000 		.4byte	0x2c7
+ 2048 0215 01       		.byte	0x1
+ 2049 0216 44000000 		.4byte	.LASF22
+ 2050 021a 01       		.byte	0x1
+ 2051 021b 2201     		.2byte	0x122
+ 2052 021d 01       		.byte	0x1
+ 2053 021e 68010000 		.4byte	.LFB8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 47
+
+
+ 2054 0222 80020000 		.4byte	.LFE8
+ 2055 0226 C3000000 		.4byte	.LLST9
+ 2056 022a 1C       		.uleb128 0x1c
+ 2057 022b E2000000 		.4byte	.LASF14
+ 2058 022f 01       		.byte	0x1
+ 2059 0230 1D01     		.2byte	0x11d
+ 2060 0232 48000000 		.4byte	0x48
+ 2061 0236 EF000000 		.4byte	.LLST10
+ 2062 023a 1C       		.uleb128 0x1c
+ 2063 023b 36010000 		.4byte	.LASF23
+ 2064 023f 01       		.byte	0x1
+ 2065 0240 1E01     		.2byte	0x11e
+ 2066 0242 48000000 		.4byte	0x48
+ 2067 0246 0D010000 		.4byte	.LLST11
+ 2068 024a 1C       		.uleb128 0x1c
+ 2069 024b 8A010000 		.4byte	.LASF24
+ 2070 024f 01       		.byte	0x1
+ 2071 0250 1F01     		.2byte	0x11f
+ 2072 0252 48000000 		.4byte	0x48
+ 2073 0256 20010000 		.4byte	.LLST12
+ 2074 025a 1D       		.uleb128 0x1d
+ 2075 025b 70616400 		.ascii	"pad\000"
+ 2076 025f 01       		.byte	0x1
+ 2077 0260 2001     		.2byte	0x120
+ 2078 0262 63000000 		.4byte	0x63
+ 2079 0266 33010000 		.4byte	.LLST13
+ 2080 026a 1C       		.uleb128 0x1c
+ 2081 026b 37020000 		.4byte	.LASF13
+ 2082 026f 01       		.byte	0x1
+ 2083 0270 2101     		.2byte	0x121
+ 2084 0272 25000000 		.4byte	0x25
+ 2085 0276 51010000 		.4byte	.LLST14
+ 2086 027a 1E       		.uleb128 0x1e
+ 2087 027b B6010000 		.4byte	.LASF25
+ 2088 027f 01       		.byte	0x1
+ 2089 0280 2401     		.2byte	0x124
+ 2090 0282 5D000000 		.4byte	0x5d
+ 2091 0286 01       		.byte	0x1
+ 2092 0287 54       		.byte	0x54
+ 2093 0288 1F       		.uleb128 0x1f
+ 2094 0289 62756600 		.ascii	"buf\000"
+ 2095 028d 01       		.byte	0x1
+ 2096 028e 2501     		.2byte	0x125
+ 2097 0290 C7020000 		.4byte	0x2c7
+ 2098 0294 03       		.byte	0x3
+ 2099 0295 91       		.byte	0x91
+ 2100 0296 BC7F     		.sleb128 -68
+ 2101 0298 20       		.uleb128 0x20
+ 2102 0299 2E000000 		.4byte	.LASF26
+ 2103 029d 01       		.byte	0x1
+ 2104 029e 2601     		.2byte	0x126
+ 2105 02a0 3A000000 		.4byte	0x3a
+ 2106 02a4 70010000 		.4byte	.LLST15
+ 2107 02a8 21       		.uleb128 0x21
+ 2108 02a9 89000000 		.4byte	.LASF27
+ 2109 02ad 01       		.byte	0x1
+ 2110 02ae 2701     		.2byte	0x127
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 48
+
+
+ 2111 02b0 48000000 		.4byte	0x48
+ 2112 02b4 1E       		.uleb128 0x1e
+ 2113 02b5 2D010000 		.4byte	.LASF15
+ 2114 02b9 01       		.byte	0x1
+ 2115 02ba 2301     		.2byte	0x123
+ 2116 02bc 7E050000 		.4byte	0x57e
+ 2117 02c0 05       		.byte	0x5
+ 2118 02c1 03       		.byte	0x3
+ 2119 02c2 00000000 		.4byte	hexChars.2029
+ 2120 02c6 00       		.byte	0x0
+ 2121 02c7 11       		.uleb128 0x11
+ 2122 02c8 D7020000 		.4byte	0x2d7
+ 2123 02cc 63000000 		.4byte	0x63
+ 2124 02d0 12       		.uleb128 0x12
+ 2125 02d1 41000000 		.4byte	0x41
+ 2126 02d5 1F       		.byte	0x1f
+ 2127 02d6 00       		.byte	0x0
+ 2128 02d7 22       		.uleb128 0x22
+ 2129 02d8 B5000000 		.4byte	0xb5
+ 2130 02dc 80020000 		.4byte	.LFB10
+ 2131 02e0 A0020000 		.4byte	.LFE10
+ 2132 02e4 01       		.byte	0x1
+ 2133 02e5 5D       		.byte	0x5d
+ 2134 02e6 23       		.uleb128 0x23
+ 2135 02e7 13030000 		.4byte	0x313
+ 2136 02eb 01       		.byte	0x1
+ 2137 02ec 21020000 		.4byte	.LASF28
+ 2138 02f0 01       		.byte	0x1
+ 2139 02f1 9001     		.2byte	0x190
+ 2140 02f3 01       		.byte	0x1
+ 2141 02f4 63000000 		.4byte	0x63
+ 2142 02f8 A0020000 		.4byte	.LFB11
+ 2143 02fc C4020000 		.4byte	.LFE11
+ 2144 0300 01       		.byte	0x1
+ 2145 0301 5D       		.byte	0x5d
+ 2146 0302 1C       		.uleb128 0x1c
+ 2147 0303 00000000 		.4byte	.LASF29
+ 2148 0307 01       		.byte	0x1
+ 2149 0308 8F01     		.2byte	0x18f
+ 2150 030a 5D000000 		.4byte	0x5d
+ 2151 030e BA010000 		.4byte	.LLST18
+ 2152 0312 00       		.byte	0x0
+ 2153 0313 1B       		.uleb128 0x1b
+ 2154 0314 6A030000 		.4byte	0x36a
+ 2155 0318 01       		.byte	0x1
+ 2156 0319 DC010000 		.4byte	.LASF30
+ 2157 031d 01       		.byte	0x1
+ 2158 031e A401     		.2byte	0x1a4
+ 2159 0320 01       		.byte	0x1
+ 2160 0321 C4020000 		.4byte	.LFB12
+ 2161 0325 3C030000 		.4byte	.LFE12
+ 2162 0329 CD010000 		.4byte	.LLST19
+ 2163 032d 1C       		.uleb128 0x1c
+ 2164 032e 9B000000 		.4byte	.LASF21
+ 2165 0332 01       		.byte	0x1
+ 2166 0333 A301     		.2byte	0x1a3
+ 2167 0335 5D000000 		.4byte	0x5d
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 49
+
+
+ 2168 0339 EC010000 		.4byte	.LLST20
+ 2169 033d 21       		.uleb128 0x21
+ 2170 033e 74010000 		.4byte	.LASF31
+ 2171 0342 01       		.byte	0x1
+ 2172 0343 A501     		.2byte	0x1a5
+ 2173 0345 5D000000 		.4byte	0x5d
+ 2174 0349 20       		.uleb128 0x20
+ 2175 034a 82000000 		.4byte	.LASF32
+ 2176 034e 01       		.byte	0x1
+ 2177 034f A601     		.2byte	0x1a6
+ 2178 0351 63000000 		.4byte	0x63
+ 2179 0355 36020000 		.4byte	.LLST21
+ 2180 0359 24       		.uleb128 0x24
+ 2181 035a B5000000 		.4byte	0xb5
+ 2182 035e FC020000 		.4byte	.LBB12
+ 2183 0362 10030000 		.4byte	.LBE12
+ 2184 0366 01       		.byte	0x1
+ 2185 0367 A901     		.2byte	0x1a9
+ 2186 0369 00       		.byte	0x0
+ 2187 036a 25       		.uleb128 0x25
+ 2188 036b C7030000 		.4byte	0x3c7
+ 2189 036f AE000000 		.4byte	.LASF34
+ 2190 0373 01       		.byte	0x1
+ 2191 0374 60       		.byte	0x60
+ 2192 0375 01       		.byte	0x1
+ 2193 0376 01       		.byte	0x1
+ 2194 0377 09       		.uleb128 0x9
+ 2195 0378 D2010000 		.4byte	.LASF12
+ 2196 037c 01       		.byte	0x1
+ 2197 037d 5D       		.byte	0x5d
+ 2198 037e 3E010000 		.4byte	0x13e
+ 2199 0382 26       		.uleb128 0x26
+ 2200 0383 666D7400 		.ascii	"fmt\000"
+ 2201 0387 01       		.byte	0x1
+ 2202 0388 5E       		.byte	0x5e
+ 2203 0389 6A000000 		.4byte	0x6a
+ 2204 038d 26       		.uleb128 0x26
+ 2205 038e 617000   		.ascii	"ap\000"
+ 2206 0391 01       		.byte	0x1
+ 2207 0392 5F       		.byte	0x5f
+ 2208 0393 90000000 		.4byte	0x90
+ 2209 0397 27       		.uleb128 0x27
+ 2210 0398 7000     		.ascii	"p\000"
+ 2211 039a 01       		.byte	0x1
+ 2212 039b 61       		.byte	0x61
+ 2213 039c 5D000000 		.4byte	0x5d
+ 2214 03a0 27       		.uleb128 0x27
+ 2215 03a1 636800   		.ascii	"ch\000"
+ 2216 03a4 01       		.byte	0x1
+ 2217 03a5 62       		.byte	0x62
+ 2218 03a6 63000000 		.4byte	0x63
+ 2219 03aa 27       		.uleb128 0x27
+ 2220 03ab 756C00   		.ascii	"ul\000"
+ 2221 03ae 01       		.byte	0x1
+ 2222 03af 63       		.byte	0x63
+ 2223 03b0 4F000000 		.4byte	0x4f
+ 2224 03b4 28       		.uleb128 0x28
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 50
+
+
+ 2225 03b5 FB000000 		.4byte	.LASF35
+ 2226 03b9 01       		.byte	0x1
+ 2227 03ba 64       		.byte	0x64
+ 2228 03bb 48000000 		.4byte	0x48
+ 2229 03bf 29       		.uleb128 0x29
+ 2230 03c0 BA000000 		.4byte	.LASF51
+ 2231 03c4 01       		.byte	0x1
+ 2232 03c5 79       		.byte	0x79
+ 2233 03c6 00       		.byte	0x0
+ 2234 03c7 1B       		.uleb128 0x1b
+ 2235 03c8 58040000 		.4byte	0x458
+ 2236 03cc 01       		.byte	0x1
+ 2237 03cd 11000000 		.4byte	.LASF36
+ 2238 03d1 01       		.byte	0x1
+ 2239 03d2 6401     		.2byte	0x164
+ 2240 03d4 01       		.byte	0x1
+ 2241 03d5 3C030000 		.4byte	.LFB9
+ 2242 03d9 BC040000 		.4byte	.LFE9
+ 2243 03dd 80020000 		.4byte	.LLST22
+ 2244 03e1 1D       		.uleb128 0x1d
+ 2245 03e2 666D7400 		.ascii	"fmt\000"
+ 2246 03e6 01       		.byte	0x1
+ 2247 03e7 6201     		.2byte	0x162
+ 2248 03e9 6A000000 		.4byte	0x6a
+ 2249 03ed B7020000 		.4byte	.LLST23
+ 2250 03f1 2A       		.uleb128 0x2a
+ 2251 03f2 1F       		.uleb128 0x1f
+ 2252 03f3 617000   		.ascii	"ap\000"
+ 2253 03f6 01       		.byte	0x1
+ 2254 03f7 6501     		.2byte	0x165
+ 2255 03f9 90000000 		.4byte	0x90
+ 2256 03fd 02       		.byte	0x2
+ 2257 03fe 91       		.byte	0x91
+ 2258 03ff 74       		.sleb128 -12
+ 2259 0400 2B       		.uleb128 0x2b
+ 2260 0401 6A030000 		.4byte	0x36a
+ 2261 0405 5C030000 		.4byte	.LBB16
+ 2262 0409 A8040000 		.4byte	.LBE16
+ 2263 040d 01       		.byte	0x1
+ 2264 040e 6801     		.2byte	0x168
+ 2265 0410 2C       		.uleb128 0x2c
+ 2266 0411 8D030000 		.4byte	0x38d
+ 2267 0415 D6020000 		.4byte	.LLST24
+ 2268 0419 19       		.uleb128 0x19
+ 2269 041a 82030000 		.4byte	0x382
+ 2270 041e 19       		.uleb128 0x19
+ 2271 041f 77030000 		.4byte	0x377
+ 2272 0423 2D       		.uleb128 0x2d
+ 2273 0424 5C030000 		.4byte	.LBB17
+ 2274 0428 A8040000 		.4byte	.LBE17
+ 2275 042c 2E       		.uleb128 0x2e
+ 2276 042d 97030000 		.4byte	0x397
+ 2277 0431 20030000 		.4byte	.LLST25
+ 2278 0435 2E       		.uleb128 0x2e
+ 2279 0436 A0030000 		.4byte	0x3a0
+ 2280 043a 49030000 		.4byte	.LLST26
+ 2281 043e 2E       		.uleb128 0x2e
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 51
+
+
+ 2282 043f AA030000 		.4byte	0x3aa
+ 2283 0443 17040000 		.4byte	.LLST27
+ 2284 0447 2E       		.uleb128 0x2e
+ 2285 0448 B4030000 		.4byte	0x3b4
+ 2286 044c 40040000 		.4byte	.LLST28
+ 2287 0450 2F       		.uleb128 0x2f
+ 2288 0451 BF030000 		.4byte	0x3bf
+ 2289 0455 00       		.byte	0x0
+ 2290 0456 00       		.byte	0x0
+ 2291 0457 00       		.byte	0x0
+ 2292 0458 30       		.uleb128 0x30
+ 2293 0459 DF040000 		.4byte	0x4df
+ 2294 045d 01       		.byte	0x1
+ 2295 045e 1E000000 		.4byte	.LASF37
+ 2296 0462 01       		.byte	0x1
+ 2297 0463 C901     		.2byte	0x1c9
+ 2298 0465 01       		.byte	0x1
+ 2299 0466 25000000 		.4byte	0x25
+ 2300 046a BC040000 		.4byte	.LFB13
+ 2301 046e 9C050000 		.4byte	.LFE13
+ 2302 0472 B6040000 		.4byte	.LLST29
+ 2303 0476 1E       		.uleb128 0x1e
+ 2304 0477 A3000000 		.4byte	.LASF38
+ 2305 047b 01       		.byte	0x1
+ 2306 047c CA01     		.2byte	0x1ca
+ 2307 047e DF040000 		.4byte	0x4df
+ 2308 0482 02       		.byte	0x2
+ 2309 0483 91       		.byte	0x91
+ 2310 0484 52       		.sleb128 -46
+ 2311 0485 1E       		.uleb128 0x1e
+ 2312 0486 9B000000 		.4byte	.LASF21
+ 2313 048a 01       		.byte	0x1
+ 2314 048b CB01     		.2byte	0x1cb
+ 2315 048d 5D000000 		.4byte	0x5d
+ 2316 0491 01       		.byte	0x1
+ 2317 0492 54       		.byte	0x54
+ 2318 0493 1E       		.uleb128 0x1e
+ 2319 0494 A7010000 		.4byte	.LASF39
+ 2320 0498 01       		.byte	0x1
+ 2321 0499 CC01     		.2byte	0x1cc
+ 2322 049b 25000000 		.4byte	0x25
+ 2323 049f 01       		.byte	0x1
+ 2324 04a0 55       		.byte	0x55
+ 2325 04a1 1E       		.uleb128 0x1e
+ 2326 04a2 26010000 		.4byte	.LASF40
+ 2327 04a6 01       		.byte	0x1
+ 2328 04a7 CD01     		.2byte	0x1cd
+ 2329 04a9 25000000 		.4byte	0x25
+ 2330 04ad 01       		.byte	0x1
+ 2331 04ae 56       		.byte	0x56
+ 2332 04af 20       		.uleb128 0x20
+ 2333 04b0 06000000 		.4byte	.LASF41
+ 2334 04b4 01       		.byte	0x1
+ 2335 04b5 CE01     		.2byte	0x1ce
+ 2336 04b7 25000000 		.4byte	0x25
+ 2337 04bb E1040000 		.4byte	.LLST30
+ 2338 04bf 20       		.uleb128 0x20
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 52
+
+
+ 2339 04c0 2F020000 		.4byte	.LASF42
+ 2340 04c4 01       		.byte	0x1
+ 2341 04c5 CF01     		.2byte	0x1cf
+ 2342 04c7 25000000 		.4byte	0x25
+ 2343 04cb FF040000 		.4byte	.LLST31
+ 2344 04cf 31       		.uleb128 0x31
+ 2345 04d0 774900   		.ascii	"wI\000"
+ 2346 04d3 01       		.byte	0x1
+ 2347 04d4 D001     		.2byte	0x1d0
+ 2348 04d6 25000000 		.4byte	0x25
+ 2349 04da 28050000 		.4byte	.LLST32
+ 2350 04de 00       		.byte	0x0
+ 2351 04df 11       		.uleb128 0x11
+ 2352 04e0 EF040000 		.4byte	0x4ef
+ 2353 04e4 63000000 		.4byte	0x63
+ 2354 04e8 12       		.uleb128 0x12
+ 2355 04e9 41000000 		.4byte	0x41
+ 2356 04ed 1D       		.byte	0x1d
+ 2357 04ee 00       		.byte	0x0
+ 2358 04ef 1B       		.uleb128 0x1b
+ 2359 04f0 68050000 		.4byte	0x568
+ 2360 04f4 01       		.byte	0x1
+ 2361 04f5 01010000 		.4byte	.LASF43
+ 2362 04f9 01       		.byte	0x1
+ 2363 04fa 1002     		.2byte	0x210
+ 2364 04fc 01       		.byte	0x1
+ 2365 04fd 9C050000 		.4byte	.LFB14
+ 2366 0501 80060000 		.4byte	.LFE14
+ 2367 0505 46050000 		.4byte	.LLST33
+ 2368 0509 1C       		.uleb128 0x1c
+ 2369 050a 6E000000 		.4byte	.LASF44
+ 2370 050e 01       		.byte	0x1
+ 2371 050f 0F02     		.2byte	0x20f
+ 2372 0511 5D000000 		.4byte	0x5d
+ 2373 0515 7D050000 		.4byte	.LLST34
+ 2374 0519 2A       		.uleb128 0x2a
+ 2375 051a 1E       		.uleb128 0x1e
+ 2376 051b A9000000 		.4byte	.LASF45
+ 2377 051f 01       		.byte	0x1
+ 2378 0520 1102     		.2byte	0x211
+ 2379 0522 90000000 		.4byte	0x90
+ 2380 0526 02       		.byte	0x2
+ 2381 0527 91       		.byte	0x91
+ 2382 0528 74       		.sleb128 -12
+ 2383 0529 20       		.uleb128 0x20
+ 2384 052a 17020000 		.4byte	.LASF46
+ 2385 052e 01       		.byte	0x1
+ 2386 052f 1202     		.2byte	0x212
+ 2387 0531 63000000 		.4byte	0x63
+ 2388 0535 9C050000 		.4byte	.LLST35
+ 2389 0539 1E       		.uleb128 0x1e
+ 2390 053a BB010000 		.4byte	.LASF47
+ 2391 053e 01       		.byte	0x1
+ 2392 053f 1302     		.2byte	0x213
+ 2393 0541 68050000 		.4byte	0x568
+ 2394 0545 01       		.byte	0x1
+ 2395 0546 54       		.byte	0x54
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 53
+
+
+ 2396 0547 20       		.uleb128 0x20
+ 2397 0548 00000000 		.4byte	.LASF29
+ 2398 054c 01       		.byte	0x1
+ 2399 054d 1402     		.2byte	0x214
+ 2400 054f 5D000000 		.4byte	0x5d
+ 2401 0553 BA050000 		.4byte	.LLST36
+ 2402 0557 24       		.uleb128 0x24
+ 2403 0558 B5000000 		.4byte	0xb5
+ 2404 055c 48060000 		.4byte	.LBB20
+ 2405 0560 5C060000 		.4byte	.LBE20
+ 2406 0564 01       		.byte	0x1
+ 2407 0565 2902     		.2byte	0x229
+ 2408 0567 00       		.byte	0x0
+ 2409 0568 04       		.uleb128 0x4
+ 2410 0569 04       		.byte	0x4
+ 2411 056a 25000000 		.4byte	0x25
+ 2412 056e 11       		.uleb128 0x11
+ 2413 056f 7E050000 		.4byte	0x57e
+ 2414 0573 63000000 		.4byte	0x63
+ 2415 0577 12       		.uleb128 0x12
+ 2416 0578 41000000 		.4byte	0x41
+ 2417 057c 0F       		.byte	0xf
+ 2418 057d 00       		.byte	0x0
+ 2419 057e 05       		.uleb128 0x5
+ 2420 057f 6E050000 		.4byte	0x56e
+ 2421 0583 00       		.byte	0x0
+ 2422              		.section	.debug_abbrev
+ 2423 0000 01       		.uleb128 0x1
+ 2424 0001 11       		.uleb128 0x11
+ 2425 0002 01       		.byte	0x1
+ 2426 0003 10       		.uleb128 0x10
+ 2427 0004 06       		.uleb128 0x6
+ 2428 0005 12       		.uleb128 0x12
+ 2429 0006 01       		.uleb128 0x1
+ 2430 0007 11       		.uleb128 0x11
+ 2431 0008 01       		.uleb128 0x1
+ 2432 0009 25       		.uleb128 0x25
+ 2433 000a 0E       		.uleb128 0xe
+ 2434 000b 13       		.uleb128 0x13
+ 2435 000c 0B       		.uleb128 0xb
+ 2436 000d 03       		.uleb128 0x3
+ 2437 000e 0E       		.uleb128 0xe
+ 2438 000f 1B       		.uleb128 0x1b
+ 2439 0010 0E       		.uleb128 0xe
+ 2440 0011 00       		.byte	0x0
+ 2441 0012 00       		.byte	0x0
+ 2442 0013 02       		.uleb128 0x2
+ 2443 0014 24       		.uleb128 0x24
+ 2444 0015 00       		.byte	0x0
+ 2445 0016 03       		.uleb128 0x3
+ 2446 0017 08       		.uleb128 0x8
+ 2447 0018 0B       		.uleb128 0xb
+ 2448 0019 0B       		.uleb128 0xb
+ 2449 001a 3E       		.uleb128 0x3e
+ 2450 001b 0B       		.uleb128 0xb
+ 2451 001c 00       		.byte	0x0
+ 2452 001d 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 54
+
+
+ 2453 001e 03       		.uleb128 0x3
+ 2454 001f 24       		.uleb128 0x24
+ 2455 0020 00       		.byte	0x0
+ 2456 0021 03       		.uleb128 0x3
+ 2457 0022 0E       		.uleb128 0xe
+ 2458 0023 0B       		.uleb128 0xb
+ 2459 0024 0B       		.uleb128 0xb
+ 2460 0025 3E       		.uleb128 0x3e
+ 2461 0026 0B       		.uleb128 0xb
+ 2462 0027 00       		.byte	0x0
+ 2463 0028 00       		.byte	0x0
+ 2464 0029 04       		.uleb128 0x4
+ 2465 002a 0F       		.uleb128 0xf
+ 2466 002b 00       		.byte	0x0
+ 2467 002c 0B       		.uleb128 0xb
+ 2468 002d 0B       		.uleb128 0xb
+ 2469 002e 49       		.uleb128 0x49
+ 2470 002f 13       		.uleb128 0x13
+ 2471 0030 00       		.byte	0x0
+ 2472 0031 00       		.byte	0x0
+ 2473 0032 05       		.uleb128 0x5
+ 2474 0033 26       		.uleb128 0x26
+ 2475 0034 00       		.byte	0x0
+ 2476 0035 49       		.uleb128 0x49
+ 2477 0036 13       		.uleb128 0x13
+ 2478 0037 00       		.byte	0x0
+ 2479 0038 00       		.byte	0x0
+ 2480 0039 06       		.uleb128 0x6
+ 2481 003a 16       		.uleb128 0x16
+ 2482 003b 00       		.byte	0x0
+ 2483 003c 03       		.uleb128 0x3
+ 2484 003d 0E       		.uleb128 0xe
+ 2485 003e 3A       		.uleb128 0x3a
+ 2486 003f 0B       		.uleb128 0xb
+ 2487 0040 3B       		.uleb128 0x3b
+ 2488 0041 0B       		.uleb128 0xb
+ 2489 0042 49       		.uleb128 0x49
+ 2490 0043 13       		.uleb128 0x13
+ 2491 0044 00       		.byte	0x0
+ 2492 0045 00       		.byte	0x0
+ 2493 0046 07       		.uleb128 0x7
+ 2494 0047 0F       		.uleb128 0xf
+ 2495 0048 00       		.byte	0x0
+ 2496 0049 0B       		.uleb128 0xb
+ 2497 004a 0B       		.uleb128 0xb
+ 2498 004b 00       		.byte	0x0
+ 2499 004c 00       		.byte	0x0
+ 2500 004d 08       		.uleb128 0x8
+ 2501 004e 2E       		.uleb128 0x2e
+ 2502 004f 01       		.byte	0x1
+ 2503 0050 01       		.uleb128 0x1
+ 2504 0051 13       		.uleb128 0x13
+ 2505 0052 3F       		.uleb128 0x3f
+ 2506 0053 0C       		.uleb128 0xc
+ 2507 0054 03       		.uleb128 0x3
+ 2508 0055 0E       		.uleb128 0xe
+ 2509 0056 3A       		.uleb128 0x3a
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 55
+
+
+ 2510 0057 0B       		.uleb128 0xb
+ 2511 0058 3B       		.uleb128 0x3b
+ 2512 0059 0B       		.uleb128 0xb
+ 2513 005a 27       		.uleb128 0x27
+ 2514 005b 0C       		.uleb128 0xc
+ 2515 005c 20       		.uleb128 0x20
+ 2516 005d 0B       		.uleb128 0xb
+ 2517 005e 00       		.byte	0x0
+ 2518 005f 00       		.byte	0x0
+ 2519 0060 09       		.uleb128 0x9
+ 2520 0061 05       		.uleb128 0x5
+ 2521 0062 00       		.byte	0x0
+ 2522 0063 03       		.uleb128 0x3
+ 2523 0064 0E       		.uleb128 0xe
+ 2524 0065 3A       		.uleb128 0x3a
+ 2525 0066 0B       		.uleb128 0xb
+ 2526 0067 3B       		.uleb128 0x3b
+ 2527 0068 0B       		.uleb128 0xb
+ 2528 0069 49       		.uleb128 0x49
+ 2529 006a 13       		.uleb128 0x13
+ 2530 006b 00       		.byte	0x0
+ 2531 006c 00       		.byte	0x0
+ 2532 006d 0A       		.uleb128 0xa
+ 2533 006e 2E       		.uleb128 0x2e
+ 2534 006f 00       		.byte	0x0
+ 2535 0070 3F       		.uleb128 0x3f
+ 2536 0071 0C       		.uleb128 0xc
+ 2537 0072 03       		.uleb128 0x3
+ 2538 0073 0E       		.uleb128 0xe
+ 2539 0074 3A       		.uleb128 0x3a
+ 2540 0075 0B       		.uleb128 0xb
+ 2541 0076 3B       		.uleb128 0x3b
+ 2542 0077 05       		.uleb128 0x5
+ 2543 0078 27       		.uleb128 0x27
+ 2544 0079 0C       		.uleb128 0xc
+ 2545 007a 49       		.uleb128 0x49
+ 2546 007b 13       		.uleb128 0x13
+ 2547 007c 20       		.uleb128 0x20
+ 2548 007d 0B       		.uleb128 0xb
+ 2549 007e 00       		.byte	0x0
+ 2550 007f 00       		.byte	0x0
+ 2551 0080 0B       		.uleb128 0xb
+ 2552 0081 2E       		.uleb128 0x2e
+ 2553 0082 01       		.byte	0x1
+ 2554 0083 01       		.uleb128 0x1
+ 2555 0084 13       		.uleb128 0x13
+ 2556 0085 03       		.uleb128 0x3
+ 2557 0086 0E       		.uleb128 0xe
+ 2558 0087 3A       		.uleb128 0x3a
+ 2559 0088 0B       		.uleb128 0xb
+ 2560 0089 3B       		.uleb128 0x3b
+ 2561 008a 0B       		.uleb128 0xb
+ 2562 008b 27       		.uleb128 0x27
+ 2563 008c 0C       		.uleb128 0xc
+ 2564 008d 11       		.uleb128 0x11
+ 2565 008e 01       		.uleb128 0x1
+ 2566 008f 12       		.uleb128 0x12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 56
+
+
+ 2567 0090 01       		.uleb128 0x1
+ 2568 0091 40       		.uleb128 0x40
+ 2569 0092 06       		.uleb128 0x6
+ 2570 0093 00       		.byte	0x0
+ 2571 0094 00       		.byte	0x0
+ 2572 0095 0C       		.uleb128 0xc
+ 2573 0096 05       		.uleb128 0x5
+ 2574 0097 00       		.byte	0x0
+ 2575 0098 03       		.uleb128 0x3
+ 2576 0099 0E       		.uleb128 0xe
+ 2577 009a 3A       		.uleb128 0x3a
+ 2578 009b 0B       		.uleb128 0xb
+ 2579 009c 3B       		.uleb128 0x3b
+ 2580 009d 0B       		.uleb128 0xb
+ 2581 009e 49       		.uleb128 0x49
+ 2582 009f 13       		.uleb128 0x13
+ 2583 00a0 02       		.uleb128 0x2
+ 2584 00a1 06       		.uleb128 0x6
+ 2585 00a2 00       		.byte	0x0
+ 2586 00a3 00       		.byte	0x0
+ 2587 00a4 0D       		.uleb128 0xd
+ 2588 00a5 34       		.uleb128 0x34
+ 2589 00a6 00       		.byte	0x0
+ 2590 00a7 03       		.uleb128 0x3
+ 2591 00a8 08       		.uleb128 0x8
+ 2592 00a9 3A       		.uleb128 0x3a
+ 2593 00aa 0B       		.uleb128 0xb
+ 2594 00ab 3B       		.uleb128 0x3b
+ 2595 00ac 0B       		.uleb128 0xb
+ 2596 00ad 49       		.uleb128 0x49
+ 2597 00ae 13       		.uleb128 0x13
+ 2598 00af 02       		.uleb128 0x2
+ 2599 00b0 0A       		.uleb128 0xa
+ 2600 00b1 00       		.byte	0x0
+ 2601 00b2 00       		.byte	0x0
+ 2602 00b3 0E       		.uleb128 0xe
+ 2603 00b4 34       		.uleb128 0x34
+ 2604 00b5 00       		.byte	0x0
+ 2605 00b6 03       		.uleb128 0x3
+ 2606 00b7 0E       		.uleb128 0xe
+ 2607 00b8 3A       		.uleb128 0x3a
+ 2608 00b9 0B       		.uleb128 0xb
+ 2609 00ba 3B       		.uleb128 0x3b
+ 2610 00bb 0B       		.uleb128 0xb
+ 2611 00bc 49       		.uleb128 0x49
+ 2612 00bd 13       		.uleb128 0x13
+ 2613 00be 02       		.uleb128 0x2
+ 2614 00bf 0A       		.uleb128 0xa
+ 2615 00c0 00       		.byte	0x0
+ 2616 00c1 00       		.byte	0x0
+ 2617 00c2 0F       		.uleb128 0xf
+ 2618 00c3 15       		.uleb128 0x15
+ 2619 00c4 01       		.byte	0x1
+ 2620 00c5 01       		.uleb128 0x1
+ 2621 00c6 13       		.uleb128 0x13
+ 2622 00c7 27       		.uleb128 0x27
+ 2623 00c8 0C       		.uleb128 0xc
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 57
+
+
+ 2624 00c9 00       		.byte	0x0
+ 2625 00ca 00       		.byte	0x0
+ 2626 00cb 10       		.uleb128 0x10
+ 2627 00cc 05       		.uleb128 0x5
+ 2628 00cd 00       		.byte	0x0
+ 2629 00ce 49       		.uleb128 0x49
+ 2630 00cf 13       		.uleb128 0x13
+ 2631 00d0 00       		.byte	0x0
+ 2632 00d1 00       		.byte	0x0
+ 2633 00d2 11       		.uleb128 0x11
+ 2634 00d3 01       		.uleb128 0x1
+ 2635 00d4 01       		.byte	0x1
+ 2636 00d5 01       		.uleb128 0x1
+ 2637 00d6 13       		.uleb128 0x13
+ 2638 00d7 49       		.uleb128 0x49
+ 2639 00d8 13       		.uleb128 0x13
+ 2640 00d9 00       		.byte	0x0
+ 2641 00da 00       		.byte	0x0
+ 2642 00db 12       		.uleb128 0x12
+ 2643 00dc 21       		.uleb128 0x21
+ 2644 00dd 00       		.byte	0x0
+ 2645 00de 49       		.uleb128 0x49
+ 2646 00df 13       		.uleb128 0x13
+ 2647 00e0 2F       		.uleb128 0x2f
+ 2648 00e1 0B       		.uleb128 0xb
+ 2649 00e2 00       		.byte	0x0
+ 2650 00e3 00       		.byte	0x0
+ 2651 00e4 13       		.uleb128 0x13
+ 2652 00e5 2E       		.uleb128 0x2e
+ 2653 00e6 00       		.byte	0x0
+ 2654 00e7 3F       		.uleb128 0x3f
+ 2655 00e8 0C       		.uleb128 0xc
+ 2656 00e9 03       		.uleb128 0x3
+ 2657 00ea 0E       		.uleb128 0xe
+ 2658 00eb 3A       		.uleb128 0x3a
+ 2659 00ec 0B       		.uleb128 0xb
+ 2660 00ed 3B       		.uleb128 0x3b
+ 2661 00ee 0B       		.uleb128 0xb
+ 2662 00ef 27       		.uleb128 0x27
+ 2663 00f0 0C       		.uleb128 0xc
+ 2664 00f1 11       		.uleb128 0x11
+ 2665 00f2 01       		.uleb128 0x1
+ 2666 00f3 12       		.uleb128 0x12
+ 2667 00f4 01       		.uleb128 0x1
+ 2668 00f5 40       		.uleb128 0x40
+ 2669 00f6 0A       		.uleb128 0xa
+ 2670 00f7 00       		.byte	0x0
+ 2671 00f8 00       		.byte	0x0
+ 2672 00f9 14       		.uleb128 0x14
+ 2673 00fa 2E       		.uleb128 0x2e
+ 2674 00fb 01       		.byte	0x1
+ 2675 00fc 01       		.uleb128 0x1
+ 2676 00fd 13       		.uleb128 0x13
+ 2677 00fe 31       		.uleb128 0x31
+ 2678 00ff 13       		.uleb128 0x13
+ 2679 0100 11       		.uleb128 0x11
+ 2680 0101 01       		.uleb128 0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 58
+
+
+ 2681 0102 12       		.uleb128 0x12
+ 2682 0103 01       		.uleb128 0x1
+ 2683 0104 40       		.uleb128 0x40
+ 2684 0105 0A       		.uleb128 0xa
+ 2685 0106 00       		.byte	0x0
+ 2686 0107 00       		.byte	0x0
+ 2687 0108 15       		.uleb128 0x15
+ 2688 0109 05       		.uleb128 0x5
+ 2689 010a 00       		.byte	0x0
+ 2690 010b 31       		.uleb128 0x31
+ 2691 010c 13       		.uleb128 0x13
+ 2692 010d 02       		.uleb128 0x2
+ 2693 010e 0A       		.uleb128 0xa
+ 2694 010f 00       		.byte	0x0
+ 2695 0110 00       		.byte	0x0
+ 2696 0111 16       		.uleb128 0x16
+ 2697 0112 2E       		.uleb128 0x2e
+ 2698 0113 01       		.byte	0x1
+ 2699 0114 01       		.uleb128 0x1
+ 2700 0115 13       		.uleb128 0x13
+ 2701 0116 3F       		.uleb128 0x3f
+ 2702 0117 0C       		.uleb128 0xc
+ 2703 0118 03       		.uleb128 0x3
+ 2704 0119 0E       		.uleb128 0xe
+ 2705 011a 3A       		.uleb128 0x3a
+ 2706 011b 0B       		.uleb128 0xb
+ 2707 011c 3B       		.uleb128 0x3b
+ 2708 011d 0B       		.uleb128 0xb
+ 2709 011e 27       		.uleb128 0x27
+ 2710 011f 0C       		.uleb128 0xc
+ 2711 0120 11       		.uleb128 0x11
+ 2712 0121 01       		.uleb128 0x1
+ 2713 0122 12       		.uleb128 0x12
+ 2714 0123 01       		.uleb128 0x1
+ 2715 0124 40       		.uleb128 0x40
+ 2716 0125 0A       		.uleb128 0xa
+ 2717 0126 00       		.byte	0x0
+ 2718 0127 00       		.byte	0x0
+ 2719 0128 17       		.uleb128 0x17
+ 2720 0129 05       		.uleb128 0x5
+ 2721 012a 00       		.byte	0x0
+ 2722 012b 03       		.uleb128 0x3
+ 2723 012c 0E       		.uleb128 0xe
+ 2724 012d 3A       		.uleb128 0x3a
+ 2725 012e 0B       		.uleb128 0xb
+ 2726 012f 3B       		.uleb128 0x3b
+ 2727 0130 0B       		.uleb128 0xb
+ 2728 0131 49       		.uleb128 0x49
+ 2729 0132 13       		.uleb128 0x13
+ 2730 0133 02       		.uleb128 0x2
+ 2731 0134 0A       		.uleb128 0xa
+ 2732 0135 00       		.byte	0x0
+ 2733 0136 00       		.byte	0x0
+ 2734 0137 18       		.uleb128 0x18
+ 2735 0138 1D       		.uleb128 0x1d
+ 2736 0139 01       		.byte	0x1
+ 2737 013a 01       		.uleb128 0x1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 59
+
+
+ 2738 013b 13       		.uleb128 0x13
+ 2739 013c 31       		.uleb128 0x31
+ 2740 013d 13       		.uleb128 0x13
+ 2741 013e 11       		.uleb128 0x11
+ 2742 013f 01       		.uleb128 0x1
+ 2743 0140 12       		.uleb128 0x12
+ 2744 0141 01       		.uleb128 0x1
+ 2745 0142 58       		.uleb128 0x58
+ 2746 0143 0B       		.uleb128 0xb
+ 2747 0144 59       		.uleb128 0x59
+ 2748 0145 0B       		.uleb128 0xb
+ 2749 0146 00       		.byte	0x0
+ 2750 0147 00       		.byte	0x0
+ 2751 0148 19       		.uleb128 0x19
+ 2752 0149 05       		.uleb128 0x5
+ 2753 014a 00       		.byte	0x0
+ 2754 014b 31       		.uleb128 0x31
+ 2755 014c 13       		.uleb128 0x13
+ 2756 014d 00       		.byte	0x0
+ 2757 014e 00       		.byte	0x0
+ 2758 014f 1A       		.uleb128 0x1a
+ 2759 0150 1D       		.uleb128 0x1d
+ 2760 0151 01       		.byte	0x1
+ 2761 0152 31       		.uleb128 0x31
+ 2762 0153 13       		.uleb128 0x13
+ 2763 0154 11       		.uleb128 0x11
+ 2764 0155 01       		.uleb128 0x1
+ 2765 0156 12       		.uleb128 0x12
+ 2766 0157 01       		.uleb128 0x1
+ 2767 0158 58       		.uleb128 0x58
+ 2768 0159 0B       		.uleb128 0xb
+ 2769 015a 59       		.uleb128 0x59
+ 2770 015b 0B       		.uleb128 0xb
+ 2771 015c 00       		.byte	0x0
+ 2772 015d 00       		.byte	0x0
+ 2773 015e 1B       		.uleb128 0x1b
+ 2774 015f 2E       		.uleb128 0x2e
+ 2775 0160 01       		.byte	0x1
+ 2776 0161 01       		.uleb128 0x1
+ 2777 0162 13       		.uleb128 0x13
+ 2778 0163 3F       		.uleb128 0x3f
+ 2779 0164 0C       		.uleb128 0xc
+ 2780 0165 03       		.uleb128 0x3
+ 2781 0166 0E       		.uleb128 0xe
+ 2782 0167 3A       		.uleb128 0x3a
+ 2783 0168 0B       		.uleb128 0xb
+ 2784 0169 3B       		.uleb128 0x3b
+ 2785 016a 05       		.uleb128 0x5
+ 2786 016b 27       		.uleb128 0x27
+ 2787 016c 0C       		.uleb128 0xc
+ 2788 016d 11       		.uleb128 0x11
+ 2789 016e 01       		.uleb128 0x1
+ 2790 016f 12       		.uleb128 0x12
+ 2791 0170 01       		.uleb128 0x1
+ 2792 0171 40       		.uleb128 0x40
+ 2793 0172 06       		.uleb128 0x6
+ 2794 0173 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 60
+
+
+ 2795 0174 00       		.byte	0x0
+ 2796 0175 1C       		.uleb128 0x1c
+ 2797 0176 05       		.uleb128 0x5
+ 2798 0177 00       		.byte	0x0
+ 2799 0178 03       		.uleb128 0x3
+ 2800 0179 0E       		.uleb128 0xe
+ 2801 017a 3A       		.uleb128 0x3a
+ 2802 017b 0B       		.uleb128 0xb
+ 2803 017c 3B       		.uleb128 0x3b
+ 2804 017d 05       		.uleb128 0x5
+ 2805 017e 49       		.uleb128 0x49
+ 2806 017f 13       		.uleb128 0x13
+ 2807 0180 02       		.uleb128 0x2
+ 2808 0181 06       		.uleb128 0x6
+ 2809 0182 00       		.byte	0x0
+ 2810 0183 00       		.byte	0x0
+ 2811 0184 1D       		.uleb128 0x1d
+ 2812 0185 05       		.uleb128 0x5
+ 2813 0186 00       		.byte	0x0
+ 2814 0187 03       		.uleb128 0x3
+ 2815 0188 08       		.uleb128 0x8
+ 2816 0189 3A       		.uleb128 0x3a
+ 2817 018a 0B       		.uleb128 0xb
+ 2818 018b 3B       		.uleb128 0x3b
+ 2819 018c 05       		.uleb128 0x5
+ 2820 018d 49       		.uleb128 0x49
+ 2821 018e 13       		.uleb128 0x13
+ 2822 018f 02       		.uleb128 0x2
+ 2823 0190 06       		.uleb128 0x6
+ 2824 0191 00       		.byte	0x0
+ 2825 0192 00       		.byte	0x0
+ 2826 0193 1E       		.uleb128 0x1e
+ 2827 0194 34       		.uleb128 0x34
+ 2828 0195 00       		.byte	0x0
+ 2829 0196 03       		.uleb128 0x3
+ 2830 0197 0E       		.uleb128 0xe
+ 2831 0198 3A       		.uleb128 0x3a
+ 2832 0199 0B       		.uleb128 0xb
+ 2833 019a 3B       		.uleb128 0x3b
+ 2834 019b 05       		.uleb128 0x5
+ 2835 019c 49       		.uleb128 0x49
+ 2836 019d 13       		.uleb128 0x13
+ 2837 019e 02       		.uleb128 0x2
+ 2838 019f 0A       		.uleb128 0xa
+ 2839 01a0 00       		.byte	0x0
+ 2840 01a1 00       		.byte	0x0
+ 2841 01a2 1F       		.uleb128 0x1f
+ 2842 01a3 34       		.uleb128 0x34
+ 2843 01a4 00       		.byte	0x0
+ 2844 01a5 03       		.uleb128 0x3
+ 2845 01a6 08       		.uleb128 0x8
+ 2846 01a7 3A       		.uleb128 0x3a
+ 2847 01a8 0B       		.uleb128 0xb
+ 2848 01a9 3B       		.uleb128 0x3b
+ 2849 01aa 05       		.uleb128 0x5
+ 2850 01ab 49       		.uleb128 0x49
+ 2851 01ac 13       		.uleb128 0x13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 61
+
+
+ 2852 01ad 02       		.uleb128 0x2
+ 2853 01ae 0A       		.uleb128 0xa
+ 2854 01af 00       		.byte	0x0
+ 2855 01b0 00       		.byte	0x0
+ 2856 01b1 20       		.uleb128 0x20
+ 2857 01b2 34       		.uleb128 0x34
+ 2858 01b3 00       		.byte	0x0
+ 2859 01b4 03       		.uleb128 0x3
+ 2860 01b5 0E       		.uleb128 0xe
+ 2861 01b6 3A       		.uleb128 0x3a
+ 2862 01b7 0B       		.uleb128 0xb
+ 2863 01b8 3B       		.uleb128 0x3b
+ 2864 01b9 05       		.uleb128 0x5
+ 2865 01ba 49       		.uleb128 0x49
+ 2866 01bb 13       		.uleb128 0x13
+ 2867 01bc 02       		.uleb128 0x2
+ 2868 01bd 06       		.uleb128 0x6
+ 2869 01be 00       		.byte	0x0
+ 2870 01bf 00       		.byte	0x0
+ 2871 01c0 21       		.uleb128 0x21
+ 2872 01c1 34       		.uleb128 0x34
+ 2873 01c2 00       		.byte	0x0
+ 2874 01c3 03       		.uleb128 0x3
+ 2875 01c4 0E       		.uleb128 0xe
+ 2876 01c5 3A       		.uleb128 0x3a
+ 2877 01c6 0B       		.uleb128 0xb
+ 2878 01c7 3B       		.uleb128 0x3b
+ 2879 01c8 05       		.uleb128 0x5
+ 2880 01c9 49       		.uleb128 0x49
+ 2881 01ca 13       		.uleb128 0x13
+ 2882 01cb 00       		.byte	0x0
+ 2883 01cc 00       		.byte	0x0
+ 2884 01cd 22       		.uleb128 0x22
+ 2885 01ce 2E       		.uleb128 0x2e
+ 2886 01cf 00       		.byte	0x0
+ 2887 01d0 31       		.uleb128 0x31
+ 2888 01d1 13       		.uleb128 0x13
+ 2889 01d2 11       		.uleb128 0x11
+ 2890 01d3 01       		.uleb128 0x1
+ 2891 01d4 12       		.uleb128 0x12
+ 2892 01d5 01       		.uleb128 0x1
+ 2893 01d6 40       		.uleb128 0x40
+ 2894 01d7 0A       		.uleb128 0xa
+ 2895 01d8 00       		.byte	0x0
+ 2896 01d9 00       		.byte	0x0
+ 2897 01da 23       		.uleb128 0x23
+ 2898 01db 2E       		.uleb128 0x2e
+ 2899 01dc 01       		.byte	0x1
+ 2900 01dd 01       		.uleb128 0x1
+ 2901 01de 13       		.uleb128 0x13
+ 2902 01df 3F       		.uleb128 0x3f
+ 2903 01e0 0C       		.uleb128 0xc
+ 2904 01e1 03       		.uleb128 0x3
+ 2905 01e2 0E       		.uleb128 0xe
+ 2906 01e3 3A       		.uleb128 0x3a
+ 2907 01e4 0B       		.uleb128 0xb
+ 2908 01e5 3B       		.uleb128 0x3b
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 62
+
+
+ 2909 01e6 05       		.uleb128 0x5
+ 2910 01e7 27       		.uleb128 0x27
+ 2911 01e8 0C       		.uleb128 0xc
+ 2912 01e9 49       		.uleb128 0x49
+ 2913 01ea 13       		.uleb128 0x13
+ 2914 01eb 11       		.uleb128 0x11
+ 2915 01ec 01       		.uleb128 0x1
+ 2916 01ed 12       		.uleb128 0x12
+ 2917 01ee 01       		.uleb128 0x1
+ 2918 01ef 40       		.uleb128 0x40
+ 2919 01f0 0A       		.uleb128 0xa
+ 2920 01f1 00       		.byte	0x0
+ 2921 01f2 00       		.byte	0x0
+ 2922 01f3 24       		.uleb128 0x24
+ 2923 01f4 1D       		.uleb128 0x1d
+ 2924 01f5 00       		.byte	0x0
+ 2925 01f6 31       		.uleb128 0x31
+ 2926 01f7 13       		.uleb128 0x13
+ 2927 01f8 11       		.uleb128 0x11
+ 2928 01f9 01       		.uleb128 0x1
+ 2929 01fa 12       		.uleb128 0x12
+ 2930 01fb 01       		.uleb128 0x1
+ 2931 01fc 58       		.uleb128 0x58
+ 2932 01fd 0B       		.uleb128 0xb
+ 2933 01fe 59       		.uleb128 0x59
+ 2934 01ff 05       		.uleb128 0x5
+ 2935 0200 00       		.byte	0x0
+ 2936 0201 00       		.byte	0x0
+ 2937 0202 25       		.uleb128 0x25
+ 2938 0203 2E       		.uleb128 0x2e
+ 2939 0204 01       		.byte	0x1
+ 2940 0205 01       		.uleb128 0x1
+ 2941 0206 13       		.uleb128 0x13
+ 2942 0207 03       		.uleb128 0x3
+ 2943 0208 0E       		.uleb128 0xe
+ 2944 0209 3A       		.uleb128 0x3a
+ 2945 020a 0B       		.uleb128 0xb
+ 2946 020b 3B       		.uleb128 0x3b
+ 2947 020c 0B       		.uleb128 0xb
+ 2948 020d 27       		.uleb128 0x27
+ 2949 020e 0C       		.uleb128 0xc
+ 2950 020f 20       		.uleb128 0x20
+ 2951 0210 0B       		.uleb128 0xb
+ 2952 0211 00       		.byte	0x0
+ 2953 0212 00       		.byte	0x0
+ 2954 0213 26       		.uleb128 0x26
+ 2955 0214 05       		.uleb128 0x5
+ 2956 0215 00       		.byte	0x0
+ 2957 0216 03       		.uleb128 0x3
+ 2958 0217 08       		.uleb128 0x8
+ 2959 0218 3A       		.uleb128 0x3a
+ 2960 0219 0B       		.uleb128 0xb
+ 2961 021a 3B       		.uleb128 0x3b
+ 2962 021b 0B       		.uleb128 0xb
+ 2963 021c 49       		.uleb128 0x49
+ 2964 021d 13       		.uleb128 0x13
+ 2965 021e 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 63
+
+
+ 2966 021f 00       		.byte	0x0
+ 2967 0220 27       		.uleb128 0x27
+ 2968 0221 34       		.uleb128 0x34
+ 2969 0222 00       		.byte	0x0
+ 2970 0223 03       		.uleb128 0x3
+ 2971 0224 08       		.uleb128 0x8
+ 2972 0225 3A       		.uleb128 0x3a
+ 2973 0226 0B       		.uleb128 0xb
+ 2974 0227 3B       		.uleb128 0x3b
+ 2975 0228 0B       		.uleb128 0xb
+ 2976 0229 49       		.uleb128 0x49
+ 2977 022a 13       		.uleb128 0x13
+ 2978 022b 00       		.byte	0x0
+ 2979 022c 00       		.byte	0x0
+ 2980 022d 28       		.uleb128 0x28
+ 2981 022e 34       		.uleb128 0x34
+ 2982 022f 00       		.byte	0x0
+ 2983 0230 03       		.uleb128 0x3
+ 2984 0231 0E       		.uleb128 0xe
+ 2985 0232 3A       		.uleb128 0x3a
+ 2986 0233 0B       		.uleb128 0xb
+ 2987 0234 3B       		.uleb128 0x3b
+ 2988 0235 0B       		.uleb128 0xb
+ 2989 0236 49       		.uleb128 0x49
+ 2990 0237 13       		.uleb128 0x13
+ 2991 0238 00       		.byte	0x0
+ 2992 0239 00       		.byte	0x0
+ 2993 023a 29       		.uleb128 0x29
+ 2994 023b 0A       		.uleb128 0xa
+ 2995 023c 00       		.byte	0x0
+ 2996 023d 03       		.uleb128 0x3
+ 2997 023e 0E       		.uleb128 0xe
+ 2998 023f 3A       		.uleb128 0x3a
+ 2999 0240 0B       		.uleb128 0xb
+ 3000 0241 3B       		.uleb128 0x3b
+ 3001 0242 0B       		.uleb128 0xb
+ 3002 0243 00       		.byte	0x0
+ 3003 0244 00       		.byte	0x0
+ 3004 0245 2A       		.uleb128 0x2a
+ 3005 0246 18       		.uleb128 0x18
+ 3006 0247 00       		.byte	0x0
+ 3007 0248 00       		.byte	0x0
+ 3008 0249 00       		.byte	0x0
+ 3009 024a 2B       		.uleb128 0x2b
+ 3010 024b 1D       		.uleb128 0x1d
+ 3011 024c 01       		.byte	0x1
+ 3012 024d 31       		.uleb128 0x31
+ 3013 024e 13       		.uleb128 0x13
+ 3014 024f 11       		.uleb128 0x11
+ 3015 0250 01       		.uleb128 0x1
+ 3016 0251 12       		.uleb128 0x12
+ 3017 0252 01       		.uleb128 0x1
+ 3018 0253 58       		.uleb128 0x58
+ 3019 0254 0B       		.uleb128 0xb
+ 3020 0255 59       		.uleb128 0x59
+ 3021 0256 05       		.uleb128 0x5
+ 3022 0257 00       		.byte	0x0
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 64
+
+
+ 3023 0258 00       		.byte	0x0
+ 3024 0259 2C       		.uleb128 0x2c
+ 3025 025a 05       		.uleb128 0x5
+ 3026 025b 00       		.byte	0x0
+ 3027 025c 31       		.uleb128 0x31
+ 3028 025d 13       		.uleb128 0x13
+ 3029 025e 02       		.uleb128 0x2
+ 3030 025f 06       		.uleb128 0x6
+ 3031 0260 00       		.byte	0x0
+ 3032 0261 00       		.byte	0x0
+ 3033 0262 2D       		.uleb128 0x2d
+ 3034 0263 0B       		.uleb128 0xb
+ 3035 0264 01       		.byte	0x1
+ 3036 0265 11       		.uleb128 0x11
+ 3037 0266 01       		.uleb128 0x1
+ 3038 0267 12       		.uleb128 0x12
+ 3039 0268 01       		.uleb128 0x1
+ 3040 0269 00       		.byte	0x0
+ 3041 026a 00       		.byte	0x0
+ 3042 026b 2E       		.uleb128 0x2e
+ 3043 026c 34       		.uleb128 0x34
+ 3044 026d 00       		.byte	0x0
+ 3045 026e 31       		.uleb128 0x31
+ 3046 026f 13       		.uleb128 0x13
+ 3047 0270 02       		.uleb128 0x2
+ 3048 0271 06       		.uleb128 0x6
+ 3049 0272 00       		.byte	0x0
+ 3050 0273 00       		.byte	0x0
+ 3051 0274 2F       		.uleb128 0x2f
+ 3052 0275 0A       		.uleb128 0xa
+ 3053 0276 00       		.byte	0x0
+ 3054 0277 31       		.uleb128 0x31
+ 3055 0278 13       		.uleb128 0x13
+ 3056 0279 00       		.byte	0x0
+ 3057 027a 00       		.byte	0x0
+ 3058 027b 30       		.uleb128 0x30
+ 3059 027c 2E       		.uleb128 0x2e
+ 3060 027d 01       		.byte	0x1
+ 3061 027e 01       		.uleb128 0x1
+ 3062 027f 13       		.uleb128 0x13
+ 3063 0280 3F       		.uleb128 0x3f
+ 3064 0281 0C       		.uleb128 0xc
+ 3065 0282 03       		.uleb128 0x3
+ 3066 0283 0E       		.uleb128 0xe
+ 3067 0284 3A       		.uleb128 0x3a
+ 3068 0285 0B       		.uleb128 0xb
+ 3069 0286 3B       		.uleb128 0x3b
+ 3070 0287 05       		.uleb128 0x5
+ 3071 0288 27       		.uleb128 0x27
+ 3072 0289 0C       		.uleb128 0xc
+ 3073 028a 49       		.uleb128 0x49
+ 3074 028b 13       		.uleb128 0x13
+ 3075 028c 11       		.uleb128 0x11
+ 3076 028d 01       		.uleb128 0x1
+ 3077 028e 12       		.uleb128 0x12
+ 3078 028f 01       		.uleb128 0x1
+ 3079 0290 40       		.uleb128 0x40
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 65
+
+
+ 3080 0291 06       		.uleb128 0x6
+ 3081 0292 00       		.byte	0x0
+ 3082 0293 00       		.byte	0x0
+ 3083 0294 31       		.uleb128 0x31
+ 3084 0295 34       		.uleb128 0x34
+ 3085 0296 00       		.byte	0x0
+ 3086 0297 03       		.uleb128 0x3
+ 3087 0298 08       		.uleb128 0x8
+ 3088 0299 3A       		.uleb128 0x3a
+ 3089 029a 0B       		.uleb128 0xb
+ 3090 029b 3B       		.uleb128 0x3b
+ 3091 029c 05       		.uleb128 0x5
+ 3092 029d 49       		.uleb128 0x49
+ 3093 029e 13       		.uleb128 0x13
+ 3094 029f 02       		.uleb128 0x2
+ 3095 02a0 06       		.uleb128 0x6
+ 3096 02a1 00       		.byte	0x0
+ 3097 02a2 00       		.byte	0x0
+ 3098 02a3 00       		.byte	0x0
+ 3099              		.section	.debug_pubnames,"",%progbits
+ 3100 0000 D6000000 		.4byte	0xd6
+ 3101 0004 0200     		.2byte	0x2
+ 3102 0006 00000000 		.4byte	.Ldebug_info0
+ 3103 000a 84050000 		.4byte	0x584
+ 3104 000e 64010000 		.4byte	0x164
+ 3105 0012 636F6E73 		.ascii	"consolInit\000"
+ 3105      6F6C496E 
+ 3105      697400
+ 3106 001d 77010000 		.4byte	0x177
+ 3107 0021 636F6E73 		.ascii	"consolSendChar\000"
+ 3107      6F6C5365 
+ 3107      6E644368 
+ 3107      617200
+ 3108 0030 92010000 		.4byte	0x192
+ 3109 0034 636F6E73 		.ascii	"consolSendCh\000"
+ 3109      6F6C5365 
+ 3109      6E644368 
+ 3109      00
+ 3110 0041 E5010000 		.4byte	0x1e5
+ 3111 0045 636F6E73 		.ascii	"consolSendString\000"
+ 3111      6F6C5365 
+ 3111      6E645374 
+ 3111      72696E67 
+ 3111      00
+ 3112 0056 10020000 		.4byte	0x210
+ 3113 005a 636F6E73 		.ascii	"consolSendNumber\000"
+ 3113      6F6C5365 
+ 3113      6E644E75 
+ 3113      6D626572 
+ 3113      00
+ 3114 006b D7020000 		.4byte	0x2d7
+ 3115 006f 636F6E73 		.ascii	"consolGetCh\000"
+ 3115      6F6C4765 
+ 3115      74436800 
+ 3116 007b E6020000 		.4byte	0x2e6
+ 3117 007f 636F6E73 		.ascii	"consolGetChar\000"
+ 3117      6F6C4765 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 66
+
+
+ 3117      74436861 
+ 3117      7200
+ 3118 008d 13030000 		.4byte	0x313
+ 3119 0091 636F6E73 		.ascii	"consolGetString\000"
+ 3119      6F6C4765 
+ 3119      74537472 
+ 3119      696E6700 
+ 3120 00a1 C7030000 		.4byte	0x3c7
+ 3121 00a5 73696D70 		.ascii	"simplePrintf\000"
+ 3121      6C655072 
+ 3121      696E7466 
+ 3121      00
+ 3122 00b2 58040000 		.4byte	0x458
+ 3123 00b6 636F6E73 		.ascii	"consolGetIntNum\000"
+ 3123      6F6C4765 
+ 3123      74496E74 
+ 3123      4E756D00 
+ 3124 00c6 EF040000 		.4byte	0x4ef
+ 3125 00ca 636F6E73 		.ascii	"consolScanf\000"
+ 3125      6F6C5363 
+ 3125      616E6600 
+ 3126 00d6 00000000 		.4byte	0x0
+ 3127              		.section	.debug_aranges,"",%progbits
+ 3128 0000 1C000000 		.4byte	0x1c
+ 3129 0004 0200     		.2byte	0x2
+ 3130 0006 00000000 		.4byte	.Ldebug_info0
+ 3131 000a 04       		.byte	0x4
+ 3132 000b 00       		.byte	0x0
+ 3133 000c 0000     		.2byte	0x0
+ 3134 000e 0000     		.2byte	0x0
+ 3135 0010 00000000 		.4byte	.Ltext0
+ 3136 0014 80060000 		.4byte	.Letext0-.Ltext0
+ 3137 0018 00000000 		.4byte	0x0
+ 3138 001c 00000000 		.4byte	0x0
+ 3139              		.section	.debug_str,"MS",%progbits,1
+ 3140              	.LASF29:
+ 3141 0000 70436861 		.ascii	"pChar\000"
+ 3141      7200
+ 3142              	.LASF41:
+ 3143 0006 774C6173 		.ascii	"wLastIndex\000"
+ 3143      74496E64 
+ 3143      657800
+ 3144              	.LASF36:
+ 3145 0011 73696D70 		.ascii	"simplePrintf\000"
+ 3145      6C655072 
+ 3145      696E7466 
+ 3145      00
+ 3146              	.LASF37:
+ 3147 001e 636F6E73 		.ascii	"consolGetIntNum\000"
+ 3147      6F6C4765 
+ 3147      74496E74 
+ 3147      4E756D00 
+ 3148              	.LASF26:
+ 3149 002e 6E756D62 		.ascii	"numberAbs\000"
+ 3149      65724162 
+ 3149      7300
+ 3150              	.LASF16:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 67
+
+
+ 3151 0038 636F6E73 		.ascii	"consolGetCh\000"
+ 3151      6F6C4765 
+ 3151      74436800 
+ 3152              	.LASF22:
+ 3153 0044 636F6E73 		.ascii	"consolSendNumber\000"
+ 3153      6F6C5365 
+ 3153      6E644E75 
+ 3153      6D626572 
+ 3153      00
+ 3154              	.LASF18:
+ 3155 0055 636F6E73 		.ascii	"consolSendChar\000"
+ 3155      6F6C5365 
+ 3155      6E644368 
+ 3155      617200
+ 3156              	.LASF5:
+ 3157 0064 73686F72 		.ascii	"short int\000"
+ 3157      7420696E 
+ 3157      7400
+ 3158              	.LASF44:
+ 3159 006e 70466D74 		.ascii	"pFmt\000"
+ 3159      00
+ 3160              	.LASF9:
+ 3161 0073 5F5F676E 		.ascii	"__gnuc_va_list\000"
+ 3161      75635F76 
+ 3161      615F6C69 
+ 3161      737400
+ 3162              	.LASF32:
+ 3163 0082 72784368 		.ascii	"rxChar\000"
+ 3163      617200
+ 3164              	.LASF27:
+ 3165 0089 636F756E 		.ascii	"count\000"
+ 3165      7400
+ 3166              	.LASF48:
+ 3167 008f 474E5520 		.ascii	"GNU C 4.1.1\000"
+ 3167      4320342E 
+ 3167      312E3100 
+ 3168              	.LASF21:
+ 3169 009b 70537472 		.ascii	"pString\000"
+ 3169      696E6700 
+ 3170              	.LASF38:
+ 3171 00a3 61625374 		.ascii	"abStr\000"
+ 3171      7200
+ 3172              	.LASF45:
+ 3173 00a9 70417267 		.ascii	"pArg\000"
+ 3173      00
+ 3174              	.LASF34:
+ 3175 00ae 73696D70 		.ascii	"simplePrint\000"
+ 3175      6C655072 
+ 3175      696E7400 
+ 3176              	.LASF51:
+ 3177 00ba 72657377 		.ascii	"reswitch\000"
+ 3177      69746368 
+ 3177      00
+ 3178              	.LASF10:
+ 3179 00c3 76615F6C 		.ascii	"va_list\000"
+ 3179      69737400 
+ 3180              	.LASF1:
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 68
+
+
+ 3181 00cb 6C6F6E67 		.ascii	"long long int\000"
+ 3181      206C6F6E 
+ 3181      6720696E 
+ 3181      7400
+ 3182              	.LASF0:
+ 3183 00d9 6C6F6E67 		.ascii	"long int\000"
+ 3183      20696E74 
+ 3183      00
+ 3184              	.LASF14:
+ 3185 00e2 62617365 		.ascii	"base\000"
+ 3185      00
+ 3186              	.LASF11:
+ 3187 00e7 63686172 		.ascii	"charToSend\000"
+ 3187      546F5365 
+ 3187      6E6400
+ 3188              	.LASF33:
+ 3189 00f2 7072696E 		.ascii	"printNum\000"
+ 3189      744E756D 
+ 3189      00
+ 3190              	.LASF35:
+ 3191 00fb 6C666C61 		.ascii	"lflag\000"
+ 3191      6700
+ 3192              	.LASF43:
+ 3193 0101 636F6E73 		.ascii	"consolScanf\000"
+ 3193      6F6C5363 
+ 3193      616E6600 
+ 3194              	.LASF17:
+ 3195 010d 636F6E73 		.ascii	"consolInit\000"
+ 3195      6F6C496E 
+ 3195      697400
+ 3196              	.LASF4:
+ 3197 0118 756E7369 		.ascii	"unsigned char\000"
+ 3197      676E6564 
+ 3197      20636861 
+ 3197      7200
+ 3198              	.LASF40:
+ 3199 0126 774D696E 		.ascii	"wMinus\000"
+ 3199      757300
+ 3200              	.LASF15:
+ 3201 012d 68657843 		.ascii	"hexChars\000"
+ 3201      68617273 
+ 3201      00
+ 3202              	.LASF23:
+ 3203 0136 6E6F4469 		.ascii	"noDigits\000"
+ 3203      67697473 
+ 3203      00
+ 3204              	.LASF8:
+ 3205 013f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3205      206C6F6E 
+ 3205      6720756E 
+ 3205      7369676E 
+ 3205      65642069 
+ 3206              	.LASF20:
+ 3207 0156 636F6E73 		.ascii	"consolSendString\000"
+ 3207      6F6C5365 
+ 3207      6E645374 
+ 3207      72696E67 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 69
+
+
+ 3207      00
+ 3208              	.LASF2:
+ 3209 0167 756E7369 		.ascii	"unsigned int\000"
+ 3209      676E6564 
+ 3209      20696E74 
+ 3209      00
+ 3210              	.LASF31:
+ 3211 0174 70537472 		.ascii	"pString2\000"
+ 3211      696E6732 
+ 3211      00
+ 3212              	.LASF19:
+ 3213 017d 636F6E73 		.ascii	"consolSendCh\000"
+ 3213      6F6C5365 
+ 3213      6E644368 
+ 3213      00
+ 3214              	.LASF24:
+ 3215 018a 7369676E 		.ascii	"sign\000"
+ 3215      00
+ 3216              	.LASF7:
+ 3217 018f 73686F72 		.ascii	"short unsigned int\000"
+ 3217      7420756E 
+ 3217      7369676E 
+ 3217      65642069 
+ 3217      6E7400
+ 3218              	.LASF6:
+ 3219 01a2 63686172 		.ascii	"char\000"
+ 3219      00
+ 3220              	.LASF39:
+ 3221 01a7 77426173 		.ascii	"wBase\000"
+ 3221      6500
+ 3222              	.LASF49:
+ 3223 01ad 636F6E73 		.ascii	"consol.c\000"
+ 3223      6F6C2E63 
+ 3223      00
+ 3224              	.LASF25:
+ 3225 01b6 70427566 		.ascii	"pBuf\000"
+ 3225      00
+ 3226              	.LASF47:
+ 3227 01bb 70496E74 		.ascii	"pInt\000"
+ 3227      00
+ 3228              	.LASF3:
+ 3229 01c0 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3229      20756E73 
+ 3229      69676E65 
+ 3229      6420696E 
+ 3229      7400
+ 3230              	.LASF12:
+ 3231 01d2 6F757470 		.ascii	"outputFnk\000"
+ 3231      7574466E 
+ 3231      6B00
+ 3232              	.LASF30:
+ 3233 01dc 636F6E73 		.ascii	"consolGetString\000"
+ 3233      6F6C4765 
+ 3233      74537472 
+ 3233      696E6700 
+ 3234              	.LASF50:
+ 3235 01ec 2F637967 		.ascii	"/cygdrive/c/eclipse/workspace/2138/startup\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 70
+
+
+ 3235      64726976 
+ 3235      652F632F 
+ 3235      65636C69 
+ 3235      7073652F 
+ 3236              	.LASF46:
+ 3237 0217 63686172 		.ascii	"character\000"
+ 3237      61637465 
+ 3237      7200
+ 3238              	.LASF28:
+ 3239 0221 636F6E73 		.ascii	"consolGetChar\000"
+ 3239      6F6C4765 
+ 3239      74436861 
+ 3239      7200
+ 3240              	.LASF42:
+ 3241 022f 77526573 		.ascii	"wResult\000"
+ 3241      756C7400 
+ 3242              	.LASF13:
+ 3243 0237 6E756D62 		.ascii	"number\000"
+ 3243      657200
+ 3244              		.ident	"GCC: (GNU) 4.1.1"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s 			page 71
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 consol.c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:19     .text:00000000 printNum
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:27     .text:00000000 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:80     .text:00000080 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:86     .text:00000084 consolInit
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:94     .text:00000084 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:130    .text:000000d0 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:137    .text:000000d8 consolSendChar
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:146    .text:000000d8 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:160    .text:000000f4 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:166    .text:000000f8 consolSendCh
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:174    .text:000000f8 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:212    .text:00000138 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:218    .text:0000013c consolSendString
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:225    .text:0000013c $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:252    .text:00000168 consolSendNumber
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:386    .text:0000027c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:981    .rodata:00000000 hexChars.2029
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:392    .text:00000280 consolGetCh
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:402    .text:00000280 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:414    .text:0000029c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:420    .text:000002a0 consolGetChar
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:429    .text:000002a0 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:446    .text:000002c0 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:457    .text:000002c4 consolGetString
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:464    .text:000002c4 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:535    .text:00000334 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:542    .text:0000033c simplePrintf
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:549    .text:0000033c $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:747    .text:000004b8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:753    .text:000004bc consolGetIntNum
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:759    .text:000004bc $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:866    .text:0000059c consolScanf
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cckWeWyG.s:974    .text:0000067c $d
+
+UNDEFINED SYMBOLS
+__umodsi3
+__udivsi3
+memcpy
+strlen
+atoi
