@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
   33:startupDisplay.c ****  *
   34:startupDisplay.c ****  * Description:
   35:startupDisplay.c ****  *    A process entry function 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 2
 
 
   36:startupDisplay.c ****  *
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
   58 0030 96000000 		.word	.L18
   59 0034 9A000000 		.word	.L19
   60 0038 9E000000 		.word	.L20
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 3
 
 
   61 003c AA000000 		.word	.L21
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  109 003a 4120     		mov	r0, #65
  110 003c 36E0     		b	.L243
  111              	.L10:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 4
 
 
   57:startupDisplay.c ****       case 4: lcdPutchar('V'); break;
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
   65:startupDisplay.c ****       case 10: lcdGotoxy(8+(8*8),100); lcdPutchar('E'); break;
  158              		.loc 1 65 0
  159 0086 4820     		mov	r0, #72
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 5
 
 
  160 0088 6421     		mov	r1, #100
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  199 00be 0093     		str	r3, [sp]
  200 00c0 0223     		mov	r3, #2
  201 00c2 0193     		str	r3, [sp, #4]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 6
 
 
  202 00c4 A94B     		ldr	r3, .L249+4
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  242              	.L229:
  243 00b8 FA000000 		.word	.L30
  244 00bc 08010000 		.word	.L31
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 7
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 7
 
 
  245 00c0 22010000 		.word	.L32
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  299 0198 44080000 		.word	.L29
  300 019c 44080000 		.word	.L29
  301 01a0 44080000 		.word	.L29
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 8
 
 
  302 01a4 44080000 		.word	.L29
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  356 027c 44080000 		.word	.L29
  357 0280 44080000 		.word	.L29
  358 0284 44080000 		.word	.L29
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 9
 
 
  359 0288 44080000 		.word	.L29
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  413 0360 2E060000 		.word	.L171
  414 0364 36060000 		.word	.L172
  415 0368 3E060000 		.word	.L173
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 10
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 10
 
 
  416 036c 46060000 		.word	.L174
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  470 0444 BC070000 		.word	.L213
  471 0448 C4070000 		.word	.L214
  472 044c CC070000 		.word	.L215
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 11
 
 
  473 0450 D4070000 		.word	.L216
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  100:startupDisplay.c ****       case 4: lcdPutchar('s'); break;
  522              		.loc 1 100 0
  523 013a 7320     		mov	r0, #115
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 12
 
 
  524 013c FFF7FEFF 		bl	lcdPutchar
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  569 0184 FFF7FEFF 		bl	lcdPutchar
  570 0188 74E3     		b	.L230
  571              	.L44:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 13
 
 
  110:startupDisplay.c ****       case 14: lcdGotoxy(20,80); lcdPutchar('p'); break;
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  617 01d4 FFF7FEFF 		bl	lcdPutchar
  618 01d8 4CE3     		b	.L230
  619              	.L53:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 14
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 14
 
 
  119:startupDisplay.c ****       case 23: lcdPutchar('b'); break;
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  665 0224 FFF7FEFF 		bl	lcdPutchar
  666 0228 24E3     		b	.L230
  667              	.L62:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 15
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 15
 
 
  128:startupDisplay.c ****       case 32: lcdPutchar('d'); break;
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  137:startupDisplay.c ****       case 41: lcdGotoxy(32,112); lcdPutchar('('); break;
  713              		.loc 1 137 0
  714 0272 2020     		mov	r0, #32
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 16
 
 
  715 0274 7021     		mov	r1, #112
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  760 02c2 0193     		str	r3, [sp, #4]
  761 02c4 2D4B     		ldr	r3, .L249+20
  762 02c6 0020     		mov	r0, #0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 17
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 17
 
 
  763 02c8 0293     		str	r3, [sp, #8]
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  809 0316 6520     		mov	r0, #101
  810 0318 FFF7FEFF 		bl	lcdPutchar
  811 031c AAE2     		b	.L230
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 18
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 18
 
 
  812              	.L88:
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  858 0368 00000000 		.word	.L24
  859 036c 04000000 		.word	_fun_1_130x90c+4
  860 0370 04000000 		.word	_fun_0_130x90c+4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 19
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 19
 
 
  861 0374 B8000000 		.word	.L229
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  906 03c0 6520     		mov	r0, #101
  907 03c2 FFF7FEFF 		bl	lcdPutchar
  908 03c6 55E2     		b	.L230
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 20
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 20
 
 
  909              	.L105:
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  954 0410 6920     		mov	r0, #105
  955 0412 FFF7FEFF 		bl	lcdPutchar
  956 0416 2DE2     		b	.L230
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 21
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 21
 
 
  957              	.L114:
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1002              		.loc 1 189 0
  1003 0462 FFF7FEFF 		bl	lcdClrscr
  1004 0466 0123     		mov	r3, #1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 22
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 22
 
 
  1005 0468 0093     		str	r3, [sp]
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1052 04bc DAE1     		b	.L230
  1053              	.L129:
  197:startupDisplay.c ****       case 128: lcdPutchar('d'); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 23
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 23
 
 
  1054              		.loc 1 197 0
@@ -1378,7 +1378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1100 050c B2E1     		b	.L230
  1101              	.L138:
  206:startupDisplay.c ****       case 137: lcdPutchar('i'); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 24
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 24
 
 
  1102              		.loc 1 206 0
@@ -1438,7 +1438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1148 055c 8AE1     		b	.L230
  1149              	.L147:
  215:startupDisplay.c ****       case 146: lcdPutchar('l'); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 25
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 25
 
 
  1150              		.loc 1 215 0
@@ -1498,7 +1498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1196 05ac 62E1     		b	.L230
  1197              	.L156:
  224:startupDisplay.c ****       case 155: lcdPutchar('s'); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 26
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 26
 
 
  1198              		.loc 1 224 0
@@ -1558,7 +1558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1244 05fc 3AE1     		b	.L230
  1245              	.L165:
  233:startupDisplay.c ****       case 164: lcdPutchar('.'); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 27
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 27
 
 
  1246              		.loc 1 233 0
@@ -1618,7 +1618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1291              		.loc 1 242 0
  1292 0646 6F20     		mov	r0, #111
  1293 0648 FFF7FEFF 		bl	lcdPutchar
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 28
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 28
 
 
  1294 064c 12E1     		b	.L230
@@ -1678,7 +1678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1340              		.loc 1 250 0
  1341 069e 6720     		mov	r0, #103
  1342 06a0 FFF7FEFF 		bl	lcdPutchar
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 29
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 29
 
 
  1343 06a4 E6E0     		b	.L230
@@ -1738,7 +1738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1388 06ec C2E0     		b	.L230
  1389              	.L191:
  260:startupDisplay.c ****       case 205: lcdPutchar('.'); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 30
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 30
 
 
  1390              		.loc 1 260 0
@@ -1798,7 +1798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1436 073c 9AE0     		b	.L230
  1437              	.L200:
  269:startupDisplay.c ****       case 214: lcdPutchar('o'); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 31
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 31
 
 
  1438              		.loc 1 269 0
@@ -1858,7 +1858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1484 078c 72E0     		b	.L230
  1485              	.L209:
  278:startupDisplay.c ****       case 223: lcdPutchar(' '); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 32
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 32
 
 
  1486              		.loc 1 278 0
@@ -1918,7 +1918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1533 07e2 47E0     		b	.L230
  1534              	.L217:
  286:startupDisplay.c ****       case 231: lcdPutchar('u'); break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 33
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 33
 
 
  1535              		.loc 1 286 0
@@ -1978,7 +1978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1580              		.loc 1 295 0
  1581 082c 6720     		mov	r0, #103
  1582 082e FFF7FEFF 		bl	lcdPutchar
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 34
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 34
 
 
  1583 0832 1FE0     		b	.L230
@@ -2038,7 +2038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1626 086e 0134     		add	r4, r4, #1
  1627 0870 FFF7C9FB 		bl	.L247	@ far jump
  1628              	.LVL5:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 35
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 35
 
 
  1629              	.L230:
@@ -2098,7 +2098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1683 04a8 00       		.byte	0
  1684 04a9 5E       		.byte	94
  1685 04aa FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 36
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 36
 
 
  1686 04ab DB       		.byte	-37
@@ -2158,7 +2158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1740 04e1 00       		.byte	0
  1741 04e2 0C       		.byte	12
  1742 04e3 80       		.byte	-128
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 37
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 37
 
 
  1743 04e4 A5       		.byte	-91
@@ -2218,7 +2218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1797 051a 0A       		.byte	10
  1798 051b 80       		.byte	-128
  1799 051c A5       		.byte	-91
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 38
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 38
 
 
  1800 051d DB       		.byte	-37
@@ -2278,7 +2278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1854 0553 08       		.byte	8
  1855 0554 80       		.byte	-128
  1856 0555 AD       		.byte	-83
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 39
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 39
 
 
  1857 0556 00       		.byte	0
@@ -2338,7 +2338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1911 058c DB       		.byte	-37
  1912 058d 92       		.byte	-110
  1913 058e DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 40
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 40
 
 
  1914 058f 00       		.byte	0
@@ -2398,7 +2398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  1968 05c5 04       		.byte	4
  1969 05c6 FF       		.byte	-1
  1970 05c7 92       		.byte	-110
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 41
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 41
 
 
  1971 05c8 92       		.byte	-110
@@ -2458,7 +2458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2025 05fe FF       		.byte	-1
  2026 05ff 84       		.byte	-124
  2027 0600 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 42
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 42
 
 
  2028 0601 06       		.byte	6
@@ -2518,7 +2518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2082 0637 DB       		.byte	-37
  2083 0638 FF       		.byte	-1
  2084 0639 D2       		.byte	-46
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 43
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 43
 
 
  2085 063a 00       		.byte	0
@@ -2578,7 +2578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2139 0670 DB       		.byte	-37
  2140 0671 92       		.byte	-110
  2141 0672 B6       		.byte	-74
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 44
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 44
 
 
  2142 0673 DB       		.byte	-37
@@ -2638,7 +2638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2196 06a9 FF       		.byte	-1
  2197 06aa FF       		.byte	-1
  2198 06ab 84       		.byte	-124
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 45
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 45
 
 
  2199 06ac 00       		.byte	0
@@ -2698,7 +2698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2253 06e2 FF       		.byte	-1
  2254 06e3 92       		.byte	-110
  2255 06e4 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 46
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 46
 
 
  2256 06e5 FF       		.byte	-1
@@ -2758,7 +2758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2310 071b DB       		.byte	-37
  2311 071c 92       		.byte	-110
  2312 071d DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 47
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 47
 
 
  2313 071e DB       		.byte	-37
@@ -2818,7 +2818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2367 0754 92       		.byte	-110
  2368 0755 92       		.byte	-110
  2369 0756 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 48
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 48
 
 
  2370 0757 FF       		.byte	-1
@@ -2878,7 +2878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2424 078d DB       		.byte	-37
  2425 078e 92       		.byte	-110
  2426 078f DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 49
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 49
 
 
  2427 0790 FF       		.byte	-1
@@ -2938,7 +2938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2481 07c6 92       		.byte	-110
  2482 07c7 DB       		.byte	-37
  2483 07c8 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 50
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 50
 
 
  2484 07c9 92       		.byte	-110
@@ -2998,7 +2998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2538 07ff FF       		.byte	-1
  2539 0800 84       		.byte	-124
  2540 0801 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 51
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 51
 
 
  2541 0802 04       		.byte	4
@@ -3058,7 +3058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2595 0838 DB       		.byte	-37
  2596 0839 A5       		.byte	-91
  2597 083a 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 52
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 52
 
 
  2598 083b 05       		.byte	5
@@ -3118,7 +3118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2652 0871 05       		.byte	5
  2653 0872 FF       		.byte	-1
  2654 0873 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 53
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 53
 
 
  2655 0874 DB       		.byte	-37
@@ -3178,7 +3178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2709 08aa FF       		.byte	-1
  2710 08ab DB       		.byte	-37
  2711 08ac 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 54
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 54
 
 
  2712 08ad 0B       		.byte	11
@@ -3238,7 +3238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2766 08e3 DB       		.byte	-37
  2767 08e4 FF       		.byte	-1
  2768 08e5 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 55
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 55
 
 
  2769 08e6 B6       		.byte	-74
@@ -3298,7 +3298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2823 091c DB       		.byte	-37
  2824 091d FF       		.byte	-1
  2825 091e DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 56
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 56
 
 
  2826 091f 92       		.byte	-110
@@ -3358,7 +3358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2880 0955 B6       		.byte	-74
  2881 0956 92       		.byte	-110
  2882 0957 92       		.byte	-110
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 57
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 57
 
 
  2883 0958 B6       		.byte	-74
@@ -3418,7 +3418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2937 098e 92       		.byte	-110
  2938 098f B6       		.byte	-74
  2939 0990 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 58
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 58
 
 
  2940 0991 B6       		.byte	-74
@@ -3478,7 +3478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  2994 09c7 92       		.byte	-110
  2995 09c8 B6       		.byte	-74
  2996 09c9 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 59
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 59
 
 
  2997 09ca FF       		.byte	-1
@@ -3538,7 +3538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3051 0a00 80       		.byte	-128
  3052 0a01 DB       		.byte	-37
  3053 0a02 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 60
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 60
 
 
  3054 0a03 17       		.byte	23
@@ -3598,7 +3598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3108 0a39 92       		.byte	-110
  3109 0a3a DB       		.byte	-37
  3110 0a3b FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 61
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 61
 
 
  3111 0a3c FF       		.byte	-1
@@ -3658,7 +3658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3165 0a72 FF       		.byte	-1
  3166 0a73 D6       		.byte	-42
  3167 0a74 80       		.byte	-128
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 62
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 62
 
 
  3168 0a75 80       		.byte	-128
@@ -3718,7 +3718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3222 0aab FF       		.byte	-1
  3223 0aac FF       		.byte	-1
  3224 0aad AD       		.byte	-83
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 63
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 63
 
 
  3225 0aae 80       		.byte	-128
@@ -3778,7 +3778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3279 0ae4 3C       		.byte	60
  3280 0ae5 FF       		.byte	-1
  3281 0ae6 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 64
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 64
 
 
  3282 0ae7 00       		.byte	0
@@ -3838,7 +3838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3336 0b1d 80       		.byte	-128
  3337 0b1e A5       		.byte	-91
  3338 0b1f A9       		.byte	-87
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 65
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 65
 
 
  3339 0b20 AD       		.byte	-83
@@ -3898,7 +3898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3393 0b56 FF       		.byte	-1
  3394 0b57 DB       		.byte	-37
  3395 0b58 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 66
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 66
 
 
  3396 0b59 04       		.byte	4
@@ -3958,7 +3958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3450 0b8f DB       		.byte	-37
  3451 0b90 D2       		.byte	-46
  3452 0b91 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 67
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 67
 
 
  3453 0b92 5F       		.byte	95
@@ -4018,7 +4018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3507 0bc8 FF       		.byte	-1
  3508 0bc9 FF       		.byte	-1
  3509 0bca FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 68
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 68
 
 
  3510 0bcb FF       		.byte	-1
@@ -4078,7 +4078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3564 0bfd 51       		.byte	81
  3565 0bfe 01       		.byte	1
  3566 0bff 61       		.byte	97
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 69
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 69
 
 
  3567 0c00 FF       		.byte	-1
@@ -4138,7 +4138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3621 0c36 01       		.byte	1
  3622 0c37 05       		.byte	5
  3623 0c38 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 70
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 70
 
 
  3624 0c39 FB       		.byte	-5
@@ -4198,7 +4198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3678 0c6f DB       		.byte	-37
  3679 0c70 FA       		.byte	-6
  3680 0c71 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 71
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 71
 
 
  3681 0c72 DB       		.byte	-37
@@ -4258,7 +4258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3735 0ca8 00       		.byte	0
  3736 0ca9 6D       		.byte	109
  3737 0caa DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 72
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 72
 
 
  3738 0cab 24       		.byte	36
@@ -4318,7 +4318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3792 0ce1 35       		.byte	53
  3793 0ce2 51       		.byte	81
  3794 0ce3 35       		.byte	53
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 73
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 73
 
 
  3795 0ce4 35       		.byte	53
@@ -4378,7 +4378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3849 0d1a 00       		.byte	0
  3850 0d1b D6       		.byte	-42
  3851 0d1c FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 74
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 74
 
 
  3852 0d1d 29       		.byte	41
@@ -4438,7 +4438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3906 0d53 DB       		.byte	-37
  3907 0d54 D6       		.byte	-42
  3908 0d55 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 75
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 75
 
 
  3909 0d56 D6       		.byte	-42
@@ -4498,7 +4498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  3963 0d8c 4D       		.byte	77
  3964 0d8d FF       		.byte	-1
  3965 0d8e 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 76
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 76
 
 
  3966 0d8f 00       		.byte	0
@@ -4558,7 +4558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4020 0dc5 FB       		.byte	-5
  4021 0dc6 28       		.byte	40
  4022 0dc7 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 77
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 77
 
 
  4023 0dc8 00       		.byte	0
@@ -4618,7 +4618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4077 0dfe 92       		.byte	-110
  4078 0dff FA       		.byte	-6
  4079 0e00 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 78
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 78
 
 
  4080 0e01 07       		.byte	7
@@ -4678,7 +4678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4134 0e37 06       		.byte	6
  4135 0e38 FF       		.byte	-1
  4136 0e39 B6       		.byte	-74
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 79
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 79
 
 
  4137 0e3a 00       		.byte	0
@@ -4738,7 +4738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4191 0e70 30       		.byte	48
  4192 0e71 51       		.byte	81
  4193 0e72 BF       		.byte	-65
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 80
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 80
 
 
  4194 0e73 FF       		.byte	-1
@@ -4798,7 +4798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4248 0ea9 07       		.byte	7
  4249 0eaa FF       		.byte	-1
  4250 0eab 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 81
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 81
 
 
  4251 0eac 00       		.byte	0
@@ -4858,7 +4858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4305 0ee2 BF       		.byte	-65
  4306 0ee3 9A       		.byte	-102
  4307 0ee4 51       		.byte	81
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 82
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 82
 
 
  4308 0ee5 01       		.byte	1
@@ -4918,7 +4918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4362 0f1b 00       		.byte	0
  4363 0f1c 00       		.byte	0
  4364 0f1d 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 83
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 83
 
 
  4365 0f1e B6       		.byte	-74
@@ -4978,7 +4978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4419 0f54 9A       		.byte	-102
  4420 0f55 D6       		.byte	-42
  4421 0f56 96       		.byte	-106
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 84
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 84
 
 
  4422 0f57 24       		.byte	36
@@ -5038,7 +5038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4476 0f8d 9A       		.byte	-102
  4477 0f8e D6       		.byte	-42
  4478 0f8f 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 85
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 85
 
 
  4479 0f90 07       		.byte	7
@@ -5098,7 +5098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4533 0fc6 00       		.byte	0
  4534 0fc7 DB       		.byte	-37
  4535 0fc8 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 86
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 86
 
 
  4536 0fc9 05       		.byte	5
@@ -5158,7 +5158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4590 0fff BA       		.byte	-70
  4591 1000 9A       		.byte	-102
  4592 1001 51       		.byte	81
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 87
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 87
 
 
  4593 1002 01       		.byte	1
@@ -5218,7 +5218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4647 1038 01       		.byte	1
  4648 1039 06       		.byte	6
  4649 103a FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 88
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 88
 
 
  4650 103b 96       		.byte	-106
@@ -5278,7 +5278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4704 1071 08       		.byte	8
  4705 1072 FF       		.byte	-1
  4706 1073 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 89
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 89
 
 
  4707 1074 DB       		.byte	-37
@@ -5338,7 +5338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4761 10aa DF       		.byte	-33
  4762 10ab FB       		.byte	-5
  4763 10ac BF       		.byte	-65
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 90
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 90
 
 
  4764 10ad FF       		.byte	-1
@@ -5398,7 +5398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4818 10e3 35       		.byte	53
  4819 10e4 31       		.byte	49
  4820 10e5 35       		.byte	53
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 91
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 91
 
 
  4821 10e6 35       		.byte	53
@@ -5458,7 +5458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4875 111c 31       		.byte	49
  4876 111d 01       		.byte	1
  4877 111e 04       		.byte	4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 92
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 92
 
 
  4878 111f 11       		.byte	17
@@ -5518,7 +5518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4932 1155 01       		.byte	1
  4933 1156 0A       		.byte	10
  4934 1157 31       		.byte	49
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 93
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 93
 
 
  4935 1158 11       		.byte	17
@@ -5578,7 +5578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  4989 118e 51       		.byte	81
  4990 118f 01       		.byte	1
  4991 1190 04       		.byte	4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 94
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 94
 
 
  4992 1191 FF       		.byte	-1
@@ -5638,7 +5638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5046 11c7 FF       		.byte	-1
  5047 11c8 DF       		.byte	-33
  5048 11c9 76       		.byte	118
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 95
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 95
 
 
  5049 11ca 9A       		.byte	-102
@@ -5698,7 +5698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5103 1200 6D       		.byte	109
  5104 1201 92       		.byte	-110
  5105 1202 6D       		.byte	109
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 96
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 96
 
 
  5106 1203 92       		.byte	-110
@@ -5758,7 +5758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5160 1239 96       		.byte	-106
  5161 123a FF       		.byte	-1
  5162 123b FB       		.byte	-5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 97
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 97
 
 
  5163 123c B6       		.byte	-74
@@ -5818,7 +5818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5217 1272 00       		.byte	0
  5218 1273 24       		.byte	36
  5219 1274 29       		.byte	41
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 98
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 98
 
 
  5220 1275 28       		.byte	40
@@ -5878,7 +5878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5274 12ab FF       		.byte	-1
  5275 12ac 96       		.byte	-106
  5276 12ad DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 99
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 99
 
 
  5277 12ae 31       		.byte	49
@@ -5938,7 +5938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5331 12e4 FF       		.byte	-1
  5332 12e5 FF       		.byte	-1
  5333 12e6 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 100
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 100
 
 
  5334 12e7 FA       		.byte	-6
@@ -5998,7 +5998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5388 131d D6       		.byte	-42
  5389 131e 96       		.byte	-106
  5390 131f 6D       		.byte	109
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 101
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 101
 
 
  5391 1320 D6       		.byte	-42
@@ -6058,7 +6058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5445 1356 24       		.byte	36
  5446 1357 24       		.byte	36
  5447 1358 20       		.byte	32
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 102
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 102
 
 
  5448 1359 49       		.byte	73
@@ -6118,7 +6118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5502 138f 24       		.byte	36
  5503 1390 96       		.byte	-106
  5504 1391 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 103
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 103
 
 
  5505 1392 07       		.byte	7
@@ -6178,7 +6178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5559 13c8 BA       		.byte	-70
  5560 13c9 DB       		.byte	-37
  5561 13ca DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 104
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 104
 
 
  5562 13cb FB       		.byte	-5
@@ -6238,7 +6238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5616 1401 96       		.byte	-106
  5617 1402 96       		.byte	-106
  5618 1403 49       		.byte	73
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 105
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 105
 
 
  5619 1404 B6       		.byte	-74
@@ -6298,7 +6298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5673 143a 01       		.byte	1
  5674 143b 06       		.byte	6
  5675 143c 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 106
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 106
 
 
  5676 143d FF       		.byte	-1
@@ -6358,7 +6358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5730 1473 96       		.byte	-106
  5731 1474 01       		.byte	1
  5732 1475 07       		.byte	7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 107
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 107
 
 
  5733 1476 FF       		.byte	-1
@@ -6418,7 +6418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5787 14ac 96       		.byte	-106
  5788 14ad FF       		.byte	-1
  5789 14ae DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 108
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 108
 
 
  5790 14af D6       		.byte	-42
@@ -6478,7 +6478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5844 14e5 D6       		.byte	-42
  5845 14e6 01       		.byte	1
  5846 14e7 04       		.byte	4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 109
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 109
 
 
  5847 14e8 B6       		.byte	-74
@@ -6538,7 +6538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5901 151e 9A       		.byte	-102
  5902 151f 9A       		.byte	-102
  5903 1520 BA       		.byte	-70
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 110
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 110
 
 
  5904 1521 9A       		.byte	-102
@@ -6598,7 +6598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  5958 1557 FF       		.byte	-1
  5959 1558 FF       		.byte	-1
  5960 1559 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 111
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 111
 
 
  5961 155a FF       		.byte	-1
@@ -6658,7 +6658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6015 1590 FF       		.byte	-1
  6016 1591 FF       		.byte	-1
  6017 1592 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 112
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 112
 
 
  6018 1593 FF       		.byte	-1
@@ -6718,7 +6718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6072 15c9 FF       		.byte	-1
  6073 15ca FF       		.byte	-1
  6074 15cb FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 113
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 113
 
 
  6075 15cc FF       		.byte	-1
@@ -6778,7 +6778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6129 1602 FF       		.byte	-1
  6130 1603 FF       		.byte	-1
  6131 1604 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 114
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 114
 
 
  6132 1605 FF       		.byte	-1
@@ -6838,7 +6838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6186 163b FF       		.byte	-1
  6187 163c FF       		.byte	-1
  6188 163d FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 115
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 115
 
 
  6189 163e FF       		.byte	-1
@@ -6898,7 +6898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6243 1674 FF       		.byte	-1
  6244 1675 FF       		.byte	-1
  6245 1676 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 116
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 116
 
 
  6246 1677 FF       		.byte	-1
@@ -6958,7 +6958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6300 16ad FF       		.byte	-1
  6301 16ae FF       		.byte	-1
  6302 16af FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 117
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 117
 
 
  6303 16b0 FF       		.byte	-1
@@ -7018,7 +7018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6357 16e6 FF       		.byte	-1
  6358 16e7 FF       		.byte	-1
  6359 16e8 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 118
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 118
 
 
  6360 16e9 FF       		.byte	-1
@@ -7078,7 +7078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6414              	_philips_122x25c:
  6415 171c 7A       		.byte	122
  6416 171d 19       		.byte	25
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 119
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 119
 
 
  6417 171e 01       		.byte	1
@@ -7138,7 +7138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6471 1754 53       		.byte	83
  6472 1755 73       		.byte	115
  6473 1756 BB       		.byte	-69
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 120
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 120
 
 
  6474 1757 00       		.byte	0
@@ -7198,7 +7198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6528 178d 97       		.byte	-105
  6529 178e 00       		.byte	0
  6530 178f 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 121
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 121
 
 
  6531 1790 0F       		.byte	15
@@ -7258,7 +7258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6585 17c6 DF       		.byte	-33
  6586 17c7 77       		.byte	119
  6587 17c8 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 122
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 122
 
 
  6588 17c9 0A       		.byte	10
@@ -7318,7 +7318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6642 17ff 97       		.byte	-105
  6643 1800 0F       		.byte	15
  6644 1801 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 123
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 123
 
 
  6645 1802 04       		.byte	4
@@ -7378,7 +7378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6699 1838 73       		.byte	115
  6700 1839 0F       		.byte	15
  6701 183a 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 124
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 124
 
 
  6702 183b 0B       		.byte	11
@@ -7438,7 +7438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6756 1871 FF       		.byte	-1
  6757 1872 77       		.byte	119
  6758 1873 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 125
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 125
 
 
  6759 1874 0F       		.byte	15
@@ -7498,7 +7498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6813 18aa 0B       		.byte	11
  6814 18ab 0F       		.byte	15
  6815 18ac 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 126
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 126
 
 
  6816 18ad 0B       		.byte	11
@@ -7558,7 +7558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6870 18e3 0B       		.byte	11
  6871 18e4 0F       		.byte	15
  6872 18e5 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 127
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 127
 
 
  6873 18e6 9B       		.byte	-101
@@ -7618,7 +7618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6927 191c 33       		.byte	51
  6928 191d 0F       		.byte	15
  6929 191e 0F       		.byte	15
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 128
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 128
 
 
  6930 191f 53       		.byte	83
@@ -7678,7 +7678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  6984 1955 00       		.byte	0
  6985 1956 04       		.byte	4
  6986 1957 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 129
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 129
 
 
  6987 1958 97       		.byte	-105
@@ -7738,7 +7738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7041 198e BB       		.byte	-69
  7042 198f 97       		.byte	-105
  7043 1990 97       		.byte	-105
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 130
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 130
 
 
  7044 1991 DF       		.byte	-33
@@ -7798,7 +7798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7098 19c7 04       		.byte	4
  7099 19c8 FF       		.byte	-1
  7100 19c9 97       		.byte	-105
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 131
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 131
 
 
  7101 19ca 33       		.byte	51
@@ -7858,7 +7858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7155 1a00 00       		.byte	0
  7156 1a01 05       		.byte	5
  7157 1a02 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 132
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 132
 
 
  7158 1a03 97       		.byte	-105
@@ -7918,7 +7918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7212 1a39 0F       		.byte	15
  7213 1a3a 0B       		.byte	11
  7214 1a3b 0F       		.byte	15
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 133
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 133
 
 
  7215 1a3c 0B       		.byte	11
@@ -7978,7 +7978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7269 1a72 0F       		.byte	15
  7270 1a73 77       		.byte	119
  7271 1a74 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 134
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 134
 
 
  7272 1a75 04       		.byte	4
@@ -8038,7 +8038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7326 1aab 0F       		.byte	15
  7327 1aac 00       		.byte	0
  7328 1aad 04       		.byte	4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 135
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 135
 
 
  7329 1aae 0B       		.byte	11
@@ -8098,7 +8098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7383 1ae4 0B       		.byte	11
  7384 1ae5 0B       		.byte	11
  7385 1ae6 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 136
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 136
 
 
  7386 1ae7 53       		.byte	83
@@ -8158,7 +8158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7440 1b1d DF       		.byte	-33
  7441 1b1e FF       		.byte	-1
  7442 1b1f FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 137
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 137
 
 
  7443 1b20 FF       		.byte	-1
@@ -8218,7 +8218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7497 1b56 53       		.byte	83
  7498 1b57 FF       		.byte	-1
  7499 1b58 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 138
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 138
 
 
  7500 1b59 77       		.byte	119
@@ -8278,7 +8278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7554 1b8f 0B       		.byte	11
  7555 1b90 0F       		.byte	15
  7556 1b91 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 139
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 139
 
 
  7557 1b92 0F       		.byte	15
@@ -8338,7 +8338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7611 1bc8 0F       		.byte	15
  7612 1bc9 00       		.byte	0
  7613 1bca 04       		.byte	4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 140
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 140
 
 
  7614 1bcb 0B       		.byte	11
@@ -8398,7 +8398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7668 1c01 0F       		.byte	15
  7669 1c02 97       		.byte	-105
  7670 1c03 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 141
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 141
 
 
  7671 1c04 04       		.byte	4
@@ -8458,7 +8458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7725 1c3a 0B       		.byte	11
  7726 1c3b 0F       		.byte	15
  7727 1c3c 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 142
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 142
 
 
  7728 1c3d 0F       		.byte	15
@@ -8518,7 +8518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7782 1c73 33       		.byte	51
  7783 1c74 97       		.byte	-105
  7784 1c75 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 143
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 143
 
 
  7785 1c76 BB       		.byte	-69
@@ -8578,7 +8578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7839 1cac 0B       		.byte	11
  7840 1cad 0B       		.byte	11
  7841 1cae 33       		.byte	51
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 144
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 144
 
 
  7842 1caf 73       		.byte	115
@@ -8638,7 +8638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7896 1ce5 0B       		.byte	11
  7897 1ce6 0F       		.byte	15
  7898 1ce7 33       		.byte	51
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 145
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 145
 
 
  7899 1ce8 33       		.byte	51
@@ -8698,7 +8698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  7953 1d1e DF       		.byte	-33
  7954 1d1f BB       		.byte	-69
  7955 1d20 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 146
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 146
 
 
  7956 1d21 BB       		.byte	-69
@@ -8758,7 +8758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8010 1d57 77       		.byte	119
  8011 1d58 DF       		.byte	-33
  8012 1d59 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 147
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 147
 
 
  8013 1d5a 06       		.byte	6
@@ -8818,7 +8818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8067 1d90 00       		.byte	0
  8068 1d91 04       		.byte	4
  8069 1d92 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 148
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 148
 
 
  8070 1d93 73       		.byte	115
@@ -8878,7 +8878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8124 1dc9 DF       		.byte	-33
  8125 1dca DF       		.byte	-33
  8126 1dcb 97       		.byte	-105
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 149
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 149
 
 
  8127 1dcc 33       		.byte	51
@@ -8938,7 +8938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8181 1e02 FF       		.byte	-1
  8182 1e03 97       		.byte	-105
  8183 1e04 33       		.byte	51
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 150
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 150
 
 
  8184 1e05 00       		.byte	0
@@ -8998,7 +8998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8238 1e3b 0F       		.byte	15
  8239 1e3c 0F       		.byte	15
  8240 1e3d 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 151
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 151
 
 
  8241 1e3e 0B       		.byte	11
@@ -9058,7 +9058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8295 1e74 BB       		.byte	-69
  8296 1e75 33       		.byte	51
  8297 1e76 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 152
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 152
 
 
  8298 1e77 0F       		.byte	15
@@ -9118,7 +9118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8352 1ead 0F       		.byte	15
  8353 1eae 0B       		.byte	11
  8354 1eaf 0F       		.byte	15
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 153
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 153
 
 
  8355 1eb0 97       		.byte	-105
@@ -9178,7 +9178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8409 1ee6 73       		.byte	115
  8410 1ee7 BB       		.byte	-69
  8411 1ee8 BB       		.byte	-69
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 154
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 154
 
 
  8412 1ee9 BB       		.byte	-69
@@ -9238,7 +9238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8466 1f1f 04       		.byte	4
  8467 1f20 FF       		.byte	-1
  8468 1f21 73       		.byte	115
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 155
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 155
 
 
  8469 1f22 0B       		.byte	11
@@ -9298,7 +9298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8523 1f58 0B       		.byte	11
  8524 1f59 0F       		.byte	15
  8525 1f5a 0B       		.byte	11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 156
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 156
 
 
  8526 1f5b 0B       		.byte	11
@@ -9358,7 +9358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8580 1f91 04       		.byte	4
  8581 1f92 0B       		.byte	11
  8582 1f93 0F       		.byte	15
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 157
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 157
 
 
  8583 1f94 0B       		.byte	11
@@ -9418,7 +9418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8637 1fca 00       		.byte	0
  8638 1fcb 0D       		.byte	13
  8639 1fcc FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 158
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 158
 
 
  8640 1fcd 73       		.byte	115
@@ -9478,7 +9478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8694 2003 FF       		.byte	-1
  8695 2004 FF       		.byte	-1
  8696 2005 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 159
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 159
 
 
  8697 2006 77       		.byte	119
@@ -9538,7 +9538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8751 203c 97       		.byte	-105
  8752 203d DF       		.byte	-33
  8753 203e 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 160
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 160
 
 
  8754 203f 04       		.byte	4
@@ -9598,7 +9598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8808 2075 06       		.byte	6
  8809 2076 0F       		.byte	15
  8810 2077 33       		.byte	51
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 161
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 161
 
 
  8811 2078 53       		.byte	83
@@ -9658,7 +9658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8865 20ae DF       		.byte	-33
  8866 20af 00       		.byte	0
  8867 20b0 05       		.byte	5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 162
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 162
 
 
  8868 20b1 BB       		.byte	-69
@@ -9718,7 +9718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8922 20e3 92       		.byte	-110
  8923 20e4 B6       		.byte	-74
  8924 20e5 92       		.byte	-110
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 163
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 163
 
 
  8925 20e6 B6       		.byte	-74
@@ -9778,7 +9778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  8979 211c B6       		.byte	-74
  8980 211d 92       		.byte	-110
  8981 211e B6       		.byte	-74
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 164
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 164
 
 
  8982 211f 92       		.byte	-110
@@ -9838,7 +9838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9036 2155 49       		.byte	73
  9037 2156 00       		.byte	0
  9038 2157 8D       		.byte	-115
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 165
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 165
 
 
  9039 2158 FF       		.byte	-1
@@ -9898,7 +9898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9093 218e B6       		.byte	-74
  9094 218f 01       		.byte	1
  9095 2190 41       		.byte	65
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 166
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 166
 
 
  9096 2191 FF       		.byte	-1
@@ -9958,7 +9958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9150 21c7 01       		.byte	1
  9151 21c8 05       		.byte	5
  9152 21c9 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 167
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 167
 
 
  9153 21ca 52       		.byte	82
@@ -10018,7 +10018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9207 2200 FF       		.byte	-1
  9208 2201 4E       		.byte	78
  9209 2202 72       		.byte	114
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 168
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 168
 
 
  9210 2203 01       		.byte	1
@@ -10078,7 +10078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9264 2239 04       		.byte	4
  9265 223a FF       		.byte	-1
  9266 223b 76       		.byte	118
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 169
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 169
 
 
  9267 223c 06       		.byte	6
@@ -10138,7 +10138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9321 2272 00       		.byte	0
  9322 2273 72       		.byte	114
  9323 2274 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 170
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 170
 
 
  9324 2275 FB       		.byte	-5
@@ -10198,7 +10198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9378 22ab 01       		.byte	1
  9379 22ac 04       		.byte	4
  9380 22ad 2A       		.byte	42
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 171
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 171
 
 
  9381 22ae 0A       		.byte	10
@@ -10258,7 +10258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9435 22e4 01       		.byte	1
  9436 22e5 05       		.byte	5
  9437 22e6 05       		.byte	5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 172
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 172
 
 
  9438 22e7 06       		.byte	6
@@ -10318,7 +10318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9492 231d 01       		.byte	1
  9493 231e 05       		.byte	5
  9494 231f 96       		.byte	-106
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 173
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 173
 
 
  9495 2320 92       		.byte	-110
@@ -10378,7 +10378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9549 2356 0A       		.byte	10
  9550 2357 72       		.byte	114
  9551 2358 73       		.byte	115
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 174
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 174
 
 
  9552 2359 72       		.byte	114
@@ -10438,7 +10438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9606 238f FF       		.byte	-1
  9607 2390 2E       		.byte	46
  9608 2391 05       		.byte	5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 175
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 175
 
 
  9609 2392 0A       		.byte	10
@@ -10498,7 +10498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9663 23c8 2A       		.byte	42
  9664 23c9 4E       		.byte	78
  9665 23ca 2A       		.byte	42
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 176
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 176
 
 
  9666 23cb 4E       		.byte	78
@@ -10558,7 +10558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9720 2401 FF       		.byte	-1
  9721 2402 FF       		.byte	-1
  9722 2403 2A       		.byte	42
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 177
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 177
 
 
  9723 2404 05       		.byte	5
@@ -10618,7 +10618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9777 243a FB       		.byte	-5
  9778 243b DB       		.byte	-37
  9779 243c FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 178
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 178
 
 
  9780 243d FB       		.byte	-5
@@ -10678,7 +10678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9834 2473 96       		.byte	-106
  9835 2474 06       		.byte	6
  9836 2475 05       		.byte	5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 179
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 179
 
 
  9837 2476 4E       		.byte	78
@@ -10738,7 +10738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9891 24ac 92       		.byte	-110
  9892 24ad 6D       		.byte	109
  9893 24ae 48       		.byte	72
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 180
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 180
 
 
  9894 24af 49       		.byte	73
@@ -10798,7 +10798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  9948 24e5 24       		.byte	36
  9949 24e6 00       		.byte	0
  9950 24e7 49       		.byte	73
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 181
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 181
 
 
  9951 24e8 49       		.byte	73
@@ -10858,7 +10858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10005 251e FF       		.byte	-1
  10006 251f 49       		.byte	73
  10007 2520 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 182
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 182
 
 
  10008 2521 8D       		.byte	-115
@@ -10918,7 +10918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10062 2557 FF       		.byte	-1
  10063 2558 49       		.byte	73
  10064 2559 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 183
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 183
 
 
  10065 255a 96       		.byte	-106
@@ -10978,7 +10978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10119 2590 00       		.byte	0
  10120 2591 92       		.byte	-110
  10121 2592 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 184
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 184
 
 
  10122 2593 04       		.byte	4
@@ -11038,7 +11038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10176 25c9 06       		.byte	6
  10177 25ca FF       		.byte	-1
  10178 25cb 96       		.byte	-106
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 185
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 185
 
 
  10179 25cc 24       		.byte	36
@@ -11098,7 +11098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10233 2602 01       		.byte	1
  10234 2603 04       		.byte	4
  10235 2604 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 186
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 186
 
 
  10236 2605 49       		.byte	73
@@ -11158,7 +11158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10290 263b 29       		.byte	41
  10291 263c 00       		.byte	0
  10292 263d B6       		.byte	-74
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 187
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 187
 
 
  10293 263e FF       		.byte	-1
@@ -11218,7 +11218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10347 2674 01       		.byte	1
  10348 2675 05       		.byte	5
  10349 2676 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 188
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 188
 
 
  10350 2677 72       		.byte	114
@@ -11278,7 +11278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10404 26ad 05       		.byte	5
  10405 26ae 72       		.byte	114
  10406 26af 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 189
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 189
 
 
  10407 26b0 07       		.byte	7
@@ -11338,7 +11338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10461 26e6 6D       		.byte	109
  10462 26e7 00       		.byte	0
  10463 26e8 6D       		.byte	109
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 190
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 190
 
 
  10464 26e9 01       		.byte	1
@@ -11398,7 +11398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10518 271f 21       		.byte	33
  10519 2720 6D       		.byte	109
  10520 2721 DA       		.byte	-38
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 191
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 191
 
 
  10521 2722 49       		.byte	73
@@ -11458,7 +11458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10575 2758 01       		.byte	1
  10576 2759 17       		.byte	23
  10577 275a FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 192
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 192
 
 
  10578 275b 49       		.byte	73
@@ -11518,7 +11518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10632 2791 00       		.byte	0
  10633 2792 20       		.byte	32
  10634 2793 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 193
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 193
 
 
  10635 2794 04       		.byte	4
@@ -11578,7 +11578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10689 27ca 00       		.byte	0
  10690 27cb 04       		.byte	4
  10691 27cc 20       		.byte	32
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 194
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 194
 
 
  10692 27cd 00       		.byte	0
@@ -11638,7 +11638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10746 27ff 72       		.byte	114
  10747 2800 FD       		.byte	-3
  10748 2801 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 195
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 195
 
 
  10749 2802 01       		.byte	1
@@ -11698,7 +11698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10803 2838 F9       		.byte	-7
  10804 2839 01       		.byte	1
  10805 283a 2D       		.byte	45
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 196
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 196
 
 
  10806 283b FD       		.byte	-3
@@ -11758,7 +11758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10860 2871 FF       		.byte	-1
  10861 2872 F9       		.byte	-7
  10862 2873 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 197
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 197
 
 
  10863 2874 F4       		.byte	-12
@@ -11818,7 +11818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10917 28aa 01       		.byte	1
  10918 28ab 27       		.byte	39
  10919 28ac FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 198
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 198
 
 
  10920 28ad F9       		.byte	-7
@@ -11878,7 +11878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  10974 28e3 F4       		.byte	-12
  10975 28e4 01       		.byte	1
  10976 28e5 04       		.byte	4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 199
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 199
 
 
  10977 28e6 F4       		.byte	-12
@@ -11938,7 +11938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11031 291c F4       		.byte	-12
  11032 291d F4       		.byte	-12
  11033 291e F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 200
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 200
 
 
  11034 291f FE       		.byte	-2
@@ -11998,7 +11998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11088 2955 F4       		.byte	-12
  11089 2956 F4       		.byte	-12
  11090 2957 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 201
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 201
 
 
  11091 2958 21       		.byte	33
@@ -12058,7 +12058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11145 298e 20       		.byte	32
  11146 298f 25       		.byte	37
  11147 2990 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 202
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 202
 
 
  11148 2991 F9       		.byte	-7
@@ -12118,7 +12118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11202 29c7 01       		.byte	1
  11203 29c8 05       		.byte	5
  11204 29c9 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 203
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 203
 
 
  11205 29ca FE       		.byte	-2
@@ -12178,7 +12178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11259 2a00 FE       		.byte	-2
  11260 2a01 AC       		.byte	-84
  11261 2a02 F9       		.byte	-7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 204
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 204
 
 
  11262 2a03 01       		.byte	1
@@ -12238,7 +12238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11316 2a39 FD       		.byte	-3
  11317 2a3a F4       		.byte	-12
  11318 2a3b F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 205
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 205
 
 
  11319 2a3c F8       		.byte	-8
@@ -12298,7 +12298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11373 2a72 00       		.byte	0
  11374 2a73 00       		.byte	0
  11375 2a74 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 206
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 206
 
 
  11376 2a75 20       		.byte	32
@@ -12358,7 +12358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11430 2aab 07       		.byte	7
  11431 2aac F4       		.byte	-12
  11432 2aad 48       		.byte	72
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 207
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 207
 
 
  11433 2aae DF       		.byte	-33
@@ -12418,7 +12418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11487 2ae4 00       		.byte	0
  11488 2ae5 F4       		.byte	-12
  11489 2ae6 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 208
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 208
 
 
  11490 2ae7 07       		.byte	7
@@ -12478,7 +12478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11544 2b1d FE       		.byte	-2
  11545 2b1e FE       		.byte	-2
  11546 2b1f F9       		.byte	-7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 209
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 209
 
 
  11547 2b20 F9       		.byte	-7
@@ -12538,7 +12538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11601 2b56 F8       		.byte	-8
  11602 2b57 FC       		.byte	-4
  11603 2b58 AC       		.byte	-84
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 210
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 210
 
 
  11604 2b59 01       		.byte	1
@@ -12598,7 +12598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11658 2b8f 01       		.byte	1
  11659 2b90 14       		.byte	20
  11660 2b91 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 211
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 211
 
 
  11661 2b92 F4       		.byte	-12
@@ -12658,7 +12658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11715 2bc8 05       		.byte	5
  11716 2bc9 F8       		.byte	-8
  11717 2bca DA       		.byte	-38
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 212
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 212
 
 
  11718 2bcb FF       		.byte	-1
@@ -12718,7 +12718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11772 2c01 FD       		.byte	-3
  11773 2c02 FE       		.byte	-2
  11774 2c03 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 213
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 213
 
 
  11775 2c04 13       		.byte	19
@@ -12778,7 +12778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11829 2c3a F8       		.byte	-8
  11830 2c3b FC       		.byte	-4
  11831 2c3c F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 214
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 214
 
 
  11832 2c3d FC       		.byte	-4
@@ -12838,7 +12838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11886 2c73 DF       		.byte	-33
  11887 2c74 DF       		.byte	-33
  11888 2c75 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 215
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 215
 
 
  11889 2c76 04       		.byte	4
@@ -12898,7 +12898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  11943 2cac F9       		.byte	-7
  11944 2cad 01       		.byte	1
  11945 2cae 05       		.byte	5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 216
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 216
 
 
  11946 2caf FD       		.byte	-3
@@ -12958,7 +12958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12000 2ce5 05       		.byte	5
  12001 2ce6 00       		.byte	0
  12002 2ce7 AC       		.byte	-84
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 217
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 217
 
 
  12003 2ce8 01       		.byte	1
@@ -13018,7 +13018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12057 2d1e 01       		.byte	1
  12058 2d1f 11       		.byte	17
  12059 2d20 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 218
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 218
 
 
  12060 2d21 25       		.byte	37
@@ -13078,7 +13078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12114 2d57 01       		.byte	1
  12115 2d58 0E       		.byte	14
  12116 2d59 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 219
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 219
 
 
  12117 2d5a BF       		.byte	-65
@@ -13138,7 +13138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12171 2d90 04       		.byte	4
  12172 2d91 FF       		.byte	-1
  12173 2d92 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 220
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 220
 
 
  12174 2d93 DF       		.byte	-33
@@ -13198,7 +13198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12228 2dc9 F8       		.byte	-8
  12229 2dca F4       		.byte	-12
  12230 2dcb 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 221
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 221
 
 
  12231 2dcc 17       		.byte	23
@@ -13258,7 +13258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12285 2e02 06       		.byte	6
  12286 2e03 FF       		.byte	-1
  12287 2e04 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 222
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 222
 
 
  12288 2e05 DF       		.byte	-33
@@ -13318,7 +13318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12342 2e3b FE       		.byte	-2
  12343 2e3c F9       		.byte	-7
  12344 2e3d F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 223
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 223
 
 
  12345 2e3e F4       		.byte	-12
@@ -13378,7 +13378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12399 2e74 20       		.byte	32
  12400 2e75 AC       		.byte	-84
  12401 2e76 F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 224
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 224
 
 
  12402 2e77 F8       		.byte	-8
@@ -13438,7 +13438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12456 2ead 32       		.byte	50
  12457 2eae 01       		.byte	1
  12458 2eaf 09       		.byte	9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 225
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 225
 
 
  12459 2eb0 F8       		.byte	-8
@@ -13498,7 +13498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12513 2ee6 FE       		.byte	-2
  12514 2ee7 FF       		.byte	-1
  12515 2ee8 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 226
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 226
 
 
  12516 2ee9 F4       		.byte	-12
@@ -13558,7 +13558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12570 2f1f FF       		.byte	-1
  12571 2f20 FF       		.byte	-1
  12572 2f21 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 227
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 227
 
 
  12573 2f22 DF       		.byte	-33
@@ -13618,7 +13618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12627 2f58 DF       		.byte	-33
  12628 2f59 BF       		.byte	-65
  12629 2f5a BF       		.byte	-65
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 228
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 228
 
 
  12630 2f5b DF       		.byte	-33
@@ -13678,7 +13678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12684 2f91 D0       		.byte	-48
  12685 2f92 F9       		.byte	-7
  12686 2f93 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 229
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 229
 
 
  12687 2f94 FE       		.byte	-2
@@ -13738,7 +13738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12741 2fca 19       		.byte	25
  12742 2fcb FD       		.byte	-3
  12743 2fcc F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 230
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 230
 
 
  12744 2fcd 01       		.byte	1
@@ -13798,7 +13798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12798 3003 08       		.byte	8
  12799 3004 FE       		.byte	-2
  12800 3005 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 231
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 231
 
 
  12801 3006 F8       		.byte	-8
@@ -13858,7 +13858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12855 303c 04       		.byte	4
  12856 303d F4       		.byte	-12
  12857 303e F9       		.byte	-7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 232
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 232
 
 
  12858 303f FE       		.byte	-2
@@ -13918,7 +13918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12912 3075 DF       		.byte	-33
  12913 3076 DF       		.byte	-33
  12914 3077 DA       		.byte	-38
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 233
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 233
 
 
  12915 3078 01       		.byte	1
@@ -13978,7 +13978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  12969 30ae FD       		.byte	-3
  12970 30af FE       		.byte	-2
  12971 30b0 FA       		.byte	-6
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 234
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 234
 
 
  12972 30b1 FE       		.byte	-2
@@ -14038,7 +14038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13026 30e7 F4       		.byte	-12
  13027 30e8 F9       		.byte	-7
  13028 30e9 FA       		.byte	-6
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 235
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 235
 
 
  13029 30ea FD       		.byte	-3
@@ -14098,7 +14098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13083 3120 01       		.byte	1
  13084 3121 1D       		.byte	29
  13085 3122 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 236
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 236
 
 
  13086 3123 F9       		.byte	-7
@@ -14158,7 +14158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13140 3159 BF       		.byte	-65
  13141 315a DB       		.byte	-37
  13142 315b DE       		.byte	-34
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 237
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 237
 
 
  13143 315c 01       		.byte	1
@@ -14218,7 +14218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13197 3192 FD       		.byte	-3
  13198 3193 F9       		.byte	-7
  13199 3194 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 238
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 238
 
 
  13200 3195 F9       		.byte	-7
@@ -14278,7 +14278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13254 31cb 9B       		.byte	-101
  13255 31cc B2       		.byte	-78
  13256 31cd FC       		.byte	-4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 239
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 239
 
 
  13257 31ce F8       		.byte	-8
@@ -14338,7 +14338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13311 3204 08       		.byte	8
  13312 3205 FD       		.byte	-3
  13313 3206 F9       		.byte	-7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 240
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 240
 
 
  13314 3207 01       		.byte	1
@@ -14398,7 +14398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13368 323d 9B       		.byte	-101
  13369 323e BA       		.byte	-70
  13370 323f 9B       		.byte	-101
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 241
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 241
 
 
  13371 3240 BB       		.byte	-69
@@ -14458,7 +14458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13425 3276 01       		.byte	1
  13426 3277 0B       		.byte	11
  13427 3278 F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 242
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 242
 
 
  13428 3279 F9       		.byte	-7
@@ -14518,7 +14518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13482 32af FF       		.byte	-1
  13483 32b0 DF       		.byte	-33
  13484 32b1 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 243
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 243
 
 
  13485 32b2 DF       		.byte	-33
@@ -14578,7 +14578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13539 32e8 DF       		.byte	-33
  13540 32e9 BF       		.byte	-65
  13541 32ea DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 244
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 244
 
 
  13542 32eb 9B       		.byte	-101
@@ -14638,7 +14638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13596 3321 F8       		.byte	-8
  13597 3322 F8       		.byte	-8
  13598 3323 FC       		.byte	-4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 245
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 245
 
 
  13599 3324 F8       		.byte	-8
@@ -14698,7 +14698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13653 335a 06       		.byte	6
  13654 335b DF       		.byte	-33
  13655 335c DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 246
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 246
 
 
  13656 335d DF       		.byte	-33
@@ -14758,7 +14758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13710 3393 DF       		.byte	-33
  13711 3394 DB       		.byte	-37
  13712 3395 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 247
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 247
 
 
  13713 3396 DF       		.byte	-33
@@ -14818,7 +14818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13767 33cc DF       		.byte	-33
  13768 33cd DB       		.byte	-37
  13769 33ce DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 248
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 248
 
 
  13770 33cf DF       		.byte	-33
@@ -14878,7 +14878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13824 3405 01       		.byte	1
  13825 3406 07       		.byte	7
  13826 3407 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 249
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 249
 
 
  13827 3408 DF       		.byte	-33
@@ -14938,7 +14938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13881 343e 01       		.byte	1
  13882 343f 16       		.byte	22
  13883 3440 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 250
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 250
 
 
  13884 3441 D8       		.byte	-40
@@ -14998,7 +14998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13938 3477 24       		.byte	36
  13939 3478 01       		.byte	1
  13940 3479 07       		.byte	7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 251
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 251
 
 
  13941 347a 00       		.byte	0
@@ -15058,7 +15058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  13995 34b0 01       		.byte	1
  13996 34b1 08       		.byte	8
  13997 34b2 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 252
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 252
 
 
  13998 34b3 25       		.byte	37
@@ -15118,7 +15118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14052 34e9 01       		.byte	1
  14053 34ea 06       		.byte	6
  14054 34eb DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 253
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 253
 
 
  14055 34ec DF       		.byte	-33
@@ -15178,7 +15178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14109 3522 DB       		.byte	-37
  14110 3523 DB       		.byte	-37
  14111 3524 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 254
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 254
 
 
  14112 3525 DE       		.byte	-34
@@ -15238,7 +15238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14166 355b 01       		.byte	1
  14167 355c 1D       		.byte	29
  14168 355d FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 255
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 255
 
 
  14169 355e DA       		.byte	-38
@@ -15298,7 +15298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14223 3594 DF       		.byte	-33
  14224 3595 01       		.byte	1
  14225 3596 13       		.byte	19
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 256
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 256
 
 
  14226 3597 DB       		.byte	-37
@@ -15358,7 +15358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14280 35cd 23       		.byte	35
  14281 35ce FD       		.byte	-3
  14282 35cf FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 257
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 257
 
 
  14283 35d0 01       		.byte	1
@@ -15418,7 +15418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14337 3606 DB       		.byte	-37
  14338 3607 D4       		.byte	-44
  14339 3608 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 258
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 258
 
 
  14340 3609 F4       		.byte	-12
@@ -15478,7 +15478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14394 363f 01       		.byte	1
  14395 3640 12       		.byte	18
  14396 3641 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 259
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 259
 
 
  14397 3642 DB       		.byte	-37
@@ -15538,7 +15538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14451 3678 DB       		.byte	-37
  14452 3679 DF       		.byte	-33
  14453 367a DA       		.byte	-38
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 260
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 260
 
 
  14454 367b 01       		.byte	1
@@ -15598,7 +15598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14508 36b1 FD       		.byte	-3
  14509 36b2 FE       		.byte	-2
  14510 36b3 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 261
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 261
 
 
  14511 36b4 19       		.byte	25
@@ -15658,7 +15658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14565 36ea 07       		.byte	7
  14566 36eb FD       		.byte	-3
  14567 36ec FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 262
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 262
 
 
  14568 36ed 01       		.byte	1
@@ -15718,7 +15718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14622 3723 01       		.byte	1
  14623 3724 0A       		.byte	10
  14624 3725 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 263
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 263
 
 
  14625 3726 FD       		.byte	-3
@@ -15778,7 +15778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14679 375c DB       		.byte	-37
  14680 375d DE       		.byte	-34
  14681 375e 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 264
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 264
 
 
  14682 375f 34       		.byte	52
@@ -15838,7 +15838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14736 3795 01       		.byte	1
  14737 3796 04       		.byte	4
  14738 3797 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 265
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 265
 
 
  14739 3798 DE       		.byte	-34
@@ -15898,7 +15898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14793 37ce F4       		.byte	-12
  14794 37cf F4       		.byte	-12
  14795 37d0 F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 266
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 266
 
 
  14796 37d1 01       		.byte	1
@@ -15958,7 +15958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14850 3807 F9       		.byte	-7
  14851 3808 F4       		.byte	-12
  14852 3809 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 267
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 267
 
 
  14853 380a F8       		.byte	-8
@@ -16018,7 +16018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14907 3840 01       		.byte	1
  14908 3841 13       		.byte	19
  14909 3842 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 268
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 268
 
 
  14910 3843 FE       		.byte	-2
@@ -16078,7 +16078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  14964 3879 F4       		.byte	-12
  14965 387a 01       		.byte	1
  14966 387b 18       		.byte	24
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 269
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 269
 
 
  14967 387c F8       		.byte	-8
@@ -16138,7 +16138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15021 38b2 F4       		.byte	-12
  15022 38b3 F4       		.byte	-12
  15023 38b4 F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 270
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 270
 
 
  15024 38b5 F4       		.byte	-12
@@ -16198,7 +16198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15078 38eb F8       		.byte	-8
  15079 38ec F8       		.byte	-8
  15080 38ed F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 271
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 271
 
 
  15081 38ee 01       		.byte	1
@@ -16258,7 +16258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15135 3924 F4       		.byte	-12
  15136 3925 F8       		.byte	-8
  15137 3926 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 272
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 272
 
 
  15138 3927 08       		.byte	8
@@ -16318,7 +16318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15192 395d FD       		.byte	-3
  15193 395e FE       		.byte	-2
  15194 395f 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 273
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 273
 
 
  15195 3960 12       		.byte	18
@@ -16378,7 +16378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15249 3996 D9       		.byte	-39
  15250 3997 BD       		.byte	-67
  15251 3998 D9       		.byte	-39
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 274
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 274
 
 
  15252 3999 D9       		.byte	-39
@@ -16438,7 +16438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15306 39cf FE       		.byte	-2
  15307 39d0 01       		.byte	1
  15308 39d1 09       		.byte	9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 275
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 275
 
 
  15309 39d2 FD       		.byte	-3
@@ -16498,7 +16498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15363 3a04 FD       		.byte	-3
  15364 3a05 F8       		.byte	-8
  15365 3a06 02       		.byte	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 276
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 276
 
 
  15366 3a07 0C       		.byte	12
@@ -16558,7 +16558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15420 3a3d 02       		.byte	2
  15421 3a3e 12       		.byte	18
  15422 3a3f F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 277
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 277
 
 
  15423 3a40 F9       		.byte	-7
@@ -16618,7 +16618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15477 3a76 F4       		.byte	-12
  15478 3a77 FD       		.byte	-3
  15479 3a78 02       		.byte	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 278
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 278
 
 
  15480 3a79 07       		.byte	7
@@ -16678,7 +16678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15534 3aaf FD       		.byte	-3
  15535 3ab0 FD       		.byte	-3
  15536 3ab1 FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 279
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 279
 
 
  15537 3ab2 F4       		.byte	-12
@@ -16738,7 +16738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15591 3ae8 FE       		.byte	-2
  15592 3ae9 F9       		.byte	-7
  15593 3aea FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 280
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 280
 
 
  15594 3aeb F9       		.byte	-7
@@ -16798,7 +16798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15648 3b21 F4       		.byte	-12
  15649 3b22 FE       		.byte	-2
  15650 3b23 FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 281
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 281
 
 
  15651 3b24 8C       		.byte	-116
@@ -16858,7 +16858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15705 3b5a F9       		.byte	-7
  15706 3b5b 02       		.byte	2
  15707 3b5c 23       		.byte	35
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 282
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 282
 
 
  15708 3b5d FD       		.byte	-3
@@ -16918,7 +16918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15762 3b93 FE       		.byte	-2
  15763 3b94 FE       		.byte	-2
  15764 3b95 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 283
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 283
 
 
  15765 3b96 FE       		.byte	-2
@@ -16978,7 +16978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15819 3bcc D0       		.byte	-48
  15820 3bcd 00       		.byte	0
  15821 3bce 71       		.byte	113
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 284
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 284
 
 
  15822 3bcf 8A       		.byte	-118
@@ -17038,7 +17038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15876 3c05 02       		.byte	2
  15877 3c06 0B       		.byte	11
  15878 3c07 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 285
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 285
 
 
  15879 3c08 FE       		.byte	-2
@@ -17098,7 +17098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15933 3c3e FD       		.byte	-3
  15934 3c3f FD       		.byte	-3
  15935 3c40 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 286
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 286
 
 
  15936 3c41 F9       		.byte	-7
@@ -17158,7 +17158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  15990 3c77 F8       		.byte	-8
  15991 3c78 F4       		.byte	-12
  15992 3c79 F9       		.byte	-7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 287
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 287
 
 
  15993 3c7a 02       		.byte	2
@@ -17218,7 +17218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16047 3cb0 F4       		.byte	-12
  16048 3cb1 02       		.byte	2
  16049 3cb2 05       		.byte	5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 288
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 288
 
 
  16050 3cb3 F8       		.byte	-8
@@ -17278,7 +17278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16104 3ce9 00       		.byte	0
  16105 3cea AC       		.byte	-84
  16106 3ceb 02       		.byte	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 289
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 289
 
 
  16107 3cec 08       		.byte	8
@@ -17338,7 +17338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16161 3d22 F8       		.byte	-8
  16162 3d23 F9       		.byte	-7
  16163 3d24 F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 290
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 290
 
 
  16164 3d25 F8       		.byte	-8
@@ -17398,7 +17398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16218 3d5b 06       		.byte	6
  16219 3d5c FE       		.byte	-2
  16220 3d5d F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 291
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 291
 
 
  16221 3d5e F4       		.byte	-12
@@ -17458,7 +17458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16275 3d94 06       		.byte	6
  16276 3d95 00       		.byte	0
  16277 3d96 8C       		.byte	-116
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 292
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 292
 
 
  16278 3d97 FD       		.byte	-3
@@ -17518,7 +17518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16332 3dcd BF       		.byte	-65
  16333 3dce F9       		.byte	-7
  16334 3dcf 02       		.byte	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 293
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 293
 
 
  16335 3dd0 05       		.byte	5
@@ -17578,7 +17578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16389 3e06 10       		.byte	16
  16390 3e07 FD       		.byte	-3
  16391 3e08 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 294
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 294
 
 
  16392 3e09 02       		.byte	2
@@ -17638,7 +17638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16446 3e3f 02       		.byte	2
  16447 3e40 11       		.byte	17
  16448 3e41 FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 295
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 295
 
 
  16449 3e42 25       		.byte	37
@@ -17698,7 +17698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16503 3e78 8C       		.byte	-116
  16504 3e79 00       		.byte	0
  16505 3e7a 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 296
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 296
 
 
  16506 3e7b 00       		.byte	0
@@ -17758,7 +17758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16560 3eb1 19       		.byte	25
  16561 3eb2 FD       		.byte	-3
  16562 3eb3 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 297
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 297
 
 
  16563 3eb4 02       		.byte	2
@@ -17818,7 +17818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16617 3eea FC       		.byte	-4
  16618 3eeb F9       		.byte	-7
  16619 3eec F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 298
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 298
 
 
  16620 3eed F9       		.byte	-7
@@ -17878,7 +17878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16674 3f23 DB       		.byte	-37
  16675 3f24 02       		.byte	2
  16676 3f25 0F       		.byte	15
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 299
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 299
 
 
  16677 3f26 F8       		.byte	-8
@@ -17938,7 +17938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16731 3f5c FC       		.byte	-4
  16732 3f5d F8       		.byte	-8
  16733 3f5e F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 300
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 300
 
 
  16734 3f5f F4       		.byte	-12
@@ -17998,7 +17998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16788 3f95 F8       		.byte	-8
  16789 3f96 F8       		.byte	-8
  16790 3f97 F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 301
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 301
 
 
  16791 3f98 02       		.byte	2
@@ -18058,7 +18058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16845 3fce DF       		.byte	-33
  16846 3fcf 00       		.byte	0
  16847 3fd0 02       		.byte	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 302
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 302
 
 
  16848 3fd1 05       		.byte	5
@@ -18118,7 +18118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16902 4007 BF       		.byte	-65
  16903 4008 DF       		.byte	-33
  16904 4009 01       		.byte	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 303
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 303
 
 
  16905 400a F4       		.byte	-12
@@ -18178,7 +18178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  16959 4040 FF       		.byte	-1
  16960 4041 02       		.byte	2
  16961 4042 04       		.byte	4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 304
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 304
 
 
  16962 4043 DF       		.byte	-33
@@ -18238,7 +18238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17016 4079 FF       		.byte	-1
  17017 407a FE       		.byte	-2
  17018 407b FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 305
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 305
 
 
  17019 407c FE       		.byte	-2
@@ -18298,7 +18298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17073 40b2 04       		.byte	4
  17074 40b3 40       		.byte	64
  17075 40b4 60       		.byte	96
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 306
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 306
 
 
  17076 40b5 C8       		.byte	-56
@@ -18358,7 +18358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17130 40eb FF       		.byte	-1
  17131 40ec DF       		.byte	-33
  17132 40ed DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 307
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 307
 
 
  17133 40ee FF       		.byte	-1
@@ -18418,7 +18418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17187 4124 FE       		.byte	-2
  17188 4125 FE       		.byte	-2
  17189 4126 F9       		.byte	-7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 308
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 308
 
 
  17190 4127 AC       		.byte	-84
@@ -18478,7 +18478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17244 415d E0       		.byte	-32
  17245 415e A0       		.byte	-96
  17246 415f E0       		.byte	-32
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 309
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 309
 
 
  17247 4160 C8       		.byte	-56
@@ -18538,7 +18538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17301 4196 B1       		.byte	-79
  17302 4197 02       		.byte	2
  17303 4198 09       		.byte	9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 310
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 310
 
 
  17304 4199 F8       		.byte	-8
@@ -18598,7 +18598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17358 41cf 08       		.byte	8
  17359 41d0 FE       		.byte	-2
  17360 41d1 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 311
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 311
 
 
  17361 41d2 F8       		.byte	-8
@@ -18658,7 +18658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17415 4208 FE       		.byte	-2
  17416 4209 FE       		.byte	-2
  17417 420a FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 312
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 312
 
 
  17418 420b FA       		.byte	-6
@@ -18718,7 +18718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17472 4241 02       		.byte	2
  17473 4242 18       		.byte	24
  17474 4243 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 313
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 313
 
 
  17475 4244 F4       		.byte	-12
@@ -18778,7 +18778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17529 427a F9       		.byte	-7
  17530 427b F4       		.byte	-12
  17531 427c F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 314
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 314
 
 
  17532 427d F4       		.byte	-12
@@ -18838,7 +18838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17586 42b3 F4       		.byte	-12
  17587 42b4 F4       		.byte	-12
  17588 42b5 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 315
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 315
 
 
  17589 42b6 F4       		.byte	-12
@@ -18898,7 +18898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17643 42ec DF       		.byte	-33
  17644 42ed FF       		.byte	-1
  17645 42ee DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 316
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 316
 
 
  17646 42ef DF       		.byte	-33
@@ -18958,7 +18958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17700 4325 02       		.byte	2
  17701 4326 04       		.byte	4
  17702 4327 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 317
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 317
 
 
  17703 4328 F9       		.byte	-7
@@ -19018,7 +19018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17757 435e F9       		.byte	-7
  17758 435f F8       		.byte	-8
  17759 4360 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 318
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 318
 
 
  17760 4361 02       		.byte	2
@@ -19078,7 +19078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17814 4397 04       		.byte	4
  17815 4398 DF       		.byte	-33
  17816 4399 B9       		.byte	-71
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 319
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 319
 
 
  17817 439a F8       		.byte	-8
@@ -19138,7 +19138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17871 43d0 DF       		.byte	-33
  17872 43d1 96       		.byte	-106
  17873 43d2 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 320
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 320
 
 
  17874 43d3 DF       		.byte	-33
@@ -19198,7 +19198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17928 4409 F9       		.byte	-7
  17929 440a F4       		.byte	-12
  17930 440b 40       		.byte	64
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 321
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 321
 
 
  17931 440c 00       		.byte	0
@@ -19258,7 +19258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  17985 4442 02       		.byte	2
  17986 4443 06       		.byte	6
  17987 4444 F8       		.byte	-8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 322
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 322
 
 
  17988 4445 F9       		.byte	-7
@@ -19318,7 +19318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18042 447b 04       		.byte	4
  18043 447c BA       		.byte	-70
  18044 447d BB       		.byte	-69
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 323
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 323
 
 
  18045 447e BA       		.byte	-70
@@ -19378,7 +19378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18099 44b4 DB       		.byte	-37
  18100 44b5 DF       		.byte	-33
  18101 44b6 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 324
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 324
 
 
  18102 44b7 DB       		.byte	-37
@@ -19438,7 +19438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18156 44ed 00       		.byte	0
  18157 44ee F4       		.byte	-12
  18158 44ef FC       		.byte	-4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 325
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 325
 
 
  18159 44f0 F8       		.byte	-8
@@ -19498,7 +19498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18213 4526 FA       		.byte	-6
  18214 4527 DA       		.byte	-38
  18215 4528 D9       		.byte	-39
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 326
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 326
 
 
  18216 4529 D9       		.byte	-39
@@ -19558,7 +19558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18270 455f FF       		.byte	-1
  18271 4560 DF       		.byte	-33
  18272 4561 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 327
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 327
 
 
  18273 4562 DF       		.byte	-33
@@ -19618,7 +19618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18327 4598 FF       		.byte	-1
  18328 4599 DF       		.byte	-33
  18329 459a FF       		.byte	-1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 328
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 328
 
 
  18330 459b FF       		.byte	-1
@@ -19678,7 +19678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18384 45d1 DF       		.byte	-33
  18385 45d2 DF       		.byte	-33
  18386 45d3 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 329
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 329
 
 
  18387 45d4 DB       		.byte	-37
@@ -19738,7 +19738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18441 460a FF       		.byte	-1
  18442 460b DF       		.byte	-33
  18443 460c DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 330
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 330
 
 
  18444 460d DF       		.byte	-33
@@ -19798,7 +19798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18498 4643 02       		.byte	2
  18499 4644 05       		.byte	5
  18500 4645 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 331
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 331
 
 
  18501 4646 DB       		.byte	-37
@@ -19858,7 +19858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18555 467c 04       		.byte	4
  18556 467d DB       		.byte	-37
  18557 467e DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 332
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 332
 
 
  18558 467f DB       		.byte	-37
@@ -19918,7 +19918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18612 46b5 F4       		.byte	-12
  18613 46b6 F4       		.byte	-12
  18614 46b7 8C       		.byte	-116
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 333
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 333
 
 
  18615 46b8 02       		.byte	2
@@ -19978,7 +19978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18669 46ee 02       		.byte	2
  18670 46ef 21       		.byte	33
  18671 46f0 00       		.byte	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 334
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 334
 
 
  18672 46f1 AC       		.byte	-84
@@ -20038,7 +20038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18726 4727 06       		.byte	6
  18727 4728 DF       		.byte	-33
  18728 4729 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 335
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 335
 
 
  18729 472a DF       		.byte	-33
@@ -20098,7 +20098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18783 4760 02       		.byte	2
  18784 4761 0A       		.byte	10
  18785 4762 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 336
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 336
 
 
  18786 4763 DF       		.byte	-33
@@ -20158,7 +20158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18840 4799 0D       		.byte	13
  18841 479a FD       		.byte	-3
  18842 479b FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 337
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 337
 
 
  18843 479c 02       		.byte	2
@@ -20218,7 +20218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18897 47d2 2A       		.byte	42
  18898 47d3 FD       		.byte	-3
  18899 47d4 DE       		.byte	-34
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 338
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 338
 
 
  18900 47d5 02       		.byte	2
@@ -20278,7 +20278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  18954 480b DA       		.byte	-38
  18955 480c 02       		.byte	2
  18956 480d 19       		.byte	25
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 339
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 339
 
 
  18957 480e DB       		.byte	-37
@@ -20338,7 +20338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19011 4844 04       		.byte	4
  19012 4845 DB       		.byte	-37
  19013 4846 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 340
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 340
 
 
  19014 4847 02       		.byte	2
@@ -20398,7 +20398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19068 487d DB       		.byte	-37
  19069 487e DA       		.byte	-38
  19070 487f 02       		.byte	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 341
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 341
 
 
  19071 4880 2C       		.byte	44
@@ -20458,7 +20458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19125 48b6 1E       		.byte	30
  19126 48b7 FD       		.byte	-3
  19127 48b8 FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 342
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 342
 
 
  19128 48b9 DE       		.byte	-34
@@ -20518,7 +20518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19182 48ef DB       		.byte	-37
  19183 48f0 02       		.byte	2
  19184 48f1 09       		.byte	9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 343
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 343
 
 
  19185 48f2 DF       		.byte	-33
@@ -20578,7 +20578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19239 4928 FD       		.byte	-3
  19240 4929 DB       		.byte	-37
  19241 492a DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 344
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 344
 
 
  19242 492b DB       		.byte	-37
@@ -20638,7 +20638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19296 4961 02       		.byte	2
  19297 4962 08       		.byte	8
  19298 4963 DB       		.byte	-37
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 345
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 345
 
 
  19299 4964 DA       		.byte	-38
@@ -20698,7 +20698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19353 499a F4       		.byte	-12
  19354 499b 02       		.byte	2
  19355 499c 09       		.byte	9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 346
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 346
 
 
  19356 499d F8       		.byte	-8
@@ -20758,7 +20758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19410 49d3 0A       		.byte	10
  19411 49d4 DB       		.byte	-37
  19412 49d5 DF       		.byte	-33
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 347
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 347
 
 
  19413 49d6 FB       		.byte	-5
@@ -20818,7 +20818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19467 4a0c FE       		.byte	-2
  19468 4a0d 02       		.byte	2
  19469 4a0e 29       		.byte	41
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 348
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 348
 
 
  19470 4a0f FD       		.byte	-3
@@ -20878,7 +20878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19524 4a45 F4       		.byte	-12
  19525 4a46 F8       		.byte	-8
  19526 4a47 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 349
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 349
 
 
  19527 4a48 F8       		.byte	-8
@@ -20938,7 +20938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19581 4a7e DB       		.byte	-37
  19582 4a7f DE       		.byte	-34
  19583 4a80 FE       		.byte	-2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 350
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 350
 
 
  19584 4a81 02       		.byte	2
@@ -20998,7 +20998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19638 4ab7 F8       		.byte	-8
  19639 4ab8 F8       		.byte	-8
  19640 4ab9 F4       		.byte	-12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 351
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 351
 
 
  19641 4aba F4       		.byte	-12
@@ -21058,7 +21058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19695 4af0 1D       		.byte	29
  19696 4af1 FD       		.byte	-3
  19697 4af2 F9       		.byte	-7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 352
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 352
 
 
  19698 4af3 02       		.byte	2
@@ -21118,7 +21118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19752 4b29 15       		.byte	21
  19753 4b2a F8       		.byte	-8
  19754 4b2b F9       		.byte	-7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 353
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 353
 
 
  19755 4b2c 02       		.byte	2
@@ -21178,7 +21178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19809 4b62 04       		.byte	4
  19810 4b63 D9       		.byte	-39
  19811 4b64 FD       		.byte	-3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 354
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 354
 
 
  19812 4b65 D9       		.byte	-39
@@ -21238,7 +21238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19866 4b9b DE       		.byte	-34
  19867 4b9c D9       		.byte	-39
  19868 4b9d D9       		.byte	-39
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 355
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 355
 
 
  19869 4b9e DE       		.byte	-34
@@ -21298,7 +21298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19923 4bd4 06       		.byte	6
  19924 4bd5 D9       		.byte	-39
  19925 4bd6 BD       		.byte	-67
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 356
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 356
 
 
  19926 4bd7 D9       		.byte	-39
@@ -21358,7 +21358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  19980 4c0d 23       		.byte	35
  19981 4c0e FD       		.byte	-3
  19982 4c0f DE       		.byte	-34
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 357
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 357
 
 
  19983 4c10 02       		.byte	2
@@ -21418,7 +21418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20037              	.Lframe0:
  20038 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
  20039              	.LSCIE0:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 358
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 358
 
 
  20040 0004 FFFFFFFF 		.4byte	0xffffffff
@@ -21478,7 +21478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20094 001f 0200     		.2byte	0x2
  20095 0021 7D       		.byte	0x7d
  20096 0022 14       		.sleb128 20
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 359
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 359
 
 
  20097 0023 00000000 		.4byte	0x0
@@ -21538,7 +21538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20151 0055 01       		.byte	0x1
  20152 0056 06       		.byte	0x6
  20153 0057 03       		.uleb128 0x3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 360
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 360
 
 
  20154 0058 E0000000 		.4byte	.LASF5
@@ -21598,7 +21598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20208 00c4 D4000000 		.4byte	0xd4
  20209 00c8 30000000 		.4byte	0x30
  20210 00cc 0A       		.uleb128 0xa
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 361
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 361
 
 
  20211 00cd 65000000 		.4byte	0x65
@@ -21658,7 +21658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20265 0145 65000000 		.4byte	0x65
  20266 0149 1907     		.2byte	0x719
  20267 014b 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 362
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 362
 
 
  20268 014c 0B       		.uleb128 0xb
@@ -21718,7 +21718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20322 0005 12       		.uleb128 0x12
  20323 0006 01       		.uleb128 0x1
  20324 0007 11       		.uleb128 0x11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 363
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 363
 
 
  20325 0008 01       		.uleb128 0x1
@@ -21778,7 +21778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20379 003e 0B       		.uleb128 0xb
  20380 003f 3E       		.uleb128 0x3e
  20381 0040 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 364
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 364
 
 
  20382 0041 00       		.byte	0x0
@@ -21838,7 +21838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20436 0077 01       		.uleb128 0x1
  20437 0078 01       		.byte	0x1
  20438 0079 01       		.uleb128 0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 365
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 365
 
 
  20439 007a 13       		.uleb128 0x13
@@ -21898,7 +21898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20487 0038 FC000000 		.4byte	0xfc
  20488 003c 5F667574 		.ascii	"_future_128x39c\000"
  20488      7572655F 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 366
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 366
 
 
  20488      31323878 
@@ -21958,7 +21958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20518      206C6F6E 
  20518      6720696E 
  20518      7400
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 367
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 367
 
 
  20519              	.LASF7:
@@ -22018,7 +22018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20542      7420696E 
  20542      7400
  20543              	.LASF13:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 368
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 368
 
 
  20544 00ea 5F65615F 		.ascii	"_ea_97x60c\000"
@@ -22054,25 +22054,25 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 1
  20556      61792E63 
  20556      00
  20557              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s 			page 369
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s 			page 369
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 startupDisplay.c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:1      .text:00000000 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:16     .text:00000000 displayStartupSequence
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:46     .rodata:00000000 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:858    .text:00000368 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:15340  .rodata:000039ee _fun_1_130x90c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:10716  .rodata:000027e2 _fun_0_130x90c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:1646   .rodata:00000484 _ea_97x60c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:3534   .rodata:00000be0 _future_128x39c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:866    .text:00000380 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:1493   .text:00000798 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:6414   .rodata:0000171c _philips_122x25c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:8894   .rodata:000020c8 _segger_85x40c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:1498   .text:000007a4 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSxA4NO.s:1639   .text:00000880 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:16     .text:00000000 displayStartupSequence
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:46     .rodata:00000000 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:858    .text:00000368 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:15340  .rodata:000039ee _fun_1_130x90c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:10716  .rodata:000027e2 _fun_0_130x90c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:1646   .rodata:00000484 _ea_97x60c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:3534   .rodata:00000be0 _future_128x39c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:866    .text:00000380 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:1493   .text:00000798 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:6414   .rodata:0000171c _philips_122x25c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:8894   .rodata:000020c8 _segger_85x40c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:1498   .text:000007a4 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc3vL6gw.s:1639   .text:00000880 $d
 
 UNDEFINED SYMBOLS
 checkKey

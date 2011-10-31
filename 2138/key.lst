@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
   33:key.c         ****  ****************************************************************************/
   34:key.c         **** static tU8 centerReleased = TRUE;
   35:key.c         **** static tU8 keyUpReleased = TRUE;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 2
 
 
   36:key.c         **** static tU8 keyDownReleased = TRUE;
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
   64:key.c         ****  *
   65:key.c         ****  * Description:
   66:key.c         ****  *    Function to check current (instantaneous) key state
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 3
 
 
   67:key.c         ****  *
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
   73              		.loc 1 92 0
   74 0024 1020     		mov	r0, #16
   75 0026 4E4A     		ldr	r2, .L74
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 4
 
 
   76 0028 0542     		tst	r5, r0
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  108              		.loc 1 114 0
  109 0054 454B     		ldr	r3, .L74+12
  110 0056 1870     		strb	r0, [r3]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 5
 
 
  111              	.L58:
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  144              		.loc 1 135 0
  145 0082 042B     		cmp	r3, #4
  146 0084 03D0     		beq	.L60
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 6
 
 
  136:key.c         ****   	  {
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  179 00ac 0023     		mov	r3, #0
  180 00ae 1370     		strb	r3, [r2]
  158:key.c         ****   		downKeyCnt = 0;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 7
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 7
 
 
  181              		.loc 1 158 0
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  180:key.c         **** 
  181:key.c         ****   //check left key
  182:key.c         ****   if (readKeys & KEY_LEFT)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 8
 
 
  214              		.loc 1 182 0
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  247 0104 184B     		ldr	r3, .L74+8
  248 0106 1870     		strb	r0, [r3]
  204:key.c         ****   		  activeKey2 = KEY_LEFT;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 9
 
 
  249              		.loc 1 204 0
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  282              		.loc 1 225 0
  283 0136 042B     		cmp	r3, #4
  284 0138 03D0     		beq	.L69
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 10
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 10
 
 
  226:key.c         ****   	  {
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  321 0164 02000000 		.word	centerKeyCnt
  322 0168 00000000 		.word	activeKey
  323 016c 01000000 		.word	activeKey2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 11
 
 
  324 0170 01000000 		.word	keyUpReleased
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  378 0004 FFFFFFFF 		.4byte	0xffffffff
  379 0008 01       		.byte	0x1
  380 0009 00       		.ascii	"\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 12
 
 
  381 000a 01       		.uleb128 0x1
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  435 000f 90010000 		.4byte	.LFE4-.Ltext0
  436 0013 0200     		.2byte	0x2
  437 0015 7D       		.byte	0x7d
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 13
 
 
  438 0016 0C       		.sleb128 12
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  492 0058 04       		.byte	0x4
  493 0059 05       		.byte	0x5
  494 005a 05       		.uleb128 0x5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 14
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 14
 
 
  495 005b 44010000 		.4byte	.LASF5
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  549 00d0 1F000000 		.4byte	.LLST3
  550 00d4 0B       		.uleb128 0xb
  551 00d5 F3000000 		.4byte	.LASF11
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 15
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 15
 
 
  552 00d9 01       		.byte	0x1
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  606 014b 01       		.byte	0x1
  607 014c 28       		.byte	0x28
  608 014d 25000000 		.4byte	0x25
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 16
 
 
  609 0151 05       		.byte	0x5
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  663 01c3 0D       		.uleb128 0xd
  664 01c4 52000000 		.4byte	.LASF25
  665 01c8 03       		.byte	0x3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 17
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 17
 
 
  666 01c9 22       		.byte	0x22
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  720 002e 03       		.uleb128 0x3
  721 002f 08       		.uleb128 0x8
  722 0030 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 18
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 18
 
 
  723 0031 0B       		.uleb128 0xb
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  777 0067 02       		.uleb128 0x2
  778 0068 0A       		.uleb128 0xa
  779 0069 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 19
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 19
 
 
  780 006a 00       		.byte	0x0
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  834 00a0 3B       		.uleb128 0x3b
  835 00a1 0B       		.uleb128 0xb
  836 00a2 49       		.uleb128 0x49
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 20
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 20
 
 
  837 00a3 13       		.uleb128 0x13
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  888      6B4B6579 
  888      3200
  889 0029 AC000000 		.4byte	0xac
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 21
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 21
 
 
  890 002d 73616D70 		.ascii	"sampleKey\000"
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  924      744B6579 
  924      436E7400 
  925              	.LASF12:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 22
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 22
 
 
  926 006c 63656E74 		.ascii	"centerReleased\000"
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  948      312E3100 
  949              	.LASF24:
  950 0108 76657231 		.ascii	"ver1_0\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 23
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 23
 
 
  950      5F3000
@@ -1360,34 +1360,34 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 1
  968      61736564 
  968      00
  969              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s 			page 24
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 key.c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:1      .text:00000000 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:16     .text:00000000 checkKey
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:35     .text:0000000c $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:340    .bss:00000000 activeKey
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:43     .text:00000010 checkKey2
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:40     .text:00000010 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:57     .text:00000018 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:342    .bss:00000001 activeKey2
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:65     .text:0000001c sampleKey
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:62     .text:0000001c $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:320    .text:00000160 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:337    .data:00000000 centerReleased
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:362    .bss:00000002 centerKeyCnt
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:347    .data:00000001 keyUpReleased
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:364    .bss:00000003 upKeyCnt
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:351    .data:00000002 keyDownReleased
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:366    .bss:00000004 downKeyCnt
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:355    .data:00000003 keyLeftReleased
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:368    .bss:00000005 leftKeyCnt
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:359    .data:00000004 keyRightReleased
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:370    .bss:00000006 rightKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:16     .text:00000000 checkKey
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:35     .text:0000000c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:340    .bss:00000000 activeKey
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:43     .text:00000010 checkKey2
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:40     .text:00000010 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:57     .text:00000018 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:342    .bss:00000001 activeKey2
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:65     .text:0000001c sampleKey
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:62     .text:0000001c $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:320    .text:00000160 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:337    .data:00000000 centerReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:362    .bss:00000002 centerKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:347    .data:00000001 keyUpReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:364    .bss:00000003 upKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:351    .data:00000002 keyDownReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:366    .bss:00000004 downKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:355    .data:00000003 keyLeftReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:368    .bss:00000005 leftKeyCnt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:359    .data:00000004 keyRightReleased
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:370    .bss:00000006 rightKeyCnt
                              .bss:00000000 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccg3idsj.s:344    .bss:00000002 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccEeTu3u.s:344    .bss:00000002 $d
                             *COM*:00000001 ver1_0
                             *COM*:00000001 ver1_1
 

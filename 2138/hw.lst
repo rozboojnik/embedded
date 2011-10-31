@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
   33:hw.c          ****  ****************************************************************************/
   34:hw.c          **** tBool ver1_0;
   35:hw.c          **** tBool ver1_1;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 2
 
 
   36:hw.c          **** 
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
   90:hw.c          ****     
   91:hw.c          ****     IODIR |= (LED_GREEN_PIN | LED_RED_PIN);
   92:hw.c          ****     IOSET  = (LED_GREEN_PIN | LED_RED_PIN);
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 3
 
 
   93:hw.c          ****   }
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  147:hw.c          ****   if (TRUE == ver1_0)
  148:hw.c          ****   {
  149:hw.c          ****     if (TRUE == resetFlag)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 4
 
 
  150:hw.c          ****       IOCLR  = BT_RST;
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
   41              		.loc 1 181 0
   42              		@ sp needed for prologue
   43 0018 7047     		bx	lr
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 5
 
 
   44              	.L8:
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  222:hw.c          ****   else
  223:hw.c          ****   {
  224:hw.c          ****     if (LED_GREEN == ledSelect)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 6
 
 
  225:hw.c          ****     {
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  279:hw.c          **** 
  280:hw.c          **** 
  281:hw.c          **** /*****************************************************************************
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 7
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 7
 
 
  282:hw.c          ****  *
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
   90 0044 8023     		mov	r3, #128
   91 0046 1B02     		lsl	r3, r3, #8
   92              	.L19:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 8
 
 
   93 0048 044A     		ldr	r2, .L21+4
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  130              		.loc 1 320 0
  131 006a 1023     		mov	r3, #16
  132 006c 2360     		str	r3, [r4]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 9
 
 
  133              		.loc 1 318 0
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  338:hw.c          ****   SPI_SPCCR = 0x08;    
  170              		.loc 1 338 0
  171 0098 0E4B     		ldr	r3, .L32+16
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 10
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 10
 
 
  172 009a 0822     		mov	r2, #8
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  216              		.code 16
  217              		.thumb_func
  218              		.type	initSpiForLcd, %function
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 11
 
 
  219              	initSpiForLcd:
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  377:hw.c          ****   PINSEL0 |= 0x00005500;
  245              		.loc 1 377 0
  246 0102 0B49     		ldr	r1, .L40+16
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 12
 
 
  247 0104 AA23     		mov	r3, #170
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  296              		.loc 1 259 0
  297 0144 274B     		ldr	r3, .L68+4
  298 0146 1B68     		ldr	r3, [r3]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 13
 
 
  299 0148 5904     		lsl	r1, r3, #17
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  353              		.loc 1 252 0
  354 0190 0370     		strb	r3, [r0]
  355              		.loc 1 269 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 14
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 14
 
 
  356 0192 221C     		mov	r2, r4
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  410 01da 10BC     		pop	{r4}
  411 01dc 02BC     		pop	{r1}
  412 01de 0847     		bx	r1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 15
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 15
 
 
  413              	.L69:
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  467 0218 09D1     		bne	.L73
  468              		.loc 1 207 0
  469 021a 012C     		cmp	r4, #1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 16
 
 
  470 021c 02D1     		bne	.L75
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  524 0260 1343     		orr	r3, r3, r2
  525 0262 7B70     		strb	r3, [r7, #1]
  526              	.L85:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 17
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 17
 
 
  527              		.loc 1 231 0
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  581              		.loc 1 141 0
  582 02a8 6D46     		mov	r5, sp
  583              		.loc 1 140 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 18
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 18
 
 
  584 02aa 0006     		lsl	r0, r0, #24
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  638              	.L105:
  639              		.loc 1 163 0
  640 02f4 281C     		mov	r0, r5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 19
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 19
 
 
  641 02f6 0221     		mov	r1, #2
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  695 0344 FFF7FEFF 		bl	osSleep
  696              		.loc 1 115 0
  697 0348 104B     		ldr	r3, .L117+12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 20
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 20
 
 
  698 034a 1C60     		str	r4, [r3]
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  752 0392 83B0     		sub	sp, sp, #12
  753              	.LCFI11:
  754              		.loc 1 57 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 21
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 21
 
 
  755 0394 6C46     		mov	r4, sp
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  809 03ea 164B     		ldr	r3, .L124+28
  810              		.loc 1 75 0
  811 03ec 0870     		strb	r0, [r1]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 22
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 22
 
 
  812              		.loc 1 77 0
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  866 0444 01000000 		.word	btResetShadow
  867 0448 0C8002E0 		.word	-536707060
  868              	.LFE2:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 23
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 23
 
 
  869              		.size	immediateIoInit, .-immediateIoInit
@@ -1378,7 +1378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  923              		.align	2
  924              	.LECIE0:
  925              	.LSFDE0:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 24
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 24
 
 
  926 0010 0C000000 		.4byte	.LEFDE0-.LASFDE0
@@ -1438,7 +1438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  980              		.4byte	.LCFI2-.LFB7
  981 0075 0E       		.byte	0xe
  982 0076 08       		.uleb128 0x8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 25
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 25
 
 
  983 0077 84       		.byte	0x84
@@ -1498,7 +1498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1037 00ba 0E       		.byte	0xe
  1038 00bb 10       		.uleb128 0x10
  1039              		.align	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 26
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 26
 
 
  1040              	.LEFDE12:
@@ -1558,7 +1558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1094 000a 50       		.byte	0x50
  1095 000b 04000000 		.4byte	.LVL2-.Ltext0
  1096 000f 24000000 		.4byte	.LFE5-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 27
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 27
 
 
  1097 0013 0100     		.2byte	0x1
@@ -1618,7 +1618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1151 00a2 E2000000 		.4byte	.LCFI1-.Ltext0
  1152 00a6 38010000 		.4byte	.LFE10-.Ltext0
  1153 00aa 0200     		.2byte	0x2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 28
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 28
 
 
  1154 00ac 7D       		.byte	0x7d
@@ -1678,7 +1678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1208 0137 18       		.sleb128 24
  1209 0138 00000000 		.4byte	0x0
  1210 013c 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 29
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 29
 
 
  1211              	.LLST11:
@@ -1738,7 +1738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1265 01cf 5D       		.byte	0x5d
  1266 01d0 22030000 		.4byte	.LCFI8-.Ltext0
  1267 01d4 24030000 		.4byte	.LCFI9-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 30
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 30
 
 
  1268 01d8 0200     		.2byte	0x2
@@ -1798,7 +1798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1322 003f 04010000 		.4byte	.LASF2
  1323 0043 04       		.byte	0x4
  1324 0044 07       		.byte	0x7
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 31
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 31
 
 
  1325 0045 03       		.uleb128 0x3
@@ -1858,7 +1858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1379 00b2 5A000000 		.4byte	0x5a
  1380 00b6 1E000000 		.4byte	.LLST3
  1381 00ba 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 32
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 32
 
 
  1382 00bb 0A       		.uleb128 0xa
@@ -1918,7 +1918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1436 013d FD       		.byte	0xfd
  1437 013e 25000000 		.4byte	0x25
  1438 0142 E1000000 		.4byte	.LLST9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 33
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 33
 
 
  1439 0146 0D       		.uleb128 0xd
@@ -1978,7 +1978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1493 01b8 00       		.byte	0x0
  1494 01b9 0F       		.uleb128 0xf
  1495 01ba C9010000 		.4byte	0x1c9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 34
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 34
 
 
  1496 01be 25000000 		.4byte	0x25
@@ -2038,7 +2038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1550 0239 0D       		.uleb128 0xd
  1551 023a 5F010000 		.4byte	.LASF24
  1552 023e 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 35
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 35
 
 
  1553 023f 6A       		.byte	0x6a
@@ -2098,7 +2098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1607 02ae 01000000 		.4byte	btResetShadow
  1608 02b2 13       		.uleb128 0x13
  1609 02b3 62000000 		.4byte	.LASF30
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 36
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 36
 
 
  1610 02b7 01       		.byte	0x1
@@ -2158,7 +2158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1664 0024 0E       		.uleb128 0xe
  1665 0025 0B       		.uleb128 0xb
  1666 0026 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 37
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 37
 
 
  1667 0027 3E       		.uleb128 0x3e
@@ -2218,7 +2218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1721 005d 03       		.uleb128 0x3
  1722 005e 08       		.uleb128 0x8
  1723 005f 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 38
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 38
 
 
  1724 0060 0B       		.uleb128 0xb
@@ -2278,7 +2278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1778 0096 03       		.uleb128 0x3
  1779 0097 0E       		.uleb128 0xe
  1780 0098 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 39
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 39
 
 
  1781 0099 0B       		.uleb128 0xb
@@ -2338,7 +2338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1835 00cf 01       		.uleb128 0x1
  1836 00d0 40       		.uleb128 0x40
  1837 00d1 06       		.uleb128 0x6
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 40
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 40
 
 
  1838 00d2 00       		.byte	0x0
@@ -2398,7 +2398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1892 0108 13       		.uleb128 0x13
  1893 0109 3F       		.uleb128 0x3f
  1894 010a 0C       		.uleb128 0xc
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 41
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 41
 
 
  1895 010b 03       		.uleb128 0x3
@@ -2458,7 +2458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1949 000e 6C000000 		.4byte	0x6c
  1950 0012 73657442 		.ascii	"setBuzzer\000"
  1950      757A7A65 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 42
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 42
 
 
  1950      7200
@@ -2518,7 +2518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  1986      454400
  1987              	.LASF14:
  1988 0007 636F6D6D 		.ascii	"commandReadKeys\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 43
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 43
 
 
  1988      616E6452 
@@ -2578,7 +2578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  2014 00ab 6C6F6E67 		.ascii	"long unsigned int\000"
  2014      20756E73 
  2014      69676E65 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 44
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 44
 
 
  2014      6420696E 
@@ -2638,7 +2638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  2039              	.LASF10:
  2040 014b 73656E64 		.ascii	"sendToLCD\000"
  2040      546F4C43 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 45
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 45
 
 
  2040      4400
@@ -2672,46 +2672,46 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 1
  2056      6861646F 
  2056      7700
  2057              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s 			page 46
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s 			page 46
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 hw.c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:1      .text:00000000 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:16     .text:00000000 setBuzzer
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:47     .text:0000001c $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:56     .text:00000024 selectLCD
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:53     .text:00000024 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:109    .text:00000058 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:16     .text:00000000 setBuzzer
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:47     .text:0000001c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:56     .text:00000024 selectLCD
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:53     .text:00000024 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:109    .text:00000058 $d
                             *COM*:00000001 ver1_0
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:119    .text:00000064 sendToLCD
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:116    .text:00000064 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:205    .text:000000c4 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:219    .text:000000e0 initSpiForLcd
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:216    .text:000000e0 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:269    .text:00000120 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:282    .text:00000138 getKeys
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:279    .text:00000138 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:416    .text:000001e0 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:425    .text:000001e8 setLED
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:422    .text:000001e8 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:559    .text:00000288 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:878    .rodata:00000002 C.6.1502
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:873    .rodata:00000000 C.7.1503
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:904    .bss:00000000 greenLedShadow
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:906    .bss:00000001 btResetShadow
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:573    .text:000002a4 resetBT
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:570    .text:000002a4 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:656    .text:00000308 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:883    .rodata:00000004 C.3.1484
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:669    .text:00000320 resetLCD
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:666    .text:00000320 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:736    .text:00000380 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:888    .rodata:00000006 C.1.1476
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:747    .text:00000390 immediateIoInit
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:744    .text:00000390 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:859    .text:00000428 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccBDnZHk.s:893    .rodata:00000008 C.0.1455
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:119    .text:00000064 sendToLCD
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:116    .text:00000064 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:205    .text:000000c4 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:219    .text:000000e0 initSpiForLcd
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:216    .text:000000e0 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:269    .text:00000120 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:282    .text:00000138 getKeys
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:279    .text:00000138 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:416    .text:000001e0 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:425    .text:000001e8 setLED
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:422    .text:000001e8 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:559    .text:00000288 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:878    .rodata:00000002 C.6.1502
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:873    .rodata:00000000 C.7.1503
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:904    .bss:00000000 greenLedShadow
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:906    .bss:00000001 btResetShadow
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:573    .text:000002a4 resetBT
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:570    .text:000002a4 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:656    .text:00000308 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:883    .rodata:00000004 C.3.1484
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:669    .text:00000320 resetLCD
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:666    .text:00000320 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:736    .text:00000380 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:888    .rodata:00000006 C.1.1476
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:747    .text:00000390 immediateIoInit
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:744    .text:00000390 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:859    .text:00000428 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/cc60xxjS.s:893    .rodata:00000008 C.0.1455
                             *COM*:00000001 ver1_1
                              .bss:00000000 $d
 

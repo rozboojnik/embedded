@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
   33:i2c.c         **** #define I2C_STAT   (*((volatile unsigned char *) 0xE001C004))
   34:i2c.c         **** #define I2C_DATA   (*((volatile unsigned char *) 0xE001C008))
   35:i2c.c         **** #define I2C_ADDR   (*((volatile unsigned char *) 0xE001C00C))
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 2
 
 
   36:i2c.c         **** #define I2C_SCLH   (*((volatile unsigned short*) 0xE001C010))
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
   90:i2c.c         ****  *      80h Data byte received with own SLA, ACK transmitted
   91:i2c.c         ****  *      88h Data byte received with own SLA, ACK not transmitted
   92:i2c.c         ****  *      90h Data byte received after general call, ACK transmitted
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 3
 
 
   93:i2c.c         ****  *      98h Data byte received after general call, ACK not transmitted
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
   44              		.type	i2cStart, %function
   45              	i2cStart:
   46              	.LFB6:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 4
 
 
  122:i2c.c         **** 
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
   55              		@ lr needed for prologue
   56              		.loc 1 167 0
   57 0022 120E     		lsr	r2, r2, #24
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 5
 
 
   58              	.L24:
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  191:i2c.c         ****       I2C_CONCLR = 0x08;
   89              		.loc 1 191 0
   90 0044 064B     		ldr	r3, .L25+8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 6
 
 
   91              	.LVL3:
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  212:i2c.c         ****  *
  213:i2c.c         ****  *****************************************************************************/
  214:i2c.c         **** tS8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 7
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 7
 
 
  215:i2c.c         **** i2cRepeatStart(void)
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  269:i2c.c         **** tS8
  270:i2c.c         **** i2cStop(void)
  271:i2c.c         **** {
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 8
 
 
  125              		.loc 1 271 0
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  287:i2c.c         ****  * Description:
  288:i2c.c         ****  *    Sends a character on the I2C network
  289:i2c.c         ****  *
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 9
 
 
  290:i2c.c         ****  * Params:
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  309:i2c.c         ****     retCode    = I2C_CODE_OK;
  310:i2c.c         ****   }
  311:i2c.c         ****   else
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 10
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 10
 
 
  312:i2c.c         ****   {
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  342:i2c.c         ****   tS8 retCode = I2C_CODE_OK;
  343:i2c.c         **** 
  344:i2c.c         ****   if(mode == I2C_MODE_ACK0)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 11
 
 
  223              		.loc 1 344 0
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  259 00ec 1B78     		ldrb	r3, [r3]
  260 00ee 1A07     		lsl	r2, r3, #28
  261 00f0 01D4     		bmi	.L50
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 12
 
 
  262 00f2 FD20     		mov	r0, #253
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  382:i2c.c         ****  *    Note: After this function is run, you may need a bus free time before a 
  383:i2c.c         ****  *          new data transfer can be initiated.
  384:i2c.c         ****  *
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 13
 
 
  385:i2c.c         ****  * Params:
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  439:i2c.c         ****           retCode = i2cPutChar(*pData);
  440:i2c.c         ****           while(retCode == I2C_CODE_BUSY)
  441:i2c.c         ****           {
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 14
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 14
 
 
  442:i2c.c         ****             retCode = i2cPutChar(*pData);
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  297              		.loc 1 495 0
  298              		@ lr needed for prologue
  299              	.LVL25:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 15
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 15
 
 
  300              	.L70:
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  521:i2c.c         ****   }
  522:i2c.c         **** }
  329              		.loc 1 522 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 16
 
 
  330              		@ sp needed for prologue
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  370              	.LVL31:
  371 015c 0006     		lsl	r0, r0, #24
  372 015e 000E     		lsr	r0, r0, #24
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 17
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 17
 
 
  373              	.LVL32:
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  410              		.loc 1 553 0
  411 017e 050E     		lsr	r5, r0, #24
  412              	.LVL40:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 18
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 18
 
 
  413 0180 0016     		asr	r0, r0, #24
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  570:i2c.c         ****   } while(0);
  571:i2c.c         **** 
  572:i2c.c         ****   /* generate Stop condition */
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 19
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 19
 
 
  573:i2c.c         ****   i2cStop();
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  500              		.loc 1 141 0
  501 01ec 0A49     		ldr	r1, .L92+12
  502 01ee 0B78     		ldrb	r3, [r1]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 20
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 20
 
 
  503 01f0 7C22     		mov	r2, #124
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  557              		.global	getI2cLock
  558              		.code 16
  559              		.thumb_func
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 21
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 21
 
 
  560              		.type	getI2cLock, %function
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  614 0268 0A4B     		ldr	r3, .L118
  615 026a 1B78     		ldrb	r3, [r3]
  616 026c 0822     		mov	r2, #8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 22
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 22
 
 
  617 026e 1342     		tst	r3, r2
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  580:i2c.c         **** /******************************************************************************
  581:i2c.c         ****  *
  582:i2c.c         ****  * Description:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 23
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 23
 
 
  583:i2c.c         ****  *    Read a specified number of bytes from the I2C network.
@@ -1378,7 +1378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  612:i2c.c         ****     /* write SLA+R */
  613:i2c.c         ****     retCode = i2cPutChar(addr);
  614:i2c.c         ****     while(retCode == I2C_CODE_BUSY)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 24
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 24
 
 
  615:i2c.c         ****     {
@@ -1438,7 +1438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  635:i2c.c         ****          */
  636:i2c.c         ****         if((status == 0x40 ) || (status == 0x48 ) || (status == 0x50 ))
  728              		.loc 1 636 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 25
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 25
 
 
  729 02e4 402B     		cmp	r3, #64
@@ -1498,7 +1498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  763              	.L133:
  657:i2c.c         **** 
  658:i2c.c         ****           break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 26
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 26
 
 
  659:i2c.c         ****         }
@@ -1558,7 +1558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  799 033c 04C001E0 		.word	-536756220
  800              	.LFE15:
  801              		.size	i2cRead, .-i2cRead
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 27
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 27
 
 
  802              		.align	2
@@ -1618,7 +1618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  856              		.loc 1 110 0
  857 0376 184B     		ldr	r3, .L196
  858              	.LVL84:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 28
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 28
 
 
  859 0378 1B78     		ldrb	r3, [r3]
@@ -1678,7 +1678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  913 03b4 1A07     		lsl	r2, r3, #28
  914 03b6 FBD5     		bpl	.L195
  915              		.loc 1 116 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 29
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 29
 
 
  916 03b8 084B     		ldr	r3, .L196+4
@@ -1738,7 +1738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  966 000d 0C       		.byte	0xc
  967 000e 0D       		.uleb128 0xd
  968 000f 00       		.uleb128 0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 30
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 30
 
 
  969              		.align	2
@@ -1798,7 +1798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1023 0078 3C010000 		.4byte	.LFB13
  1024 007c 2E000000 		.4byte	.LFE13-.LFB13
  1025 0080 42       		.byte	0x4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 31
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 31
 
 
  1026              		.4byte	.LCFI0-.LFB13
@@ -1858,7 +1858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1080 00d2 04       		.uleb128 0x4
  1081 00d3 8E       		.byte	0x8e
  1082 00d4 01       		.uleb128 0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 32
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 32
 
 
  1083 00d5 42       		.byte	0x4
@@ -1918,7 +1918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1137              	.LSFDE26:
  1138 0120 1C000000 		.4byte	.LEFDE26-.LASFDE26
  1139              	.LASFDE26:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 33
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 33
 
 
  1140 0124 00000000 		.4byte	.Lframe0
@@ -1978,7 +1978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1194 004f 0100     		.2byte	0x1
  1195 0051 50       		.byte	0x50
  1196 0052 9E000000 		.4byte	.LVL12-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 34
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 34
 
 
  1197 0056 A8000000 		.4byte	.LVL13-.Ltext0
@@ -2038,7 +2038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1251 00ea 50       		.byte	0x50
  1252 00eb 00000000 		.4byte	0x0
  1253 00ef 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 35
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 35
 
 
  1254              	.LLST13:
@@ -2098,7 +2098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1308 0180 6E010000 		.4byte	.LVL34-.Ltext0
  1309 0184 70010000 		.4byte	.LVL35-.Ltext0
  1310 0188 0100     		.2byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 36
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 36
 
 
  1311 018a 50       		.byte	0x50
@@ -2158,7 +2158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1365 021b 22020000 		.4byte	.LCFI3-.Ltext0
  1366 021f 0100     		.2byte	0x1
  1367 0221 5D       		.byte	0x5d
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 37
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 37
 
 
  1368 0222 22020000 		.4byte	.LCFI3-.Ltext0
@@ -2218,7 +2218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1422 02b1 0100     		.2byte	0x1
  1423 02b3 5D       		.byte	0x5d
  1424 02b4 A2020000 		.4byte	.LCFI7-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 38
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 38
 
 
  1425 02b8 40030000 		.4byte	.LFE15-.Ltext0
@@ -2278,7 +2278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1479 034a 53       		.byte	0x53
  1480 034b E4020000 		.4byte	.LVL65-.Ltext0
  1481 034f 00030000 		.4byte	.LVL66-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 39
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 39
 
 
  1482 0353 0100     		.2byte	0x1
@@ -2338,7 +2338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1536 03e2 42030000 		.4byte	.LVL74-.Ltext0
  1537 03e6 46030000 		.4byte	.LVL76-.Ltext0
  1538 03ea 0100     		.2byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 40
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 40
 
 
  1539 03ec 52       		.byte	0x52
@@ -2398,7 +2398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1593 0004 0200     		.2byte	0x2
  1594 0006 00000000 		.4byte	.Ldebug_abbrev0
  1595 000a 04       		.byte	0x4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 41
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 41
 
 
  1596 000b 01       		.uleb128 0x1
@@ -2458,7 +2458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1650 0080 DC000000 		.4byte	.LASF19
  1651 0084 28       		.byte	0x28
  1652 0085 03       		.byte	0x3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 42
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 42
 
 
  1653 0086 58       		.byte	0x58
@@ -2518,7 +2518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1707 00e6 02       		.byte	0x2
  1708 00e7 23       		.byte	0x23
  1709 00e8 18       		.uleb128 0x18
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 43
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 43
 
 
  1710 00e9 07       		.uleb128 0x7
@@ -2578,7 +2578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1764 014c AA010000 		.4byte	.LASF20
  1765 0150 18       		.byte	0x18
  1766 0151 03       		.byte	0x3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 44
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 44
 
 
  1767 0152 70       		.byte	0x70
@@ -2638,7 +2638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1821 01b8 03       		.byte	0x3
  1822 01b9 78       		.byte	0x78
  1823 01ba 98010000 		.4byte	0x198
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 45
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 45
 
 
  1824 01be 06       		.uleb128 0x6
@@ -2698,7 +2698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1878 0229 00       		.byte	0x0
  1879 022a 10       		.uleb128 0x10
  1880 022b 83020000 		.4byte	0x283
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 46
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 46
 
 
  1881 022f 01       		.byte	0x1
@@ -2758,7 +2758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1935 02a9 5B000000 		.4byte	0x5b
  1936 02ad 8C000000 		.4byte	.LFB9
  1937 02b1 B8000000 		.4byte	.LFE9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 47
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 47
 
 
  1938 02b5 01       		.byte	0x1
@@ -2818,7 +2818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  1992 0337 10010000 		.4byte	.LFB12
  1993 033b 3C010000 		.4byte	.LFE12
  1994 033f 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 48
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 48
 
 
  1995 0340 5D       		.byte	0x5d
@@ -2878,7 +2878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2049 03c7 C4010000 		.4byte	.LFE14
  2050 03cb 61010000 		.4byte	.LLST17
  2051 03cf 17       		.uleb128 0x17
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 49
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 49
 
 
  2052 03d0 51000000 		.4byte	.LASF42
@@ -2938,7 +2938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2106 0454 91       		.byte	0x91
  2107 0455 7B       		.sleb128 -5
  2108 0456 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 50
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 50
 
 
  2109 0457 1E       		.uleb128 0x1e
@@ -2998,7 +2998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2163 04d5 00       		.byte	0x0
  2164 04d6 00       		.byte	0x0
  2165 04d7 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 51
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 51
 
 
  2166 04d8 1A       		.uleb128 0x1a
@@ -3058,7 +3058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2220 0565 D8020000 		.4byte	.LBB17
  2221 0569 E4020000 		.4byte	.LBE17
  2222 056d 14       		.uleb128 0x14
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 52
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 52
 
 
  2223 056e 03020000 		.4byte	0x203
@@ -3118,7 +3118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2277 05fa 76030000 		.4byte	.LBB22
  2278 05fe 82030000 		.4byte	.LBE22
  2279 0602 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 53
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 53
 
 
  2280 0603 AC01     		.2byte	0x1ac
@@ -3178,7 +3178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2334 0016 03       		.uleb128 0x3
  2335 0017 08       		.uleb128 0x8
  2336 0018 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 54
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 54
 
 
  2337 0019 0B       		.uleb128 0xb
@@ -3238,7 +3238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2391 004f 0B       		.uleb128 0xb
  2392 0050 00       		.byte	0x0
  2393 0051 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 55
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 55
 
 
  2394 0052 07       		.uleb128 0x7
@@ -3298,7 +3298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2448 0088 0B       		.uleb128 0xb
  2449 0089 00       		.byte	0x0
  2450 008a 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 56
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 56
 
 
  2451 008b 0C       		.uleb128 0xc
@@ -3358,7 +3358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2505 00c1 02       		.uleb128 0x2
  2506 00c2 0A       		.uleb128 0xa
  2507 00c3 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 57
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 57
 
 
  2508 00c4 00       		.byte	0x0
@@ -3418,7 +3418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2562 00fa 00       		.byte	0x0
  2563 00fb 00       		.byte	0x0
  2564 00fc 13       		.uleb128 0x13
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 58
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 58
 
 
  2565 00fd 0B       		.uleb128 0xb
@@ -3478,7 +3478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2619 0133 13       		.uleb128 0x13
  2620 0134 11       		.uleb128 0x11
  2621 0135 01       		.uleb128 0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 59
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 59
 
 
  2622 0136 12       		.uleb128 0x12
@@ -3538,7 +3538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2676 016c 01       		.uleb128 0x1
  2677 016d 13       		.uleb128 0x13
  2678 016e 3F       		.uleb128 0x3f
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 60
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 60
 
 
  2679 016f 0C       		.uleb128 0xc
@@ -3598,7 +3598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2733 01a5 3A       		.uleb128 0x3a
  2734 01a6 0B       		.uleb128 0xb
  2735 01a7 3B       		.uleb128 0x3b
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 61
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 61
 
 
  2736 01a8 0B       		.uleb128 0xb
@@ -3658,7 +3658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2790 01de 3A       		.uleb128 0x3a
  2791 01df 0B       		.uleb128 0xb
  2792 01e0 3B       		.uleb128 0x3b
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 62
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 62
 
 
  2793 01e1 05       		.uleb128 0x5
@@ -3718,7 +3718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2834      6D697400 
  2835 006c 72030000 		.4byte	0x372
  2836 0070 69326357 		.ascii	"i2cWriteWithWait\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 63
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 63
 
 
  2836      72697465 
@@ -3778,7 +3778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2870      64726976 
  2870      652F632F 
  2870      65636C69 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 64
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 64
 
 
  2870      7073652F 
@@ -3838,7 +3838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2898      656D00
  2899              	.LASF9:
  2900 00b3 70507265 		.ascii	"pPrevPrioQueueReady\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 65
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 65
 
 
  2900      76507269 
@@ -3898,7 +3898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2922      656E7400 
  2923              	.LASF4:
  2924 0157 756E7369 		.ascii	"unsigned int\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 66
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 66
 
 
  2924      676E6564 
@@ -3958,7 +3958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2954 01e1 72656C65 		.ascii	"releaseI2cLock\000"
  2954      61736549 
  2954      32634C6F 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 67
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 67
 
 
  2954      636B00
@@ -4004,50 +4004,50 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 1
  2976      74617274 
  2976      00
  2977              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s 			page 68
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s 			page 68
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 i2c.c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:1      .text:00000000 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:16     .text:00000000 i2cCheckStatus
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:36     .text:00000010 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:45     .text:00000018 i2cStart
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:42     .text:00000018 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:113    .text:00000058 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:123    .text:00000064 i2cStop
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:120    .text:00000064 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:153    .text:00000084 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:162    .text:0000008c i2cPutChar
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:159    .text:0000008c $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:205    .text:000000b0 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:214    .text:000000b8 i2cGetChar
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:211    .text:000000b8 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:285    .text:00000104 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:295    .text:00000110 i2cWaitTransmit
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:292    .text:00000110 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:335    .text:00000134 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:344    .text:0000013c i2cWriteWithWait
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:341    .text:0000013c $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:390    .text:0000016c i2cMyWrite
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:471    .text:000001c4 i2cInit
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:521    .text:0000020c $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:954    .bss:00000000 i2cSem
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:533    .text:00000220 releaseI2cLock
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:530    .text:00000220 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:553    .text:00000234 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:561    .text:00000238 getI2cLock
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:558    .text:00000238 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:582    .text:00000250 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:590    .text:00000254 i2cRepeatStart
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:587    .text:00000254 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:657    .text:00000294 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:667    .text:000002a0 i2cRead
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:664    .text:000002a0 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:798    .text:00000338 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:807    .text:00000340 i2cWrite
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:804    .text:00000340 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccSUXkMt.s:948    .text:000003d8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:16     .text:00000000 i2cCheckStatus
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:36     .text:00000010 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:45     .text:00000018 i2cStart
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:42     .text:00000018 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:113    .text:00000058 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:123    .text:00000064 i2cStop
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:120    .text:00000064 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:153    .text:00000084 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:162    .text:0000008c i2cPutChar
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:159    .text:0000008c $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:205    .text:000000b0 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:214    .text:000000b8 i2cGetChar
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:211    .text:000000b8 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:285    .text:00000104 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:295    .text:00000110 i2cWaitTransmit
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:292    .text:00000110 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:335    .text:00000134 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:344    .text:0000013c i2cWriteWithWait
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:341    .text:0000013c $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:390    .text:0000016c i2cMyWrite
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:471    .text:000001c4 i2cInit
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:521    .text:0000020c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:954    .bss:00000000 i2cSem
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:533    .text:00000220 releaseI2cLock
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:530    .text:00000220 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:553    .text:00000234 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:561    .text:00000238 getI2cLock
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:558    .text:00000238 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:582    .text:00000250 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:590    .text:00000254 i2cRepeatStart
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:587    .text:00000254 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:657    .text:00000294 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:667    .text:000002a0 i2cRead
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:664    .text:000002a0 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:798    .text:00000338 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:807    .text:00000340 i2cWrite
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:804    .text:00000340 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccs8lcCi.s:948    .text:000003d8 $d
 
 UNDEFINED SYMBOLS
 osSemInit

@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
   34:pong.c        **** #define COLOR_GREEN 0x1c
   35:pong.c        **** #define COLOR_BLUE  0x03
   36:pong.c        **** 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 2
 
 
   37:pong.c        **** #define BACKGROUND_COLOR    COLOR_BLACK
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
   91:pong.c        **** #define GAME_TYPE_DUAL_C 1
   92:pong.c        **** #define GAME_TYPE_DUAL_S 2
   93:pong.c        **** 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 3
 
 
   94:pong.c        **** #define MAX_BT_UNITS 5
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  148:pong.c        **** 
  149:pong.c        **** static tU32 lastMove = 0;
  150:pong.c        **** static tU32 lastStatus = 0;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 4
 
 
  151:pong.c        **** 
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  205:pong.c        **** 
  206:pong.c        ****   // right player
  207:pong.c        ****   scoreStr[0] = player2.score/100     + '0';
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 5
 
 
  208:pong.c        ****   scoreStr[1] = (player2.score/10)%10 + '0';
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  262:pong.c        **** 
  263:pong.c        ****   // temp
  264:pong.c        ****   pActivePlayer = pPlayer;    
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 6
 
 
  265:pong.c        **** }
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  319:pong.c        ****   {
  320:pong.c        ****     // check if there is a risk hitting one of the pads
  321:pong.c        ****     if (ball.xSpeed > 0)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 7
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 7
 
 
  322:pong.c        ****     {
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  376:pong.c        ****         }
  377:pong.c        ****       }
  378:pong.c        ****     }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 8
 
 
  379:pong.c        **** 
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  433:pong.c        ****   {
  434:pong.c        ****     switch (key)
  435:pong.c        ****     {
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 9
 
 
  436:pong.c        ****     case KEY_UP:
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  490:pong.c        ****     osSleep(speed);
  491:pong.c        ****   }
  492:pong.c        **** }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 10
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 10
 
 
  493:pong.c        **** 
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  547:pong.c        ****     lcdColor(0x00,0xfd);
  548:pong.c        **** 
  549:pong.c        ****     //search for available servers...
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 11
 
 
  550:pong.c        ****     if (TRUE == searchServers(btAddress))
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  604:pong.c        ****           lcdPuts("Request from");
  605:pong.c        ****           lcdGotoxy(8,32);
  606:pong.c        ****           lcdPuts(btAddress);
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 12
 
 
  607:pong.c        ****           lcdPuts("  ");
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  661:pong.c        ****       }
  662:pong.c        ****     }
  663:pong.c        ****     break;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 13
 
 
  664:pong.c        ****   default: break;
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  718:pong.c        **** 
  719:pong.c        ****         player1.key = remoteClientKey;
  720:pong.c        **** 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 14
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 14
 
 
  721:pong.c        ****         if (gameType == GAME_TYPE_DUAL_C 
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  775:pong.c        **** 
  776:pong.c        **** /******************************************************************************
  777:pong.c        ****  ******************************************************************************
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 15
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 15
 
 
  778:pong.c        ****  * BLUETOOTH HANDLING PARTS
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  832:pong.c        ****       recvPos = 0;
  833:pong.c        ****     }
  834:pong.c        ****     else if (recvPos < RECV_BUF_LEN)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 16
 
 
  835:pong.c        ****       recvBuf[recvPos++] = rxChar;
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  889:pong.c        ****         }
  890:pong.c        ****         recvPos = 0;
  891:pong.c        ****       }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 17
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 17
 
 
  892:pong.c        ****       else if (recvPos < RECV_BUF_LEN)
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  946:pong.c        ****       osSleep(1);
  947:pong.c        **** 
  948:pong.c        ****       //print activity indicator
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 18
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 18
 
 
  949:pong.c        ****       lcdGotoxy(88,18);
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
   44              	.L3:
   45 0014 00000000 		.word	toHex.3453
   46              	.LFE13:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 19
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 19
 
 
   47              		.size	convertToDigits, .-convertToDigits
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
   87 003c 131C     		mov	r3, r2
   88 003e 373B     		sub	r3, r3, #55
   89 0040 1B06     		lsl	r3, r3, #24
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 20
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 20
 
 
   90 0042 1B0E     		lsr	r3, r3, #24
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  130 0074 1A0E     		lsr	r2, r3, #24
  131              	.L13:
 1005:pong.c        ****   }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 21
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 21
 
 
 1006:pong.c        ****   else
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  180              	movePlayer:
  181              	.LFB7:
  182              		.loc 1 423 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 22
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 22
 
 
  183 00a0 10B5     		push	{r4, lr}
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  237 00ea 112B     		cmp	r3, #17
  238 00ec 2EDD     		ble	.L38
  239              		.loc 1 440 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 23
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 23
 
 
  240 00ee 013B     		sub	r3, r3, #1
@@ -1378,7 +1378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  294              		.loc 1 470 0
  295 013a 0023     		mov	r3, #0
  296 013c 0906     		lsl	r1, r1, #24
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 24
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 24
 
 
  297 013e 0093     		str	r3, [sp]
@@ -1438,7 +1438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
 1030:pong.c        ****         if (gameType == GAME_TYPE_DUAL_C)
 1031:pong.c        ****         {
 1032:pong.c        ****           tU8 score1, score2, tmp;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 25
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 25
 
 
 1033:pong.c        ****           
@@ -1498,7 +1498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
 1087:pong.c        **** 
 1088:pong.c        ****   if (lastStatus + STATUS_UPDATE_TIME > ms && !force)
 1089:pong.c        ****   {
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 26
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 26
 
 
 1090:pong.c        ****     return TRUE;
@@ -1558,7 +1558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  344              	.LVL29:
  345 0172 1E26     		mov	r6, #30
  346              	.L44:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 27
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 27
 
 
 1133:pong.c        ****   tU32 row;
@@ -1618,7 +1618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  382 01a4 FD21     		mov	r1, #253
  383              	.L59:
  384 01a6 FFF7FEFF 		bl	lcdColor
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 28
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 28
 
 
 1152:pong.c        ****       lcdPuts(foundBtUnits[row].btAddress);
@@ -1678,7 +1678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  434 01d6 81B0     		sub	sp, sp, #4
  435              	.LCFI7:
  436              		.loc 1 191 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 29
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 29
 
 
  437 01d8 201C     		mov	r0, r4
@@ -1738,7 +1738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  491 0240 FFF7FEFF 		bl	__udivsi3
  492 0244 3030     		add	r0, r0, #48
  493 0246 2870     		strb	r0, [r5]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 30
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 30
 
 
  494              		.loc 1 208 0
@@ -1798,7 +1798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  548 029a 0E4B     		ldr	r3, .L73
  549 029c 1860     		str	r0, [r3]
  550              		.loc 1 252 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 31
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 31
 
 
  551 029e 0E4B     		ldr	r3, .L73+4
@@ -1858,7 +1858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  605 02f8 5C000000 		.word	serving
  606 02fc 20000000 		.word	pActivePlayer
  607              	.LFE5:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 32
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 32
 
 
  608              		.size	startNewServ, .-startNewServ
@@ -1918,7 +1918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  651 006c 41542B42 		.ascii	"AT+BTSDP=\000"
  651      54534450 
  651      3D00
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 33
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 33
 
 
  652 0076 0000     		.align	2
@@ -1978,7 +1978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
 1163:pong.c        **** {
  689              		.loc 1 1163 0
  690 0300 F0B5     		push	{r4, r5, r6, r7, lr}
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 34
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 34
 
 
  691              	.LCFI9:
@@ -2038,7 +2038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  724 0330 0020     		mov	r0, #0
  725 0332 FFF7FEFF 		bl	lcdColor
 1185:pong.c        ****   lcdPuts("Inquiry");
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 35
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 35
 
 
  726              		.loc 1 1185 0
@@ -2098,7 +2098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
 1205:pong.c        ****   while((done == FALSE) && ((ms - timeStamp) < 6500))
 1206:pong.c        ****   {
 1207:pong.c        ****     //check if any character has been received from BT
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 36
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 36
 
 
 1208:pong.c        ****     if (uart1GetChar(&rxChar) == TRUE)
@@ -2158,7 +2158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  802 03b2 994A     		ldr	r2, .L160
  803 03b4 9B18     		add	r3, r3, r2
  804 03b6 5A1C     		add	r2, r3, #1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 37
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 37
 
 
  805 03b8 0021     		mov	r1, #0
@@ -2218,7 +2218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
 1236:pong.c        ****       else if (recvPos < RECV_BUF_LEN)
  844              		.loc 1 1236 0
  845 03f4 272D     		cmp	r5, #39
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 38
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 38
 
 
  846 03f6 04D8     		bhi	.L80
@@ -2278,7 +2278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  892 0440 0CD0     		beq	.L102
  893 0442 4B28     		cmp	r0, #75
  894 0444 0DD1     		bne	.L96
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 39
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 39
 
 
  895 0446 05E0     		b	.L100
@@ -2338,7 +2338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  939              	.L104:
  940 047c 0027     		mov	r7, #0
  941              	.LVL48:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 40
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 40
 
 
  942 047e 90E0     		b	.L105
@@ -2398,7 +2398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  975 04b2 5F48     		ldr	r0, .L160+24
  976 04b4 2178     		ldrb	r1, [r4]
  977 04b6 FFF7FEFF 		bl	simplePrintf
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 41
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 41
 
 
 1276:pong.c        ****       
@@ -2458,7 +2458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1016 04f4 1A30     		add	r0, r0, #26
  1017 04f6 FFF7FEFF 		bl	strchr
  1018 04fa 011C     		mov	r1, r0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 42
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 42
 
 
 1292:pong.c        ****             if (pStr != NULL)
@@ -2518,7 +2518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1058 052e FFF7FEFF 		bl	osSleep
 1307:pong.c        ****       //print activity indicator
 1308:pong.c        ****       lcdGotoxy(74,16);
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 43
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 43
 
 
  1059              		.loc 1 1308 0
@@ -2578,7 +2578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1105              		.loc 1 1316 0
  1106 057a 3F48     		ldr	r0, .L160+96
  1107 057c 00E0     		b	.L158
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 44
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 44
 
 
  1108              	.L129:
@@ -2638,7 +2638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
 1327:pong.c        **** 
 1328:pong.c        ****   //*************************************************************
 1329:pong.c        ****   //* Handle user key inputs (move between discovered units)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 45
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 45
 
 
 1330:pong.c        ****   //*************************************************************
@@ -2698,7 +2698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
 1356:pong.c        ****       else if (anyKey == KEY_DOWN)
  1180              		.loc 1 1356 0
  1181 05e4 0428     		cmp	r0, #4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 46
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 46
 
 
  1182 05e6 09D1     		bne	.L134
@@ -2758,7 +2758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1222 0624 18000000 		.word	.LC26
  1223 0628 24000000 		.word	.LC28
  1224 062c 00000000 		.word	ms
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 47
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 47
 
 
  1225 0630 30000000 		.word	.LC31
@@ -2818,7 +2818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1274 06a4 0C000000 		.word	foundBtUnits
  1275              	.LFE18:
  1276              		.size	searchServers, .-searchServers
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 48
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 48
 
 
  1277              		.align	2
@@ -2878,7 +2878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1331 06d0 0020     		mov	r0, #0
  1332 06d2 E021     		mov	r1, #224
  1333 06d4 FFF7FEFF 		bl	lcdColor
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 49
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 49
 
 
  1334              		.loc 1 229 0
@@ -2938,7 +2938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1386              	.LVL77:
  1387              	.LBB6:
  1388              		.loc 1 1023 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 50
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 50
 
 
  1389 0712 6C46     		mov	r4, sp
@@ -2998,7 +2998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1443 0752 FFF761FC 		bl	decodeFromDigits
  1444              		.loc 1 1035 0
  1445 0756 684F     		ldr	r7, .L206+16
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 51
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 51
 
 
  1446              		.loc 1 1036 0
@@ -3058,7 +3058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1500 07b6 0930     		add	r0, r0, #9
  1501 07b8 FFF72EFC 		bl	decodeFromDigits
  1502              		.loc 1 1041 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 52
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 52
 
 
  1503 07bc 281C     		mov	r0, r5
@@ -3118,7 +3118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1557 080a 12E0     		b	.L174
  1558              	.L180:
  1559              	.LBE10:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 53
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 53
 
 
  1560              		.loc 1 1066 0
@@ -3178,7 +3178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1614 0858 3B70     		strb	r3, [r7]
  1615              		.loc 1 1098 0
  1616 085a 2F4E     		ldr	r6, .L206+48
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 54
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 54
 
 
  1617 085c 7178     		ldrb	r1, [r6, #1]
@@ -3238,7 +3238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1671              		.loc 1 1113 0
  1672 08c8 0A23     		mov	r3, #10
  1673 08ca FB70     		strb	r3, [r7, #3]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 55
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 55
 
 
  1674              		.loc 1 1114 0
@@ -3298,7 +3298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1721      202D2043 
  1721      6C69656E 
  1721      7400
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 56
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 56
 
 
  1722 0102 0000     		.align	2
@@ -3358,7 +3358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1754 0184 41542B42 		.ascii	"AT+BTSRV=20,\"PingPongServer\"\015\000"
  1754      54535256 
  1754      3D32302C 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 57
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 57
 
 
  1754      2250696E 
@@ -3418,7 +3418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1788              	.LC163:
  1789 0214 47616D65 		.ascii	"Game over!\000"
  1789      206F7665 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 58
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 58
 
 
  1789      722100
@@ -3478,7 +3478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1838 094e 0B73     		strb	r3, [r1, #12]
  1839              		.loc 1 530 0
  1840 0950 C14B     		ldr	r3, .L370+8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 59
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 59
 
 
  1841 0952 2593     		str	r3, [sp, #148]
@@ -3538,7 +3538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1895 09a8 00F065FE 		bl	.L209	@far jump
  1896              	.LCB1809:
  1897 09ac 92E1     		b	.L212
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 60
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 60
 
 
  1898              	.L210:
@@ -3598,7 +3598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  1952 0a02 5023     		mov	r3, #80
  1953 0a04 7922     		mov	r2, #121
  1954 0a06 0420     		mov	r0, #4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 61
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 61
 
 
  1955 0a08 1221     		mov	r1, #18
@@ -3658,7 +3658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2009              	.LVL97:
  2010              	.L217:
  2011              	.LBE26:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 62
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 62
 
 
  2012              		.loc 1 872 0
@@ -3718,7 +3718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2066              	.LCB1986:
  2067 0abe 0024     		mov	r4, #0
  2068              	.LVL101:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 63
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 63
 
 
  2069              	.L227:
@@ -3778,7 +3778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2123              	.L233:
  2124              		.loc 1 902 0
  2125 0b16 6048     		ldr	r0, .L370+72
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 64
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 64
 
 
  2126 0b18 08E0     		b	.L362
@@ -3838,7 +3838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2180              		.loc 1 923 0
  2181 0b58 6C46     		mov	r4, sp
  2182              	.LVL104:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 65
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 65
 
 
  2183 0b5a CB34     		add	r4, r4, #203
@@ -3898,7 +3898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2237 0bb2 364B     		ldr	r3, .L370+60
  2238 0bb4 9854     		strb	r0, [r3, r2]
  2239 0bb6 531C     		add	r3, r2, #1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 66
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 66
 
 
  2240              	.L363:
@@ -3958,7 +3958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2294 0c0a 00E0     		b	.L364
  2295              	.L259:
  2296              		.loc 1 958 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 67
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 67
 
 
  2297 0c0c 2E48     		ldr	r0, .L370+120
@@ -4018,7 +4018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2351 0c70 14000000 		.word	.LC24
  2352 0c74 18000000 		.word	.LC26
  2353 0c78 20010000 		.word	.LC107
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 68
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 68
 
 
  2354 0c7c 2C010000 		.word	.LC109
@@ -4078,7 +4078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2408              		.loc 1 590 0
  2409 0d0e D348     		ldr	r0, .L372+4
  2410 0d10 FFF7FEFF 		bl	lcdPuts
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 69
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 69
 
 
  2411              		.loc 1 592 0
@@ -4138,7 +4138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2465              	.LBB39:
  2466 0d58 0128     		cmp	r0, #1
  2467 0d5a 01D0     		beq	.LCB2445
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 70
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 70
 
 
  2468 0d5c 00F0B9FC 		bl	.L262	@far jump
@@ -4198,7 +4198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2522              	.LVL111:
  2523 0db2 C333     		add	r3, r3, #195
  2524 0db4 0024     		mov	r4, #0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 71
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 71
 
 
  2525 0db6 1C70     		strb	r4, [r3]
@@ -4258,7 +4258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2579 0e04 0133     		add	r3, r3, #1
  2580 0e06 1970     		strb	r1, [r3]
  2581              		.loc 1 622 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 72
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 72
 
 
  2582 0e08 0133     		add	r3, r3, #1
@@ -4318,7 +4318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2636              		.loc 1 835 0
  2637 0e5e 864B     		ldr	r3, .L372+32
  2638 0e60 9854     		strb	r0, [r3, r2]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 73
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 73
 
 
  2639 0e62 531C     		add	r3, r2, #1
@@ -4378,7 +4378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2693 0ebc 7648     		ldr	r0, .L372+64
  2694 0ebe 08E0     		b	.L365
  2695              	.L279:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 74
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 74
 
 
  2696              		.loc 1 651 0
@@ -4438,7 +4438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2750              		.loc 1 678 0
  2751 0efc FFF7FEFF 		bl	checkKey2
  2752              		.loc 1 680 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 75
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 75
 
 
  2753 0f00 574B     		ldr	r3, .L372+8
@@ -4498,7 +4498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2807 0f4a CB70     		strb	r3, [r1, #3]
  2808              		.loc 1 697 0
  2809 0f4c 0123     		mov	r3, #1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 76
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 76
 
 
  2810 0f4e 0B71     		strb	r3, [r1, #4]
@@ -4558,7 +4558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2864 0fa0 0F96     		str	r6, [sp, #60]
  2865 0fa2 01E0     		b	.L292
  2866              	.L293:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 77
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 77
 
 
  2867 0fa4 0127     		mov	r7, #1
@@ -4618,7 +4618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2921 0fee 1B78     		ldrb	r3, [r3]
  2922 0ff0 002B     		cmp	r3, #0
  2923 0ff2 02D0     		beq	.L301
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 78
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 78
 
 
  2924 0ff4 022B     		cmp	r3, #2
@@ -4678,7 +4678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  2978 104a FFF7FEFF 		bl	__adddf3
  2979 104e 0D9B     		ldr	r3, [sp, #52]
  2980 1050 1860     		str	r0, [r3]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 79
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 79
 
 
  2981 1052 5960     		str	r1, [r3, #4]
@@ -4738,7 +4738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3035 10fc D84D     		ldr	r5, .L374
  3036 10fe 1298     		ldr	r0, [sp, #72]
  3037 1100 0C95     		str	r5, [sp, #48]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 80
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 80
 
 
  3038 1102 FFF7FEFF 		bl	__floatsidf
@@ -4798,7 +4798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3092 1172 391C     		mov	r1, r7
  3093 1174 0406     		lsl	r4, r0, #24
  3094 1176 301C     		mov	r0, r6
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 81
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 81
 
 
  3095 1178 FFF7FEFF 		bl	__fixunsdfsi
@@ -4858,7 +4858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3149              	.LBE47:
  3150 11d4 0106     		lsl	r1, r0, #24
  3151 11d6 0023     		mov	r3, #0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 82
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 82
 
 
  3152 11d8 240E     		lsr	r4, r4, #24
@@ -4918,7 +4918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3206 1242 291C     		mov	r1, r5
  3207 1244 FFF7FEFF 		bl	__gedf2
  3208 1248 0028     		cmp	r0, #0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 83
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 83
 
 
  3209 124a 01DB     		blt	.L320
@@ -4978,7 +4978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3263 12b0 12DB     		blt	.L325
  3264 12b2 307C     		ldrb	r0, [r6, #16]
  3265 12b4 FFF7FEFF 		bl	__floatsidf
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 84
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 84
 
 
  3266 12b8 021C     		mov	r2, r0
@@ -5038,7 +5038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3320 131c 201C     		mov	r0, r4
  3321 131e 291C     		mov	r1, r5
  3322 1320 FFF7FEFF 		bl	__muldf3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 85
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 85
 
 
  3323 1324 1A9A     		ldr	r2, [sp, #104]
@@ -5098,7 +5098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3377 139e 454B     		ldr	r3, .L374+84
  3378 13a0 FFF7FEFF 		bl	__divdf3
  3379 13a4 444A     		ldr	r2, .L374+88
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 86
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 86
 
 
  3380 13a6 454B     		ldr	r3, .L374+92
@@ -5158,7 +5158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3434              	.LBE54:
  3435 13f6 0998     		ldr	r0, [sp, #36]
  3436 13f8 0A99     		ldr	r1, [sp, #40]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 87
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 87
 
 
  3437              	.LVL143:
@@ -5218,7 +5218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3491 1440 291C     		mov	r1, r5
  3492 1442 FFF7FEFF 		bl	__muldf3
  3493 1446 0B9A     		ldr	r2, [sp, #44]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 88
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 88
 
 
  3494 1448 5061     		str	r0, [r2, #20]
@@ -5278,7 +5278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3548 14de 854B     		ldr	r3, .L376+12
  3549 14e0 FFF7FEFF 		bl	__muldf3
  3550 14e4 0B9C     		ldr	r4, [sp, #44]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 89
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 89
 
 
  3551 14e6 6061     		str	r0, [r4, #20]
@@ -5338,7 +5338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3605 1546 FFF7FEFF 		bl	__ledf2
  3606 154a 0028     		cmp	r0, #0
  3607 154c 01DC     		bgt	.L340
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 90
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 90
 
 
  3608              		.loc 1 386 0
@@ -5398,7 +5398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3662 15a6 786A     		ldr	r0, [r7, #36]
  3663 15a8 B96A     		ldr	r1, [r7, #40]
  3664              		.loc 1 408 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 91
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 91
 
 
  3665 15aa 3A7C     		ldrb	r2, [r7, #16]
@@ -5458,7 +5458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3719 1600 21A9     		add	r1, sp, #132
  3720 1602 0A23     		mov	r3, #10
  3721 1604 0B70     		strb	r3, [r1]
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 92
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 92
 
 
  3722              		.loc 1 740 0
@@ -5518,7 +5518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3776 164c 6946     		mov	r1, sp
  3777 164e 70CB     		ldmia	r3!, {r4, r5, r6}
  3778 1650 70C1     		stmia	r1!, {r4, r5, r6}
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 93
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 93
 
 
  3779              	.LVL152:
@@ -5578,7 +5578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3833 1698 7D22     		mov	r2, #125
  3834 169a 5423     		mov	r3, #84
  3835 169c FFF7FEFF 		bl	lcdRect
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 94
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 94
 
 
  3836              		.loc 1 766 0
@@ -5638,7 +5638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3890 16f8 28000000 		.word	ball
  3891 16fc 00000000 		.word	0
  3892 1700 00000000 		.word	0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 95
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 95
 
 
  3893 1704 10000000 		.word	player2
@@ -5698,7 +5698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3943              		.align	2
  3944              		.type	ball, %object
  3945              		.size	ball, 52
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 96
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 96
 
 
  3946              	ball:
@@ -5758,7 +5758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  3993      00000000 
  3994              	gameType:
  3995 00ac 00       		.space	1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 97
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 97
 
 
  3996              	recvPos:
@@ -5818,7 +5818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4046              		.4byte	.LCFI1-.LFB2
  4047 0049 0E       		.byte	0xe
  4048 004a 08       		.uleb128 0x8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 98
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 98
 
 
  4049 004b 84       		.byte	0x84
@@ -5878,7 +5878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4103              	.LASFDE10:
  4104 0094 00000000 		.4byte	.Lframe0
  4105 0098 D0010000 		.4byte	.LFB3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 99
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 99
 
 
  4106 009c C8000000 		.4byte	.LFE3-.LFB3
@@ -5938,7 +5938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4160 00e4 03       		.uleb128 0x3
  4161 00e5 87       		.byte	0x87
  4162 00e6 02       		.uleb128 0x2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 100
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 100
 
 
  4163 00e7 8E       		.byte	0x8e
@@ -5998,7 +5998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4217 0133 84       		.byte	0x84
  4218 0134 05       		.uleb128 0x5
  4219 0135 85       		.byte	0x85
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 101
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 101
 
 
  4220 0136 04       		.uleb128 0x4
@@ -6058,7 +6058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4274 0017 1A000000 		.4byte	.LCFI0-.Ltext0
  4275 001b 0100     		.2byte	0x1
  4276 001d 5D       		.byte	0x5d
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 102
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 102
 
 
  4277 001e 1A000000 		.4byte	.LCFI0-.Ltext0
@@ -6118,7 +6118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4331 00b1 00000000 		.4byte	0x0
  4332              	.LLST7:
  4333 00b5 80000000 		.4byte	.LFB2-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 103
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 103
 
 
  4334 00b9 82000000 		.4byte	.LCFI1-.Ltext0
@@ -6178,7 +6178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4388              	.LLST11:
  4389 0147 A2000000 		.4byte	.LVL17-.Ltext0
  4390 014b A4000000 		.4byte	.LVL18-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 104
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 104
 
 
  4391 014f 0100     		.2byte	0x1
@@ -6238,7 +6238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4445 01e0 7D       		.byte	0x7d
  4446 01e1 14       		.sleb128 20
  4447 01e2 D8010000 		.4byte	.LCFI7-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 105
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 105
 
 
  4448 01e6 98020000 		.4byte	.LFE3-.Ltext0
@@ -6298,7 +6298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4502 0274 91       		.byte	0x91
  4503 0275 44       		.sleb128 -60
  4504 0276 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 106
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 106
 
 
  4505 027a 00000000 		.4byte	0x0
@@ -6358,7 +6358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4559              	.LLST23:
  4560 030f C8050000 		.4byte	.LVL58-.Ltext0
  4561 0313 9C060000 		.4byte	.LVL65-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 107
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 107
 
 
  4562 0317 0100     		.2byte	0x1
@@ -6418,7 +6418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4616 03a6 CC060000 		.4byte	.LFB4-.Ltext0
  4617 03aa CE060000 		.4byte	.LCFI12-.Ltext0
  4618 03ae 0100     		.2byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 108
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 108
 
 
  4619 03b0 5D       		.byte	0x5d
@@ -6478,7 +6478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4673              	.LLST32:
  4674 043a CE070000 		.4byte	.LVL85-.Ltext0
  4675 043e EA070000 		.4byte	.LVL89-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 109
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 109
 
 
  4676 0442 0200     		.2byte	0x2
@@ -6538,7 +6538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4730 04c8 0200     		.2byte	0x2
  4731 04ca 76       		.byte	0x76
  4732 04cb 00       		.sleb128 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 110
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 110
 
 
  4733 04cc 1A080000 		.4byte	.LVL90-.Ltext0
@@ -6598,7 +6598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4787 0558 D40C0000 		.4byte	.LVL108-.Ltext0
  4788 055c 0300     		.2byte	0x3
  4789 055e 91       		.byte	0x91
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 111
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 111
 
 
  4790 055f B47F     		.sleb128 -76
@@ -6658,7 +6658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4844 05ea 91       		.byte	0x91
  4845 05eb F07E     		.sleb128 -144
  4846 05ed 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 112
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 112
 
 
  4847 05f1 00000000 		.4byte	0x0
@@ -6718,7 +6718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4901 067e C6110000 		.4byte	.LVL137-.Ltext0
  4902 0682 0100     		.2byte	0x1
  4903 0684 54       		.byte	0x54
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 113
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 113
 
 
  4904 0685 E8150000 		.4byte	.LVL151-.Ltext0
@@ -6778,7 +6778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  4958 0712 A6110000 		.4byte	.LVL135-.Ltext0
  4959 0716 32120000 		.4byte	.LVL138-.Ltext0
  4960 071a 0100     		.2byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 114
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 114
 
 
  4961 071c 56       		.byte	0x56
@@ -6838,7 +6838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5015 07b1 0100     		.2byte	0x1
  5016 07b3 57       		.byte	0x57
  5017 07b4 7C160000 		.4byte	.LVL158-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 115
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 115
 
 
  5018 07b8 82160000 		.4byte	.LVL160-.Ltext0
@@ -6898,7 +6898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5072 0843 76160000 		.4byte	.LVL156-.Ltext0
  5073 0847 0300     		.2byte	0x3
  5074 0849 91       		.byte	0x91
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 116
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 116
 
 
  5075 084a 887F     		.sleb128 -120
@@ -6958,7 +6958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5129 08d7 FC7E     		.sleb128 -132
  5130 08d9 82160000 		.4byte	.LVL160-.Ltext0
  5131 08dd D2160000 		.4byte	.LVL165-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 117
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 117
 
 
  5132 08e1 0300     		.2byte	0x3
@@ -7018,7 +7018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5186 001d A9030000 		.4byte	.LASF106
  5187 0021 4D010000 		.4byte	.LASF107
  5188 0025 02       		.uleb128 0x2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 118
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 118
 
 
  5189 0026 74553800 		.ascii	"tU8\000"
@@ -7078,7 +7078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5243 008f 03       		.uleb128 0x3
  5244 0090 AE000000 		.4byte	.LASF9
  5245 0094 08       		.byte	0x8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 119
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 119
 
 
  5246 0095 05       		.byte	0x5
@@ -7138,7 +7138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5300 00f2 08       		.uleb128 0x8
  5301 00f3 11010000 		.4byte	.LASF18
  5302 00f7 03       		.byte	0x3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 120
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 120
 
 
  5303 00f8 1E       		.byte	0x1e
@@ -7198,7 +7198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5357 0155 A2000000 		.4byte	.LASF25
  5358 0159 03       		.byte	0x3
  5359 015a 25       		.byte	0x25
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 121
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 121
 
 
  5360 015b 25000000 		.4byte	0x25
@@ -7258,7 +7258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5414 01c1 00       		.uleb128 0x0
  5415 01c2 08       		.uleb128 0x8
  5416 01c3 BA030000 		.4byte	.LASF16
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 122
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 122
 
 
  5417 01c7 01       		.byte	0x1
@@ -7318,7 +7318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5471 0224 00       		.byte	0x0
  5472 0225 04       		.uleb128 0x4
  5473 0226 CD030000 		.4byte	.LASF35
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 123
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 123
 
 
  5474 022a 01       		.byte	0x1
@@ -7378,7 +7378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5528 028d 02       		.byte	0x2
  5529 028e 23       		.byte	0x23
  5530 028f 1C       		.uleb128 0x1c
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 124
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 124
 
 
  5531 0290 08       		.uleb128 0x8
@@ -7438,7 +7438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5585 02f0 25000000 		.4byte	0x25
  5586 02f4 0A       		.uleb128 0xa
  5587 02f5 81000000 		.4byte	0x81
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 125
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 125
 
 
  5588 02f9 0C       		.byte	0xc
@@ -7498,7 +7498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5642 0373 80000000 		.4byte	.LFE14
  5643 0377 13000000 		.4byte	.LLST2
  5644 037b 0F       		.uleb128 0xf
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 126
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 126
 
 
  5645 037c D9030000 		.4byte	.LASF47
@@ -7558,7 +7558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5699 0408 01       		.byte	0x1
  5700 0409 A601     		.2byte	0x1a6
  5701 040b E4030000 		.4byte	0x3e4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 127
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 127
 
 
  5702 040f 1E010000 		.4byte	.LLST10
@@ -7618,7 +7618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5756 0494 00       		.byte	0x0
  5757 0495 13       		.uleb128 0x13
  5758 0496 BD040000 		.4byte	0x4bd
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 128
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 128
 
 
  5759 049a 0A040000 		.4byte	.LASF62
@@ -7678,7 +7678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5813 051f 25000000 		.4byte	0x25
  5814 0523 E6020000 		.4byte	.LLST22
  5815 0527 12       		.uleb128 0x12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 129
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 129
 
 
  5816 0528 6B020000 		.4byte	.LASF59
@@ -7738,7 +7738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5870 059c 3E000000 		.4byte	0x3e
  5871 05a0 09       		.uleb128 0x9
  5872 05a1 B0050000 		.4byte	0x5b0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 130
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 130
 
 
  5873 05a5 25000000 		.4byte	0x25
@@ -7798,7 +7798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5927 0629 1B       		.uleb128 0x1b
  5928 062a 8E030000 		.4byte	.LASF78
  5929 062e 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 131
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 131
 
 
  5930 062f 0804     		.2byte	0x408
@@ -7858,7 +7858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  5984 06b1 24       		.uleb128 0x24
  5985 06b2 1D060000 		.4byte	0x61d
  5986 06b6 3A040000 		.4byte	.LLST32
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 132
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 132
 
 
  5987 06ba 24       		.uleb128 0x24
@@ -7918,7 +7918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6041 0736 01       		.byte	0x1
  6042 0737 01       		.byte	0x1
  6043 0738 1E       		.uleb128 0x1e
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 133
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 133
 
 
  6044 0739 63070000 		.4byte	0x763
@@ -7978,7 +7978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6098 07b4 1B       		.uleb128 0x1b
  6099 07b5 D7000000 		.4byte	.LASF90
  6100 07b9 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 134
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 134
 
 
  6101 07ba 5901     		.2byte	0x159
@@ -8038,7 +8038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6155 083c 10       		.uleb128 0x10
  6156 083d E4020000 		.4byte	.LASF44
  6157 0841 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 135
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 135
 
 
  6158 0842 0002     		.2byte	0x200
@@ -8098,7 +8098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6212 08c9 38070000 		.4byte	0x738
  6213 08cd A8000000 		.4byte	.Ldebug_ranges0+0xa8
  6214 08d1 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 136
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 136
 
 
  6215 08d2 5802     		.2byte	0x258
@@ -8158,7 +8158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6269 0959 B4070000 		.4byte	0x7b4
  6270 095d 24       		.uleb128 0x24
  6271 095e C0070000 		.4byte	0x7c0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 137
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 137
 
 
  6272 0962 FB080000 		.4byte	.LLST49
@@ -8218,7 +8218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6326 09da 01       		.byte	0x1
  6327 09db 84       		.byte	0x84
  6328 09dc 25020000 		.4byte	0x225
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 138
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 138
 
 
  6329 09e0 05       		.byte	0x5
@@ -8278,7 +8278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6383 0a52 98       		.byte	0x98
  6384 0a53 25000000 		.4byte	0x25
  6385 0a57 05       		.byte	0x5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 139
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 139
 
 
  6386 0a58 03       		.byte	0x3
@@ -8338,7 +8338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6440 001b 0B       		.uleb128 0xb
  6441 001c 49       		.uleb128 0x49
  6442 001d 13       		.uleb128 0x13
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 140
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 140
 
 
  6443 001e 00       		.byte	0x0
@@ -8398,7 +8398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6497 0054 0B       		.uleb128 0xb
  6498 0055 3B       		.uleb128 0x3b
  6499 0056 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 141
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 141
 
 
  6500 0057 00       		.byte	0x0
@@ -8458,7 +8458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6554 008d 08       		.uleb128 0x8
  6555 008e 3A       		.uleb128 0x3a
  6556 008f 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 142
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 142
 
 
  6557 0090 3B       		.uleb128 0x3b
@@ -8518,7 +8518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6611 00c6 13       		.uleb128 0x13
  6612 00c7 02       		.uleb128 0x2
  6613 00c8 06       		.uleb128 0x6
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 143
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 143
 
 
  6614 00c9 00       		.byte	0x0
@@ -8578,7 +8578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6668 00ff 00       		.byte	0x0
  6669 0100 13       		.uleb128 0x13
  6670 0101 2E       		.uleb128 0x2e
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 144
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 144
 
 
  6671 0102 01       		.byte	0x1
@@ -8638,7 +8638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6725 0138 00       		.byte	0x0
  6726 0139 16       		.uleb128 0x16
  6727 013a 05       		.uleb128 0x5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 145
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 145
 
 
  6728 013b 00       		.byte	0x0
@@ -8698,7 +8698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6782 0171 02       		.uleb128 0x2
  6783 0172 0A       		.uleb128 0xa
  6784 0173 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 146
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 146
 
 
  6785 0174 00       		.byte	0x0
@@ -8758,7 +8758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6839 01aa 03       		.uleb128 0x3
  6840 01ab 0E       		.uleb128 0xe
  6841 01ac 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 147
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 147
 
 
  6842 01ad 0B       		.uleb128 0xb
@@ -8818,7 +8818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6896 01e3 02       		.uleb128 0x2
  6897 01e4 0A       		.uleb128 0xa
  6898 01e5 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 148
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 148
 
 
  6899 01e6 00       		.byte	0x0
@@ -8878,7 +8878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  6953 021c 00       		.byte	0x0
  6954 021d 28       		.uleb128 0x28
  6955 021e 05       		.uleb128 0x5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 149
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 149
 
 
  6956 021f 00       		.byte	0x0
@@ -8938,7 +8938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7010 0255 59       		.uleb128 0x59
  7011 0256 05       		.uleb128 0x5
  7012 0257 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 150
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 150
 
 
  7013 0258 00       		.byte	0x0
@@ -8998,7 +8998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7067 028e 00       		.byte	0x0
  7068 028f 00       		.byte	0x0
  7069 0290 31       		.uleb128 0x31
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 151
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 151
 
 
  7070 0291 34       		.uleb128 0x34
@@ -9058,7 +9058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7122              	.Ldebug_ranges0:
  7123 0000 12070000 		.4byte	.LBB6-.Ltext0
  7124 0004 14070000 		.4byte	.LBE6-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 152
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 152
 
 
  7125 0008 22070000 		.4byte	.LBB9-.Ltext0
@@ -9118,7 +9118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7179 00e0 00000000 		.4byte	0x0
  7180 00e4 00000000 		.4byte	0x0
  7181 00e8 E20F0000 		.4byte	.LBB45-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 153
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 153
 
 
  7182 00ec B8110000 		.4byte	.LBE45-.Ltext0
@@ -9178,7 +9178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7231      626C6500 
  7232              	.LASF50:
  7233 001c 6465636F 		.ascii	"decodeFromDigits\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 154
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 154
 
 
  7233      64654672 
@@ -9238,7 +9238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7260              	.LASF9:
  7261 00ae 6C6F6E67 		.ascii	"long long int\000"
  7261      206C6F6E 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 155
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 155
 
 
  7261      6720696E 
@@ -9298,7 +9298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7289      76696E67 
  7289      506C6179 
  7289      657200
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 156
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 156
 
 
  7290              	.LASF107:
@@ -9358,7 +9358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7312              	.LASF43:
  7313 01fe 61637469 		.ascii	"active\000"
  7313      766500
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 157
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 157
 
 
  7314              	.LASF22:
@@ -9418,7 +9418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7343 028c 6267436F 		.ascii	"bgColor\000"
  7343      6C6F7200 
  7344              	.LASF71:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 158
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 158
 
 
  7345 0294 666F756E 		.ascii	"foundBt\000"
@@ -9478,7 +9478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7375      697400
  7376              	.LASF86:
  7377 031b 6D6F7665 		.ascii	"moveBall\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 159
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 159
 
 
  7377      42616C6C 
@@ -9538,7 +9538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7408              	.LASF103:
  7409 039e 6C617374 		.ascii	"lastStatus\000"
  7409      53746174 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 160
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 160
 
 
  7409      757300
@@ -9598,7 +9598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7439      6D6500
  7440              	.LASF42:
  7441 042b 74506F6E 		.ascii	"tPongBall\000"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 161
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 161
 
 
  7441      6742616C 
@@ -9611,67 +9611,67 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 1
  7445      64657254 
  7445      65787400 
  7446              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 162
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 162
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 pong.c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1      .text:00000000 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:15     .text:00000000 convertToDigits
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:45     .text:00000014 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3973   .rodata:00000000 toHex.3453
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:49     .text:00000018 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:52     .text:00000018 decodeFromDigits
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:148    .text:00000080 paintPlayer
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:180    .text:000000a0 movePlayer
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:315    .text:00000154 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3994   .bss:000000ac gameType
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3932   .data:00000020 pActivePlayer
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3921   .data:00000010 player2
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3910   .data:00000000 player1
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:328    .text:00000168 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:331    .text:00000168 drawBtsFound
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:410    .text:000001c8 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3992   .bss:0000000c foundBtUnits
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:422    .text:000001d0 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:425    .text:000001d0 paintScore
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:532    .text:0000028c $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:538    .text:00000298 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:541    .text:00000298 startNewServ
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:596    .text:000002d4 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3941   .data:00000024 pServingPlayer
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3946   .data:00000028 ball
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3961   .data:0000005c serving
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:684    .text:00000300 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:687    .text:00000300 searchServers
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1219   .text:00000618 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1250   .text:00000688 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1274   .text:000006a4 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1278   .text:000006a8 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1281   .text:000006a8 displayMessage
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1323   .text:000006cc paintGame
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1360   .text:00000704 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1373   .text:0000070c $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1376   .text:0000070c btSendAndRecvStatus
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1696   .text:000008e8 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3998   .bss:000000ae recvBuf
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3996   .bss:000000ad recvPos
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3935   .bss:00000000 remoteClientKey
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3968   .bss:00000008 lastStatus
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1802   .text:00000920 playPong
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:1799   .text:00000920 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:2343   .text:00000c50 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:2380   .text:00000cd4 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:2986   .text:00001058 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3023   .text:000010e4 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3509   .text:00001460 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3965   .bss:00000004 lastMove
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3537   .text:000014c8 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3886   .text:000016e8 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3933   .data:00000020 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s:3970   .bss:0000000c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:15     .text:00000000 convertToDigits
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:45     .text:00000014 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3973   .rodata:00000000 toHex.3453
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:49     .text:00000018 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:52     .text:00000018 decodeFromDigits
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:148    .text:00000080 paintPlayer
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:180    .text:000000a0 movePlayer
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:315    .text:00000154 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3994   .bss:000000ac gameType
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3932   .data:00000020 pActivePlayer
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3921   .data:00000010 player2
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3910   .data:00000000 player1
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:328    .text:00000168 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:331    .text:00000168 drawBtsFound
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:410    .text:000001c8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3992   .bss:0000000c foundBtUnits
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:422    .text:000001d0 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:425    .text:000001d0 paintScore
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:532    .text:0000028c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:538    .text:00000298 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:541    .text:00000298 startNewServ
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:596    .text:000002d4 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3941   .data:00000024 pServingPlayer
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3946   .data:00000028 ball
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3961   .data:0000005c serving
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:684    .text:00000300 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:687    .text:00000300 searchServers
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1219   .text:00000618 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1250   .text:00000688 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1274   .text:000006a4 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1278   .text:000006a8 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1281   .text:000006a8 displayMessage
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1323   .text:000006cc paintGame
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1360   .text:00000704 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1373   .text:0000070c $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1376   .text:0000070c btSendAndRecvStatus
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1696   .text:000008e8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3998   .bss:000000ae recvBuf
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3996   .bss:000000ad recvPos
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3935   .bss:00000000 remoteClientKey
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3968   .bss:00000008 lastStatus
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1802   .text:00000920 playPong
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:1799   .text:00000920 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:2343   .text:00000c50 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:2380   .text:00000cd4 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:2986   .text:00001058 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3023   .text:000010e4 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3509   .text:00001460 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3965   .bss:00000004 lastMove
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3537   .text:000014c8 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3886   .text:000016e8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3933   .data:00000020 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s:3970   .bss:0000000c $d
 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXkwgf1.s 			page 163
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccsvcMf0.s 			page 163
 
 
 UNDEFINED SYMBOLS

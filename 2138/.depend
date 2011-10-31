@@ -1,0 +1,62 @@
+main.o: main.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/ea_init.h lcd.h key.h uart.h \
+  pre_emptive_os/api/osapi.h snake.h pong.h bt.h hw.h startup/lpc2xxx.h \
+  chess/chess.h startupDisplay.h Arrow.h Reflexes.h fire_0_100x40c.h \
+  fire_1_100x40c.h fire_2_100x40c.h fire_3_100x40c.h fire_4_100x40c.h \
+  fire_5_100x40c.h fire_6_100x40c.h
+lcd.o: lcd.c startup/../pre_emptive_os/api/general.h \
+  startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h lcd.h ascii.h hw.h \
+  startup/lpc2xxx.h
+startupDisplay.o: startupDisplay.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/ea_init.h lcd.h key.h \
+  ea_97x60c.h future_128x39c.h philips_122x25c.h segger_85x40c.h \
+  fun_0_130x90c.h fun_1_130x90c.h
+key.o: key.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h key.h hw.h startup/lpc2xxx.h
+select.o: select.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/ea_init.h lcd.h key.h \
+  select.h
+uart.o: uart.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h startup/lpc2xxx.h uart.h \
+  pre_emptive_os/api/osapi.h irq_code/irqUart.h
+bt.o: bt.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/ea_init.h lcd.h key.h uart.h \
+  pre_emptive_os/api/osapi.h hw.h startup/lpc2xxx.h select.h
+snake.o: snake.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/ea_init.h lcd.h key.h \
+  select.h
+pong.o: pong.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h lcd.h key.h bt.h select.h \
+  startup/printf_P.h startup/config.h startup/consol.h uart.h \
+  pre_emptive_os/api/osapi.h
+eeprom.o: eeprom.c startup/../pre_emptive_os/api/general.h i2c.h
+i2c.o: i2c.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h i2c.h startup/lpc2xxx.h
+hw.o: hw.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/lpc2xxx.h hw.h key.h \
+  pins.h eeprom.h i2c.h
+Arrow.o: Arrow.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/ea_init.h lcd.h ArrowLeft.h \
+  ArrowRight.h ArrowUp.h ArrowDown.h Arrow.h
+Reflexes.o: Reflexes.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/ea_init.h lcd.h key.h Arrow.h

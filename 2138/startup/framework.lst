@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 1
 
 
    1              		.file	"framework.c"
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
   36:framework.c   **** 
   37:framework.c   **** /******************************************************************************
   38:framework.c   ****  * External functions
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 2
 
 
   39:framework.c   ****  *****************************************************************************/
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
   93:framework.c   **** /*****************************************************************************
   94:framework.c   ****  *
   95:framework.c   ****  * Description:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 3
 
 
   96:framework.c   ****  *    Default exception handler for invalid program fetch.
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  150:framework.c   ****     ;
  151:framework.c   **** }
  152:framework.c   **** 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 4
 
 
  153:framework.c   **** #if (IRQ_HANDLER == 0)
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  198:framework.c   **** #endif
  199:framework.c   **** 
  200:framework.c   ****   //set heap limits
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 5
 
 
  201:framework.c   ****   pHeapStart = &end;
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  204:framework.c   **** 
  205:framework.c   **** /*****************************************************************************
  206:framework.c   ****  *
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 6
 
 
  207:framework.c   ****  * Description:
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  228:framework.c   ****   //set the peripheral bus speed, PCLK = CCLK / PBSD
  229:framework.c   **** 	VPBDIV = PBSD;
  109              		.loc 1 229 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 7
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 7
 
 
  110 00b8 031081E2 		add	r1, r1, #3
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  145 00fc CF3E02E5 		str	r3, [r2, #-3791]
  249:framework.c   ****   VICVectAddr13  = (unsigned int)0;      /* Set the vector address                             */
  146              		.loc 1 249 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 8
 
 
  147 0100 CB3E02E5 		str	r3, [r2, #-3787]
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  178              		.loc 1 272 0
  179 012c FEFFFFEB 		bl	consolInit
  273:framework.c   ****   
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 9
 
 
  274:framework.c   **** #ifdef CONSOL_STARTUP_DELAY
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  218 0000 49525120 		.ascii	"IRQ exception !!!\012Address: 0x\000"
  218      65786365 
  218      7074696F 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 10
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 10
 
 
  218      6E202121 
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  267              		@ frame_needed = 0, uses_anonymous_args = 0
  268 01b8 04E02DE5 		str	lr, [sp, #-4]!
  269              	.LCFI3:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 11
 
 
  270              		.loc 1 147 0
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  320 0200 08E04EE2 		sub	lr, lr, #8
  321              	.LVL5:
  322 0204 0810A0E3 		mov	r1, #8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 12
 
 
  323 0208 0020A0E3 		mov	r2, #0
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  373              	.LFE4:
  374              		.size	exceptionHandlerPabort, .-exceptionHandlerPabort
  375              		.section	.rodata.str1.4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 13
 
 
  376 0085 000000   		.align	2
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  422              	exceptionHandlerUndef:
  423              	.LFB2:
  424              		.loc 1 63 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 14
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 14
 
 
  425              		@ Function supports interworking.
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  479              	.LEFDE0:
  480              	.LSFDE2:
  481 0020 0C000000 		.4byte	.LEFDE2-.LASFDE2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 15
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 15
 
 
  482              	.LASFDE2:
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  536              		.align	2
  537              	.LEFDE8:
  538              	.LSFDE10:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 16
 
 
  539 0078 14000000 		.4byte	.LEFDE10-.LASFDE10
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  593 00c0 14000000 		.4byte	.LEFDE16-.LASFDE16
  594              	.LASFDE16:
  595 00c4 00000000 		.4byte	.Lframe0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 17
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 17
 
 
  596 00c8 88020000 		.4byte	.LFB2
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  650              	.LLST5:
  651 005d B8010000 		.4byte	.LFB6-.Ltext0
  652 0061 BC010000 		.4byte	.LCFI3-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 18
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 18
 
 
  653 0065 0100     		.2byte	0x1
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  707 00ef 04       		.sleb128 4
  708 00f0 2C020000 		.4byte	.LCFI8-.Ltext0
  709 00f4 54020000 		.4byte	.LFE4-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 19
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 19
 
 
  710 00f8 0200     		.2byte	0x2
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  764 0180 9C020000 		.4byte	.LVL10-.Ltext0
  765 0184 A0020000 		.4byte	.LVL11-.Ltext0
  766 0188 0100     		.2byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 20
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 20
 
 
  767 018a 5E       		.byte	0x5e
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  821 0079 05       		.uleb128 0x5
  822 007a 01010000 		.4byte	.LASF3
  823 007e 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 21
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 21
 
 
  824 007f A6       		.byte	0xa6
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  878 0100 00       		.byte	0x0
  879 0101 08       		.uleb128 0x8
  880 0102 33010000 		.4byte	0x133
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 22
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 22
 
 
  881 0106 C8000000 		.4byte	.LASF8
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  935 018d 06       		.uleb128 0x6
  936 018e C2000000 		.4byte	.LASF4
  937 0192 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 23
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 23
 
 
  938 0193 41       		.byte	0x41
@@ -1378,7 +1378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  992 000c 0B       		.uleb128 0xb
  993 000d 03       		.uleb128 0x3
  994 000e 0E       		.uleb128 0xe
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 24
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 24
 
 
  995 000f 1B       		.uleb128 0x1b
@@ -1438,7 +1438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  1049 0045 0B       		.uleb128 0xb
  1050 0046 3B       		.uleb128 0x3b
  1051 0047 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 25
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 25
 
 
  1052 0048 27       		.uleb128 0x27
@@ -1498,7 +1498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  1106 007e 03       		.uleb128 0x3
  1107 007f 0E       		.uleb128 0xe
  1108 0080 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 26
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 26
 
 
  1109 0081 0B       		.uleb128 0xb
@@ -1558,7 +1558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  1163 00b8 00       		.byte	0x0
  1164 00b9 00       		.byte	0x0
  1165 00ba 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 27
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 27
 
 
  1166              		.section	.debug_pubnames,"",%progbits
@@ -1618,7 +1618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  1200      65636C69 
  1200      7073652F 
  1201              	.LASF13:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 28
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 28
 
 
  1202 0043 756E7369 		.ascii	"unsigned char\000"
@@ -1678,7 +1678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  1224      646C6572 
  1224      49727100 
  1225              	.LASF14:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 29
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 29
 
 
  1226 00f3 70486561 		.ascii	"pHeapEnd\000"
@@ -1705,40 +1705,40 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 1
  1234      646C6572 
  1234      53776900 
  1235              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s 			page 30
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s 			page 30
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 framework.c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:13     .text:00000000 exceptionHandlerInit
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:22     .text:00000000 $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:59     .text:00000050 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:222    .text:00000184 exceptionHandlerIrq
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:13     .text:00000000 exceptionHandlerInit
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:22     .text:00000000 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:59     .text:00000050 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:222    .text:00000184 exceptionHandlerIrq
                             *COM*:00000004 pHeapStart
                             *COM*:00000004 pHeapEnd
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:422    .text:00000288 exceptionHandlerUndef
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:382    .text:00000254 exceptionHandlerSwi
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:342    .text:00000220 exceptionHandlerPabort
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:302    .text:000001ec exceptionHandlerDabort
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:262    .text:000001b8 exceptionHandlerFiq
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:74     .text:00000078 lowLevelInit
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:82     .text:00000078 $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:162    .text:0000011c $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:170    .text:00000128 eaInit
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:176    .text:00000128 $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:211    .text:0000017c $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:228    .text:00000184 $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:252    .text:000001b4 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:268    .text:000001b8 $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:292    .text:000001e8 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:308    .text:000001ec $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:332    .text:0000021c $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:348    .text:00000220 $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:372    .text:00000250 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:388    .text:00000254 $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:412    .text:00000284 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:428    .text:00000288 $a
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccXr2FnH.s:452    .text:000002b8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:422    .text:00000288 exceptionHandlerUndef
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:382    .text:00000254 exceptionHandlerSwi
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:342    .text:00000220 exceptionHandlerPabort
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:302    .text:000001ec exceptionHandlerDabort
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:262    .text:000001b8 exceptionHandlerFiq
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:74     .text:00000078 lowLevelInit
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:82     .text:00000078 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:162    .text:0000011c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:170    .text:00000128 eaInit
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:176    .text:00000128 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:211    .text:0000017c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:228    .text:00000184 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:252    .text:000001b4 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:268    .text:000001b8 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:292    .text:000001e8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:308    .text:000001ec $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:332    .text:0000021c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:348    .text:00000220 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:372    .text:00000250 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:388    .text:00000254 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:412    .text:00000284 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:428    .text:00000288 $a
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccdnmAYV.s:452    .text:000002b8 $d
 
 UNDEFINED SYMBOLS
 end

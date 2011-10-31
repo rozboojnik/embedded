@@ -18,18 +18,19 @@
 #include "../pre_emptive_os/api/general.h"
 #include <printf_P.h>
 #include <ea_init.h>
-#include <stdlib.h>
+
 
 #include "lcd.h"
 #include "key.h"
 #include "uart.h"
-#include "exampleGame.h"
 #include "snake.h"
 #include "pong.h"
 #include "bt.h"
 #include "hw.h"
 #include "chess/chess.h"
 #include "startupDisplay.h"
+#include "Arrow.h"
+#include "Reflexes.h"
 #include "fire_0_100x40c.h"
 #include "fire_1_100x40c.h"
 #include "fire_2_100x40c.h"
@@ -118,10 +119,10 @@ drawMenuCursor(tU8 cursor)
     switch(row)
     {
       case 0: lcdPuts("Play Example"); break;
-      case 1: lcdPuts("Play Snake"); break;
-      case 2: lcdPuts("Play P-Pong"); break;
-      case 3: lcdPuts("Play Chess"); break;
-      case 4: lcdPuts("Bluetooth"); break;
+      case 1: lcdPuts("InitApp"); break;
+      case 2: lcdPuts("Play R"); break;
+      case 3: lcdPuts("Play U"); break;
+      case 4: lcdPuts("D"); break;
       default: break;
     }
   }
@@ -195,7 +196,7 @@ proc1(void* arg)
   for(;;)
   {
     tU8 anyKey;
-    static tU8 i = 0;
+    //static tU8 i = 0;
 
     anyKey = checkKey();
     if (anyKey != KEY_NOTHING)
@@ -205,11 +206,11 @@ proc1(void* arg)
       {
         switch(cursor)
         {
-          case 0: playExample(); break;
-          case 1: playSnake(); break;
-          case 2: playPong(); break;
-          case 3: playChess(); break;
-          case 4: handleBt(); break;
+          case 0: playSnake(); break;
+          case 1: initApp(); break;
+          case 2: getRightArrow(); break;
+          case 3: getUpArrow(); break;
+          case 4: getDownArrow(); break;
           default: break;
         }
         drawMenu();
@@ -250,7 +251,7 @@ proc1(void* arg)
         lcdContrast(contrast);
       }
     }
-
+    /*
     switch(i)
     {
       case 0: lcdIcon(15, 88, 100, 40, _fire_0_100x40c[2], _fire_0_100x40c[3], &_fire_0_100x40c[4]); i++; break;
@@ -262,6 +263,8 @@ proc1(void* arg)
       case 6: lcdIcon(15, 88, 100, 40, _fire_6_100x40c[2], _fire_6_100x40c[3], &_fire_6_100x40c[4]); i = 0; break;
       default: i = 0; break;
     }
+    //*/
+
     osSleep(20);
   }
 }

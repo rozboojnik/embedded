@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
   33:bt.c          **** #define PROC_BT_STACK_SIZE 800
   34:bt.c          **** 
   35:bt.c          **** #define BT_BACKGROUND_COLOR     0x01
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 2
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 2
 
 
   36:bt.c          **** #define BT_BACKBACKGROUND_COLOR 0x03
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
   90:bt.c          **** {
   91:bt.c          ****   tU8 error;
   92:bt.c          ****   
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 3
 
 
   93:bt.c          ****   osSemInit(&recvSem, 1);
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  147:bt.c          ****   /***************************************************************************
  148:bt.c          ****    * Loop forever and create a terminal directly between the
  149:bt.c          ****    * USB serial port and the BT module
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 4
 
 
  150:bt.c          ****    **************************************************************************/
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  204:bt.c          ****  *
  205:bt.c          ****  * Description:
  206:bt.c          ****  *    Prints the list of 'found' Bluetooth units
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 5
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 5
 
 
  207:bt.c          ****  *
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  261:bt.c          ****     foundBtUnits[foundBt].active = FALSE;
  262:bt.c          ****     foundBtUnits[foundBt].btName[0] = '\0';
  263:bt.c          ****   }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 6
 
 
  264:bt.c          **** 
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  318:bt.c          ****         else if (memcmp(recvBuf, "+BTINQ: COMPLETE", 16) == 0)
  319:bt.c          ****         {
  320:bt.c          ****           done = TRUE;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 7
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 7
 
 
  321:bt.c          ****         }
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  375:bt.c          ****       
  376:bt.c          ****       //
  377:bt.c          ****       else if (anyKey == KEY_DOWN)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 8
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 8
 
 
  378:bt.c          ****       {
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  432:bt.c          ****               //skip to first '"'
  433:bt.c          ****               pStr = strchr(&recvBuf[10], '\"');
  434:bt.c          ****               if (pStr != NULL)
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 9
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 9
 
 
  435:bt.c          ****               {
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  489:bt.c          ****       str[2] = '\0';
  490:bt.c          ****       lcdPuts(str);
  491:bt.c          ****     }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 10
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 10
 
 
  492:bt.c          ****     lcdGotoxy(2,16+(14*1));
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  546:bt.c          ****   tU32 col;
  547:bt.c          **** 
  548:bt.c          ****   lcdGotoxy(16,85);
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 11
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 11
 
 
  549:bt.c          ****   for(col=0; col<12; col++)
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  603:bt.c          ****   //* Get (receive and interpret) current address
  604:bt.c          ****   //*************************************************************
  605:bt.c          ****   timeStamp = ms;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 12
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 12
 
 
  606:bt.c          ****   done = FALSE;
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  660:bt.c          ****         menu.noOfChoices = 2;
  661:bt.c          ****         menu.initialChoice = 0;
  662:bt.c          ****         menu.pHeaderText = "Exit";
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 13
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 13
 
 
  663:bt.c          ****         menu.headerTextXpos = 50;
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  717:bt.c          ****       }
  718:bt.c          **** 
  719:bt.c          ****       //
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 14
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 14
 
 
  720:bt.c          ****       else if (anyKey == KEY_RIGHT)
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  774:bt.c          ****   volatile tU8  recvPos;
  775:bt.c          ****   tU8  error;
  776:bt.c          ****   tU8  recvBuf[RECV_BUF_LEN];
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 15
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 15
 
 
  777:bt.c          **** 
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  831:bt.c          ****           }
  832:bt.c          ****           done = TRUE;
  833:bt.c          ****         }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 16
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 16
 
 
  834:bt.c          ****         recvPos = 0;
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  888:bt.c          ****               else
  889:bt.c          ****                 break;
  890:bt.c          ****             }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 17
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 17
 
 
  891:bt.c          **** 
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  945:bt.c          ****   }
  946:bt.c          **** 
  947:bt.c          ****   osSleep(100);
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 18
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 18
 
 
  948:bt.c          ****   btSetMode(btCommandMode);
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
 1002:bt.c          ****  *
 1003:bt.c          ****  ****************************************************************************/
 1004:bt.c          **** static void
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 19
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 19
 
 
 1005:bt.c          **** btSetMode(tBool commandMode)
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
 1059:bt.c          ****     btSetMode(TRUE);
 1060:bt.c          ****     btCommandMode = TRUE;
 1061:bt.c          ****   }
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 20
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 20
 
 
 1062:bt.c          ****   else
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
 1116:bt.c          ****   }
 1117:bt.c          **** }
 1118:bt.c          **** 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 21
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 21
 
 
 1119:bt.c          **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
 1173:bt.c          ****   {
 1174:bt.c          ****     tU8 anyKey;
 1175:bt.c          **** 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 22
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 22
 
 
 1176:bt.c          ****     anyKey = checkKey();
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
   19              		.loc 1 1229 0
   20 0000 00B5     		push	{lr}
   21              	.LCFI0:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 23
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 23
 
 
 1230:bt.c          ****   //stop the BT handling process
@@ -1378,7 +1378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
   70              		.loc 1 1011 0
   71 002a 201C     		mov	r0, r4
   72 002c FFF7FEFF 		bl	uart1SendString
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 24
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 24
 
 
   73              		.loc 1 1012 0
@@ -1438,7 +1438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  115 0062 81B0     		sub	sp, sp, #4
  116              	.LCFI3:
 1246:bt.c          ****   tU8 error;
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 25
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 25
 
 
 1247:bt.c          **** 
@@ -1498,7 +1498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  157      65737300 
  158              		.align	2
  159              	.LC17:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 26
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 26
 
 
  160 0030 53657420 		.ascii	"Set comm.mode\000"
@@ -1558,7 +1558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  201 00ae 1B78     		ldrb	r3, [r3]
  202 00b0 9C42     		cmp	r4, r3
  203 00b2 02D1     		bne	.L18
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 27
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 27
 
 
  204              		.loc 1 1102 0
@@ -1618,7 +1618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  258 00ec 1B78     		ldrb	r3, [r3]
  259 00ee 002B     		cmp	r3, #0
  260 00f0 01D1     		bne	.L32
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 28
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 28
 
 
  261 00f2 1148     		ldr	r0, .L44+36
@@ -1678,7 +1678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  315              		.loc 1 211 0
  316 0144 F0B5     		push	{r4, r5, r6, r7, lr}
  317              	.LCFI5:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 29
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 29
 
 
  318              	.LVL10:
@@ -1738,7 +1738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  372 018e E021     		mov	r1, #224
  373 0190 01E0     		b	.L64
  374              	.L55:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 30
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 30
 
 
  375              		.loc 1 230 0
@@ -1798,7 +1798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  429 01ce 0B4C     		ldr	r4, .L78
  430              	.L69:
  431              		.loc 1 743 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 31
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 31
 
 
  432 01d0 0A4B     		ldr	r3, .L78
@@ -1858,7 +1858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  486 020a 5521     		mov	r1, #85
  487 020c 1020     		mov	r0, #16
  488 020e FFF7FEFF 		bl	lcdGotoxy
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 32
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 32
 
 
  489 0212 0B4C     		ldr	r4, .L90
@@ -1918,7 +1918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  543 024c 041C     		mov	r4, r0
  544 024e 0D0E     		lsr	r5, r1, #24
  545              	.LVL28:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 33
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 33
 
 
  546 0250 05E0     		b	.L93
@@ -1978,7 +1978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  587      6D6F6465 
  587      2900
  588 00c6 0000     		.align	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 34
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 34
 
 
  589              	.LC47:
@@ -2038,7 +2038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  634 029c 6630     		add	r0, r0, #102
  635 029e FFF7FEFF 		bl	memcpy
  636              		.loc 1 1044 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 35
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 35
 
 
  637 02a2 6846     		mov	r0, sp
@@ -2098,7 +2098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  691 0304 4421     		mov	r1, #68
  692 0306 FFF7FEFF 		bl	lcdGotoxy
  693              		.loc 1 1055 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 36
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 36
 
 
  694 030a 6846     		mov	r0, sp
@@ -2158,7 +2158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  748 0360 FFF7FEFF 		bl	memcpy
  749              		.loc 1 1069 0
  750 0364 201C     		mov	r0, r4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 37
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 37
 
 
  751 0366 0321     		mov	r1, #3
@@ -2218,7 +2218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  805 03d4 D8000000 		.word	.LC49
  806 03d8 E8000000 		.word	.LC51
  807              	.LFE13:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 38
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 38
 
 
  808              		.size	btMode, .-btMode
@@ -2278,7 +2278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  855 040a 1F34     		add	r4, r4, #31
  856              		.loc 1 971 0
  857 040c 6D46     		mov	r5, sp
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 39
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 39
 
 
  858              		.loc 1 970 0
@@ -2338,7 +2338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  912 0464 FFF7FEFF 		bl	resetBT
  913              		.loc 1 986 0
  914 0468 114B     		ldr	r3, .L110+20
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 40
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 40
 
 
  915 046a 1878     		ldrb	r0, [r3]
@@ -2398,7 +2398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  963      766500
  964 0143 00       		.align	2
  965              	.LC70:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 41
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 41
 
 
  966 0144 496E6163 		.ascii	"Inactive\000"
@@ -2458,7 +2458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1013 04ee 0320     		mov	r0, #3
  1014 04f0 FFF7FEFF 		bl	lcdColor
  1015              		.loc 1 1137 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 42
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 42
 
 
  1016 04f4 1748     		ldr	r0, .L122
@@ -2518,7 +2518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1070 054e 01BC     		pop	{r0}
  1071 0550 0047     		bx	r0
  1072              	.L123:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 43
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 43
 
 
  1073 0552 0000     		.align	2
@@ -2578,7 +2578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1119              	.LC105:
  1120 01b4 2D646F6E 		.ascii	"-done\000"
  1120      6500
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 44
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 44
 
 
  1121 01ba 0000     		.align	2
@@ -2638,7 +2638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1160      6500
  1161 022a 0000     		.align	2
  1162              	.LC133:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 45
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 45
 
 
  1163 022c 206E616D 		.ascii	" name is:\000"
@@ -2698,7 +2698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1193      77206E61 
  1193      6D6500
  1194 02bb 00       		.align	2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 46
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 46
 
 
  1195              	.LC158:
@@ -2758,7 +2758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1233              	.LVL33:
  1234              	.L353:
  1235              	.LBB19:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 47
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 47
 
 
  1236              		.loc 1 1176 0
@@ -2818,7 +2818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1290 05be 0124     		mov	r4, #1
  1291              	.LVL35:
  1292 05c0 0120     		mov	r0, #1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 48
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 48
 
 
  1293              	.LVL36:
@@ -2878,7 +2878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1347 0618 FFF7FEFF 		bl	uart1GetChar
  1348              	.LBB22:
  1349 061c 0128     		cmp	r0, #1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 49
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 49
 
 
  1350 061e 48D1     		bne	.L142
@@ -2938,7 +2938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1404 0672 6B01     		lsl	r3, r5, #5
  1405 0674 9B18     		add	r3, r3, r2
  1406 0676 0022     		mov	r2, #0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 50
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 50
 
 
  1407 0678 5A73     		strb	r2, [r3, #13]
@@ -2998,7 +2998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1461 06bc FFF7FEFF 		bl	osSleep
  1462              		.loc 1 330 0
  1463 06c0 4A20     		mov	r0, #74
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 51
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 51
 
 
  1464 06c2 1021     		mov	r1, #16
@@ -3058,7 +3058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1518 0712 002C     		cmp	r4, #0
  1519 0714 08D1     		bne	.L166
  1520              		.loc 1 342 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 52
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 52
 
 
  1521 0716 0137     		add	r7, r7, #1
@@ -3118,7 +3118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1575 0764 631E     		sub	r3, r4, #1
  1576 0766 06E0     		b	.L369
  1577              	.L173:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 53
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 53
 
 
  1578              		.loc 1 377 0
@@ -3178,7 +3178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1632              	.LVL54:
  1633              	.L184:
  1634              	.LBE26:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 54
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 54
 
 
  1635              	.LBE25:
@@ -3238,7 +3238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1689              	.LBB29:
  1690              	.LBB30:
  1691              		.loc 1 425 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 55
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 55
 
 
  1692 0806 731C     		add	r3, r6, #1
@@ -3298,7 +3298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1746 084a 0024     		mov	r4, #0
  1747              	.LVL60:
  1748 084c 0127     		mov	r7, #1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 56
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 56
 
 
  1749 084e 0894     		str	r4, [sp, #32]
@@ -3358,7 +3358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1803 0892 FFF7FEFF 		bl	lcdColor
  1804              		.loc 1 463 0
  1805 0896 281C     		mov	r0, r5
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 57
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 57
 
 
  1806 0898 9621     		mov	r1, #150
@@ -3418,7 +3418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1860              		.loc 1 467 0
  1861 0922 D748     		ldr	r0, .L383+8
  1862 0924 04E0     		b	.L362
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 58
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 58
 
 
  1863              	.L210:
@@ -3478,7 +3478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1917 0972 0A21     		mov	r1, #10
  1918 0974 FFF7FEFF 		bl	__umodsi3
  1919 0978 6C46     		mov	r4, sp
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 59
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 59
 
 
  1920              	.LVL70:
@@ -3538,7 +3538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  1974              	.L218:
  1975              		.loc 1 497 0
  1976 09cc 2C21     		mov	r1, #44
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 60
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 60
 
 
  1977 09ce 0220     		mov	r0, #2
@@ -3598,7 +3598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2031 0a26 FFF7FEFF 		bl	lcdRect
  2032              		.loc 1 526 0
  2033 0a2a A04A     		ldr	r2, .L383+52
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 61
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 61
 
 
  2034 0a2c 0023     		mov	r3, #0
@@ -3658,7 +3658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2088 0a82 FFF7FEFF 		bl	lcdGotoxy
  2089              		.loc 1 788 0
  2090 0a86 8E48     		ldr	r0, .L383+72
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 62
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 62
 
 
  2091 0a88 FFF7FEFF 		bl	lcdPuts
@@ -3718,7 +3718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2145 0adc 0022     		mov	r2, #0
  2146 0ade 1A70     		strb	r2, [r3]
  2147              	.LVL79:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 63
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 63
 
 
  2148              	.L228:
@@ -3778,7 +3778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2202 0b26 1B19     		add	r3, r3, r4
  2203 0b28 825C     		ldrb	r2, [r0, r2]
  2204 0b2a 093B     		sub	r3, r3, #9
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 64
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 64
 
 
  2205 0b2c 1A70     		strb	r2, [r3]
@@ -3838,7 +3838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2259              		.loc 1 842 0
  2260 0b74 4D4B     		ldr	r3, .L383+52
  2261 0b76 0022     		mov	r2, #0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 65
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 65
 
 
  2262 0b78 1A70     		strb	r2, [r3]
@@ -3898,7 +3898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2316              		.loc 1 871 0
  2317 0bbc 13AB     		add	r3, sp, #76
  2318              		.loc 1 866 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 66
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 66
 
 
  2319 0bbe 4871     		strb	r0, [r1, #5]
@@ -3958,7 +3958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2373 0c0a 06D1     		bne	.L249
  2374              		.loc 1 887 0
  2375 0c0c 0023     		mov	r3, #0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 67
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 67
 
 
  2376 0c0e A354     		strb	r3, [r4, r2]
@@ -4018,7 +4018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2430 0c5e 1355     		strb	r3, [r2, r4]
  2431              		.loc 1 923 0
  2432 0c60 1F2B     		cmp	r3, #31
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 68
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 68
 
 
  2433 0c62 4DD8     		bhi	.L265
@@ -4078,7 +4078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2487              	.LCB2403:
  2488              		.loc 1 939 0
  2489 0cf6 0E2C     		cmp	r4, #14
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 69
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 69
 
 
  2490 0cf8 02D8     		bhi	.L265
@@ -4138,7 +4138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2544              		.loc 1 584 0
  2545 0d44 2221     		mov	r1, #34
  2546 0d46 0620     		mov	r0, #6
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 70
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 70
 
 
  2547 0d48 FFF7FEFF 		bl	lcdGotoxy
@@ -4198,7 +4198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2601              		.loc 1 615 0
  2602 0da4 2078     		ldrb	r0, [r4]
  2603 0da6 0A28     		cmp	r0, #10
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 71
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 71
 
 
  2604 0da8 1ED1     		bne	.L270
@@ -4258,7 +4258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2658              	.L378:
  2659 0dfa 0025     		mov	r5, #0
  2660              	.LVL110:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 72
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 72
 
 
  2661              	.L379:
@@ -4318,7 +4318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2715 0e40 0B71     		strb	r3, [r1, #4]
  2716              		.loc 1 663 0
  2717 0e42 3223     		mov	r3, #50
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 73
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 73
 
 
  2718 0e44 0B73     		strb	r3, [r1, #12]
@@ -4378,7 +4378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2772 0e8c FFF7FEFF 		bl	drawMenu
  2773              	.LBB53:
  2774              	.LBB54:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 74
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 74
 
 
  2775 0e90 0128     		cmp	r0, #1
@@ -4438,7 +4438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2829 0edc 1B0E     		lsr	r3, r3, #24
  2830 0ede 1355     		strb	r3, [r2, r4]
  2831              		.loc 1 704 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 75
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 75
 
 
  2832 0ee0 2F2B     		cmp	r3, #47
@@ -4498,7 +4498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2886              	.L135:
  2887              		.loc 1 1188 0
  2888 0f20 FFF75CFA 		bl	btActiveSleep
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 76
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 76
 
 
  2889              	.LVL121:
@@ -4558,7 +4558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  2943 0f64 012B     		cmp	r3, #1
  2944 0f66 00D0     		beq	.LCB2931
  2945 0f68 57E5     		b	.L221	@long jump
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 77
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 77
 
 
  2946              	.LCB2931:
@@ -4618,7 +4618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3000              		.loc 1 1215 0
  3001 0f98 0120     		mov	r0, #1
  3002 0f9a FFF7FEFF 		bl	osSleep
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 78
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 78
 
 
  3003              	.LBE19:
@@ -4678,7 +4678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3057 1006 0423     		mov	r3, #4
  3058 1008 0093     		str	r3, [sp]
  3059 100a 6C46     		mov	r4, sp
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 79
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 79
 
 
  3060 100c 0023     		mov	r3, #0
@@ -4738,7 +4738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3111              	.LVL141:
  3112 104a FFF7FEFF 		bl	resetBT
  3113              		.loc 1 116 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 80
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 80
 
 
  3114 104e 0220     		mov	r0, #2
@@ -4798,7 +4798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3168              	.L392:
  3169              		.loc 1 153 0
  3170 10ba 6A46     		mov	r2, sp
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 81
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 81
 
 
  3171 10bc 0021     		mov	r1, #0
@@ -4858,7 +4858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3225              	.L409:
  3226 1114 00000000 		.word	.LC1
  3227 1118 1C030000 		.word	.LC182
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 82
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 82
 
 
  3228 111c 84020000 		.word	.LC147
@@ -4918,7 +4918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3263              	.Lframe0:
  3264 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
  3265              	.LSCIE0:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 83
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 83
 
 
  3266 0004 FFFFFFFF 		.4byte	0xffffffff
@@ -4978,7 +4978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3320              		.4byte	.LCFI3-.LCFI2
  3321 0056 0E       		.byte	0xe
  3322 0057 08       		.uleb128 0x8
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 84
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 84
 
 
  3323              		.align	2
@@ -5038,7 +5038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3377 00a3 84       		.byte	0x84
  3378 00a4 03       		.uleb128 0x3
  3379 00a5 85       		.byte	0x85
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 85
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 85
 
 
  3380 00a6 02       		.uleb128 0x2
@@ -5098,7 +5098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3434 00fa 04       		.uleb128 0x4
  3435 00fb 86       		.byte	0x86
  3436 00fc 03       		.uleb128 0x3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 86
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 86
 
 
  3437 00fd 87       		.byte	0x87
@@ -5158,7 +5158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3491              	.LSFDE22:
  3492 0140 20000000 		.4byte	.LEFDE22-.LASFDE22
  3493              	.LASFDE22:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 87
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 87
 
 
  3494 0144 00000000 		.4byte	.Lframe0
@@ -5218,7 +5218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3548 0192 0C       		.uleb128 0xc
  3549 0193 84       		.byte	0x84
  3550 0194 03       		.uleb128 0x3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 88
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 88
 
 
  3551 0195 85       		.byte	0x85
@@ -5278,7 +5278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3605 005e 50       		.byte	0x50
  3606 005f 00000000 		.4byte	0x0
  3607 0063 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 89
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 89
 
 
  3608              	.LLST3:
@@ -5338,7 +5338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3662 00f2 C0010000 		.4byte	.LFE5-.Ltext0
  3663 00f6 0200     		.2byte	0x2
  3664 00f8 7D       		.byte	0x7d
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 90
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 90
 
 
  3665 00f9 18       		.sleb128 24
@@ -5398,7 +5398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3719 0187 00000000 		.4byte	0x0
  3720 018b 00000000 		.4byte	0x0
  3721              	.LLST13:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 91
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 91
 
 
  3722 018f 04020000 		.4byte	.LFB7-.Ltext0
@@ -5458,7 +5458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3776 021f 00000000 		.4byte	0x0
  3777 0223 00000000 		.4byte	0x0
  3778              	.LLST18:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 92
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 92
 
 
  3779 0227 6C020000 		.4byte	.LFB13-.Ltext0
@@ -5518,7 +5518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3833 02b4 5D       		.byte	0x5d
  3834 02b5 7A050000 		.4byte	.LCFI16-.Ltext0
  3835 02b9 7C050000 		.4byte	.LCFI17-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 93
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 93
 
 
  3836 02bd 0200     		.2byte	0x2
@@ -5578,7 +5578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3890 034c A0060000 		.4byte	.LVL41-.Ltext0
  3891 0350 A2060000 		.4byte	.LVL42-.Ltext0
  3892 0354 0100     		.2byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 94
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 94
 
 
  3893 0356 54       		.byte	0x54
@@ -5638,7 +5638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  3947 03ea 54       		.byte	0x54
  3948 03eb 48070000 		.4byte	.LVL46-.Ltext0
  3949 03ef B6070000 		.4byte	.LVL55-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 95
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 95
 
 
  3950 03f3 0100     		.2byte	0x1
@@ -5698,7 +5698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4004 0485 AA070000 		.4byte	.LVL51-.Ltext0
  4005 0489 0100     		.2byte	0x1
  4006 048b 55       		.byte	0x55
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 96
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 96
 
 
  4007 048c 1A0A0000 		.4byte	.LVL72-.Ltext0
@@ -5758,7 +5758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4061 0520 6C0F0000 		.4byte	.LVL126-.Ltext0
  4062 0524 740F0000 		.4byte	.LVL128-.Ltext0
  4063 0528 0100     		.2byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 97
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 97
 
 
  4064 052a 56       		.byte	0x56
@@ -5818,7 +5818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4118 05be 0100     		.2byte	0x1
  4119 05c0 50       		.byte	0x50
  4120 05c1 360C0000 		.4byte	.LVL100-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 98
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 98
 
 
  4121 05c5 020D0000 		.4byte	.LVL101-.Ltext0
@@ -5878,7 +5878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4175 0657 F60A0000 		.4byte	.LVL80-.Ltext0
  4176 065b 0200     		.2byte	0x2
  4177 065d 74       		.byte	0x74
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 99
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 99
 
 
  4178 065e 00       		.sleb128 0
@@ -5938,7 +5938,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4232 06e7 0200     		.2byte	0x2
  4233 06e9 73       		.byte	0x73
  4234 06ea 00       		.sleb128 0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 100
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 100
 
 
  4235 06eb 7C0F0000 		.4byte	.LVL130-.Ltext0
@@ -5998,7 +5998,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4289 077d 56       		.byte	0x56
  4290 077e 00000000 		.4byte	0x0
  4291 0782 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 101
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 101
 
 
  4292              	.LLST41:
@@ -6058,7 +6058,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4346 0810 00000000 		.4byte	0x0
  4347 0814 00000000 		.4byte	0x0
  4348              		.section	.debug_info
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 102
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 102
 
 
  4349 0000 640C0000 		.4byte	0xc64
@@ -6118,7 +6118,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4403 0076 4D       		.byte	0x4d
  4404 0077 30000000 		.4byte	0x30
  4405 007b 06       		.uleb128 0x6
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 103
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 103
 
 
  4406 007c 30010000 		.4byte	0x130
@@ -6178,7 +6178,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4460 00dc 70696400 		.ascii	"pid\000"
  4461 00e0 04       		.byte	0x4
  4462 00e1 5F       		.byte	0x5f
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 104
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 104
 
 
  4463 00e2 25000000 		.4byte	0x25
@@ -6238,7 +6238,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4517 0142 68       		.byte	0x68
  4518 0143 7B000000 		.4byte	0x7b
  4519 0147 06       		.uleb128 0x6
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 105
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 105
 
 
  4520 0148 70010000 		.4byte	0x170
@@ -6298,7 +6298,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4574 01b1 00       		.uleb128 0x0
  4575 01b2 00       		.byte	0x0
  4576 01b3 04       		.uleb128 0x4
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 106
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 106
 
 
  4577 01b4 F6030000 		.4byte	.LASF28
@@ -6358,7 +6358,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4631 0216 0D       		.uleb128 0xd
  4632 0217 E3020000 		.4byte	0x2e3
  4633 021b 30       		.byte	0x30
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 107
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 107
 
 
  4634 021c 03       		.byte	0x3
@@ -6418,7 +6418,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4688 0279 30010000 		.4byte	0x130
  4689 027d 02       		.byte	0x2
  4690 027e 23       		.byte	0x23
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 108
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 108
 
 
  4691 027f 08       		.uleb128 0x8
@@ -6478,7 +6478,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4745 02df 02       		.byte	0x2
  4746 02e0 23       		.byte	0x23
  4747 02e1 2C       		.uleb128 0x2c
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 109
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 109
 
 
  4748 02e2 00       		.byte	0x0
@@ -6538,7 +6538,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4802 034b 80010000 		.4byte	0x180
  4803 034f 10       		.byte	0x10
  4804 0350 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 110
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 110
 
 
  4805 0351 04       		.uleb128 0x4
@@ -6598,7 +6598,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4859 03d2 01       		.byte	0x1
  4860 03d3 94000000 		.4byte	.LFB14
  4861 03d7 44010000 		.4byte	.LFE14
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 111
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 111
 
 
  4862 03db 92000000 		.4byte	.LLST4
@@ -6658,7 +6658,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4916 0465 E602     		.2byte	0x2e6
  4917 0467 25000000 		.4byte	0x25
  4918 046b 71010000 		.4byte	.LLST12
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 112
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 112
 
 
  4919 046f 17       		.uleb128 0x17
@@ -6718,7 +6718,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  4973 04f5 01       		.byte	0x1
  4974 04f6 6C020000 		.4byte	.LFB13
  4975 04fa DC030000 		.4byte	.LFE13
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 113
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 113
 
 
  4976 04fe 27020000 		.4byte	.LLST18
@@ -6778,7 +6778,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5030 0573 02       		.byte	0x2
  5031 0574 91       		.byte	0x91
  5032 0575 63       		.sleb128 -29
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 114
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 114
 
 
  5033 0576 12       		.uleb128 0x12
@@ -6838,7 +6838,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5087 05e7 0A       		.uleb128 0xa
  5088 05e8 F7050000 		.4byte	0x5f7
  5089 05ec 25000000 		.4byte	0x25
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 115
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 115
 
 
  5090 05f0 0B       		.uleb128 0xb
@@ -6898,7 +6898,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5144 066d 83030000 		.4byte	.LASF69
  5145 0671 01       		.byte	0x1
  5146 0672 CB03     		.2byte	0x3cb
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 116
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 116
 
 
  5147 0674 B6060000 		.4byte	0x6b6
@@ -6958,7 +6958,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5201 06e6 1A       		.uleb128 0x1a
  5202 06e7 AC020000 		.4byte	.LASF110
  5203 06eb 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 117
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 117
 
 
  5204 06ec 6804     		.2byte	0x468
@@ -7018,7 +7018,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5258 0765 01       		.byte	0x1
  5259 0766 FF       		.byte	0xff
  5260 0767 25000000 		.4byte	0x25
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 118
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 118
 
 
  5261 076b 17       		.uleb128 0x17
@@ -7078,7 +7078,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5315 07df 0A       		.uleb128 0xa
  5316 07e0 EF070000 		.4byte	0x7ef
  5317 07e4 25000000 		.4byte	0x25
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 119
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 119
 
 
  5318 07e8 0B       		.uleb128 0xb
@@ -7138,7 +7138,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5372 0861 0803     		.2byte	0x308
  5373 0863 CF070000 		.4byte	0x7cf
  5374 0867 1E       		.uleb128 0x1e
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 120
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 120
 
 
  5375 0868 1D       		.uleb128 0x1d
@@ -7198,7 +7198,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5429 08e3 4102     		.2byte	0x241
  5430 08e5 25000000 		.4byte	0x25
  5431 08e9 1E       		.uleb128 0x1e
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 121
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 121
 
 
  5432 08ea 1D       		.uleb128 0x1d
@@ -7258,7 +7258,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5486 0973 25       		.uleb128 0x25
  5487 0974 34070000 		.4byte	0x734
  5488 0978 02       		.byte	0x2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 122
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 122
 
 
  5489 0979 91       		.byte	0x91
@@ -7318,7 +7318,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5543 09fb 25       		.uleb128 0x25
  5544 09fc BB070000 		.4byte	0x7bb
  5545 0a00 02       		.byte	0x2
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 123
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 123
 
 
  5546 0a01 91       		.byte	0x91
@@ -7378,7 +7378,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5600 0a79 00       		.byte	0x0
  5601 0a7a 29       		.uleb128 0x29
  5602 0a7b 7B080000 		.4byte	0x87b
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 124
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 124
 
 
  5603 0a7f 30010000 		.4byte	.Ldebug_ranges0+0x130
@@ -7438,7 +7438,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5657 0af1 F80F0000 		.4byte	.LFB2
  5658 0af5 44100000 		.4byte	.LFE2
  5659 0af9 AF070000 		.4byte	.LLST42
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 125
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 125
 
 
  5660 0afd 2B       		.uleb128 0x2b
@@ -7498,7 +7498,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5714 0b6c 25000000 		.4byte	0x25
  5715 0b70 2D       		.uleb128 0x2d
  5716 0b71 80010000 		.4byte	0x180
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 126
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 126
 
 
  5717 0b75 1F03     		.2byte	0x31f
@@ -7558,7 +7558,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5771 0be8 01       		.byte	0x1
  5772 0be9 3C       		.byte	0x3c
  5773 0bea 70000000 		.4byte	0x70
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 127
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 127
 
 
  5774 0bee 05       		.byte	0x5
@@ -7618,7 +7618,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5828 0c5f 01       		.byte	0x1
  5829 0c60 47       		.byte	0x47
  5830 0c61 CA070000 		.4byte	0x7ca
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 128
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 128
 
 
  5831 0c65 01       		.byte	0x1
@@ -7678,7 +7678,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5885 0032 3B       		.uleb128 0x3b
  5886 0033 0B       		.uleb128 0xb
  5887 0034 49       		.uleb128 0x49
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 129
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 129
 
 
  5888 0035 13       		.uleb128 0x13
@@ -7738,7 +7738,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5942 006b 13       		.uleb128 0x13
  5943 006c 38       		.uleb128 0x38
  5944 006d 0A       		.uleb128 0xa
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 130
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 130
 
 
  5945 006e 00       		.byte	0x0
@@ -7798,7 +7798,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  5999 00a4 03       		.uleb128 0x3
  6000 00a5 0E       		.uleb128 0xe
  6001 00a6 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 131
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 131
 
 
  6002 00a7 0B       		.uleb128 0xb
@@ -7858,7 +7858,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6056 00dd 3F       		.uleb128 0x3f
  6057 00de 0C       		.uleb128 0xc
  6058 00df 03       		.uleb128 0x3
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 132
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 132
 
 
  6059 00e0 0E       		.uleb128 0xe
@@ -7918,7 +7918,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6113 0116 3B       		.uleb128 0x3b
  6114 0117 0B       		.uleb128 0xb
  6115 0118 27       		.uleb128 0x27
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 133
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 133
 
 
  6116 0119 0C       		.uleb128 0xc
@@ -7978,7 +7978,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6170 014f 01       		.byte	0x1
  6171 0150 01       		.uleb128 0x1
  6172 0151 13       		.uleb128 0x13
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 134
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 134
 
 
  6173 0152 11       		.uleb128 0x11
@@ -8038,7 +8038,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6227 0188 03       		.uleb128 0x3
  6228 0189 0E       		.uleb128 0xe
  6229 018a 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 135
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 135
 
 
  6230 018b 0B       		.uleb128 0xb
@@ -8098,7 +8098,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6284 01c1 00       		.byte	0x0
  6285 01c2 00       		.byte	0x0
  6286 01c3 22       		.uleb128 0x22
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 136
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 136
 
 
  6287 01c4 34       		.uleb128 0x34
@@ -8158,7 +8158,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6341 01fa 00       		.byte	0x0
  6342 01fb 00       		.byte	0x0
  6343 01fc 27       		.uleb128 0x27
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 137
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 137
 
 
  6344 01fd 0B       		.uleb128 0xb
@@ -8218,7 +8218,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6398 0233 3A       		.uleb128 0x3a
  6399 0234 0B       		.uleb128 0xb
  6400 0235 3B       		.uleb128 0x3b
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 138
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 138
 
 
  6401 0236 0B       		.uleb128 0xb
@@ -8278,7 +8278,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6455 026c 0B       		.uleb128 0xb
  6456 026d 3B       		.uleb128 0x3b
  6457 026e 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 139
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 139
 
 
  6458 026f 49       		.uleb128 0x49
@@ -8338,7 +8338,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6501 0008 580F0000 		.4byte	.LBB55-.Ltext0
  6502 000c 6C0F0000 		.4byte	.LBE55-.Ltext0
  6503 0010 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 140
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 140
 
 
  6504 0014 00000000 		.4byte	0x0
@@ -8398,7 +8398,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6558 00ec 740F0000 		.4byte	.LBE58-.Ltext0
  6559 00f0 FC0B0000 		.4byte	.LBB45-.Ltext0
  6560 00f4 1E0D0000 		.4byte	.LBE45-.Ltext0
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 141
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 141
 
 
  6561 00f8 8E0B0000 		.4byte	.LBB43-.Ltext0
@@ -8458,7 +8458,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6608              	.LASF20:
  6609 0026 5F744F53 		.ascii	"_tOSPCB__\000"
  6609      5043425F 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 142
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 142
 
 
  6609      5F00
@@ -8518,7 +8518,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6635      696F5175 
  6635      6575655F 
  6635      00
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 143
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 143
 
 
  6636              	.LASF96:
@@ -8578,7 +8578,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6665      644D6F64 
  6665      6500
  6666              	.LASF77:
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 144
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 144
 
 
  6667 014d 616E794B 		.ascii	"anyKey\000"
@@ -8638,7 +8638,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6692              	.LASF42:
  6693 01f0 68656164 		.ascii	"headerTextXpos\000"
  6693      65725465 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 145
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 145
 
 
  6693      78745870 
@@ -8698,7 +8698,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6718              	.LASF44:
  6719 028e 6267436F 		.ascii	"bgColor\000"
  6719      6C6F7200 
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 146
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 146
 
 
  6720              	.LASF81:
@@ -8758,7 +8758,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6750              	.LASF93:
  6751 031a 70726F63 		.ascii	"procBt\000"
  6751      427400
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 147
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 147
 
 
  6752              	.LASF1:
@@ -8818,7 +8818,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6779 03a6 70507269 		.ascii	"pPrioList\000"
  6779      6F4C6973 
  6779      7400
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 148
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 148
 
 
  6780              	.LASF67:
@@ -8878,7 +8878,7 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6808              	.LASF66:
  6809 043b 73706565 		.ascii	"speed\000"
  6809      6400
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 149
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 149
 
 
  6810              	.LASF35:
@@ -8911,67 +8911,67 @@ ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 1
  6823      50726F63 
  6823      00
  6824              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 150
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 150
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 bt.c
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:1      .text:00000000 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:16     .text:00000000 blockBtProc
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:36     .text:00000014 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3238   .bss:00000000 stopRecvProc
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:48     .text:00000018 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:51     .text:00000018 btSetMode
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:101    .text:00000058 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:110    .text:00000060 activateBtProc
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:107    .text:00000060 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:143    .text:00000088 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3251   .bss:00000328 recvSem
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3240   .bss:00000001 btCommandMode
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:175    .text:00000094 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:178    .text:00000094 drawBtMenuCursor
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:225    .rodata:00000000 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:290    .text:00000114 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3242   .bss:00000002 btCursor
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3244   .bss:00000003 btSleepState
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:310    .text:00000144 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:313    .text:00000144 drawBtsFound
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:406    .text:000001b8 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3258   .bss:00000364 foundBtUnits
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:411    .text:000001c0 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:414    .text:000001c0 drawBtName
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:466    .text:000001fc $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3253   .bss:00000344 localName
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:471    .text:00000204 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:474    .text:00000204 drawBtAddress
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:526    .text:00000240 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3255   .bss:00000355 btAddress
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:531    .text:00000248 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:534    .text:00000248 displayMessage
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:602    .text:0000026c btMode
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:798    .text:000003b8 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:821    .text:000003dc $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:824    .text:000003dc btActiveSleep
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:946    .text:0000049c $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:975    .text:000004b4 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:978    .text:000004b4 drawBtMenu
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:1075   .text:00000554 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:1224   .text:00000578 handleBt
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:1221   .text:00000578 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:1820   .text:000008b0 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:1844   .text:0000090c $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:2452   .text:00000c78 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:2484   .text:00000cf0 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3017   .text:00000fa8 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3044   .text:00000ff8 initBtProc
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3041   .text:00000ff8 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3083   .text:00001034 $d
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3248   .bss:00000324 pidBt
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3101   .text:00001044 procBt
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3246   .bss:00000004 procBtStack
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3098   .text:00001044 $t
-/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s:3226   .text:00001114 $d
-ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccaXFopk.s 			page 151
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:16     .text:00000000 blockBtProc
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:36     .text:00000014 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3238   .bss:00000000 stopRecvProc
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:48     .text:00000018 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:51     .text:00000018 btSetMode
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:101    .text:00000058 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:110    .text:00000060 activateBtProc
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:107    .text:00000060 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:143    .text:00000088 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3251   .bss:00000328 recvSem
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3240   .bss:00000001 btCommandMode
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:175    .text:00000094 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:178    .text:00000094 drawBtMenuCursor
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:225    .rodata:00000000 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:290    .text:00000114 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3242   .bss:00000002 btCursor
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3244   .bss:00000003 btSleepState
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:310    .text:00000144 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:313    .text:00000144 drawBtsFound
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:406    .text:000001b8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3258   .bss:00000364 foundBtUnits
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:411    .text:000001c0 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:414    .text:000001c0 drawBtName
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:466    .text:000001fc $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3253   .bss:00000344 localName
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:471    .text:00000204 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:474    .text:00000204 drawBtAddress
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:526    .text:00000240 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3255   .bss:00000355 btAddress
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:531    .text:00000248 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:534    .text:00000248 displayMessage
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:602    .text:0000026c btMode
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:798    .text:000003b8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:821    .text:000003dc $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:824    .text:000003dc btActiveSleep
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:946    .text:0000049c $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:975    .text:000004b4 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:978    .text:000004b4 drawBtMenu
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:1075   .text:00000554 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:1224   .text:00000578 handleBt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:1221   .text:00000578 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:1820   .text:000008b0 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:1844   .text:0000090c $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:2452   .text:00000c78 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:2484   .text:00000cf0 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3017   .text:00000fa8 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3044   .text:00000ff8 initBtProc
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3041   .text:00000ff8 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3083   .text:00001034 $d
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3248   .bss:00000324 pidBt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3101   .text:00001044 procBt
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3246   .bss:00000004 procBtStack
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3098   .text:00001044 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s:3226   .text:00001114 $d
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccpMQ9NA.s 			page 151
 
 
                             *COM*:00000001 ver1_0

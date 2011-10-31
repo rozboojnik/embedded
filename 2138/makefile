@@ -7,7 +7,7 @@
 ##########################################################
 
 # Name of target (executable program or library) 
-NAME      = lpc2104_color_lcd_v1.8
+NAME      = lpc2104_color_lcd
 
 # Link program to RAM or ROM (possible values for LD_RAMROM is RAM or ROM,
 # if not specified = ROM)
@@ -58,11 +58,13 @@ CSRCS   = main.c           \
           uart.c           \
           bt.c             \
           snake.c          \
-          exampleGame.c    \
           pong.c           \
           eeprom.c         \
           i2c.c            \
-          hw.c
+          hw.c 				\
+          Arrow.c \
+          Reflexes.c \
+       
           
           
 # List assembler source files here

@@ -1,0 +1,547 @@
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 1
+
+
+   1              		.code	16
+   2              		.file	"Reflexes.c"
+   3              		.section	.debug_abbrev,"",%progbits
+   4              	.Ldebug_abbrev0:
+   5              		.section	.debug_info,"",%progbits
+   6              	.Ldebug_info0:
+   7              		.section	.debug_line,"",%progbits
+   8              	.Ldebug_line0:
+   9 0000 77000000 		.text
+   9      02005500 
+   9      00000201 
+   9      FB0E0D00 
+   9      01010101 
+  10              	.Ltext0:
+  11              		.section	.rodata.str1.4,"aMS",%progbits,1
+  12              		.align	2
+  13              	.LC0:
+  14 0000 4D454E55 		.ascii	"MENU\000"
+  14      00
+  15 0005 000000   		.text
+  16              		.align	2
+  17              		.global	initApp
+  18              		.code 16
+  19              		.thumb_func
+  20              		.type	initApp, %function
+  21              	initApp:
+  22              	.LFB2:
+  23              		.file 1 "Reflexes.c"
+   1:Reflexes.c    **** /******************************************************************************
+   2:Reflexes.c    ****  *
+   3:Reflexes.c    ****  * Copyright:
+   4:Reflexes.c    ****  *    (C) 2011 Zbyszko Natkañski
+   5:Reflexes.c    ****  *
+   6:Reflexes.c    ****  * File:
+   7:Reflexes.c    ****  *    Reflexes.c
+   8:Reflexes.c    ****  *
+   9:Reflexes.c    ****  * Description:
+  10:Reflexes.c    ****  *    Implementation of Reflexes application.
+  11:Reflexes.c    ****  *
+  12:Reflexes.c    ****  *****************************************************************************/
+  13:Reflexes.c    **** 
+  14:Reflexes.c    **** /******************************************************************************
+  15:Reflexes.c    ****  * Includes
+  16:Reflexes.c    ****  *****************************************************************************/
+  17:Reflexes.c    **** #include "../pre_emptive_os/api/osapi.h"
+  18:Reflexes.c    **** #include "../pre_emptive_os/api/general.h"
+  19:Reflexes.c    **** #include <printf_P.h>
+  20:Reflexes.c    **** #include <ea_init.h>
+  21:Reflexes.c    **** #include "lcd.h"
+  22:Reflexes.c    **** #include "key.h"
+  23:Reflexes.c    **** #include "Arrow.h"
+  24:Reflexes.c    **** 
+  25:Reflexes.c    **** /******************************************************************************
+  26:Reflexes.c    ****  * Typedefs and defines
+  27:Reflexes.c    ****  *****************************************************************************/
+  28:Reflexes.c    **** 
+  29:Reflexes.c    **** 
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 2
+
+
+  30:Reflexes.c    **** /*****************************************************************************
+  31:Reflexes.c    ****  * Local variables
+  32:Reflexes.c    ****  ****************************************************************************/
+  33:Reflexes.c    **** 
+  34:Reflexes.c    **** 
+  35:Reflexes.c    **** /*****************************************************************************
+  36:Reflexes.c    ****  * External variables
+  37:Reflexes.c    ****  ****************************************************************************/
+  38:Reflexes.c    **** 
+  39:Reflexes.c    **** 
+  40:Reflexes.c    **** /*****************************************************************************
+  41:Reflexes.c    ****  *
+  42:Reflexes.c    ****  * Description:
+  43:Reflexes.c    ****  *    Check if current place for figure is valid
+  44:Reflexes.c    ****  *
+  45:Reflexes.c    ****  ****************************************************************************/
+  46:Reflexes.c    **** void initApp(void){
+  24              		.loc 1 46 0
+  25 0000 00B5     		push	{lr}
+  26              	.LCFI0:
+  27 0002 81B0     		sub	sp, sp, #4
+  28              	.LCFI1:
+  47:Reflexes.c    **** 
+  48:Reflexes.c    **** 	  lcdColor(0,0);
+  29              		.loc 1 48 0
+  30 0004 0020     		mov	r0, #0
+  31 0006 0021     		mov	r1, #0
+  32 0008 FFF7FEFF 		bl	lcdColor
+  49:Reflexes.c    **** 	  lcdClrscr();
+  33              		.loc 1 49 0
+  34 000c FFF7FEFF 		bl	lcdClrscr
+  50:Reflexes.c    **** 
+  51:Reflexes.c    **** 	  lcdRect(14, 0, 102, 128, 0x6d);
+  35              		.loc 1 51 0
+  36 0010 6D23     		mov	r3, #109
+  37 0012 0093     		str	r3, [sp]
+  38 0014 0E20     		mov	r0, #14
+  39 0016 0021     		mov	r1, #0
+  40 0018 6622     		mov	r2, #102
+  41 001a 8023     		mov	r3, #128
+  42 001c FFF7FEFF 		bl	lcdRect
+  52:Reflexes.c    **** 	  lcdRect(15, 17, 100, 110, 0);
+  43              		.loc 1 52 0
+  44 0020 0023     		mov	r3, #0
+  45 0022 6422     		mov	r2, #100
+  46 0024 0093     		str	r3, [sp]
+  47 0026 0F20     		mov	r0, #15
+  48 0028 6E23     		mov	r3, #110
+  49 002a 1121     		mov	r1, #17
+  50 002c FFF7FEFF 		bl	lcdRect
+  53:Reflexes.c    **** 
+  54:Reflexes.c    **** 	  lcdGotoxy(48,1);
+  51              		.loc 1 54 0
+  52 0030 3020     		mov	r0, #48
+  53 0032 0121     		mov	r1, #1
+  54 0034 FFF7FEFF 		bl	lcdGotoxy
+  55:Reflexes.c    **** 	  lcdColor(0x6d,0);
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 3
+
+
+  55              		.loc 1 55 0
+  56 0038 6D20     		mov	r0, #109
+  57 003a 0021     		mov	r1, #0
+  58 003c FFF7FEFF 		bl	lcdColor
+  56:Reflexes.c    **** 	  lcdPuts("MENU");
+  59              		.loc 1 56 0
+  60 0040 0D48     		ldr	r0, .L18
+  61 0042 FFF7FEFF 		bl	lcdPuts
+  62              	.LVL0:
+  63              	.L17:
+  64              	.LBB2:
+  57:Reflexes.c    **** 
+  58:Reflexes.c    **** 	for(;;){
+  59:Reflexes.c    **** 
+  60:Reflexes.c    **** 		tU8 pressKey;
+  61:Reflexes.c    **** 		pressKey = checkKey();
+  65              		.loc 1 61 0
+  66 0046 FFF7FEFF 		bl	checkKey
+  67              	.LVL1:
+  68              	.LVL2:
+  62:Reflexes.c    **** 	    if (pressKey != KEY_NOTHING)
+  69              		.loc 1 62 0
+  70 004a 0028     		cmp	r0, #0
+  71 004c FBD0     		beq	.L17
+  63:Reflexes.c    **** 	    {
+  64:Reflexes.c    **** 		if(pressKey == KEY_LEFT) getLeftArrow();
+  72              		.loc 1 64 0
+  73 004e 0828     		cmp	r0, #8
+  74 0050 02D1     		bne	.L4
+  75 0052 FFF7FEFF 		bl	getLeftArrow
+  76              	.LVL3:
+  77 0056 F6E7     		b	.L17
+  78              	.LVL4:
+  79              	.L4:
+  65:Reflexes.c    **** 		else if(pressKey == KEY_UP) getUpArrow();
+  80              		.loc 1 65 0
+  81 0058 0128     		cmp	r0, #1
+  82 005a 02D1     		bne	.L6
+  83 005c FFF7FEFF 		bl	getUpArrow
+  84              	.LVL5:
+  85 0060 F1E7     		b	.L17
+  86              	.LVL6:
+  87              	.L6:
+  66:Reflexes.c    **** 		else if(pressKey == KEY_DOWN) getDownArrow();
+  88              		.loc 1 66 0
+  89 0062 0428     		cmp	r0, #4
+  90 0064 02D1     		bne	.L8
+  91 0066 FFF7FEFF 		bl	getDownArrow
+  92              	.LVL7:
+  93 006a ECE7     		b	.L17
+  94              	.LVL8:
+  95              	.L8:
+  67:Reflexes.c    **** 		else if(pressKey == KEY_RIGHT) getRightArrow();
+  96              		.loc 1 67 0
+  97 006c 0228     		cmp	r0, #2
+  98 006e EAD1     		bne	.L17
+  99 0070 FFF7FEFF 		bl	getRightArrow
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 4
+
+
+ 100              	.LVL9:
+ 101 0074 E7E7     		b	.L17
+ 102              	.L19:
+ 103 0076 0000     		.align	2
+ 104              	.L18:
+ 105 0078 00000000 		.word	.LC0
+ 106              	.LBE2:
+ 107              	.LFE2:
+ 108              		.size	initApp, .-initApp
+ 109              		.section	.debug_frame,"",%progbits
+ 110              	.Lframe0:
+ 111 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
+ 112              	.LSCIE0:
+ 113 0004 FFFFFFFF 		.4byte	0xffffffff
+ 114 0008 01       		.byte	0x1
+ 115 0009 00       		.ascii	"\000"
+ 116 000a 01       		.uleb128 0x1
+ 117 000b 7C       		.sleb128 -4
+ 118 000c 0E       		.byte	0xe
+ 119 000d 0C       		.byte	0xc
+ 120 000e 0D       		.uleb128 0xd
+ 121 000f 00       		.uleb128 0x0
+ 122              		.align	2
+ 123              	.LECIE0:
+ 124              	.LSFDE0:
+ 125 0010 14000000 		.4byte	.LEFDE0-.LASFDE0
+ 126              	.LASFDE0:
+ 127 0014 00000000 		.4byte	.Lframe0
+ 128 0018 00000000 		.4byte	.LFB2
+ 129 001c 7C000000 		.4byte	.LFE2-.LFB2
+ 130 0020 42       		.byte	0x4
+ 131              		.4byte	.LCFI0-.LFB2
+ 132 0021 0E       		.byte	0xe
+ 133 0022 04       		.uleb128 0x4
+ 134 0023 8E       		.byte	0x8e
+ 135 0024 01       		.uleb128 0x1
+ 136 0025 42       		.byte	0x4
+ 137              		.4byte	.LCFI1-.LCFI0
+ 138 0026 0E       		.byte	0xe
+ 139 0027 08       		.uleb128 0x8
+ 140              		.align	2
+ 141              	.LEFDE0:
+ 142              		.file 2 "./startup/../pre_emptive_os/api/../api/general.h"
+ 143              		.text
+ 144              	.Letext0:
+ 145              		.section	.debug_loc,"",%progbits
+ 146              	.Ldebug_loc0:
+ 147              	.LLST0:
+ 148 0000 00000000 		.4byte	.LFB2-.Ltext0
+ 149 0004 02000000 		.4byte	.LCFI0-.Ltext0
+ 150 0008 0100     		.2byte	0x1
+ 151 000a 5D       		.byte	0x5d
+ 152 000b 02000000 		.4byte	.LCFI0-.Ltext0
+ 153 000f 04000000 		.4byte	.LCFI1-.Ltext0
+ 154 0013 0200     		.2byte	0x2
+ 155 0015 7D       		.byte	0x7d
+ 156 0016 04       		.sleb128 4
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 5
+
+
+ 157 0017 04000000 		.4byte	.LCFI1-.Ltext0
+ 158 001b 7C000000 		.4byte	.LFE2-.Ltext0
+ 159 001f 0200     		.2byte	0x2
+ 160 0021 7D       		.byte	0x7d
+ 161 0022 08       		.sleb128 8
+ 162 0023 00000000 		.4byte	0x0
+ 163 0027 00000000 		.4byte	0x0
+ 164              	.LLST1:
+ 165 002b 46000000 		.4byte	.LVL0-.Ltext0
+ 166 002f 4A000000 		.4byte	.LVL1-.Ltext0
+ 167 0033 0100     		.2byte	0x1
+ 168 0035 50       		.byte	0x50
+ 169 0036 4A000000 		.4byte	.LVL2-.Ltext0
+ 170 003a 56000000 		.4byte	.LVL3-.Ltext0
+ 171 003e 0100     		.2byte	0x1
+ 172 0040 50       		.byte	0x50
+ 173 0041 58000000 		.4byte	.LVL4-.Ltext0
+ 174 0045 60000000 		.4byte	.LVL5-.Ltext0
+ 175 0049 0100     		.2byte	0x1
+ 176 004b 50       		.byte	0x50
+ 177 004c 62000000 		.4byte	.LVL6-.Ltext0
+ 178 0050 6A000000 		.4byte	.LVL7-.Ltext0
+ 179 0054 0100     		.2byte	0x1
+ 180 0056 50       		.byte	0x50
+ 181 0057 6C000000 		.4byte	.LVL8-.Ltext0
+ 182 005b 74000000 		.4byte	.LVL9-.Ltext0
+ 183 005f 0100     		.2byte	0x1
+ 184 0061 50       		.byte	0x50
+ 185 0062 00000000 		.4byte	0x0
+ 186 0066 00000000 		.4byte	0x0
+ 187              		.section	.debug_info
+ 188 0000 8D000000 		.4byte	0x8d
+ 189 0004 0200     		.2byte	0x2
+ 190 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 191 000a 04       		.byte	0x4
+ 192 000b 01       		.uleb128 0x1
+ 193 000c 00000000 		.4byte	.Ldebug_line0
+ 194 0010 7C000000 		.4byte	.Letext0
+ 195 0014 00000000 		.4byte	.Ltext0
+ 196 0018 74000000 		.4byte	.LASF6
+ 197 001c 01       		.byte	0x1
+ 198 001d 80000000 		.4byte	.LASF7
+ 199 0021 00000000 		.4byte	.LASF8
+ 200 0025 02       		.uleb128 0x2
+ 201 0026 74553800 		.ascii	"tU8\000"
+ 202 002a 02       		.byte	0x2
+ 203 002b 47       		.byte	0x47
+ 204 002c 30000000 		.4byte	0x30
+ 205 0030 03       		.uleb128 0x3
+ 206 0031 2B000000 		.4byte	.LASF0
+ 207 0035 01       		.byte	0x1
+ 208 0036 08       		.byte	0x8
+ 209 0037 03       		.uleb128 0x3
+ 210 0038 4B000000 		.4byte	.LASF1
+ 211 003c 02       		.byte	0x2
+ 212 003d 07       		.byte	0x7
+ 213 003e 03       		.uleb128 0x3
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 6
+
+
+ 214 003f 5E000000 		.4byte	.LASF2
+ 215 0043 04       		.byte	0x4
+ 216 0044 07       		.byte	0x7
+ 217 0045 03       		.uleb128 0x3
+ 218 0046 95000000 		.4byte	.LASF3
+ 219 004a 01       		.byte	0x1
+ 220 004b 06       		.byte	0x6
+ 221 004c 03       		.uleb128 0x3
+ 222 004d 8B000000 		.4byte	.LASF4
+ 223 0051 02       		.byte	0x2
+ 224 0052 05       		.byte	0x5
+ 225 0053 04       		.uleb128 0x4
+ 226 0054 696E7400 		.ascii	"int\000"
+ 227 0058 04       		.byte	0x4
+ 228 0059 05       		.byte	0x5
+ 229 005a 03       		.uleb128 0x3
+ 230 005b 39000000 		.4byte	.LASF5
+ 231 005f 04       		.byte	0x4
+ 232 0060 07       		.byte	0x7
+ 233 0061 05       		.uleb128 0x5
+ 234 0062 01       		.byte	0x1
+ 235 0063 23000000 		.4byte	.LASF9
+ 236 0067 01       		.byte	0x1
+ 237 0068 2E       		.byte	0x2e
+ 238 0069 01       		.byte	0x1
+ 239 006a 00000000 		.4byte	.LFB2
+ 240 006e 7C000000 		.4byte	.LFE2
+ 241 0072 00000000 		.4byte	.LLST0
+ 242 0076 06       		.uleb128 0x6
+ 243 0077 46000000 		.4byte	.LBB2
+ 244 007b 7C000000 		.4byte	.LBE2
+ 245 007f 07       		.uleb128 0x7
+ 246 0080 6B000000 		.4byte	.LASF10
+ 247 0084 01       		.byte	0x1
+ 248 0085 3C       		.byte	0x3c
+ 249 0086 25000000 		.4byte	0x25
+ 250 008a 2B000000 		.4byte	.LLST1
+ 251 008e 00       		.byte	0x0
+ 252 008f 00       		.byte	0x0
+ 253 0090 00       		.byte	0x0
+ 254              		.section	.debug_abbrev
+ 255 0000 01       		.uleb128 0x1
+ 256 0001 11       		.uleb128 0x11
+ 257 0002 01       		.byte	0x1
+ 258 0003 10       		.uleb128 0x10
+ 259 0004 06       		.uleb128 0x6
+ 260 0005 12       		.uleb128 0x12
+ 261 0006 01       		.uleb128 0x1
+ 262 0007 11       		.uleb128 0x11
+ 263 0008 01       		.uleb128 0x1
+ 264 0009 25       		.uleb128 0x25
+ 265 000a 0E       		.uleb128 0xe
+ 266 000b 13       		.uleb128 0x13
+ 267 000c 0B       		.uleb128 0xb
+ 268 000d 03       		.uleb128 0x3
+ 269 000e 0E       		.uleb128 0xe
+ 270 000f 1B       		.uleb128 0x1b
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 7
+
+
+ 271 0010 0E       		.uleb128 0xe
+ 272 0011 00       		.byte	0x0
+ 273 0012 00       		.byte	0x0
+ 274 0013 02       		.uleb128 0x2
+ 275 0014 16       		.uleb128 0x16
+ 276 0015 00       		.byte	0x0
+ 277 0016 03       		.uleb128 0x3
+ 278 0017 08       		.uleb128 0x8
+ 279 0018 3A       		.uleb128 0x3a
+ 280 0019 0B       		.uleb128 0xb
+ 281 001a 3B       		.uleb128 0x3b
+ 282 001b 0B       		.uleb128 0xb
+ 283 001c 49       		.uleb128 0x49
+ 284 001d 13       		.uleb128 0x13
+ 285 001e 00       		.byte	0x0
+ 286 001f 00       		.byte	0x0
+ 287 0020 03       		.uleb128 0x3
+ 288 0021 24       		.uleb128 0x24
+ 289 0022 00       		.byte	0x0
+ 290 0023 03       		.uleb128 0x3
+ 291 0024 0E       		.uleb128 0xe
+ 292 0025 0B       		.uleb128 0xb
+ 293 0026 0B       		.uleb128 0xb
+ 294 0027 3E       		.uleb128 0x3e
+ 295 0028 0B       		.uleb128 0xb
+ 296 0029 00       		.byte	0x0
+ 297 002a 00       		.byte	0x0
+ 298 002b 04       		.uleb128 0x4
+ 299 002c 24       		.uleb128 0x24
+ 300 002d 00       		.byte	0x0
+ 301 002e 03       		.uleb128 0x3
+ 302 002f 08       		.uleb128 0x8
+ 303 0030 0B       		.uleb128 0xb
+ 304 0031 0B       		.uleb128 0xb
+ 305 0032 3E       		.uleb128 0x3e
+ 306 0033 0B       		.uleb128 0xb
+ 307 0034 00       		.byte	0x0
+ 308 0035 00       		.byte	0x0
+ 309 0036 05       		.uleb128 0x5
+ 310 0037 2E       		.uleb128 0x2e
+ 311 0038 01       		.byte	0x1
+ 312 0039 3F       		.uleb128 0x3f
+ 313 003a 0C       		.uleb128 0xc
+ 314 003b 03       		.uleb128 0x3
+ 315 003c 0E       		.uleb128 0xe
+ 316 003d 3A       		.uleb128 0x3a
+ 317 003e 0B       		.uleb128 0xb
+ 318 003f 3B       		.uleb128 0x3b
+ 319 0040 0B       		.uleb128 0xb
+ 320 0041 27       		.uleb128 0x27
+ 321 0042 0C       		.uleb128 0xc
+ 322 0043 11       		.uleb128 0x11
+ 323 0044 01       		.uleb128 0x1
+ 324 0045 12       		.uleb128 0x12
+ 325 0046 01       		.uleb128 0x1
+ 326 0047 40       		.uleb128 0x40
+ 327 0048 06       		.uleb128 0x6
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 8
+
+
+ 328 0049 00       		.byte	0x0
+ 329 004a 00       		.byte	0x0
+ 330 004b 06       		.uleb128 0x6
+ 331 004c 0B       		.uleb128 0xb
+ 332 004d 01       		.byte	0x1
+ 333 004e 11       		.uleb128 0x11
+ 334 004f 01       		.uleb128 0x1
+ 335 0050 12       		.uleb128 0x12
+ 336 0051 01       		.uleb128 0x1
+ 337 0052 00       		.byte	0x0
+ 338 0053 00       		.byte	0x0
+ 339 0054 07       		.uleb128 0x7
+ 340 0055 34       		.uleb128 0x34
+ 341 0056 00       		.byte	0x0
+ 342 0057 03       		.uleb128 0x3
+ 343 0058 0E       		.uleb128 0xe
+ 344 0059 3A       		.uleb128 0x3a
+ 345 005a 0B       		.uleb128 0xb
+ 346 005b 3B       		.uleb128 0x3b
+ 347 005c 0B       		.uleb128 0xb
+ 348 005d 49       		.uleb128 0x49
+ 349 005e 13       		.uleb128 0x13
+ 350 005f 02       		.uleb128 0x2
+ 351 0060 06       		.uleb128 0x6
+ 352 0061 00       		.byte	0x0
+ 353 0062 00       		.byte	0x0
+ 354 0063 00       		.byte	0x0
+ 355              		.section	.debug_pubnames,"",%progbits
+ 356 0000 1A000000 		.4byte	0x1a
+ 357 0004 0200     		.2byte	0x2
+ 358 0006 00000000 		.4byte	.Ldebug_info0
+ 359 000a 91000000 		.4byte	0x91
+ 360 000e 61000000 		.4byte	0x61
+ 361 0012 696E6974 		.ascii	"initApp\000"
+ 361      41707000 
+ 362 001a 00000000 		.4byte	0x0
+ 363              		.section	.debug_aranges,"",%progbits
+ 364 0000 1C000000 		.4byte	0x1c
+ 365 0004 0200     		.2byte	0x2
+ 366 0006 00000000 		.4byte	.Ldebug_info0
+ 367 000a 04       		.byte	0x4
+ 368 000b 00       		.byte	0x0
+ 369 000c 0000     		.2byte	0x0
+ 370 000e 0000     		.2byte	0x0
+ 371 0010 00000000 		.4byte	.Ltext0
+ 372 0014 7C000000 		.4byte	.Letext0-.Ltext0
+ 373 0018 00000000 		.4byte	0x0
+ 374 001c 00000000 		.4byte	0x0
+ 375              		.section	.debug_str,"MS",%progbits,1
+ 376              	.LASF8:
+ 377 0000 2F637967 		.ascii	"/cygdrive/c/eclipse/workspace/2138\000"
+ 377      64726976 
+ 377      652F632F 
+ 377      65636C69 
+ 377      7073652F 
+ 378              	.LASF9:
+ 379 0023 696E6974 		.ascii	"initApp\000"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 9
+
+
+ 379      41707000 
+ 380              	.LASF0:
+ 381 002b 756E7369 		.ascii	"unsigned char\000"
+ 381      676E6564 
+ 381      20636861 
+ 381      7200
+ 382              	.LASF5:
+ 383 0039 6C6F6E67 		.ascii	"long unsigned int\000"
+ 383      20756E73 
+ 383      69676E65 
+ 383      6420696E 
+ 383      7400
+ 384              	.LASF1:
+ 385 004b 73686F72 		.ascii	"short unsigned int\000"
+ 385      7420756E 
+ 385      7369676E 
+ 385      65642069 
+ 385      6E7400
+ 386              	.LASF2:
+ 387 005e 756E7369 		.ascii	"unsigned int\000"
+ 387      676E6564 
+ 387      20696E74 
+ 387      00
+ 388              	.LASF10:
+ 389 006b 70726573 		.ascii	"pressKey\000"
+ 389      734B6579 
+ 389      00
+ 390              	.LASF6:
+ 391 0074 474E5520 		.ascii	"GNU C 4.1.1\000"
+ 391      4320342E 
+ 391      312E3100 
+ 392              	.LASF7:
+ 393 0080 5265666C 		.ascii	"Reflexes.c\000"
+ 393      65786573 
+ 393      2E6300
+ 394              	.LASF4:
+ 395 008b 73686F72 		.ascii	"short int\000"
+ 395      7420696E 
+ 395      7400
+ 396              	.LASF3:
+ 397 0095 7369676E 		.ascii	"signed char\000"
+ 397      65642063 
+ 397      68617200 
+ 398              		.ident	"GCC: (GNU) 4.1.1"
+ARM GAS  /cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 Reflexes.c
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s:1      .text:00000000 $t
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s:21     .text:00000000 initApp
+/cygdrive/c/Users/Zbyszko/AppData/Local/Temp/ccreHEHg.s:105    .text:00000078 $d
+
+UNDEFINED SYMBOLS
+lcdColor
+lcdClrscr
+lcdRect
+lcdGotoxy
+lcdPuts
+checkKey
+getLeftArrow
+getUpArrow
+getDownArrow
+getRightArrow
